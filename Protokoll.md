@@ -4,17 +4,19 @@
 
 ### Init
 ````
-FF5500200000000673AAFFFFFF55011405FA1403090D084F000000001EDC0190B8AAFFFFFF5501130047AAFFFF
+FF 55 00 20 00 00 00 06  73 AA FF FF FF 55 01 14
+05 FA 14 03 09 0D 08 4F  00 00 00 00 1E DC 01 90
+B8 AA FF FF FF 55 01 13  00 47 AA FF FF
 ````
 
 ### Heardbeat
 ````
-FF55010054AAFFFF
+FF 55 01 00 54 AA FF FF
 ````
 
 #### Band
 ````
-?
+FF 55 01 13 00 47 AA FF  FF
 ````
 
 
@@ -29,7 +31,8 @@ Wird vom Interface gesendet, wenn keine Aktion stattfindet.
 ### Schuss
 7,6 Links (ca. 5 clicks bei hoch)
 ````
-55 01 1D 00 00 30 CD 00 00 1E 29 00 00 0E 2E A3 AA
+55 01 1D 00 00 30 CD 00  00 1E 29 00 00 0E 2E A3
+AA
 ````
 
 Analyse
