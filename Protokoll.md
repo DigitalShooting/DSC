@@ -2,6 +2,21 @@
 
 ## Write
 
+### Init
+````
+FF5500200000000673AAFFFFFF55011405FA1403090D084F000000001EDC0190B8AAFFFFFF5501130047AAFFFF
+````
+
+### Heardbeat
+````
+FF55010054AAFFFF
+````
+
+#### Band
+````
+?
+````
+
 
 ## Read
 
