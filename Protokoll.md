@@ -11,12 +11,20 @@ B8 AA FF FF FF 55 01 13  00 47 AA FF FF
 
 ### Heardbeat
 ````
+# Mit Verzögerung
 FF 55 01 00 54 AA FF FF
+
+# Ohne Verzögerung
+55 01 13 00 47 AA
 ````
 
 #### Band
 ````
+# Mit Verzögerung
 FF 55 01 13 00 47 AA FF  FF
+
+# Ohne Verzögerung
+55 01 17 02 41 AA
 ````
 
 
@@ -37,17 +45,18 @@ AA
 
 Analyse
 ````
-55 01 1D 00
-00 30 CD 00
-00 1E 29 00
-00 0E 2E A3
+# http://babbage.cs.qc.cuny.edu/IEEE-754.old/32bit.html
+55 01 1D 00: 8872597127168
+00 30 CD 00: 4.4816439589913446e-39
+00 1E 29 00: 2.7697729134212896e-39
+00 0E 2E A3: 1.302427048577451e-39
 AA
 
 55
-01 1D 00 00
-30 CD 00 00
-1E 29 00 00
-0E 2E A3 AA
+01 1D 00 00: 2.883634579360924e-38
+30 CD 00 00: 1.4915713109076023e-9
+1E 29 00 00: 8.946785505373547e-21
+0E 2E A3 AA: 2.1525957240393462e-30
 ````
 
 
