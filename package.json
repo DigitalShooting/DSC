@@ -1,0 +1,13 @@
+{
+	"name": "client",
+	"version": "0.0.0",
+	"description": "",
+	"private": true,
+	"dependencies": {
+		"serialport": "x",
+		"convert-base": "x",
+		"express": "x",
+		"jade": "x"
+	},
+	"main": "index.js"
+}
