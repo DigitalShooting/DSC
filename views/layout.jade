@@ -6,8 +6,8 @@ html(lang="en")
 		script(src="/socket.io/socket.io.js")
 		script.
 			var socket = io()
-			socket.on('some event', function(msg){
-				alert(msg.for)
+			socket.on('newData', function(data){
+				alert(data)
 			});
 	body
 		block body

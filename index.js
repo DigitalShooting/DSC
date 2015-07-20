@@ -39,6 +39,8 @@ io.on('connection', function(socket){
 });
 
 
-esa.onNewData = function(){
-	io.emit('some event', { hello: 'world' });
+esa.onNewData = function(data){
+	//io.emit('some event', { hello: 'world' });
+
+	io.emit('newData', data);
 }
