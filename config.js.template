@@ -13,7 +13,7 @@ module.exports = {
 	},
 
 	esa : {
-		com : "/dev/ttyUSB1" // Users/firebug/Desktop/port
+		com : "/dev/ttyS0" // Users/firebug/Desktop/port
 	},
 
 
