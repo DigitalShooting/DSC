@@ -2,11 +2,16 @@ var express = require("express")
 var http = require("http")
 
 var config = require("./config.js")
-//var esa = require("./lib/esa.js")()
+var esa = require("./lib/esa.js")()
 
 var app = express()
 
 app.set('view engine', 'jade');
+
+
+app.use("/js/", express.static("./assets/js"))
+
+
 
 
 app.get("/", function(req, res){
