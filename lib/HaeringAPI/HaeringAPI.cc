@@ -112,19 +112,19 @@ class HaeringAPI {
 			char seqPaper[] = { 0x55, 0x01, 0x17, 0x02, 0x41, 0xAA};
 
 			writeToHaering(fd, seqPaper, 6);
-			readFromHaering(fd, 20);
+			readFromHaering(fd, 17);
 		}
 		void sendNOP() {
 			char seqNOP[] = { 0x55, 0x01, 0x00, 0x54, 0xAA};
 
 			writeToHaering(fd, seqNOP, 5);
-			readFromHaering(fd, 20);
+			readFromHaering(fd, 17);
 		}
 		void sendSet() {
 			char seqNOP[] = { 0x55, 0x01, 0x14, 0x05, 0xFA, 0x14, 0x03, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90, 0xB8, 0xAA};
 
 			writeToHaering(fd, seqNOP, 21);
-			readFromHaering(fd, 20);
+			readFromHaering(fd, 26);
 		}
 
 		// ...
