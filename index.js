@@ -9,6 +9,12 @@ app.set('view engine', 'jade');
 
 
 app.get("/band", function(req, res){
+	esa.band()
+	res.render("band")
+})
+
+app.get("/nop", function(req, res){
+	esa.nop()
 	res.render("band")
 })
 
