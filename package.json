@@ -4,11 +4,10 @@
 	"description": "",
 	"private": true,
 	"dependencies": {
-		"serialport": "x",
 		"convert-base": "x",
 		"express": "x",
 		"jade": "x",
-		"bitwise-xor": "X"
+		"exec": "x"
 	},
 	"main": "index.js"
 }
