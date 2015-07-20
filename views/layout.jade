@@ -3,12 +3,11 @@ html(lang="en")
 	head
 		title 
 			block title
+		script(src="/socket.io/socket.io.js")
+		script.
+			var socket = io()
+			socket.on('some event', function(msg){
+				alert(msg.for)
+			});
 	body
-		ul
-			li
-				a(href="/status") Status
-			li
-				a(href="/") Index
-			li
-				a(href="/band") Band
 		block body

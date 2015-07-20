@@ -1,13 +1,35 @@
 extends ./layout.jade
 
 block title
-	| Index
+	| SCC
 
 block body
 	h1
 		block title
-	div
-		h2 Scheibe
-	div
-		h2 Liste
-		
+	div(id="user")
+		h2 User Stuff
+		form
+			div
+				p User ID
+				input(type="text")
+			input(type="submit")
+	
+	div(id="mode")
+		h2 Shooting Mode
+		p LG/ LP etc...
+	
+	div(id="modules")
+		h2 Modules
+		ul
+			li Grafik
+			li Aktueller Schuss
+			li Aktuelle Serie
+			li Serien
+			li Gesamt Serie
+			li Gesamt
+			li Stand Nummer
+			li Stand Name
+			li Status log
+			li Disziplinen
+			li Modies
+	
