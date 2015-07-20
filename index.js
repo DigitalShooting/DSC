@@ -1,18 +1,14 @@
 var express = require("express")
 var http = require("http")
 var config = require("./config.js")
-var esa = require("./lib/esa.js")()
+// var esa = require("./lib/esa.js")()
 
 var app = express()
-
-console.log("test")
 
 app.set('view engine', 'jade');
 
 
 app.get("/band", function(req, res){
-	esa.sendData(esa.seq.move)
-	console.log(esa.seq.move)
 	res.render("band")
 })
 

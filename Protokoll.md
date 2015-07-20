@@ -8,6 +8,11 @@
 FF 55 00 20 00 00 00 06  73 AA FF FF FF 55 01 14
 05 FA 14 03 09 0D 08 4F  00 00 00 00 1E DC 01 90
 B8 AA FF FF FF 55 01 13  00 47 AA FF FF
+
+
+55 00 20 00 00 00 06  73 AA
+55 01 14 05 FA 14 03 09 0D 08 4F 00 00 00 00 1E DC 01 90 B8 AA
+55 01 13  00 47 AA
 ````
 
 ### Heardbeat
@@ -16,7 +21,7 @@ B8 AA FF FF FF 55 01 13  00 47 AA FF FF
 FF 55 01 00 54 AA FF FF
 
 # Ohne Verzögerung
-55 01 13 00 47 AA
+   55 01 13 00 47 AA
 ````
 
 #### Band
@@ -45,23 +50,23 @@ AA
 ````
 
 Analyse
-http://babbage.cs.qc.cuny.edu/IEEE-754.old/32bit.html
 ````
-55 01 1D 00: 8872597127168
-00 30 CD 00: 4.4816439589913446e-39
-00 1E 29 00: 2.7697729134212896e-39
-00 0E 2E A3: 1.302427048577451e-39
+55 01
+1D  trefferdaten
+
+# Time
+00 00 30 CD # 12493
+
+# Treffer X
+00 00 1E 29 # 7721
+
+# Treffer Y
+00 00 0E 2E # 3630
+
+A3
+
 AA
 
-55 01 1D 00
-00
-   30 CD
-00 00
-   1E 29
-00 00
-   0E 2E
-A3
-AA
 
 ````
 

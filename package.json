@@ -7,7 +7,8 @@
 		"serialport": "x",
 		"convert-base": "x",
 		"express": "x",
-		"jade": "x"
+		"jade": "x",
+		"bitwise-xor": "X"
 	},
 	"main": "index.js"
 }
