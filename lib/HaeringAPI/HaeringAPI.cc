@@ -49,20 +49,18 @@ class HaeringAPI {
 	void readFromHaering(int fd, int length) {
 		setRTS(fd,1);
 
-		length = length+2;
-
-		string out = "";
+		length = (length+1);
 
 		int i = 0;
+		unsigned char arr[length];
 		while (i < length){
-			char chout;
-			read(fd, &chout, 1);
-			if (chout != 0) {
-				out[i] = (char)chout;
-				//printf("Got %02x\n", chout);
-				printf("%02x", chout);
+			// char chout[1];
+			int err = read(fd, &arr[i], 1);
+			if (err != -1) {
+				//printf("%i %02x\n", i, arr[i]);
+				printf("%02x", arr[i]);
 			}
-			usleep(40000);
+			usleep(25000);
 			i++;
 		}
 	}
@@ -76,7 +74,7 @@ class HaeringAPI {
 			struct termios options;
 
 			fd = open(device, O_RDWR);// | O_NOCTTY | O_NDELAY);
-			if (fd == -1) {
+			if (fd == 1) {
 				fprintf(stderr, "open_port: Unable to open %s - %s\n", device, strerror(errno));
 			}
 
@@ -109,23 +107,28 @@ class HaeringAPI {
 
 
 		void sendBand() {
-			char seqPaper[] = { 0x55, 0x01, 0x17, 0x02, 0x41, 0xAA};
+			char seq[] = { 0x55, 0x01, 0x17, 0x02, 0x41, 0xAA};
 
-			writeToHaering(fd, seqPaper, 6);
+			writeToHaering(fd, seq, 6);
 			readFromHaering(fd, 17);
 		}
 		void sendNOP() {
-			char seqNOP[] = { 0x55, 0x01, 0x00, 0x54, 0xAA};
+			char seq[] = { 0x55, 0x01, 0x00, 0x54, 0xAA};
 
-			writeToHaering(fd, seqNOP, 5);
+			writeToHaering(fd, seq, 5);
 			readFromHaering(fd, 17);
 		}
 		void sendSet() {
-			char seqNOP[] = { 0x55, 0x01, 0x14, 0x05, 0xFA, 0x14, 0x03, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90, 0xB8, 0xAA};
+			char seq[] = { 0x55, 0x01, 0x14, 0x05, 0xFA, 0x14, 0x03, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90, 0xB8, 0xAA};
 
-			writeToHaering(fd, seqNOP, 21);
+			writeToHaering(fd, seq, 30);
+			readFromHaering(fd, 0);
+		}
+		void sendReadSettings() {
+			char seq[] = { 0x55, 0x01, 0x13, 0x00, 0x47, 0xAA };
+
+			writeToHaering(fd, seq, 6);
 			readFromHaering(fd, 26);
 		}
 
-		// ...
 };
