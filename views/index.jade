@@ -22,8 +22,9 @@ block body
 		h2 Modules
 		ul
 			li Grafik
+			
 			li Aktueller Schuss
-			li Aktuelle Serie
+			li 
 			li Serien
 			li Gesamt Serie
 			li Gesamt
@@ -32,6 +33,13 @@ block body
 			li Status log
 			li Disziplinen
 			li Modies
+		
+		div(class="currentSerie")
+			h3 Aktuelle Serie
+			ul
+		div(class="grafik")
+			h3 Grafik
+			canvas(id="grafik" width="1200" height="1200")
 	
 	div(id="logs")
 		h2 Logs

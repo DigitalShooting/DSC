@@ -2,7 +2,8 @@ var express = require("express")
 var http = require("http")
 
 var config = require("./config.js")
-var esa = require("./lib/esa.js")()
+// var esa = require("./lib/esa.js")()
+var esa = require("./lib/esaTesting.js")()
 
 var app = express()
 
@@ -44,8 +45,10 @@ io.on('connection', function(socket){
 });
 
 
+esa.onNewShot = function(data){
+	io.emit('shot.new', data);
+}
 esa.onNewData = function(data){
 	//io.emit('some event', { hello: 'world' });
-
-	io.emit('newData', data);
+	console.log(data)
 }
