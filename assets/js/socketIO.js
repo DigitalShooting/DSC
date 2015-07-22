@@ -112,10 +112,10 @@ var session = {
 				this.shots.push(shot)
 				console.log(shot)
 				$("#modules .serie ul").append("<li>"+shot.ring+"</li>")
-
+								
 				context.fillStyle = "red";
 				context.beginPath();
-				context.arc((lastRing.width/2 - shot.x/1000)*scale+1, (lastRing.width/2 - shot.x/1000)*scale+1, scheibe.kugelDurchmesser/2*scale, 0, 2*Math.PI);
+				context.arc((lastRing.width/2 + shot.x/1000)*scale+1, (lastRing.width/2 - shot.y/1000)*scale+1, scheibe.kugelDurchmesser/2*scale, 0, 2*Math.PI);
 				context.closePath();
 				context.fill();
 				// context.strokeStyle = ring.textColor
