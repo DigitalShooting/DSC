@@ -131,7 +131,7 @@ class HaeringAPI {
 			readFromHaering(fd, 17);
 		}
 		void sendNOP() {
-			unsigned char seq[] = { 0x00, 0x54 };
+			unsigned char seq[] = { 0x00 };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
