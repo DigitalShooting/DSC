@@ -51,7 +51,7 @@ class HaeringAPI {
 
 
 		unsigned char xorBit = 0x00;
-		for (int i = 0; i < sizeof(seq)-1; i++){
+		for (int i = 0; i < sizeof(seq)-2; i++){
 			 xorBit ^= seq[i];
 		}
 		seq[sizeof(seq)-2] = xorBit;
