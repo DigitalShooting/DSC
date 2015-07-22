@@ -20,7 +20,6 @@ using namespace std;
 class HaeringAPI {
 	int fd;
 
-
 	int setRTS(int fd, int level) {
 		int status;
 
@@ -41,10 +40,30 @@ class HaeringAPI {
 
 
 
-	void writeToHaering(int fd, char value[], int length) {
+	void writeToHaering(int fd, unsigned char data[], int length) {
+		unsigned char seq[4+length];
+		seq[0] = 0x55;
+		seq[1] = 0x01;
+		for (int i = 0; i < length; i++){
+			seq[i+2] = data[i];
+		}
+		seq[sizeof(seq)-1] = 0xaa;
+
+
+		unsigned char xorBit = 0x00;
+		for (int i = 0; i < sizeof(seq)-1; i++){
+			 xorBit ^= seq[i];
+		}
+		seq[sizeof(seq)-2] = xorBit;
+
+		// for (int i = 0; i < sizeof(seq); i++){
+		//      printf("%02x ", seq[i]);
+		// }
+
+
 		setRTS(fd,0);
-		write(fd,value,length);
-		usleep(1041*length);
+		write(fd,seq,sizeof(seq));
+		usleep(1041*sizeof(seq));
 	}
 	void readFromHaering(int fd, int length) {
 		setRTS(fd,1);
@@ -107,27 +126,23 @@ class HaeringAPI {
 
 
 		void sendBand() {
-			char seq[] = { 0x55, 0x01, 0x17, 0x02, 0x41, 0xAA};
-
-			writeToHaering(fd, seq, 6);
+			unsigned char seq[] = { 0x17, 0x02 };
+			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
 		void sendNOP() {
-			char seq[] = { 0x55, 0x01, 0x00, 0x54, 0xAA};
-
-			writeToHaering(fd, seq, 5);
+			unsigned char seq[] = { 0x00, 0x54 };
+			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
 		void sendSet() {
-			char seq[] = { 0x55, 0x01, 0x14, 0x05, 0xFA, 0x14, 0x03, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90, 0xB8, 0xAA};
-
-			writeToHaering(fd, seq, 30);
+			unsigned char seq[] = { 0x14, 0x05, 0xFA, 0x14, 0x03, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90 };
+			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 0);
 		}
 		void sendReadSettings() {
-			char seq[] = { 0x55, 0x01, 0x13, 0x00, 0x47, 0xAA };
-
-			writeToHaering(fd, seq, 6);
+			unsigned char seq[] = { 0x13, 0x00 };
+			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 26);
 		}
 
