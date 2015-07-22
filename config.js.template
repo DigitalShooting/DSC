@@ -17,7 +17,7 @@ module.exports = {
 	},
 
 
-	scheibe: {
+	scheiben: {
 		lg: {
 			title: "LG 10m",
 			ringe: [
@@ -53,45 +53,47 @@ module.exports = {
 	},
 
 
+	/*
 	disziplinen: [
 		{
-			id: 1
+			id: 1,
 			title: "LG Training",
 			scheibe: this.scheiben.lg,
 			serienLength: 10,
 		},
 		{
-			id: 2
+			id: 2,
 			title: "LG Training 5er",
 			scheibe: this.scheiben.lg,
 			serienLength: 5,
 		},
 		{
-			id: 3
+			id: 3,
 			title: "LG Wettkampf",
 			scheibe: this.scheiben.lg,
 			serienLength: 10,
 		},
 		{
-			id: 4
+			id: 4,
 			title: "LP Training",
 			scheibe: this.scheiben.lp,
 			serienLength: 10,
 		},
 		{
-			id: 5
+			id: 5,
 			title: "LP Training 5er",
 			scheibe: this.scheiben.lp,
 			serienLength: 5,
 		},
 		{
-			id: 6
+			id: 6,
 			title: "LP Wettkampf",
 			scheibe: this.scheiben.lp,
 			serienLength: 10,
 		}
 	],
-	
+	+/
+
 
 	servers : {
 		servers1 : {
