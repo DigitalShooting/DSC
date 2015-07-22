@@ -126,7 +126,7 @@ class HaeringAPI {
 
 
 		void sendBand() {
-			unsigned char seq[] = { 0x17, 0x02 };
+			unsigned char seq[] = { 0x17, 0x08 };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
