@@ -126,11 +126,11 @@ Analyse
 
 Analyse
 ````
-55 01 1D 00
-00 3C 5F FF
-FF EB 50 FF
-FF F9 F5 9D
-AA
+55 01 1D
+00 00 3C 5F
+FF FF EB 50 
+FF FF F9 F5
+9D AA
 
 55 01 08 5C AA
 
