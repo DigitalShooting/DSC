@@ -79,7 +79,7 @@ class HaeringAPI {
 				//printf("%i %02x\n", i, arr[i]);
 				printf("%02x", arr[i]);
 			}
-			usleep(10000);
+			usleep(5000);
 			i++;
 		}
 	}

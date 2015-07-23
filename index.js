@@ -2,8 +2,8 @@ var express = require("express")
 var http = require("http")
 
 var config = require("./config/index.js")
-// var esa = require("./lib/esa.js")()
-var esa = require("./lib/esaTesting.js")()
+var esa = require("./lib/esa.js")()
+//var esa = require("./lib/esaTesting.js")()
 
 var app = express()
 
