@@ -117,7 +117,6 @@ class HaeringAPI {
 
 			/* Set the new options for the port */
 			tcsetattr(fd, TCSANOW, &options);
-
 		}
 		~HaeringAPI() {
 			close(fd);
