@@ -139,3 +139,32 @@ AA
 55 01 08 5C AA
 ...
 ````
+
+
+
+
+
+
+
+diff: 0.3639917581484504
+ring: 10 Zehntel: 0.7689629670665579
+Ring: 10.8 (271, 243)
+
+
+Ringbreite 10:      0.5
+Kaliber/2           2,25
+Summe Max10         2,75
+
+2,75 ^= 10,0
+0    ^= 10,9
+
+((2,75 - diff) / 2,75 ) * 0.9
+
+
+
+RB (Ringbreite/2) = 0.25
+RBV (Ringbreite Prev/2) = 0
+K (Kaliber/2) = 2,25
+
+vergleichen mit (RB + K) >= diff
+    ( (RB - diff) / (RB - RBV) ) * 0.9

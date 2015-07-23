@@ -20,23 +20,28 @@ block body
 	
 	div(id="modules")
 		h2 Modules
-		ul
-			li Grafik
-			
-			li Aktueller Schuss
-			li 
-			li Serien
-			li Gesamt Serie
-			li Gesamt
-			li Stand Nummer
-			li Stand Name
-			li Status log
-			li Disziplinen
-			li Modies
+		// Stand Nummer
+		// Stand Name
+		// Status log
+		// Disziplinen
+		// Modies
 		
-		div(class="currentSerie")
+		
+		div(class="aktuellerSchuss")
+			h3 Aktueller Schuss
+			p
+		div(class="ringeGesamt")
+			h3 Gesamt
+			p
+		div(class="serien")
+			h3 Serien
+			ul
+		div(class="aktuelleSerie")
 			h3 Aktuelle Serie
 			ul
+		div(class="ringeAktuelleSerie")
+			h3 Ringe Aktuelle Serie
+			p
 		div(class="grafik")
 			h3 Grafik
 			canvas(id="grafik" width="1200" height="1200")
