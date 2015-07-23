@@ -2,7 +2,6 @@ var socket = io();
 
 
 
-
 var a_canvas = document.getElementById("grafik");
 console.log(a_canvas)
 var context = a_canvas.getContext("2d");
@@ -20,10 +19,10 @@ var context = a_canvas.getContext("2d");
 // 	y: -1220
 // }
 
-var scale = 12
+var scale = 17
 var offset = {
-	x: 1,
-	y: 1
+	x: 10,
+	y: 10
 }
 
 
@@ -42,7 +41,7 @@ var moduleAPI = {
 	modules: [],
 
 	init: function(){
-		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), ringeAktuelleSerie(session), anzahlShots(session), anzahlShotsSerie(session), schnitt(session) ]
+		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), ringeAktuelleSerie(session), anzahlShots(session), anzahlShotsSerie(session), schnitt(session), teiler(session) ]
 	},
 
 	newShot: function(shot){
@@ -108,11 +107,17 @@ var draw = function(session){
 		}
 	}
 
-	function drawShot(shot, scheibe){
+	function drawShot(shot, scheibe, last){
 		var lastRing = scheibe.ringe[scheibe.ringe.length-1]
 
-		context.fillStyle = "gray";
-		context.globalAlpha = 0.7
+		if (last){
+			context.fillStyle = "#ff0000";
+			context.globalAlpha = 1.0
+		}
+		else {
+			context.fillStyle = "#cccccc";
+			context.globalAlpha = 0.5
+		}
 		context.beginPath();
 		context.arc((lastRing.width/2 + shot.x/1000)*scale+offset.x, (lastRing.width/2 - shot.y/1000)*scale+offset.y, scheibe.kugelDurchmesser/2*scale, 0, 2*Math.PI);
 		context.closePath();
@@ -120,9 +125,9 @@ var draw = function(session){
 	}
 
 	function drawMode(mode, scheibe){
-		mode.serie.forEach(function(shot){
-			drawShot(shot, scheibe)
-		})
+		for (i in mode.serie){
+			drawShot(mode.serie[i], scheibe, i==mode.serie.length-1)
+		}
 	}
 
 	return moduleObject
@@ -150,7 +155,7 @@ var serien = function(session){
 		for(i in mode.serie){
 			ringeSerieAktuell += mode.serie[i].ringInt
 		}
-		$("#modules .serien ul").append("<li><b>"+ringeSerieAktuell+"</b></li>")
+		$("#modules .serien ul").append("<li class='list-group-item'><b>"+ringeSerieAktuell+"</b></li>")
 	}
 
 	return moduleObject
@@ -167,7 +172,7 @@ var aktuelleSerie = function(session){
 	function update(mode){
 		$("#modules .aktuelleSerie ul").html("")
 		mode.serie.forEach(function(shot){
-			$("#modules .aktuelleSerie ul").append("<li>"+shot.ring+"</li>")
+			$("#modules .aktuelleSerie ul").append("<li class='list-group-item'>"+shot.ring+"</li>")
 		})
 	}
 
@@ -295,7 +300,32 @@ var schnitt = function(session){
 				gesamt += mode.serieHistory[i][ii].ringInt
 			}
 		}
-		$("#modules .schnitt p").text(Math.round(gesamt/ anzahl * 10)/ 10)
+		if (anzahl > 0){
+			$("#modules .schnitt p").text(Math.round(gesamt/ anzahl * 10)/ 10)
+		}
+		else {
+			$("#modules .schnitt p").text("")
+		}
+	}
+
+	return moduleObject
+}
+var teiler = function(session){
+
+	update(session.mode)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){
+		update(session.mode)
+	}
+
+	function update(mode){
+		if (mode.serie.length > 0){
+			drawShot(mode.serie[mode.serie.length-1])
+		}
+	}
+	function drawShot(shot){
+		$("#modules .teiler p").text(Math.round(shot.teiler*100)/100)
 	}
 
 	return moduleObject

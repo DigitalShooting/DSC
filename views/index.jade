@@ -4,57 +4,78 @@ block title
 	| SCC
 
 block body
-	h1
-		//block title
-	//div(id="user")
-	//	h2 User Stuff
-	//	form
-	//		div
-	//			p User ID
-	//			input(type="text")
-	//		input(type="submit")
-
-	//div(id="mode")
-	//	h2 Shooting Mode
-	//	p LG/ LP etc...
-
-	div(id="modules")
-		//h2 Modules
+	div(id="modules" class="row")
 		// Stand Nummer
 		// Stand Name
 		// Status log
 		// Disziplinen
 		// Modies
-
-
-		div(class="aktuellerSchuss")
-			h3 Aktueller Schuss
-			p
-		div(class="ringeGesamt")
-			h3 Gesamt
-			p
-		div(class="serien")
-			h3 Serien
-			ul
-		div(class="aktuelleSerie")
-			h3 Aktuelle Serie
-			ul
-		div(class="ringeAktuelleSerie")
-			h3 Ringe Aktuelle Serie
-			p
-		div(class="anzahlShots")
-			h3 Schüsse
-			p
-		div(class="anzahlShotsSerie")
-			h3 Schüsse Serie
-			p
-		div(class="schnitt")
-			h3 Schnitt
-			p
-		div(class="grafik")
-			h3 Grafik
-			canvas(id="grafik" width="1200" height="1200")
-
-	//div(id="logs")
-	//	h2 Logs
-	//	div(class="box")
+		
+		
+		div(class="grafik" class="col-xs-6")
+			div(class="panel panel-default")
+				div(class="panel-body")
+					canvas(id="grafik" width="800" height="800")
+			
+		div(class="aktuellerSchuss" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Aktueller Schuss
+				div(class="panel-body")
+					p
+					
+		div(class="ringeGesamt" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Gesamt
+				div(class="panel-body")
+					p
+			
+		div(class="serien panel" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Serien
+				div(class="panel-body")
+					ul(class="list-group")
+			
+		div(class="aktuelleSerie" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Aktuelle Serie
+				div(class="panel-body")
+					ul(class="list-group")
+			
+		div(class="ringeAktuelleSerie" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Ringe Aktuelle Serie
+				div(class="panel-body")
+					p
+					
+		div(class="anzahlShots" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Anzahl Schüsse
+				div(class="panel-body")
+					p
+				
+		div(class="anzahlShotsSerie" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Anzahl Schüsse Serie
+				div(class="panel-body")
+					p
+				
+		div(class="schnitt" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Anzahl Schüsse Serie
+				div(class="panel-body")
+					p
+					
+		div(class="teiler" class="col-xs-3")
+			div(class="panel panel-default")
+				div(class="panel-heading")
+					h3 Teiler
+				div(class="panel-body")
+					p

@@ -1,5 +1,6 @@
 var express = require("express")
 var http = require("http")
+var expressLess = require('express-less')
 
 var config = require("./config/index.js")
 // var esa = require("./lib/esa.js")()
@@ -21,7 +22,7 @@ app.get("/", function(req, res){
 
 
 
-
+app.use("/css/", expressLess(__dirname + "/stylesheets"))
 
 
 
