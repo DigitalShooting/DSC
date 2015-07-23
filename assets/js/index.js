@@ -28,7 +28,11 @@ var offset = {
 
 
 
-
+Number.prototype.toFixedDown = function(digits) {
+	var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
+		m = this.toString().match(re);
+		return m ? parseFloat(m[1]) : this.valueOf();
+};
 
 
 // --------------------------------------------------------
@@ -38,7 +42,7 @@ var moduleAPI = {
 	modules: [],
 
 	init: function(){
-		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), ringeAktuelleSerie(session) ]
+		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), ringeAktuelleSerie(session), anzahlShots(session), anzahlShotsSerie(session), schnitt(session) ]
 	},
 
 	newShot: function(shot){
@@ -51,7 +55,7 @@ var moduleAPI = {
 			session.mode.serie.push(shot)
 		}
 
-		session.mode.shots.push(shot)
+		//session.mode.shots.push(shot)
 
 		this.modules.forEach(function(moduleObject){
 			moduleObject.newShot(shot, disziplin.scheibe)
@@ -200,7 +204,7 @@ var ringeGesamt = function(session){
 	function update(mode){
 		var gesamt = 0
 		for(i in mode.serie){
-			gesamt += mode.shots[i].ringInt
+			gesamt += mode.serie[i].ringInt
 		}
 		for(i in mode.serieHistory){
 			for(ii in mode.serieHistory[i]){
@@ -228,6 +232,70 @@ var aktuellerSchuss = function(session){
 	}
 	function drawShot(shot){
 		$("#modules .aktuellerSchuss p").text(shot.ring)
+	}
+
+	return moduleObject
+}
+var anzahlShots = function(session){
+
+	update(session.mode)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){
+		update(session.mode)
+	}
+
+	function update(mode){
+		var anzahl = mode.serie.length
+
+		for(i in mode.serieHistory){
+			anzahl += mode.serieHistory[i].length
+		}
+
+		$("#modules .anzahlShots p").text(anzahl)
+	}
+
+	return moduleObject
+}
+var anzahlShotsSerie = function(session){
+
+	update(session.mode)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){
+		update(session.mode)
+	}
+
+	function update(mode){
+		var anzahl = mode.serie.length
+
+		$("#modules .anzahlShotsSerie p").text(anzahl)
+	}
+
+	return moduleObject
+}
+var schnitt = function(session){
+
+	update(session.mode)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){
+		update(session.mode)
+	}
+
+	function update(mode){
+		var gesamt = 0
+		var anzahl = mode.serie.length
+		for(i in mode.serie){
+			gesamt += mode.serie[i].ringInt
+		}
+		for(i in mode.serieHistory){
+			anzahl += mode.serieHistory[i].length
+			for(ii in mode.serieHistory[i]){
+				gesamt += mode.serieHistory[i][ii].ringInt
+			}
+		}
+		$("#modules .schnitt p").text(Math.round(gesamt/ anzahl * 10)/ 10)
 	}
 
 	return moduleObject
