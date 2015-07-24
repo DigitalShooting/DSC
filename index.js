@@ -3,8 +3,8 @@ var http = require("http")
 var expressLess = require('express-less')
 
 var config = require("./config/index.js")
-// var esa = require("./lib/esa.js")()
-var esa = require("./lib/esaTesting.js")()
+var esa = require("./lib/esa.js")()
+// var esa = require("./lib/esaTesting.js")()
 
 var app = express()
 

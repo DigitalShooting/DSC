@@ -68,7 +68,7 @@ class HaeringAPI {
 	void readFromHaering(int fd, int length) {
 		setRTS(fd,1);
 
-		length = (length+1);
+		length = (length+3);
 
 		int i = 0;
 		unsigned char arr[length];
@@ -79,7 +79,7 @@ class HaeringAPI {
 				//printf("%i %02x\n", i, arr[i]);
 				printf("%02x", arr[i]);
 			}
-			usleep(5000);
+			usleep(50000);
 			i++;
 		}
 	}
