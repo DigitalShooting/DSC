@@ -234,6 +234,9 @@ var aktuellerSchuss = function(session){
 		if (mode.serie.length > 0){
 			drawShot(mode.serie[mode.serie.length-1])
 		}
+		else {
+			$("#modules .aktuellerSchuss p").text("")
+		}
 	}
 	function drawShot(shot){
 		$("#modules .aktuellerSchuss p").text(shot.ring)
