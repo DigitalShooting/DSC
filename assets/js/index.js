@@ -149,7 +149,7 @@ var serien = function(session){
 			for(ii in mode.serieHistory[i]){
 				ringeSerie += mode.serieHistory[i][ii].ringInt
 			}
-			$("#modules .serien ul").append("<li>"+ringeSerie+"</li>")
+			$("#modules .serien ul").append("<li class='list-group-item'>"+ringeSerie+"</li>")
 		}
 		var ringeSerieAktuell = 0
 		for(i in mode.serie){
