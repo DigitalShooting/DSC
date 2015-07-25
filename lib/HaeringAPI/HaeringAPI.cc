@@ -103,6 +103,7 @@ class HaeringAPI {
 			tcgetattr(fd, &options);
 			cfsetispeed(&options, B9600); /* Set the baud rates to 19200 */
 			cfsetospeed(&options, B9600);
+			cfmakeraw(&options);
 
 			/* Enable the receiver and set local mode */
 			options.c_cflag |= (CLOCAL | CREAD);
