@@ -127,7 +127,7 @@ var draw = function(session){
 
 		// Probeecke
 		if (session.mode.type == "probe"){
-			context.beginPath();
+			context.beginPath()
 			context.moveTo(1450,50)
 			context.lineTo(1950,50)
 			context.lineTo(1950,550)
@@ -211,7 +211,8 @@ var aktuelleSerie = function(session){
 	function update(mode){
 		$("#modules .aktuelleSerie ul").html("")
 		mode.serie.forEach(function(shot){
-			$("#modules .aktuelleSerie ul").append("<li class='list-group-item'>"+shot.ring+"</li>")
+			// TODO: Pfeile http://www.key-shortcut.com/schriftsysteme/mathematik-technik/pfeile.html
+			$("#modules .aktuelleSerie ul").append("<li class='list-group-item'>"+shot.ring+" &#8595</li>")
 		})
 	}
 
