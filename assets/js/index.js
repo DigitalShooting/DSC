@@ -6,24 +6,25 @@ var a_canvas = document.getElementById("grafik");
 console.log(a_canvas)
 var context = a_canvas.getContext("2d");
 
-
-// var scale = 60
+// var zoom.scale = 43.5
 // var offset = {
-// 	x: -760,
-// 	y: -760
+// 	x: 10,
+// 	y: 10
 // }
 
-// var scale = 80
+// var zoom.scale = 70
 // var offset = {
-// 	x: -1220,
-// 	y: -1220
+// 	x: -600,
+// 	y: -600
 // }
 
-var scale = 17
-var offset = {
-	x: 10,
-	y: 10
-}
+// var zoom.scale = 100
+// var offset = {
+// 	x: -1270,
+// 	y: -1270
+// }
+
+
 
 
 
@@ -64,6 +65,7 @@ var moduleAPI = {
 
 var draw = function(session){
 
+	var zoom = {}
 	update(session.mode)
 
 	var moduleObject = {}
@@ -73,6 +75,21 @@ var draw = function(session){
 
 	function update(mode){
 		context.clearRect(0, 0, a_canvas.width, a_canvas.height);
+
+		if (mode.serie.length != 0) {
+			var scheibe = mode.disziplin.scheibe
+			var ringInt = mode.serie[mode.serie.length-1].ringInt
+			var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
+			if (ring){
+				zoom = ring.zoom
+			}
+			else {
+				zoom = mode.disziplin.scheibe.defaultZoom
+			}
+		}
+		else {
+			zoom = mode.disziplin.scheibe.defaultZoom
+		}
 
 		drawScheibe(session.mode.disziplin.scheibe)
 		drawMode(session.mode, session.mode.disziplin.scheibe)
@@ -86,7 +103,7 @@ var draw = function(session){
 			context.globalAlpha = 1.0
 			context.fillStyle = ring.color;
 			context.beginPath();
-			context.arc(lastRing.width/2*scale+offset.x, lastRing.width/2*scale+offset.y, ring.width/2*scale, 0, 2*Math.PI);
+			context.arc(lastRing.width/2*zoom.scale+zoom.offset.x, lastRing.width/2*zoom.scale+zoom.offset.y, ring.width/2*zoom.scale, 0, 2*Math.PI);
 			context.closePath();
 
 			context.fill();
@@ -96,13 +113,13 @@ var draw = function(session){
 			context.fillStyle = "black";
 
 			if (ring.text == true){
-				// context.font = (10*scale)+" px";
-				context.font = "bold "+(1*scale)+"px verdana, sans-serif";
+				// context.font = (10*zoom.zoom.scale)+" px";
+				context.font = "bold "+(1*zoom.scale)+"px verdana, sans-serif";
 				context.fillStyle = ring.textColor
-				context.fillText(ring.value, (lastRing.width/2 - ring.width/2 + 0.95)*scale+offset.x, (lastRing.width/2+0.3)*scale+offset.y);
-				context.fillText(ring.value, (lastRing.width/2 + ring.width/2 - 1.7)*scale+offset.x, (lastRing.width/2+0.3)*scale+offset.y);
-				context.fillText(ring.value, (lastRing.width/2-0.3)*scale+offset.x, (lastRing.width/2 + ring.width/2 - 0.8)*scale+offset.y);
-				context.fillText(ring.value, (lastRing.width/2-0.3)*scale+offset.x, (lastRing.width/2 - ring.width/2 + 1.8)*scale+offset.y);
+				context.fillText(ring.value, (lastRing.width/2 - ring.width/2 + 0.95)*zoom.scale+zoom.offset.x, (lastRing.width/2+0.3)*zoom.scale+zoom.offset.y);
+				context.fillText(ring.value, (lastRing.width/2 + ring.width/2 - 1.7)*zoom.scale+zoom.offset.x, (lastRing.width/2+0.3)*zoom.scale+zoom.offset.y);
+				context.fillText(ring.value, (lastRing.width/2-0.3)*zoom.scale+zoom.offset.x, (lastRing.width/2 + ring.width/2 - 0.8)*zoom.scale+zoom.offset.y);
+				context.fillText(ring.value, (lastRing.width/2-0.3)*zoom.scale+zoom.offset.x, (lastRing.width/2 - ring.width/2 + 1.8)*zoom.scale+zoom.offset.y);
 			}
 		}
 	}
@@ -119,7 +136,7 @@ var draw = function(session){
 			context.globalAlpha = 0.5
 		}
 		context.beginPath();
-		context.arc((lastRing.width/2 + shot.x/1000)*scale+offset.x, (lastRing.width/2 - shot.y/1000)*scale+offset.y, scheibe.kugelDurchmesser/2*scale, 0, 2*Math.PI);
+		context.arc((lastRing.width/2 + shot.x/1000)*zoom.scale+zoom.offset.x, (lastRing.width/2 - shot.y/1000)*zoom.scale+zoom.offset.y, scheibe.kugelDurchmesser/2*zoom.scale, 0, 2*Math.PI);
 		context.closePath();
 		context.fill();
 	}
@@ -389,3 +406,23 @@ socket.on('shot.switchToProbe', function(data){
 socket.on('reset.exit', function(data){
 	console.log('reset: ' + data);
 });
+
+
+
+
+
+
+
+
+function resize() {
+	var width = $("#grafik").outerWidth(true)
+
+	var ratio = a_canvas.width/a_canvas.height;
+	var height = width * ratio;
+
+	a_canvas.style.width = width+'px';
+	a_canvas.style.height = height+'px';
+}
+
+window.addEventListener('load', resize, false);
+window.addEventListener('resize', resize, false);
