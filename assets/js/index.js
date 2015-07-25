@@ -66,6 +66,7 @@ var moduleAPI = {
 var draw = function(session){
 
 	var zoom = {}
+	var currentRing = {}
 	update(session.mode)
 
 	var moduleObject = {}
@@ -81,6 +82,7 @@ var draw = function(session){
 			var ringInt = mode.serie[mode.serie.length-1].ringInt
 			var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
 			if (ring){
+				currentRing = ring
 				zoom = ring.zoom
 			}
 			else {
@@ -122,14 +124,34 @@ var draw = function(session){
 				context.fillText(ring.value, (lastRing.width/2-0.3)*zoom.scale+zoom.offset.x, (lastRing.width/2 - ring.width/2 + 1.8)*zoom.scale+zoom.offset.y);
 			}
 		}
+
+		// Probeecke
+		if (session.mode.type == "probe"){
+			context.beginPath();
+			context.moveTo(1450,50)
+			context.lineTo(1950,50)
+			context.lineTo(1950,550)
+			context.fillStyle = scheibe.probeEcke.color
+			context.globalAlpha = scheibe.probeEcke.alpha
+			context.fill();
+		}
+
 	}
 
 	function drawShot(shot, scheibe, last){
 		var lastRing = scheibe.ringe[scheibe.ringe.length-1]
 
 		if (last){
-			context.fillStyle = "#ff0000";
+			if (currentRing){
+				context.fillStyle = currentRing.hitColor
+				console.log(currentRing)
+			}
+			else {
+				context.fillStyle = "#ff0000";
+			}
+
 			context.globalAlpha = 1.0
+
 		}
 		else {
 			context.fillStyle = "#cccccc";
