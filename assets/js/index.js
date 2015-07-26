@@ -110,7 +110,7 @@ var draw = function(session){
 
 			context.fill();
 			context.strokeStyle = ring.textColor
-			context.lineWidth = 1;
+			context.lineWidth = 2;
 			context.stroke();
 			context.fillStyle = "black";
 
