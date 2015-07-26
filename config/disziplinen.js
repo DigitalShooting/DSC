@@ -81,7 +81,7 @@ var scheiben = {
 	lp: {
 		title: "LP 10m",
 		ringe: [
-			{ value: 10, width:  11.5, color: "black", text: true, textColor: "white", zoom: zooms.lp.z4, hitColor: "red" },
+			{ value: 10, width:  11.5, color: "black", text: false, textColor: "white", zoom: zooms.lp.z4, hitColor: "red" },
 			{ value:  9, width:  27.5, color: "black", text: true, textColor: "white", zoom: zooms.lp.z4, hitColor: "green" },
 			{ value:  8, width:  43.5, color: "black", text: true, textColor: "white", zoom: zooms.lp.z3, hitColor: "yellow" },
 			{ value:  7, width:  59.5, color: "black", text: true, textColor: "white", zoom: zooms.lp.z3, hitColor: "#00bffF" },

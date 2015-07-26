@@ -62,7 +62,7 @@ var session = {
 		type: "probe",
 
 		// disziplin: art des modes
-		disziplin: config.disziplinen.lpTraining,
+		disziplin: config.disziplinen.lgTraining,
 
 		// shots: schüsse
 		shots: [
