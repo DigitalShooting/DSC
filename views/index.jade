@@ -4,82 +4,19 @@ block title
 	| SCC
 
 block body
-	div(id="modules" class="row")
-		// Stand Nummer
-		// Stand Name
-		// Status log
-		// Disziplinen
-		// Modies
+	div(id="modules")
+		div(class="container w60 h100")		
+			div(class="grafik container w100 h100")
+				canvas(id="grafik" width="2000" height="2000")
 		
-		
-		div(class="grafik" class="col-xs-6")
-			div(class="panel panel-default")
-				div(class="panel-body")
-					canvas(id="grafik" width="2000" height="2000")
-					
-		div(class="col-xs-3")
-			div(class="ringeGesamt")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Gesamt
-					div(class="panel-body")
-						p
+		div(class="container w20 h100")
+			div(class="aktuelleSerie container w90 h100")
+				h3 Aktuelle Serie
+				table(class="table")
 			
-			div(class="serien")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Serien
-					div(class="panel-body")
-						ul(class="list-group")
-						
-			div(class="aktuellerSchuss")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Aktueller Schuss
-					div(class="panel-body")
-						p
-						
-			div(class="anzahlShots")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Anzahl Schüsse
-					div(class="panel-body")
-						p
-						
-			div(class="schnitt")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Schnitt
-					div(class="panel-body")
-						p
-								
-			div(class="teiler")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Teiler
-					div(class="panel-body")
-						p
+		div(class="container w20 h100")
+			div(class="serien container w90 h100")
+				h3 Serien
+				table(class="table")
 			
-			
-		div(class="col-xs-3")
-			div(class="aktuelleSerie")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Aktuelle Serie
-					div(class="panel-body")
-						ul(class="list-group")
-			
-			div(class="ringeAktuelleSerie")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Ringe Aktuelle Serie
-					div(class="panel-body")
-						p
-				
-			div(class="anzahlShotsSerie")
-				div(class="panel panel-default")
-					div(class="panel-heading")
-						h3 Anzahl Schüsse Serie
-					div(class="panel-body")
-						p
 				

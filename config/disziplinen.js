@@ -71,7 +71,7 @@ module.exports = {
 		title: "LG Training",
 		scheibe: scheiben.lg,
 		serienLength: 10,
-		anzahlShots: 0,
+		anzahlShots: 40,
 	},
 	lgTraining5: {
 		title: "LG Training 5er",

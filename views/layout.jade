@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html(lang="de")
 	head
 		title 
 			block title
@@ -13,17 +13,43 @@ html(lang="en")
 		meta(name="viewport", content="width=device-width")
 	body
 		nav(class="navbar navbar-default")
-			div(class="container-fluid")
-				div(class="navbar-header")
-					button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
-						span(class="sr-only") Toggle navigation
-						span(class="icon-bar")
-						span(class="icon-bar")
-						span(class="icon-bar")
-					a(class="navbar-brand" href="/") SCC
-				
-				div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-					ul(class="nav navbar-nav")
+			div(class="aktuellerSchuss container w20 h100")
+				p Aktueller Schuss
+				h2(class="value")
+				p(class="value2")
+			div(class="anzahlShots container w20 h100")
+				p Anzahl Schüsse
+				h2(class="value")
+				p(class="value2")
+			div(class="schnitt container w20 h100")
+				p Schnitt
+				h2(class="value")
+				p(class="value2")
+			div(class="ringeGesamt container w20 h100")
+				p Gesamt
+				h2(class="value")
+				p(class="value2")
+			div(class="container w20 h100")
+				p Logout/ Disziplin
+				h2 Menü
+					
 
 		block body
+		nav(class="navbar navbar-default")
+			div(class="container w20 h100")
+				p Stand
+				h2 Stand 1
+			div(class="container w20 h100")
+				p Name
+				h2 Max Mustermann
+			div(class="container w20 h100")
+				p Verein
+				h2 SV Diana Dettingen
+			div(class="container w20 h100")
+				p Uhr
+				h2 09:41 Uhr
+			div(class="container w20 h100")
+				p Verbleibende Zeit
+				h2 09:20 min
+				
 		script(src="/js/index.js")

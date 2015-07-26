@@ -1,32 +1,4 @@
-var socket = io();
-
-
-
-var a_canvas = document.getElementById("grafik");
-console.log(a_canvas)
-var context = a_canvas.getContext("2d");
-
-// var zoom.scale = 43.5
-// var offset = {
-// 	x: 10,
-// 	y: 10
-// }
-
-// var zoom.scale = 70
-// var offset = {
-// 	x: -600,
-// 	y: -600
-// }
-
-// var zoom.scale = 100
-// var offset = {
-// 	x: -1270,
-// 	y: -1270
-// }
-
-
-
-
+var socket = io()
 
 Number.prototype.toFixedDown = function(digits) {
 	var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
@@ -42,7 +14,7 @@ var moduleAPI = {
 	modules: [],
 
 	init: function(){
-		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), ringeAktuelleSerie(session), anzahlShots(session), anzahlShotsSerie(session), schnitt(session), teiler(session) ]
+		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), anzahlShots(session), schnitt(session) ]
 	},
 
 	newShot: function(shot){
@@ -55,8 +27,6 @@ var moduleAPI = {
 			session.mode.serie.push(shot)
 		}
 
-		//session.mode.shots.push(shot)
-
 		this.modules.forEach(function(moduleObject){
 			moduleObject.newShot(shot, disziplin.scheibe)
 		})
@@ -64,6 +34,36 @@ var moduleAPI = {
 }
 
 var draw = function(session){
+
+	var a_canvas = document.getElementById("grafik");
+	console.log(a_canvas)
+	var context = a_canvas.getContext("2d");
+
+	function resize() {
+		var width = $(".grafik").outerWidth(true)
+		var height = $(".grafik").outerHeight(true)
+
+		console.log(width + " " + height)
+
+		var ratio = a_canvas.width/a_canvas.height;
+		var newHeight = width * a_canvas.width/a_canvas.height;
+
+		console.log(newHeight)
+
+		if (newHeight > height) {
+			width = height * a_canvas.height/a_canvas.width;
+		}
+		else {
+			height = newHeight
+		}
+
+		a_canvas.style.width = width+'px';
+		a_canvas.style.height = height+'px';
+	}
+	resize()
+
+	window.addEventListener('load', resize, false);
+	window.addEventListener('resize', resize, false);
 
 	var zoom = {}
 	var currentRing = {}
@@ -181,20 +181,20 @@ var serien = function(session){
 	}
 
 	function update(mode){
-		$("#modules .serien ul").html("")
+		$(".serien table").html("")
 
 		for(i in mode.serieHistory){
 			var ringeSerie = 0
 			for(ii in mode.serieHistory[i]){
 				ringeSerie += mode.serieHistory[i][ii].ringInt
 			}
-			$("#modules .serien ul").append("<li class='list-group-item'>"+ringeSerie+"</li>")
+			$(".serien table").append("<tr><td>"+ringeSerie+"</li></td></tr>")
 		}
 		var ringeSerieAktuell = 0
 		for(i in mode.serie){
 			ringeSerieAktuell += mode.serie[i].ringInt
 		}
-		$("#modules .serien ul").append("<li class='list-group-item'><b>"+ringeSerieAktuell+"</b></li>")
+		$(".serien table").append("<tr><td><b>"+ringeSerieAktuell+"</b></td></tr>")
 	}
 
 	return moduleObject
@@ -209,30 +209,27 @@ var aktuelleSerie = function(session){
 	}
 
 	function update(mode){
-		$("#modules .aktuelleSerie ul").html("")
-		mode.serie.forEach(function(shot){
+		$(".aktuelleSerie table").html("")
+
+		for (var i = 0; i < mode.serie.length; i++){
+			var shot = mode.serie[i]
 			// TODO: Pfeile http://www.key-shortcut.com/schriftsysteme/mathematik-technik/pfeile.html
-			$("#modules .aktuelleSerie ul").append("<li class='list-group-item'>"+shot.ring+" &#8595</li>")
-		})
-	}
 
-	return moduleObject
-}
-var ringeAktuelleSerie = function(session){
 
-	update(session.mode)
+			var pfeil = "&#8635;"
+			if (shot.ring < 10.3) {
+				if (shot.winkel >= 22.5 && shot.winkel < 67.5) pfeil = " &#8599;"
+				else if (shot.winkel >= 67.5 && shot.winkel < 112.5) pfeil = " &#8593;"
+				else if (shot.winkel >= 112.5 && shot.winkel < 157.5) pfeil = " &#8598;"
+				else if (shot.winkel >= 157.5 && shot.winkel < 202.5) pfeil = " &#8592;"
+				else if (shot.winkel >= 202.5 && shot.winkel < 247.5) pfeil = " &#8601;"
+				else if (shot.winkel >= 247.5 && shot.winkel < 292.5) pfeil = " &#8595;"
+				else if (shot.winkel >= 292.5 && shot.winkel < 337.5) pfeil = " &#8600;"
+				else pfeil = " &#8594;"
+			}
 
-	var moduleObject = {}
-	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
-	}
-
-	function update(mode){
-		var ringeSerieAktuell = 0
-		for(i in mode.serie){
-			ringeSerieAktuell += mode.serie[i].ringInt
+			$(".aktuelleSerie table").append("<tr><td>"+(i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
 		}
-		$("#modules .ringeAktuelleSerie p").text(ringeSerieAktuell)
 	}
 
 	return moduleObject
@@ -251,12 +248,16 @@ var ringeGesamt = function(session){
 		for(i in mode.serie){
 			gesamt += mode.serie[i].ringInt
 		}
+		var gesamtSerie = gesamt
 		for(i in mode.serieHistory){
 			for(ii in mode.serieHistory[i]){
 				gesamt += mode.serieHistory[i][ii].ringInt
 			}
 		}
-		$("#modules .ringeGesamt p").text(gesamt)
+		var textRingeM = "Ringe"
+		var textRinge = "Ring"
+		$(".ringeGesamt .value").text(gesamt + " " + ((gesamt==1) ? textRinge : textRingeM))
+		$(".ringeGesamt .value2").text(gesamtSerie + " " + ((gesamt==1) ? textRinge : textRingeM))
 	}
 
 	return moduleObject
@@ -275,11 +276,12 @@ var aktuellerSchuss = function(session){
 			drawShot(mode.serie[mode.serie.length-1])
 		}
 		else {
-			$("#modules .aktuellerSchuss p").text("")
+			$(".aktuellerSchuss .value").text("")
 		}
 	}
 	function drawShot(shot){
-		$("#modules .aktuellerSchuss p").text(shot.ring)
+		$(".aktuellerSchuss .value").text(shot.ring)
+		$(".aktuellerSchuss .value2").text(Math.round(shot.teiler*10)/10 + " Teiler")
 	}
 
 	return moduleObject
@@ -300,24 +302,13 @@ var anzahlShots = function(session){
 			anzahl += mode.serieHistory[i].length
 		}
 
-		$("#modules .anzahlShots p").text(anzahl)
-	}
-
-	return moduleObject
-}
-var anzahlShotsSerie = function(session){
-
-	update(session.mode)
-
-	var moduleObject = {}
-	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
-	}
-
-	function update(mode){
-		var anzahl = mode.serie.length
-
-		$("#modules .anzahlShotsSerie p").text(anzahl)
+		if (session.mode.disziplin.anzahlShots == 0){
+			$(".anzahlShots .value").text(anzahl)
+		}
+		else {
+			$(".anzahlShots .value").text(anzahl + "/ "+session.mode.disziplin.anzahlShots)
+		}
+		$(".anzahlShots .value2").text(mode.serie.length)
 	}
 
 	return moduleObject
@@ -344,36 +335,26 @@ var schnitt = function(session){
 			}
 		}
 		if (anzahl > 0){
-			$("#modules .schnitt p").text(Math.round(gesamt/ anzahl * 10)/ 10)
+			var schnitt = Math.round(gesamt/ anzahl * 10)/ 10
+			$(".schnitt .value").text(schnitt)
+			if (mode.disziplin.anzahlShots > 0){
+				var textRingeM = "Ringe"
+				var textRinge = "Ring"
+				var hochrechnung = schnitt * mode.disziplin.anzahlShots
+				$(".schnitt .value2").text(Math.round(hochrechnung) + " " + ((hochrechnung==1) ? textRinge : textRingeM))
+			}
+			else {
+				$(".schnitt .value2").text("")
+			}
 		}
 		else {
-			$("#modules .schnitt p").text("")
+			$(".schnitt .value").text("")
+			$(".schnitt .value2").text("")
 		}
 	}
 
 	return moduleObject
 }
-var teiler = function(session){
-
-	update(session.mode)
-
-	var moduleObject = {}
-	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
-	}
-
-	function update(mode){
-		if (mode.serie.length > 0){
-			drawShot(mode.serie[mode.serie.length-1])
-		}
-	}
-	function drawShot(shot){
-		$("#modules .teiler p").text(Math.round(shot.teiler*100)/100)
-	}
-
-	return moduleObject
-}
-
 
 
 
@@ -429,23 +410,3 @@ socket.on('shot.switchToProbe', function(data){
 socket.on('reset.exit', function(data){
 	console.log('reset: ' + data);
 });
-
-
-
-
-
-
-
-
-function resize() {
-	var width = $("#grafik").outerWidth(true)
-
-	var ratio = a_canvas.width/a_canvas.height;
-	var height = width * ratio;
-
-	a_canvas.style.width = width+'px';
-	a_canvas.style.height = height+'px';
-}
-
-window.addEventListener('load', resize, false);
-window.addEventListener('resize', resize, false);
