@@ -1,33 +1,18 @@
 var express = require("express")
 var http = require("http")
 var expressLess = require('express-less')
-
 var config = require("./config/index.js")
+var app = express()
+
 // var esa = require("./lib/esa.js")()
 var esa = require("./lib/esaTesting.js")()
 
-var app = express()
-
 app.set('view engine', 'jade');
-
-
 app.use("/js/", express.static("./assets/js"))
-
-
-
-
 app.get("/", function(req, res){
 	res.render("index")
 })
-
-
-
 app.use("/css/", expressLess(__dirname + "/stylesheets"))
-
-
-
-
-
 
 var server = http.Server(app)
 var io = require('socket.io')(server);
@@ -43,48 +28,34 @@ server.on('listening', function() {
 
 
 
+var getNewSession = function(){
+	return {
+		user: {
+			firstName: "Max",
+			lastName: "Mustermann",
+			verein: "SV Diana Dettingen",
+			manschaft: "Manschaft 1",
+		},
 
+		type: "probe",
 
+		disziplin: config.disziplinen.lgTraining,
 
-
-
-
-
-// session: enthält alle daten
-var session = {
-	// user object
-	user: {
-		firstName: "Max",
-		lastName: "Mustermann",
-		verein: "SV Diana Dettingen",
-		manschaft: "Manschaft 1",
-	},
-
-	// type: art des modus (probe/ match) DEPRICATED
-	type: "probe",
-
-	// disziplin: art des modes
-	disziplin: config.disziplinen.lgTraining,
-
-	// shots: schüsse
-	shots: [
-
-	],
-
-	serie: [],
-	serieHistory: [],
+		serie: [],
+		serieHistory: [],
+	}
 }
-// var sessions = {
-// 	{type: "probe", session: session},
-// 	{type: "match", session: session},
-// }
+
+// var sessions = [
+// 	session,
+// ]
+
+var activeSession = getNewSession()
 
 
 
-function newShot(shot){
-	session.shots.push(shot)
-
-	var disziplin = session.disziplin
+function newShot(session, shot){
+	var disziplin = activeSession.disziplin
 	if (disziplin.serienLength == session.serie.length){
 		session.serieHistory.push(session.serie)
 		session.serie = [shot]
@@ -94,26 +65,35 @@ function newShot(shot){
 	}
 
 	console.log(shot)
-	io.emit('shot.new', shot);
+
+	io.emit('newShot', shot);
 }
-
-
 
 
 
 
 io.on('connection', function(socket){
-	console.log('a user connected');
+	io.emit('setSession', activeSession);
 
-	io.emit('init', session);
+	socket.on('newTarget', function(socket){
+		activeSession = getNewSession()
+
+		io.emit('setSession', activeSession);
+	});
+	socket.on('switchToMatch', function(socket){
+		activeSession = getNewSession()
+		activeSession.type = "match"
+
+		io.emit('setSession', activeSession);
+	});
+
 });
 
 
+
 esa.onNewShot = function(shot){
-	// io.emit('shot.new', data);
-	newShot(shot)
+	newShot(activeSession, shot)
 }
 esa.onNewData = function(data){
-	//io.emit('some event', { hello: 'world' });
 	console.log(data)
 }

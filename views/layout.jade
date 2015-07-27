@@ -53,7 +53,27 @@ html(lang="de")
 				p Verbleibende Zeit
 				h3 09:20 min
 				p 50 min
-			div(class="container w20 h100")
+			div(class="menu container w20 h100")
 				p Logout/ Disziplin
 				h3 Menü
+		
+		
+
+		div(class="modal fade" id="mainMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+			div(class="modal-dialog" role="document")
+				div(class="modal-content")
+					div(class="modal-header")
+						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+							span(aria-hidden="true") &times;
+						h4(class="modal-title" id="myModalLabel") Menü
+					div(class="modal-body")
+						div(class="list-group")
+							p(class="actionNewTarget list-group-item") Neue Scheibe
+							p(class="actionMatch list-group-item") Match
+					div(class="modal-footer")
+						button(type="button" class="btn btn-default" data-dismiss="modal") Close
+		
+		
+		
+		script(src="/js/modules.js")
 		script(src="/js/index.js")
