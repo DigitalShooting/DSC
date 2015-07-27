@@ -6,6 +6,16 @@ Number.prototype.toFixedDown = function(digits) {
 		return m ? parseFloat(m[1]) : this.valueOf();
 };
 
+function lastObject(array){
+	return array[array.length-1]
+}
+
+
+
+
+var activeSerie = 0
+
+
 
 // --------------------------------------------------------
 // Grafik Modul
@@ -36,14 +46,21 @@ var moduleAPI = {
 
 	newShot: function(shot){
 		var disziplin = session.disziplin
-		if (disziplin.serienLength == session.serie.length){
-			session.serieHistory.push(session.serie)
-			session.serie = [shot]
-		}
-		else {
-			session.serie.push(shot)
+
+		if (lastObject(session.serieHistory) == undefined) {
+			session.serieHistory.push([])
 		}
 
+		if (disziplin.serienLength == lastObject(session.serieHistory).length){
+			session.serieHistory.push([shot])
+		}
+		else {
+			lastObject(session.serieHistory).push(shot)
+		}
+
+		session.selection.serie = session.serieHistory.length-1
+		session.selection.shot = session.serieHistory[session.selection.serie].length-1
+		
 		this.activeModules.forEach(function(moduleObject){
 			if (moduleObject.newShot) {
 				moduleObject.newShot(shot, disziplin.scheibe)

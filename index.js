@@ -24,6 +24,14 @@ server.on('listening', function() {
 
 
 
+// HELPER
+function lastObject(array){
+	return array[array.length-1]
+}
+
+
+
+
 
 
 
@@ -40,8 +48,11 @@ var getNewSession = function(){
 		user: activeUser,
 		type: "probe",
 		disziplin: activeDisziplin,
-		serie: [],
 		serieHistory: [],
+		selection: {
+			serie: 0,
+			shot: 0,
+		}
 	}
 }
 
@@ -54,16 +65,35 @@ var activeSession = getNewSession()
 
 
 function newShot(session, shot){
-	var disziplin = activeSession.disziplin
-	if (disziplin.serienLength == session.serie.length){
-		session.serieHistory.push(session.serie)
-		session.serie = [shot]
-	}
-	else {
-		session.serie.push(shot)
+	var disziplin = session.disziplin
+
+	if (lastObject(session.serieHistory) == undefined) {
+		session.serieHistory.push([])
 	}
 
-	console.log(shot)
+	if (disziplin.serienLength == lastObject(session.serieHistory).length){
+		session.serieHistory.push([shot])
+	}
+	else {
+		lastObject(session.serieHistory).push(shot)
+	}
+
+	session.selection.serie = session.serieHistory.length-1
+	session.selection.shot = session.serieHistory[session.selection.serie].length-1
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//console.log(shot)
 
 	io.emit('newShot', shot);
 }
@@ -88,6 +118,16 @@ io.on('connection', function(socket){
 		activeDisziplin = config.disziplinen[key]
 
 		activeSession = getNewSession()
+		io.emit('setSession', activeSession);
+	});
+
+	socket.on('setSelectedSerie', function(selectedSerie){
+		activeSession.selection.serie = selectedSerie
+		activeSession.selection.shot = activeSession.serieHistory[activeSession.selection.serie].length-1
+		io.emit('setSession', activeSession);
+	});
+	socket.on('setSelectedShot', function(selectedShot){
+		activeSession.selection.shot = selectedShot
 		io.emit('setSession', activeSession);
 	});
 

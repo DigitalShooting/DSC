@@ -29,11 +29,13 @@ var modules = {
 		var currentRing = {}
 
 		function update(session){
+			var serie = session.serieHistory[session.selection.serie]
+
 			context.clearRect(0, 0, a_canvas.width, a_canvas.height);
 
-			if (session.serie.length != 0) {
+			if (serie != undefined && serie.length != 0) {
 				var scheibe = session.disziplin.scheibe
-				var ringInt = session.serie[session.serie.length-1].ringInt
+				var ringInt = serie[session.selection.shot].ringInt
 				var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
 				if (ring){
 					currentRing = ring
@@ -118,8 +120,9 @@ var modules = {
 		}
 
 		function drawMode(session, scheibe){
-			for (i in session.serie){
-				drawShot(session.serie[i], scheibe, i==session.serie.length-1)
+			var serie = session.serieHistory[session.selection.serie]
+			for (i in serie){
+				drawShot(serie[i], scheibe, i==session.selection.shot)
 			}
 		}
 
@@ -144,14 +147,16 @@ var modules = {
 				for(ii in session.serieHistory[i]){
 					ringeSerie += session.serieHistory[i][ii].ringInt
 				}
-				$(".serien table").append("<tr><td>"+ringeSerie+"</li></td></tr>")
-			}
-			var ringeSerieAktuell = 0
-			for(i in session.serie){
-				ringeSerieAktuell += session.serie[i].ringInt
-			}
-			if (session.serie.length > 0) {
-				$(".serien table").append("<tr><td><b>"+ringeSerieAktuell+"</b></td></tr>")
+
+
+
+				if (i == session.selection.serie){
+					$(".serien table").append("<tr><td><b>"+ringeSerie+"</b></li></td></tr>")
+				}
+				else {
+					$(".serien table").append("<tr onclick=\"socket.emit('setSelectedSerie', '"+i+"')\"><td>"+ringeSerie+"</li></td></tr>")
+				}
+
 			}
 		}
 
@@ -171,24 +176,32 @@ var modules = {
 		function update(session){
 			$(".aktuelleSerie table").html("")
 
-			for (var i = 0; i < session.serie.length; i++){
-				var shot = session.serie[i]
-				// TODO: Pfeile http://www.key-shortcut.com/schriftsysteme/mathematik-technik/pfeile.html
+			var serie = session.serieHistory[session.selection.serie]
 
+			if (serie){
+				for (var i = 0; i < serie.length; i++){
+					var shot = serie[i]
 
-				var pfeil = "&#8635;"
-				if (shot.ring < 10.3) {
-					if (shot.winkel >= 22.5 && shot.winkel < 67.5) pfeil = " &#8599;"
-					else if (shot.winkel >= 67.5 && shot.winkel < 112.5) pfeil = " &#8593;"
-					else if (shot.winkel >= 112.5 && shot.winkel < 157.5) pfeil = " &#8598;"
-					else if (shot.winkel >= 157.5 && shot.winkel < 202.5) pfeil = " &#8592;"
-					else if (shot.winkel >= 202.5 && shot.winkel < 247.5) pfeil = " &#8601;"
-					else if (shot.winkel >= 247.5 && shot.winkel < 292.5) pfeil = " &#8595;"
-					else if (shot.winkel >= 292.5 && shot.winkel < 337.5) pfeil = " &#8600;"
-					else pfeil = " &#8594;"
+					var pfeil = "&#8635;"
+					if (shot.ring < 10.3) {
+						if (shot.winkel >= 22.5 && shot.winkel < 67.5) pfeil = " &#8599;"
+						else if (shot.winkel >= 67.5 && shot.winkel < 112.5) pfeil = " &#8593;"
+						else if (shot.winkel >= 112.5 && shot.winkel < 157.5) pfeil = " &#8598;"
+						else if (shot.winkel >= 157.5 && shot.winkel < 202.5) pfeil = " &#8592;"
+						else if (shot.winkel >= 202.5 && shot.winkel < 247.5) pfeil = " &#8601;"
+						else if (shot.winkel >= 247.5 && shot.winkel < 292.5) pfeil = " &#8595;"
+						else if (shot.winkel >= 292.5 && shot.winkel < 337.5) pfeil = " &#8600;"
+						else pfeil = " &#8594;"
+					}
+
+					if (i == session.selection.shot){
+						$(".aktuelleSerie table").append("<tr><td>"+(i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
+					}
+					else {
+						$(".aktuelleSerie table").append("<tr onclick=\"socket.emit('setSelectedShot', '"+i+"')\"><td>"+(i+1)+".</td><td>"+shot.ring+"</td><td>"+pfeil+"</td></tr>")
+					}
+
 				}
-
-				$(".aktuelleSerie table").append("<tr><td>"+(i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
 			}
 		}
 
@@ -207,13 +220,14 @@ var modules = {
 	ringeGesamt: function(){
 		function update(session){
 			var gesamt = 0
-			for(i in session.serie){
-				gesamt += session.serie[i].ringInt
-			}
-			var gesamtSerie = gesamt
+			var gesamtSerie = 0
 			for(i in session.serieHistory){
 				for(ii in session.serieHistory[i]){
-					gesamt += session.serieHistory[i][ii].ringInt
+					var ring = session.serieHistory[i][ii].ringInt
+					gesamt += ring
+					if (i == session.selection.serie) {
+						gesamtSerie += ring
+					}
 				}
 			}
 			var textRingeM = "Ringe"
@@ -236,12 +250,16 @@ var modules = {
 
 	aktuellerSchuss: function(){
 		function update(session){
-			if (session.serie.length > 0){
-				drawShot(session.serie[session.serie.length-1])
-			}
-			else {
-				$(".aktuellerSchuss .value").text("")
-				$(".aktuellerSchuss .value2").text("")
+			var serie = session.serieHistory[session.selection.serie]
+
+			if (serie){
+				if (serie.length > 0){
+					drawShot(serie[serie.length-1])
+				}
+				else {
+					$(".aktuellerSchuss .value").text("")
+					$(".aktuellerSchuss .value2").text("")
+				}
 			}
 		}
 		function drawShot(shot){
@@ -263,8 +281,9 @@ var modules = {
 
 	anzahlShots: function(){
 		function update(session){
-			var anzahl = session.serie.length
+			var serie = session.serieHistory[session.selection.serie]
 
+			var anzahl = 0
 			for(i in session.serieHistory){
 				anzahl += session.serieHistory[i].length
 			}
@@ -275,7 +294,9 @@ var modules = {
 			else {
 				$(".anzahlShots .value").text(anzahl + "/ "+session.disziplin.anzahlShots)
 			}
-			$(".anzahlShots .value2").text(session.serie.length)
+			if (serie){
+				$(".anzahlShots .value2").text(serie.length)
+			}
 		}
 
 		var moduleObject = {}
@@ -293,10 +314,7 @@ var modules = {
 	schnitt: function(){
 		function update(session){
 			var gesamt = 0
-			var anzahl = session.serie.length
-			for(i in session.serie){
-				gesamt += session.serie[i].ringInt
-			}
+			var anzahl = 0
 			for(i in session.serieHistory){
 				anzahl += session.serieHistory[i].length
 				for(ii in session.serieHistory[i]){
