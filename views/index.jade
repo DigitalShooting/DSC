@@ -1,9 +1,22 @@
 extends ./layout.jade
 
+mixin navItem(title, classValue)
+	div(class=classValue+" container w20 h100")
+		p #{title}
+		h3(class="value")
+		p(class="value2")
+
 block title
 	| SCC
 
 block body
+	nav(class="navbar navbar-default")
+		+navItem("Aktueller Schuss", "aktuellerSchuss")
+		+navItem("Anzahl Schüsse", "anzahlShots")
+		+navItem("Schnitt", "schnitt")
+		+navItem("Gesamt", "ringeGesamt")
+		+navItem("Disziplin", "disziplin")
+
 	div(id="modules")
 		div(class="container w60 h100")		
 			div(class="grafik container w100 h100")
@@ -19,4 +32,12 @@ block body
 				h3 Serien
 				table(class="table")
 			
-				
+	nav(class="navbar navbar-default")
+		+navItem("Name", "name")
+		+navItem("Verein", "verein")
+		+navItem("Uhr", "time")
+		+navItem("Verbleibende Zeit", "restTime")
+		
+		div(class="menu container w20 h100")
+			p Logout/ Disziplin
+			h3 Menü

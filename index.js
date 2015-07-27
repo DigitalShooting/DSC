@@ -39,7 +39,7 @@ var getNewSession = function(){
 
 		type: "probe",
 
-		disziplin: config.disziplinen.lgTraining,
+		disziplin: config.disziplinen.lgWettkampf,
 
 		serie: [],
 		serieHistory: [],
