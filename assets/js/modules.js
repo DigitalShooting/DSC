@@ -361,10 +361,16 @@ var modules = {
 		function update(session){
 			$(".name .value").text(session.user.lastName + " " + session.user.firstName)
 		}
+		function updateConfig(config){
+			$(".name .value2").text(config.stand.title)
+		}
 
 		var moduleObject = {}
 		moduleObject.setSession = function(session){
 			update(session)
+		}
+		moduleObject.setConfig = function(config){
+			updateConfig(config)
 		}
 		return moduleObject
 	},

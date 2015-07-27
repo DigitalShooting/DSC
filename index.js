@@ -74,6 +74,10 @@ function newShot(session, shot){
 
 io.on('connection', function(socket){
 	io.emit('setSession', activeSession);
+	io.emit('setConfig', {
+		disziplinen: config.disziplinen,
+		stand: config.stand
+	});
 
 	socket.on('newTarget', function(socket){
 		activeSession = getNewSession()

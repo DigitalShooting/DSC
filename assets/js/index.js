@@ -50,6 +50,16 @@ var moduleAPI = {
 			}
 		})
 	},
+
+
+	setConfig: function(config){
+		this.activeModules.forEach(function(moduleObject){
+			if (moduleObject.setConfig) {
+				moduleObject.setConfig(config)
+			}
+		})
+	},
+
 }
 
 
@@ -61,6 +71,10 @@ var moduleAPI = {
 socket.on('setSession', function(newSession){
 	session = newSession
 	moduleAPI.setSession(session)
+});
+
+socket.on('setConfig', function(config){
+	moduleAPI.setConfig(config)
 });
 
 socket.on('newShot', function(shot){
