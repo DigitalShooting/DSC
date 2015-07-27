@@ -31,7 +31,7 @@ var zooms = {
 				y: 20,
 			},
 		},
-		z1: {
+		z2: {
 			scale: 20.3,
 			offset: {
 				x: -580,
@@ -92,6 +92,7 @@ var scheiben = {
 			{ value:  2, width: 139.5, color: "white", text: true, textColor: "black", zoom: zooms.lp.z1, hitColor: "#00bffF" },
 			{ value:  1, width: 155.5, color: "white", text: true, textColor: "black", zoom: zooms.lp.z1, hitColor: "#00bffF" },
 		],
+		defaultZoom: zooms.lp.z1,
 		probeEcke: {
 			color: "blue",
 			alpha: 0.7,
@@ -100,40 +101,57 @@ var scheiben = {
 	},
 }
 
+var defaultMode = {
+	probe: {
+		title: "Probe",
+		anzahlShots: 0,
+	},
+	match: {
+		title: "Match",
+		anzahlShots: 40,
+	},
+}
+
 module.exports = {
 	lgTraining: {
 		title: "LG Training",
 		scheibe: scheiben.lg,
-		serienLength: 10,
+		modes: defaultMode,
 		anzahlShots: 0,
+		serienLength: 10,
 	},
 	lgTraining5: {
 		title: "LG Training 5er",
 		scheibe: scheiben.lg,
+		modes: defaultMode,
 		serienLength: 5,
 		anzahlShots: 0,
 	},
 	lgWettkampf: {
 		title: "LG Wettkampf",
 		scheibe: scheiben.lg,
+		modes: defaultMode,
 		serienLength: 10,
 		anzahlShots: 40,
 	},
 	lpTraining: {
 		title: "LP Training",
 		scheibe: scheiben.lp,
+		modes: defaultMode,
 		serienLength: 10,
 		anzahlShots: 0,
 	},
 	lpTraining5: {
 		title: "LP Training 5er",
 		scheibe: scheiben.lp,
+		modes: defaultMode,
 		serienLength: 5,
 		anzahlShots: 0,
 	},
 	lpWettkampf: {
 		title: "LP Wettkampf",
 		scheibe: scheiben.lp,
+		modes: defaultMode,
 		serienLength: 10,
 		anzahlShots: 40,
 	}

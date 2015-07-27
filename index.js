@@ -27,6 +27,7 @@ server.on('listening', function() {
 
 
 
+var activeDisziplin = config.disziplinen.lgTraining
 
 var getNewSession = function(){
 	return {
@@ -39,7 +40,7 @@ var getNewSession = function(){
 
 		type: "probe",
 
-		disziplin: config.disziplinen.lgWettkampf,
+		disziplin: activeDisziplin,
 
 		serie: [],
 		serieHistory: [],
@@ -82,6 +83,12 @@ io.on('connection', function(socket){
 	socket.on('newTarget', function(socket){
 		activeSession = getNewSession()
 
+		io.emit('setSession', activeSession);
+	});
+	socket.on('setDisziplin', function(key){
+		activeDisziplin = config.disziplinen[key]
+
+		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
 	});
 	socket.on('switchToMatch', function(socket){

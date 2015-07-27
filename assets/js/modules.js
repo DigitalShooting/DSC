@@ -269,7 +269,7 @@ var modules = {
 				anzahl += session.serieHistory[i].length
 			}
 
-			if (session.disziplin.anzahlShots == 0){
+			if (session.disziplin.anzahlShots == 0 || session.type == "probe"){
 				$(".anzahlShots .value").text(anzahl)
 			}
 			else {
@@ -358,6 +358,13 @@ var modules = {
 
 
 	name: function(){
+		$(".name").click(function(){
+			$('#userMenu').modal('show')
+		})
+		$("#userMenu .menuItem").click(function(){
+			$('#userMenu').modal('hide')
+		})
+
 		function update(session){
 			$(".name .value").text(session.user.lastName + " " + session.user.firstName)
 		}
@@ -393,17 +400,41 @@ var modules = {
 
 
 	disziplin: function(){
+		$(".disziplin").click(function(){
+			$('#disziplinMenu').modal('show')
+		})
+
+
 		function update(session){
 			$(".disziplin .value").text(session.disziplin.title)
 			$(".disziplin .value2").text(session.disziplin.scheibe.title)
+		}
+		function updateConfig(config){
+			$("#disziplinMenu .list-group").html("")
+			for (var i in config.disziplinen){
+				var disziplin = config.disziplinen[i]
+				$("#disziplinMenu .list-group").append("<a class='menuItem type_"+i+" list-group-item'>" + disziplin.title + "<input type='hidden' value='"+i+"'" + "</a>")
+
+				$("#disziplinMenu .type_"+i).click(function(){
+					var key = $(this).find('input').val()
+					console.log(key)
+					socket.emit("setDisziplin", key)
+				})
+			}
+
+
 		}
 
 		var moduleObject = {}
 		moduleObject.setSession = function(session){
 			update(session)
 		}
+		moduleObject.setConfig = function(session){
+			updateConfig(session)
+		}
 		return moduleObject
 	},
+
 
 
 
@@ -411,13 +442,14 @@ var modules = {
 		$(".menu").click(function(){
 			$('#mainMenu').modal('show')
 		})
+		$("#mainMenu .menuItem").click(function(){
+			$('#mainMenu').modal('hide')
+		})
 		$("#mainMenu .actionNewTarget").click(function(){
 			socket.emit("newTarget", {})
-			$('#mainMenu').modal('hide')
 		})
 		$("#mainMenu .actionMatch").click(function(){
 			socket.emit("switchToMatch", {})
-			$('#mainMenu').modal('hide')
 		})
 
 
