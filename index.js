@@ -53,41 +53,44 @@ server.on('listening', function() {
 // session: enthält alle daten
 var session = {
 	// user object
-	user: null,
-
-	// mode: aktueller modus
-	mode: {
-
-		// type: art des modus (probe/ match)
-		type: "probe",
-
-		// disziplin: art des modes
-		disziplin: config.disziplinen.lgTraining,
-
-		// shots: schüsse
-		shots: [
-
-		],
-
-		serie: [],
-		serieHistory: []
-
+	user: {
+		firstName: "Max",
+		lastName: "Mustermann",
+		verein: "SV Diana Dettingen",
+		manschaft: "Manschaft 1",
 	},
-	modeHistory : [],
+
+	// type: art des modus (probe/ match) DEPRICATED
+	type: "probe",
+
+	// disziplin: art des modes
+	disziplin: config.disziplinen.lgTraining,
+
+	// shots: schüsse
+	shots: [
+
+	],
+
+	serie: [],
+	serieHistory: [],
 }
+// var sessions = {
+// 	{type: "probe", session: session},
+// 	{type: "match", session: session},
+// }
 
 
 
 function newShot(shot){
-	session.mode.shots.push(shot)
+	session.shots.push(shot)
 
-	var disziplin = session.mode.disziplin
-	if (disziplin.serienLength == session.mode.serie.length){
-		session.mode.serieHistory.push(session.mode.serie)
-		session.mode.serie = [shot]
+	var disziplin = session.disziplin
+	if (disziplin.serienLength == session.serie.length){
+		session.serieHistory.push(session.serie)
+		session.serie = [shot]
 	}
 	else {
-		session.mode.serie.push(shot)
+		session.serie.push(shot)
 	}
 
 	console.log(shot)

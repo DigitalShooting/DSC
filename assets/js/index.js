@@ -14,17 +14,17 @@ var moduleAPI = {
 	modules: [],
 
 	init: function(){
-		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), anzahlShots(session), schnitt(session) ]
+		this.modules = [ draw(session), aktuelleSerie(session), ringeGesamt(session), aktuellerSchuss(session), serien(session), anzahlShots(session), schnitt(session), time(session), nameS(session), verein(session), disziplin(session) ]
 	},
 
 	newShot: function(shot){
-		var disziplin = session.mode.disziplin
-		if (disziplin.serienLength == session.mode.serie.length){
-			session.mode.serieHistory.push(session.mode.serie)
-			session.mode.serie = [shot]
+		var disziplin = session.disziplin
+		if (disziplin.serienLength == session.serie.length){
+			session.serieHistory.push(session.serie)
+			session.serie = [shot]
 		}
 		else {
-			session.mode.serie.push(shot)
+			session.serie.push(shot)
 		}
 
 		this.modules.forEach(function(moduleObject){
@@ -67,34 +67,34 @@ var draw = function(session){
 
 	var zoom = {}
 	var currentRing = {}
-	update(session.mode)
+	update(session)
 
 	var moduleObject = {}
 	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
+		update(session)
 	}
 
-	function update(mode){
+	function update(session){
 		context.clearRect(0, 0, a_canvas.width, a_canvas.height);
 
-		if (mode.serie.length != 0) {
-			var scheibe = mode.disziplin.scheibe
-			var ringInt = mode.serie[mode.serie.length-1].ringInt
+		if (session.serie.length != 0) {
+			var scheibe = session.disziplin.scheibe
+			var ringInt = session.serie[session.serie.length-1].ringInt
 			var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
 			if (ring){
 				currentRing = ring
 				zoom = ring.zoom
 			}
 			else {
-				zoom = mode.disziplin.scheibe.defaultZoom
+				zoom = session.disziplin.scheibe.defaultZoom
 			}
 		}
 		else {
-			zoom = mode.disziplin.scheibe.defaultZoom
+			zoom = session.disziplin.scheibe.defaultZoom
 		}
 
-		drawScheibe(session.mode.disziplin.scheibe)
-		drawMode(session.mode, session.mode.disziplin.scheibe)
+		drawScheibe(session.disziplin.scheibe)
+		drawMode(session, session.disziplin.scheibe)
 	}
 
 	function drawScheibe(scheibe){
@@ -126,7 +126,7 @@ var draw = function(session){
 		}
 
 		// Probeecke
-		if (session.mode.type == "probe"){
+		if (session.type == "probe"){
 			context.beginPath()
 			context.moveTo(1450,50)
 			context.lineTo(1950,50)
@@ -163,9 +163,9 @@ var draw = function(session){
 		context.fill();
 	}
 
-	function drawMode(mode, scheibe){
-		for (i in mode.serie){
-			drawShot(mode.serie[i], scheibe, i==mode.serie.length-1)
+	function drawMode(session, scheibe){
+		for (i in session.serie){
+			drawShot(session.serie[i], scheibe, i==session.serie.length-1)
 		}
 	}
 
@@ -173,26 +173,26 @@ var draw = function(session){
 }
 var serien = function(session){
 
-	update(session.mode)
+	update(session)
 
 	var moduleObject = {}
 	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
+		update(session)
 	}
 
-	function update(mode){
+	function update(session){
 		$(".serien table").html("")
 
-		for(i in mode.serieHistory){
+		for(i in session.serieHistory){
 			var ringeSerie = 0
-			for(ii in mode.serieHistory[i]){
-				ringeSerie += mode.serieHistory[i][ii].ringInt
+			for(ii in session.serieHistory[i]){
+				ringeSerie += session.serieHistory[i][ii].ringInt
 			}
 			$(".serien table").append("<tr><td>"+ringeSerie+"</li></td></tr>")
 		}
 		var ringeSerieAktuell = 0
-		for(i in mode.serie){
-			ringeSerieAktuell += mode.serie[i].ringInt
+		for(i in session.serie){
+			ringeSerieAktuell += session.serie[i].ringInt
 		}
 		$(".serien table").append("<tr><td><b>"+ringeSerieAktuell+"</b></td></tr>")
 	}
@@ -201,18 +201,18 @@ var serien = function(session){
 }
 var aktuelleSerie = function(session){
 
-	update(session.mode)
+	update(session)
 
 	var moduleObject = {}
 	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
+		update(session)
 	}
 
-	function update(mode){
+	function update(session){
 		$(".aktuelleSerie table").html("")
 
-		for (var i = 0; i < mode.serie.length; i++){
-			var shot = mode.serie[i]
+		for (var i = 0; i < session.serie.length; i++){
+			var shot = session.serie[i]
 			// TODO: Pfeile http://www.key-shortcut.com/schriftsysteme/mathematik-technik/pfeile.html
 
 
@@ -236,22 +236,22 @@ var aktuelleSerie = function(session){
 }
 var ringeGesamt = function(session){
 
-	update(session.mode)
+	update(session)
 
 	var moduleObject = {}
 	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
+		update(session)
 	}
 
-	function update(mode){
+	function update(session){
 		var gesamt = 0
-		for(i in mode.serie){
-			gesamt += mode.serie[i].ringInt
+		for(i in session.serie){
+			gesamt += session.serie[i].ringInt
 		}
 		var gesamtSerie = gesamt
-		for(i in mode.serieHistory){
-			for(ii in mode.serieHistory[i]){
-				gesamt += mode.serieHistory[i][ii].ringInt
+		for(i in session.serieHistory){
+			for(ii in session.serieHistory[i]){
+				gesamt += session.serieHistory[i][ii].ringInt
 			}
 		}
 		var textRingeM = "Ringe"
@@ -264,16 +264,16 @@ var ringeGesamt = function(session){
 }
 var aktuellerSchuss = function(session){
 
-	update(session.mode)
+	update(session)
 
 	var moduleObject = {}
 	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
+		update(session)
 	}
 
-	function update(mode){
-		if (mode.serie.length > 0){
-			drawShot(mode.serie[mode.serie.length-1])
+	function update(session){
+		if (session.serie.length > 0){
+			drawShot(session.serie[session.serie.length-1])
 		}
 		else {
 			$(".aktuellerSchuss .value").text("")
@@ -288,59 +288,59 @@ var aktuellerSchuss = function(session){
 }
 var anzahlShots = function(session){
 
-	update(session.mode)
+	update(session)
 
 	var moduleObject = {}
 	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
+		update(session)
 	}
 
-	function update(mode){
-		var anzahl = mode.serie.length
+	function update(session){
+		var anzahl = session.serie.length
 
-		for(i in mode.serieHistory){
-			anzahl += mode.serieHistory[i].length
+		for(i in session.serieHistory){
+			anzahl += session.serieHistory[i].length
 		}
 
-		if (session.mode.disziplin.anzahlShots == 0){
+		if (session.disziplin.anzahlShots == 0){
 			$(".anzahlShots .value").text(anzahl)
 		}
 		else {
-			$(".anzahlShots .value").text(anzahl + "/ "+session.mode.disziplin.anzahlShots)
+			$(".anzahlShots .value").text(anzahl + "/ "+session.disziplin.anzahlShots)
 		}
-		$(".anzahlShots .value2").text(mode.serie.length)
+		$(".anzahlShots .value2").text(session.serie.length)
 	}
 
 	return moduleObject
 }
 var schnitt = function(session){
 
-	update(session.mode)
+	update(session)
 
 	var moduleObject = {}
 	moduleObject.newShot = function(shot, scheibe){
-		update(session.mode)
+		update(session)
 	}
 
-	function update(mode){
+	function update(session){
 		var gesamt = 0
-		var anzahl = mode.serie.length
-		for(i in mode.serie){
-			gesamt += mode.serie[i].ringInt
+		var anzahl = session.serie.length
+		for(i in session.serie){
+			gesamt += session.serie[i].ringInt
 		}
-		for(i in mode.serieHistory){
-			anzahl += mode.serieHistory[i].length
-			for(ii in mode.serieHistory[i]){
-				gesamt += mode.serieHistory[i][ii].ringInt
+		for(i in session.serieHistory){
+			anzahl += session.serieHistory[i].length
+			for(ii in session.serieHistory[i]){
+				gesamt += session.serieHistory[i][ii].ringInt
 			}
 		}
 		if (anzahl > 0){
-			var schnitt = Math.round(gesamt/ anzahl * 10)/ 10
+			var schnitt = (Math.round(gesamt/ anzahl * 10)/ 10).toFixed(1)
 			$(".schnitt .value").text(schnitt)
-			if (mode.disziplin.anzahlShots > 0){
+			if (session.disziplin.anzahlShots > 0){
 				var textRingeM = "Ringe"
 				var textRinge = "Ring"
-				var hochrechnung = schnitt * mode.disziplin.anzahlShots
+				var hochrechnung = schnitt * session.disziplin.anzahlShots
 				$(".schnitt .value2").text(Math.round(hochrechnung) + " " + ((hochrechnung==1) ? textRinge : textRingeM))
 			}
 			else {
@@ -355,6 +355,77 @@ var schnitt = function(session){
 
 	return moduleObject
 }
+
+
+
+var time = function(session){
+
+	update(session)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){
+
+	}
+
+
+	function n(n){
+		return n > 9 ? "" + n: "0" + n;
+	}
+
+	function update(session){
+		var refresh = function(){
+			var date = new Date()
+			$(".time .value").text(n(date.getHours())+":"+n(date.getMinutes())+":"+n(date.getSeconds())+" Uhr")
+			$(".time .value2").text(n(date.getDate())+"."+n((date.getMonth()+1))+"."+n(date.getFullYear()))
+		}
+		setInterval(refresh, 1000)
+		refresh()
+	}
+
+
+	return moduleObject
+}
+var nameS = function(session){
+	update(session)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){}
+
+	function update(session){
+		$(".name .value").text(session.user.lastName + " " + session.user.firstName)
+	}
+
+	return moduleObject
+}
+var verein = function(session){
+	update(session)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){}
+
+	function update(session){
+		$(".verein .value").text(session.user.verein)
+		$(".verein .value2").text(session.user.manschaft)
+	}
+
+	return moduleObject
+}
+var disziplin = function(session){
+	update(session)
+
+	var moduleObject = {}
+	moduleObject.newShot = function(shot, scheibe){}
+
+	function update(session){
+		$(".disziplin .value").text(session.disziplin.title)
+		$(".disziplin .value2").text(session.disziplin.scheibe.title)
+	}
+
+	return moduleObject
+}
+
+
+
 
 
 
@@ -390,8 +461,8 @@ socket.on('user.changeSettings', function(data){
 // Shot stuff
 socket.on('shot.new', function(shot){
 	console.log('newShot: ' + shot);
-	console.log(session.mode.disziplin.scheibe)
-	// newShot(shot, session.mode.disziplin.scheibe)
+	console.log(session.disziplin.scheibe)
+	// newShot(shot, session.disziplin.scheibe)
 	moduleAPI.newShot(shot)
 });
 socket.on('shot.newTarget', function(data){
