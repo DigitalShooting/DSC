@@ -28,20 +28,18 @@ server.on('listening', function() {
 
 
 var activeDisziplin = config.disziplinen.lgTraining
+var activeUser = {
+	firstName: "Max",
+	lastName: "Mustermann",
+	verein: "SV Diana Dettingen",
+	manschaft: "Manschaft 1",
+}
 
 var getNewSession = function(){
 	return {
-		user: {
-			firstName: "Max",
-			lastName: "Mustermann",
-			verein: "SV Diana Dettingen",
-			manschaft: "Manschaft 1",
-		},
-
+		user: activeUser,
 		type: "probe",
-
 		disziplin: activeDisziplin,
-
 		serie: [],
 		serieHistory: [],
 	}
@@ -85,12 +83,27 @@ io.on('connection', function(socket){
 
 		io.emit('setSession', activeSession);
 	});
+
 	socket.on('setDisziplin', function(key){
 		activeDisziplin = config.disziplinen[key]
 
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
 	});
+
+	socket.on('setUserGast', function(){
+		activeUser = {
+			firstName: "Gast",
+			lastName: "",
+			verein: "",
+			manschaft: "",
+		}
+
+		activeSession = getNewSession()
+		io.emit('setSession', activeSession);
+	});
+
+
 	socket.on('switchToMatch', function(socket){
 		activeSession = getNewSession()
 		activeSession.type = "match"

@@ -364,6 +364,13 @@ var modules = {
 		$("#userMenu .menuItem").click(function(){
 			$('#userMenu').modal('hide')
 		})
+		$("#userMenu .selectUser").click(function(){
+
+		})
+		$("#userMenu .selectUserGast").click(function(){
+			socket.emit("setUserGast", {})
+		})
+
 
 		function update(session){
 			$(".name .value").text(session.user.lastName + " " + session.user.firstName)
@@ -404,7 +411,6 @@ var modules = {
 			$('#disziplinMenu').modal('show')
 		})
 
-
 		function update(session){
 			$(".disziplin .value").text(session.disziplin.title)
 			$(".disziplin .value2").text(session.disziplin.scheibe.title)
@@ -421,8 +427,9 @@ var modules = {
 					socket.emit("setDisziplin", key)
 				})
 			}
-
-
+			$("#disziplinMenu .menuItem").click(function(){
+				$('#disziplinMenu').modal('hide')
+			})
 		}
 
 		var moduleObject = {}
