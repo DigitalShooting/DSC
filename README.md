@@ -1,4 +1,4 @@
-# Shooting-Client (SC)
+# DigitalShootingClient (DSC)
 
 NodeJS Project to visualize shots on an socket.io based webpage with an API for Häring ESA.
 
