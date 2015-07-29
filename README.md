@@ -7,7 +7,7 @@ NodeJS Project to visualize shots on an socket.io based webpage with an API for 
 ## Install
 ````
 # clone
-git clone https://github.com/janniklorenz/Shooting-Client
+git clone https://github.com/DigitalShooting/DSC.git
 
 # open
 cd Shooting-Client
