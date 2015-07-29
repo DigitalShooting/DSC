@@ -30,3 +30,9 @@ node index.js
 
 Scheiben Doku
 http://www.sportschuetzengossau.ch/de/images/stories/verein/reglemente_orgainsation/seiten_aus_technische_regeln_2013_2_de_light_a8_teil_1.pdf
+
+
+
+## Licence
+
+GNU GENERAL PUBLIC LICENSE Version 2
