@@ -129,7 +129,7 @@ var modules = {
 				}
 				if (serie.length > session.selection.shot){
 					var selectedShot = serie[session.selection.shot]
-					idrawShot(selectedShot, scheibe, true)
+					drawShot(selectedShot, scheibe, true)
 				}
 			}
 		}
