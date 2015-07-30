@@ -126,7 +126,7 @@ var modules = {
 					drawShot(serie[i], scheibe, false)
 				}
 			}
-			var lastShot = drawShot(session.serieHistory[session.selection.serie], true)
+			drawShot(serie[session.selection.shot], scheibe, true)
 		}
 
 		var moduleObject = {}
