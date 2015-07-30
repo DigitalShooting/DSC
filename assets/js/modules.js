@@ -126,7 +126,10 @@ var modules = {
 					drawShot(serie[i], scheibe, false)
 				}
 			}
-			drawShot(serie[session.selection.shot], scheibe, true)
+			if (serie.length > session.selection.shot){
+				var selectedShot = serie[session.selection.shot]
+				idrawShot(selectedShot, scheibe, true)
+			}
 		}
 
 		var moduleObject = {}
