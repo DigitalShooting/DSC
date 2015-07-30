@@ -122,8 +122,11 @@ var modules = {
 		function drawMode(session, scheibe){
 			var serie = session.serieHistory[session.selection.serie]
 			for (i in serie){
-				drawShot(serie[i], scheibe, i==session.selection.shot)
+				if (i != session.selection.shot){
+					drawShot(serie[i], scheibe, false)
+				}
 			}
+			var lastShot = drawShot(session.serieHistory[session.selection.serie], true)
 		}
 
 		var moduleObject = {}
