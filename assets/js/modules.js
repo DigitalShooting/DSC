@@ -121,14 +121,16 @@ var modules = {
 
 		function drawMode(session, scheibe){
 			var serie = session.serieHistory[session.selection.serie]
-			for (i in serie){
-				if (i != session.selection.shot){
-					drawShot(serie[i], scheibe, false)
+			if (serie){
+				for (i in serie){
+					if (i != session.selection.shot){
+						drawShot(serie[i], scheibe, false)
+					}
 				}
-			}
-			if (serie.length > session.selection.shot){
-				var selectedShot = serie[session.selection.shot]
-				idrawShot(selectedShot, scheibe, true)
+				if (serie.length > session.selection.shot){
+					var selectedShot = serie[session.selection.shot]
+					idrawShot(selectedShot, scheibe, true)
+				}
 			}
 		}
 
