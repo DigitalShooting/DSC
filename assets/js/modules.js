@@ -1,3 +1,9 @@
+Number.prototype.toFixedDown = function(digits) {
+	var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
+		m = this.toString().match(re);
+		return m ? parseFloat(m[1]) : this.valueOf();
+};
+
 var modules = {
 	draw: function(){
 		var a_canvas = document.getElementById("grafik");
@@ -361,6 +367,7 @@ var modules = {
 
 
 	time: function(){
+		var refreshIntervalId
 		init()
 
 		function n(n){
@@ -368,12 +375,14 @@ var modules = {
 		}
 
 		function init(){
+			clearInterval(refreshIntervalId)
+
 			var refresh = function(){
 				var date = new Date()
 				$(".time .value").text(n(date.getHours())+":"+n(date.getMinutes())+":"+n(date.getSeconds())+" Uhr")
 				$(".time .value2").text(n(date.getDate())+"."+n((date.getMonth()+1))+"."+n(date.getFullYear()))
 			}
-			setInterval(refresh, 1000)
+			refreshIntervalId = setInterval(refresh, 1000)
 			refresh()
 		}
 
@@ -488,5 +497,60 @@ var modules = {
 
 		var moduleObject = {}
 		return moduleObject
-	}
+	},
+
+
+
+
+	restTime: function(){
+
+		var refreshIntervalId
+
+		function n(n){
+			return n > 9 ? "" + n: "0" + n;
+		}
+
+		function secondsToString(seconds){
+			var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600)
+			var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60)
+			var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60
+
+			var string = ""
+			if(numhours > 0){ string += numhours.toFixedDown(0) + " Stunden " }
+			if(numminutes > 0){ string += numminutes.toFixedDown(0) + " Minuten " }
+			if(numseconds > 0){ string += numseconds.toFixedDown(0) + " Sekunden " }
+
+			return string
+		}
+
+		function update(session){
+			clearInterval(refreshIntervalId)
+
+			var refresh = function(){
+				if(session.time.type == "full"){
+
+					var date = (session.time.end - (new Date().getTime()))/1000
+
+					console.log(secondsToString(date))
+					$(".restTime .value").text(secondsToString(date))
+					//$(".restTime .value2").text(n(date.getDate())+"."+n((date.getMonth()+1))+"."+n(date.getFullYear()))
+				}
+				else {
+					$(".restTime .value").text("")
+					$(".restTime .value2").text("")
+				}
+			}
+			refreshIntervalId = setInterval(refresh, 1000)
+			refresh()
+		}
+
+		var moduleObject = {}
+		moduleObject.setSession = function(session){
+			update(session)
+		}
+		return moduleObject
+	},
+
+
+
 }

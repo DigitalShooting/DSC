@@ -44,6 +44,11 @@ var activeUser = {
 }
 
 var getNewSession = function(){
+	var end = ""
+	if (activeDisziplin.time.type == "full"){
+		end = (new Date()).getTime() + activeDisziplin.time.duration * 60 * 1000
+	}
+
 	return {
 		user: activeUser,
 		type: "probe",
@@ -52,6 +57,10 @@ var getNewSession = function(){
 		selection: {
 			serie: 0,
 			shot: 0,
+		},
+		time: {
+			type: activeDisziplin.time.type,
+			end: end,
 		}
 	}
 }

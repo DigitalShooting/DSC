@@ -33,7 +33,8 @@ var moduleAPI = {
 		modules.name(),
 		modules.verein(),
 		modules.disziplin(),
-		modules.menu(),
+		modules.menu(),,
+		modules.restTime(),
 	],
 
 	setSession: function(session){
@@ -60,7 +61,7 @@ var moduleAPI = {
 
 		session.selection.serie = session.serieHistory.length-1
 		session.selection.shot = session.serieHistory[session.selection.serie].length-1
-		
+
 		this.activeModules.forEach(function(moduleObject){
 			if (moduleObject.newShot) {
 				moduleObject.newShot(shot, disziplin.scheibe)

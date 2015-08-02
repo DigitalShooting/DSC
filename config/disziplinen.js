@@ -135,6 +135,9 @@ module.exports = {
 		modes: defaultMode,
 		anzahlShots: 0,
 		serienLength: 10,
+		time: {
+			type: "none",
+		},
 	},
 	lgTraining5: {
 		title: "LG Training 5er",
@@ -142,6 +145,10 @@ module.exports = {
 		modes: defaultMode,
 		serienLength: 5,
 		anzahlShots: 0,
+		time: 0,
+		time: {
+			type: "none",
+		},
 	},
 	lgWettkampf: {
 		title: "LG Wettkampf",
@@ -149,6 +156,10 @@ module.exports = {
 		modes: defaultMode,
 		serienLength: 10,
 		anzahlShots: 40,
+		time: {
+			type: "full",
+			duration: 50,
+		},
 	},
 	lpTraining: {
 		title: "LP Training",
@@ -156,6 +167,9 @@ module.exports = {
 		modes: defaultMode,
 		serienLength: 10,
 		anzahlShots: 0,
+		time: {
+			type: "none",
+		},
 	},
 	lpTraining5: {
 		title: "LP Training 5er",
@@ -163,6 +177,9 @@ module.exports = {
 		modes: defaultMode,
 		serienLength: 5,
 		anzahlShots: 0,
+		time: {
+			type: "none",
+		},
 	},
 	lpWettkampf: {
 		title: "LP Wettkampf",
@@ -170,5 +187,9 @@ module.exports = {
 		modes: defaultMode,
 		serienLength: 10,
 		anzahlShots: 40,
+		time: {
+			type: "full",
+			duration: 50,
+		},
 	}
 }
