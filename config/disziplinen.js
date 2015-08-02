@@ -78,6 +78,7 @@ var scheiben = {
 		},
 		text: {
 			size: 1.0,
+			width: 0.3,
 			up: 1.8,
 			down: -0.8,
 			left: 0.95,
@@ -106,6 +107,7 @@ var scheiben = {
 		},
 		text: {
 			size: 3.0,
+			width: 0.9,
 			up: 4.8,
 			down: -2.6,
 			left: 2.6,
