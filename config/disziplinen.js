@@ -76,6 +76,13 @@ var scheiben = {
 			color: "blue",
 			alpha: 0.7,
 		},
+		text: {
+			size: 1.0,
+			up: 1.8,
+			down: -0.8,
+			left: 0.95,
+			right: -1.7,
+		},
 		kugelDurchmesser: 4.5,
 	},
 	lp: {
@@ -96,6 +103,13 @@ var scheiben = {
 		probeEcke: {
 			color: "blue",
 			alpha: 0.7,
+		},
+		text: {
+			size: 3.0,
+			up: 4.8,
+			down: -2.6,
+			left: 2.6,
+			right: -4.8,
 		},
 		kugelDurchmesser: 4.5,
 	},
