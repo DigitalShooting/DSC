@@ -152,7 +152,12 @@ io.on('connection', function(socket){
 		io.emit('setSession', activeSession);
 	});
 	socket.on('setUser', function(user){
-		activeUser = user
+		activeUser = {
+			firstName: user.vorname,
+			lastName: user.name,
+			verein: activeUser.verien,
+			manschaft: activeUser.manschaft,
+		}
 
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
