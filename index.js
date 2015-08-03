@@ -115,30 +115,30 @@ io.on('connection', function(socket){
 	io.emit('setConfig', {
 		disziplinen: config.disziplinen,
 		stand: config.stand
-	});
+	})
 
 	socket.on('newTarget', function(socket){
 		activeSession = getNewSession()
 
 		io.emit('setSession', activeSession);
-	});
+	})
 
 	socket.on('setDisziplin', function(key){
 		activeDisziplin = config.disziplinen[key]
 
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
-	});
+	})
 
 	socket.on('setSelectedSerie', function(selectedSerie){
 		activeSession.selection.serie = selectedSerie
 		activeSession.selection.shot = activeSession.serieHistory[activeSession.selection.serie].length-1
 		io.emit('setSession', activeSession);
-	});
+	})
 	socket.on('setSelectedShot', function(selectedShot){
 		activeSession.selection.shot = selectedShot
 		io.emit('setSession', activeSession);
-	});
+	})
 
 	socket.on('setUserGast', function(){
 		activeUser = {
@@ -149,18 +149,18 @@ io.on('connection', function(socket){
 		}
 
 		activeSession = getNewSession()
-		io.emit('setSession', activeSession);
+		io.emit('setSession', activeSession)
 	});
 	socket.on('setUser', function(user){
 		activeUser = {
 			firstName: user.vorname,
 			lastName: user.name,
-			verein: activeUser.verien,
-			manschaft: activeUser.manschaft,
+			verein: user.verien,
+			manschaft: user.manschaft,
 		}
 
-		activeSession = getNewSession()
-		io.emit('setSession', activeSession);
+		activeSession.user = activeUser
+		io.emit('setSession', activeSession)
 	});
 
 
@@ -168,10 +168,10 @@ io.on('connection', function(socket){
 		activeSession = getNewSession()
 		activeSession.type = "match"
 
-		io.emit('setSession', activeSession);
-	});
+		io.emit('setSession', activeSession)
+	})
 
-});
+})
 
 
 
