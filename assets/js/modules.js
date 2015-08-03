@@ -510,7 +510,6 @@ var modules = {
 		var refreshIntervalId
 
 		function secondsToString(seconds){
-			console.log(seconds)
 
 			var numhours = Math.floor(seconds / 3600)
 			var numminutes = Math.floor((seconds % 3600) / 60)
