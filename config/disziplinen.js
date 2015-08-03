@@ -130,6 +130,7 @@ var defaultMode = {
 
 module.exports = {
 	lgTraining: {
+		_id: "lgTraining",
 		title: "LG Training",
 		scheibe: scheiben.lg,
 		modes: defaultMode,
@@ -140,6 +141,7 @@ module.exports = {
 		},
 	},
 	lgTraining5: {
+		_id: "lgTraining5",
 		title: "LG Training 5er",
 		scheibe: scheiben.lg,
 		modes: defaultMode,
@@ -151,6 +153,7 @@ module.exports = {
 		},
 	},
 	lgWettkampf: {
+		_id: "lgWettkampf",
 		title: "LG Wettkampf",
 		scheibe: scheiben.lg,
 		modes: defaultMode,
@@ -162,6 +165,7 @@ module.exports = {
 		},
 	},
 	lpTraining: {
+		_id: "lpTraining",
 		title: "LP Training",
 		scheibe: scheiben.lp,
 		modes: defaultMode,
@@ -172,6 +176,7 @@ module.exports = {
 		},
 	},
 	lpTraining5: {
+		_id: "lpTraining5",
 		title: "LP Training 5er",
 		scheibe: scheiben.lp,
 		modes: defaultMode,
@@ -182,6 +187,7 @@ module.exports = {
 		},
 	},
 	lpWettkampf: {
+		_id: "lpWettkampf",
 		title: "LP Wettkampf",
 		scheibe: scheiben.lp,
 		modes: defaultMode,
