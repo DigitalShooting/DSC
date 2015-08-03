@@ -509,14 +509,10 @@ var modules = {
 
 		var refreshIntervalId
 
-		function n(n){
-			return n > 9 ? "" + n: "0" + n;
-		}
-
 		function secondsToString(seconds){
-			var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600)
-			var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60)
-			var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60
+			var numhours = Math.floor(seconds / 3600)
+			var numminutes = Math.floor((seconds % 3600) / 60)
+			var numseconds = (seconds % 3600) % 60
 
 			var string = ""
 			if(numhours > 0){ string += numhours.toFixedDown(0) + " Stunden " }
