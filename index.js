@@ -151,6 +151,12 @@ io.on('connection', function(socket){
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
 	});
+	socket.on('setUser', function(user){
+		activeUser = user
+
+		activeSession = getNewSession()
+		io.emit('setSession', activeSession);
+	});
 
 
 	socket.on('switchToMatch', function(socket){

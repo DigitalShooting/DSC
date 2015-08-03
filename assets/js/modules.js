@@ -311,6 +311,9 @@ var modules = {
 			if (serie){
 				$(".anzahlShots .value2").text(serie.length)
 			}
+			else {
+				$(".anzahlShots .value2").text("")
+			}
 		}
 
 		var moduleObject = {}
