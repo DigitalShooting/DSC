@@ -154,7 +154,7 @@ var modules = {
 
 	serien: function(){
 		function update(session){
-			$(".serien table").html("")
+			$(".serien ul").html("")
 
 			for(i in session.serieHistory){
 				var ringeSerie = 0
@@ -165,10 +165,10 @@ var modules = {
 
 
 				if (i == session.selection.serie){
-					$(".serien table").append("<tr><td><b>"+ringeSerie+"</b></li></td></tr>")
+					$(".serien ul").append("<li class='col-xs-3'><b>"+ringeSerie+"</b></li>")
 				}
 				else {
-					$(".serien table").append("<tr onclick=\"socket.emit('setSelectedSerie', '"+i+"')\"><td>"+ringeSerie+"</li></td></tr>")
+					$(".serien ul").append("<li class='col-xs-3' onclick=\"socket.emit('setSelectedSerie', '"+i+"')\">"+ringeSerie+"</li>")
 				}
 
 			}
