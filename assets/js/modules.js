@@ -72,7 +72,7 @@ var modules = {
 
 				context.fill();
 				context.strokeStyle = ring.textColor
-				context.lineWidth = 2;
+				context.lineWidth = 4;
 				context.stroke();
 				context.fillStyle = "black";
 
