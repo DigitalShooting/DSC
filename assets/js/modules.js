@@ -263,6 +263,11 @@ var modules = {
 
 
 	aktuellerSchuss: function(){
+		function clear(){
+			$(".aktuellerSchuss .value").text("")
+			$(".aktuellerSchuss .value2").text("")
+		}
+
 		function update(session){
 			var serie = session.serieHistory[session.selection.serie]
 
@@ -271,9 +276,11 @@ var modules = {
 					drawShot(serie[serie.length-1])
 				}
 				else {
-					$(".aktuellerSchuss .value").text("")
-					$(".aktuellerSchuss .value2").text("")
+					clear()
 				}
+			}
+			else {
+				clear()
 			}
 		}
 		function drawShot(shot){
