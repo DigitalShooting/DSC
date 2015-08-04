@@ -12,9 +12,6 @@ git clone https://github.com/DigitalShooting/DSC.git
 # open
 cd Shooting-Client
 
-# build C++ API
-./buildAPI.sh
-
 # NPM install
 npm install
 

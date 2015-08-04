@@ -12,5 +12,8 @@
 		"socket.io": "^1.3.6",
 		"bootstrap": "x"
 	},
-	"main": "index.js"
+	"main": "index.js",
+	"scripts": {
+		"preinstall": "./buildAPI.sh"
+	}
 }
