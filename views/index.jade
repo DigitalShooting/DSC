@@ -17,7 +17,7 @@ block title
 	| SCC
 
 block body
-	nav(class="navbar navbar-default")
+	nav(class="navbar-cutsom navbar-default")
 		+navItem3("Verbleibende Zeit", "restTime")
 		+navItem3("Anzahl Schüsse", "anzahlShots")
 		+navItem3("Schnitt", "schnitt")
@@ -28,10 +28,9 @@ block body
 			canvas(id="grafik" width="2000" height="2000")
 		
 		div(class="aktuellerSchuss col-xs-5")
-			div(class="aktuellerSchussFull")
-				p #{title}
-				h3(class="value")
-				p(class="value2")
+			p #{title}
+			h3(class="value col-xs-6")
+			p(class="value2 col-xs-6")
 		
 		div(class="aktuelleSerie col-xs-2")
 				h3 Aktuelle Serie
@@ -41,7 +40,7 @@ block body
 				h3 Serien
 				ul(class="list-inline")
 			
-	nav(class="navbar navbar-default")
+	nav(class="navbar-cutsom navbar-default")
 		+navItem2("Name", "name")
 		+navItem2("Verein", "verein")
 		+navItem2("Uhr", "time")

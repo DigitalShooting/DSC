@@ -33,14 +33,14 @@ table {
 
 
 
-.navbar {
+.navbar-cutsom {
 	height: 10%;
 	max-height: 10%;
 	width: 100%;
 	padding: 0.8vh 0 0 0;
 	margin: 0;
 
-	border-radius: 0;
+	border: 1px #eee solid;
 }
 #modules {
 	height: 80%;
@@ -49,6 +49,9 @@ table {
 	margin: 0;
 	padding: 0;
 }
+
+
+
 
 
 
@@ -66,16 +69,21 @@ table {
 
 .aktuelleSerie {
 	overflow: hidden;
+
+	td {
+		font-size: 2.3vh;
+	}
 }
 
 .serien {
 	li {
 		text-align: center;
+		font-size: 2.5vh;
 	}
 }
 
 .serien, .aktuelleSerie {
-	height: 85%;
+	max-height: 91%;
 
 	h3 {
 		margin-top: 1em;
@@ -83,14 +91,17 @@ table {
 	}
 }
 
-.aktuellerSchussFull {
-	height: 15%;
-	padding: 2%;
+.aktuellerSchuss {
+	height: 9%;
+	max-height: 9%;
 
 	h3 {
 		font-size: 6vh;
+		text-align: right;
 	}
 	p {
+		padding-top: 1.2vh;
 		font-size: 3vh;
+		text-align: left;
 	}
 }

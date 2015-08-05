@@ -33,7 +33,7 @@ var moduleAPI = {
 		modules.name(),
 		modules.verein(),
 		modules.disziplin(),
-		modules.menu(),,
+		// modules.menu(),,
 		modules.restTime(),
 	],
 
