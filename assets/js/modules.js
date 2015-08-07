@@ -442,8 +442,19 @@ var modules = {
 
 	verein: function(){
 		function update(session){
-			$(".verein .value").text(session.user.verein)
-			$(".verein .value2").text(session.user.manschaft)
+			if (session.user.verein != undefined || session.user.manschaft != undefined){
+				$(".verein").width("auto")
+
+				$(".verein .value").text(session.user.verein)
+				$(".verein .value2").text(session.user.manschaft)
+			}
+			else {
+				$(".verein").width("0px")
+
+				$(".verein .value").text("")
+				$(".verein .value2").text("")
+			}
+
 		}
 
 		var moduleObject = {}
