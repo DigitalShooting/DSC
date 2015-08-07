@@ -1,6 +1,6 @@
 var express = require("express")
 var http = require("http")
-var expressLess = require('express-less')
+var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
 var app = express()
 
@@ -12,7 +12,8 @@ app.use("/js/", express.static("./assets/js"))
 app.get("/", function(req, res){
 	res.render("index")
 })
-app.use("/css/", expressLess(__dirname + "/stylesheets"))
+app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
+app.use("/css/", express.static(__dirname + "/stylesheets"))
 
 var server = http.Server(app)
 var io = require('socket.io')(server);

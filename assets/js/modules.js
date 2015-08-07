@@ -476,6 +476,7 @@ var modules = {
 					socket.emit("setDisziplin", key)
 				})
 			}
+
 			$("#disziplinMenu .menuItem").click(function(){
 				$('#disziplinMenu').modal('hide')
 			})
@@ -494,27 +495,6 @@ var modules = {
 
 
 
-	menu: function(){
-		$(".menu").click(function(){
-			$('#mainMenu').modal('show')
-		})
-		$("#mainMenu .menuItem").click(function(){
-			$('#mainMenu').modal('hide')
-		})
-		$("#mainMenu .actionNewTarget").click(function(){
-			socket.emit("newTarget", {})
-		})
-		$("#mainMenu .actionMatch").click(function(){
-			socket.emit("switchToMatch", {})
-		})
-
-
-		var moduleObject = {}
-		return moduleObject
-	},
-
-
-
 
 	restTime: function(){
 
@@ -527,9 +507,9 @@ var modules = {
 			var numseconds = (seconds % 3600) % 60
 
 			var string = ""
-			if(numhours > 0){ string += numhours.toFixedDown(0) + " Stunden " }
-			if(numminutes > 0){ string += numminutes.toFixedDown(0) + " Minuten " }
-			if(numseconds > 0){ string += numseconds.toFixedDown(0) + " Sekunden " }
+			if(numhours > 0){ string += numhours.toFixedDown(0) + "h " }
+			if(numminutes > 0){ string += numminutes.toFixedDown(0) + "m " }
+			if(numseconds > 0){ string += numseconds.toFixedDown(0) + "s " }
 
 			return string
 		}
@@ -539,14 +519,18 @@ var modules = {
 
 			var refresh = function(){
 				if(session.time.type == "full"){
-
 					var date = (session.time.end - (new Date().getTime()))/1000
 
-					console.log(secondsToString(date))
+					$(".restTime").width("auto")
+
+					$(".restTime .title").text("Verbleibende Zeit")
 					$(".restTime .value").text(secondsToString(date))
-					//$(".restTime .value2").text(n(date.getDate())+"."+n((date.getMonth()+1))+"."+n(date.getFullYear()))
+					$(".restTime .value2").text(secondsToString(session.disziplin.time.duration*60))
 				}
 				else {
+					$(".restTime").width("0px")
+
+					$(".restTime .title").text("")
 					$(".restTime .value").text("")
 					$(".restTime .value2").text("")
 				}
@@ -562,6 +546,81 @@ var modules = {
 		return moduleObject
 	},
 
+
+
+
+	switchToMatch: function(){
+
+		function update(session){
+			$(".switchToMatch").unbind()
+
+			if (session.type == "probe"){
+				$(".switchToMatch .value").text("Probe")
+				$(".switchToMatch .value2").text("")
+
+				$(".switchToMatch").click(function(){
+					socket.emit("switchToMatch", {})
+				})
+			}
+			else if (session.type == "match"){
+				$(".switchToMatch .value").text("Match")
+				$(".switchToMatch .value2").text("")
+			}
+			else {
+				$(".switchToMatch .value").text("")
+				$(".switchToMatch .value2").text("")
+			}
+		}
+
+		var moduleObject = {}
+		moduleObject.setSession = function(session){
+			update(session)
+		}
+		return moduleObject
+	},
+
+	newTarget: function(){
+
+		function update(session){
+			$(".newTarget").unbind()
+
+			if (session.type == "probe"){
+				$(".newTarget").width("auto")
+
+				$(".newTarget .title").text("Scheibe")
+				$(".newTarget .value").text("Neue Scheibe")
+				$(".newTarget .value2").text("")
+
+				$(".newTarget").click(function(){
+					socket.emit("newTarget", {})
+				})
+			}
+			else if (session.type == "match"){
+				$(".newTarget").width("0px")
+
+				$(".newTarget .title").text("")
+				$(".newTarget .value").text("")
+				$(".newTarget .value2").text("")
+			}
+			else {
+				$(".newTarget").width("0px")
+
+				$(".newTarget .title").text("")
+				$(".newTarget .value").text("")
+				$(".newTarget .value2").text("")
+			}
+
+
+
+
+		}
+
+		var moduleObject = {}
+		moduleObject.setSession = function(session){
+			update(session)
+		}
+		return moduleObject
+	},
 
 
 }

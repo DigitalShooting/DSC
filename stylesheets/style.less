@@ -7,13 +7,15 @@ html, body {
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
-	font-size: 2.0vh;
+	font-size: 2.0vmin;
 
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+
+	white-space:nowrap;
 }
 
 
@@ -23,7 +25,7 @@ h1, h2, h3, p {
 	margin: 0;
 }
 h3 {
-	font-size: 2.6vh;
+	font-size: 2.6vmin;
 }
 table {
 	width: 100%;
@@ -31,16 +33,23 @@ table {
 
 
 
+// DEBUG
+// p, span {
+// 	border: 1px dotted blue;
+// }
+p:after, h1:after, h2:after, h3:after, h4:after {
+	content: '\a0';
+}
 
 
 .navbar-cutsom {
 	height: 10%;
 	max-height: 10%;
 	width: 100%;
-	padding: 0.8vh 0 0 0;
-	margin: 0;
 
 	border: 1px #eee solid;
+
+	table-layout: fixed;
 }
 #modules {
 	height: 80%;
@@ -71,14 +80,21 @@ table {
 	overflow: hidden;
 
 	td {
-		font-size: 2.3vh;
+		font-size: 2.3vmin;
+	}
+
+	.table td {
+		padding: 1vh;
+		margin: 0;
 	}
 }
 
 .serien {
+	overflow: hidden;
+
 	li {
 		text-align: center;
-		font-size: 2.5vh;
+		font-size: 2.5vmin;
 	}
 }
 
@@ -96,12 +112,12 @@ table {
 	max-height: 9%;
 
 	h3 {
-		font-size: 6vh;
+		font-size: 6vmin;
 		text-align: right;
 	}
 	p {
-		padding-top: 1.2vh;
-		font-size: 3vh;
+		padding-top: 1.2vmin;
+		font-size: 3vmin;
 		text-align: left;
 	}
 }

@@ -35,6 +35,8 @@ var moduleAPI = {
 		modules.disziplin(),
 		// modules.menu(),,
 		modules.restTime(),
+		modules.switchToMatch(),
+		modules.newTarget(),
 	],
 
 	setSession: function(session){
@@ -79,6 +81,72 @@ var moduleAPI = {
 	},
 
 }
+
+
+
+
+
+// UP
+shortcut.add("F1",function() {
+	if (session.selection.shot > 0){
+		socket.emit('setSelectedShot', --session.selection.shot)
+	}
+	else if (session.selection.serie > 0){
+		socket.emit('setSelectedSerie', --session.selection.serie)
+	}
+})
+
+// DOWN
+shortcut.add("F2",function(){
+	if (session.selection.shot < session.serieHistory[session.selection.serie].length-1){
+		socket.emit('setSelectedShot', ++session.selection.shot)
+	}
+	else if (session.selection.serie < session.serieHistory.length-1){
+		socket.emit('setSelectedSerie', ++session.selection.serie)
+		socket.emit('setSelectedShot', 0)
+	}
+})
+
+// Enter/ Menu
+shortcut.add("F3",function() {
+	$('#disziplinMenu').modal('show')
+})
+
+// Shutdown
+// shortcut.add("F4",function() {
+// 	alert("Shutdown");
+// })
+
+// Neue Scheibe
+shortcut.add("F5",function() {
+	if (session.type == "probe"){
+		socket.emit("newTarget", {})
+	}
+})
+
+// OK
+// shortcut.add("F6",function() {
+// 	alert("OK");
+// })
+
+// Drucken
+// shortcut.add("F7",function() {
+// 	alert("Drucken");
+// })
+
+// Abbrechen/ Probe/ Match
+shortcut.add("F8",function() {
+	if (session.type == "probe"){
+		socket.emit("switchToMatch", {})
+	}
+})
+
+
+
+
+
+
+
 
 
 
