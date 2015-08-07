@@ -73,7 +73,7 @@ var scheiben = {
 		],
 		defaultZoom: zooms.lg.z1,
 		probeEcke: {
-			color: "blue",
+			color: "#0f0",
 			alpha: 0.7,
 		},
 		text: {
@@ -102,7 +102,7 @@ var scheiben = {
 		],
 		defaultZoom: zooms.lp.z1,
 		probeEcke: {
-			color: "blue",
+			color: "#0f0",
 			alpha: 0.7,
 		},
 		text: {
