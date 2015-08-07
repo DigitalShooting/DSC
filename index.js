@@ -4,8 +4,8 @@ var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
 var app = express()
 
-// var esa = require("./lib/esa.js")()
-var esa = require("./lib/esaTesting.js")()
+var esa = require("./lib/esa.js")()
+// var esa = require("./lib/esaTesting.js")()
 
 app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
