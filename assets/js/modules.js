@@ -201,19 +201,16 @@ var modules = {
 
 					var pfeil = "&#8635;"
 					if (shot.ring < 10.3) {
-						if (shot.winkel >= 22.5 && shot.winkel < 67.5) pfeil = " &#8599;"
-						else if (shot.winkel >= 67.5 && shot.winkel < 112.5) pfeil = " &#8593;"
-						else if (shot.winkel >= 112.5 && shot.winkel < 157.5) pfeil = " &#8598;"
-						else if (shot.winkel >= 157.5 && shot.winkel < 202.5) pfeil = " &#8592;"
-						else if (shot.winkel >= 202.5 && shot.winkel < 247.5) pfeil = " &#8601;"
-						else if (shot.winkel >= 247.5 && shot.winkel < 292.5) pfeil = " &#8595;"
-						else if (shot.winkel >= 292.5 && shot.winkel < 337.5) pfeil = " &#8600;"
-						else pfeil = " &#8594;"
+						pfeil = "<span style='margin-top:-2.2vh; display:block; margin-top: 5%; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
+						// if (shot.winkel >= 22.5 && shot.winkel < 67.5) pfeil = " &#8599;"
+						// else if (shot.winkel >= 67.5 && shot.winkel < 112.5) pfeil = " &#8593;"
+						// else if (shot.winkel >= 112.5 && shot.winkel < 157.5) pfeil = " &#8598;"
+						// else if (shot.winkel >= 157.5 && shot.winkel < 202.5) pfeil = " &#8592;"
+						// else if (shot.winkel >= 202.5 && shot.winkel < 247.5) pfeil = " &#8601;"
+						// else if (shot.winkel >= 247.5 && shot.winkel < 292.5) pfeil = " &#8595;"
+						// else if (shot.winkel >= 292.5 && shot.winkel < 337.5) pfeil = " &#8600;"
+						// else pfeil = " &#8594;"
 					}
-
-
-					//pfeil = "<span style='margin-top:-2.2vh; display:block; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
-
 
 					if (i == session.selection.shot){
 						$(".aktuelleSerie table").append("<tr><td>"+(i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
