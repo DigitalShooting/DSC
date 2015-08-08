@@ -203,7 +203,7 @@ var modules = {
 
 					var pfeil = "&#8635;"
 					if (shot.ring < 10.3) {
-						pfeil = "<span style='margin-top:-2.2vh; display:block; margin-top: 5%; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
+						pfeil = "<span style='margin-top:-2.2vh; display:block; margin-top: 4%; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
 					}
 
 					if (i == session.selection.shot){
@@ -305,8 +305,6 @@ var modules = {
 			for(i in session.serieHistory){
 				anzahl += session.serieHistory[i].length
 			}
-
-			console.log("u")
 
 			if (session.disziplin.anzahlShots == 0 || session.type == "probe"){
 				$(".anzahlShots .value").text(anzahl)
