@@ -16,16 +16,26 @@ html, body {
 	user-select: none;
 
 	white-space:nowrap;
+	text-align: center;
+	font-weight: 300;
 }
 
 
-h1, h2, h3, p {
-	text-align: center;
-	padding: 0;
-	margin: 0;
+
+h1 {
+	font-size: 6vmin;
+}
+h2 {
+	font-size: 3vmin;
+	font-weight: 200;
+	color: gray;
 }
 h3 {
 	font-size: 2.6vmin;
+}
+h4 {
+	font-size: 2.0vmin;
+	font-weight: 300;
 }
 table {
 	width: 100%;
@@ -34,13 +44,19 @@ table {
 
 
 // DEBUG
-// p, span {
+// h1, h2, h3, h4, p, span {
 // 	border: 1px dotted blue;
 // }
 p:after, h1:after, h2:after, h3:after, h4:after {
 	content: '\a0';
 }
+h1, h2, h3, h4, p {
+	padding: 0;
+	margin: 0;
+}
 
+
+// Helper classes
 .noPadding {
 	margin: 0px;
 	padding: 0px;
@@ -48,6 +64,14 @@ p:after, h1:after, h2:after, h3:after, h4:after {
 .fullHeight {
 	height: 100%;
 }
+.grayBox {
+	margin-top: 2vh;
+	padding: 1vh 0 1vh 0;
+	background-color: #f8f8f8;
+	border: 1px #eee solid;
+}
+
+
 
 
 
@@ -68,14 +92,6 @@ p:after, h1:after, h2:after, h3:after, h4:after {
 	padding: 0;
 	overflow: hidden;
 }
-
-.grayBox {
-	margin-top: 2vh;
-	padding: 1vh 0 1vh 0;
-	background-color: #f8f8f8;
-	border: 1px #eee solid;
-}
-
 
 
 
@@ -101,7 +117,6 @@ p:after, h1:after, h2:after, h3:after, h4:after {
 
 	td {
 		font-size: 2.3vmin;
-		text-align: center;
 	}
 	table td {
 		padding: 0.5vh;
@@ -117,7 +132,6 @@ p:after, h1:after, h2:after, h3:after, h4:after {
 	overflow: hidden;
 
 	li {
-		text-align: center;
 		font-size: 2.5vmin;
 	}
 }
@@ -133,13 +147,5 @@ p:after, h1:after, h2:after, h3:after, h4:after {
 .aktuellerSchuss {
 	height: 9%;
 	max-height: 9%;
-
-	.value {
-		font-size: 6vmin;
-		text-align: center;
-	}
-	.value2 {
-		font-size: 3vmin;
-		text-align: center;
-	}
+	padding: 1vh 0 1vh 0;
 }

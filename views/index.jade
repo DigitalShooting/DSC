@@ -2,9 +2,9 @@ extends ./layout.jade
 		
 mixin navItem(title, classValue)
 	td(class=classValue)
-		p(class="title") #{title}
+		h4(class="title") #{title}
 		h3(class="value")
-		p(class="value2")
+		h4(class="value2")
 
 block title
 	| SCC
@@ -23,10 +23,14 @@ block body
 		
 		div(class="col-xs-5 noPadding fullHeight")
 			.col-xs-12
-				table(class="aktuellerSchuss grayBox")
-					tr
-						td(class="value col-xs-6")
-						td(class="value2 col-xs-6")
+				div(class="aktuellerSchuss grayBox")
+					table
+						tr
+							td
+								h1(class="value")
+						tr
+							td
+								h2(class="value2")
 		
 			div(class="col-xs-6 fullHeight")
 				div(class="aktuelleSerie grayBox")
