@@ -276,6 +276,7 @@ var modules = {
 
 					$(".aktuellerSchuss .value").text(shot.ring)
 					$(".aktuellerSchuss .value2").text((Math.round(shot.teiler*10)/10).toFixed(1) + " Teiler")
+
 					$(".aktuellerSchuss").show()
 				}
 			}
