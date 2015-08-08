@@ -18,25 +18,29 @@ block body
 			+navItem("Gesamt", "ringeGesamt")
 		
 	div(id="modules")
-		div(class="grafik col-xs-7")
+		div(class="col-xs-7 grafik noPadding fullHeight")
 			canvas(id="grafik" width="2000" height="2000")
 		
-		div(class="aktuellerSchuss col-xs-5")
-			h3(class="value col-xs-6")
-			p(class="value2 col-xs-6")
+		div(class="col-xs-5 noPadding fullHeight")
+			.col-xs-12
+				table(class="aktuellerSchuss grayBox")
+					tr
+						td(class="value col-xs-6")
+						td(class="value2 col-xs-6")
 		
-		div(class="aktuelleSerie col-xs-2")
-				h3 Aktuelle Serie
-				table(class="table")
-		
-		div(class="serien col-xs-2 col-xs-offset-1")
-				h3 Serien
-				ul(class="list-inline")
+			div(class="col-xs-6 fullHeight")
+				div(class="aktuelleSerie grayBox")
+					h3 Aktuelle Serie
+					table(class="table")
+			div(class="col-xs-6 fullHeight")
+				div(class="serien grayBox")
+					h3 Serien
+					ul(class="list-inline")
 			
 	table(class="navbar-cutsom navbar-default")
 		tr
 			+navItem("Name", "name")
-			+navItem("Verein", "verein")
+			+navItem("", "verein")
 			+navItem("Uhr", "time")
 			+navItem("Disziplin", "disziplin")
 			+navItem("Scheibe", "newTarget")

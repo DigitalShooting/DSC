@@ -23,6 +23,9 @@ var modules = {
 				height = newHeight
 			}
 
+
+
+			a_canvas.style.top = ($("#modules").height() - height) / 2 + "px";
 			a_canvas.style.width = width+'px';
 			a_canvas.style.height = height+'px';
 		}
@@ -276,8 +279,8 @@ var modules = {
 			var serie = session.serieHistory[session.selection.serie]
 
 			if (serie){
-				if (serie.length > 0){
-					drawShot(serie[serie.length-1])
+				if (session.selection.shot < serie.length){
+					drawShot(serie[session.selection.shot])
 				}
 				else {
 					clear()
@@ -442,15 +445,17 @@ var modules = {
 
 	verein: function(){
 		function update(session){
-			if (session.user.verein != undefined || session.user.manschaft != undefined){
+			if (session.user.verein != "" || session.user.manschaft != ""){
 				$(".verein").width("auto")
 
+				$(".verein .title").text("Verein")
 				$(".verein .value").text(session.user.verein)
 				$(".verein .value2").text(session.user.manschaft)
 			}
 			else {
 				$(".verein").width("0px")
 
+				$(".verein .title").text("")
 				$(".verein .value").text("")
 				$(".verein .value2").text("")
 			}
