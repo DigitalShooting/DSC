@@ -38,10 +38,10 @@ function lastObject(array){
 
 var activeDisziplin = config.disziplinen.lgTraining
 var activeUser = {
-	firstName: "Max",
-	lastName: "Mustermann",
-	verein: "SV Diana Dettingen",
-	manschaft: "Manschaft 1",
+	firstName: "Gast",
+	lastName: "",
+	verein: "",
+	manschaft: "",
 }
 
 var getNewSession = function(){

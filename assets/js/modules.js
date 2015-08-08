@@ -158,6 +158,7 @@ var modules = {
 	serien: function(){
 		function update(session){
 			$(".serien ul").html("")
+			$(".serien").hide()
 
 			for(i in session.serieHistory){
 				var ringeSerie = 0
@@ -165,15 +166,15 @@ var modules = {
 					ringeSerie += session.serieHistory[i][ii].ringInt
 				}
 
-
-
 				if (i == session.selection.serie){
 					$(".serien ul").append("<li class='col-xs-3'><b>"+ringeSerie+"</b></li>")
 				}
 				else {
 					$(".serien ul").append("<li class='col-xs-3' onclick=\"socket.emit('setSelectedSerie', '"+i+"')\">"+ringeSerie+"</li>")
 				}
-
+			}
+			if (session.serieHistory.length > 0){
+				$(".serien").show()
 			}
 		}
 
@@ -192,6 +193,7 @@ var modules = {
 	aktuelleSerie: function(){
 		function update(session){
 			$(".aktuelleSerie table").html("")
+			$(".aktuelleSerie").hide()
 
 			var serie = session.serieHistory[session.selection.serie]
 
@@ -202,14 +204,6 @@ var modules = {
 					var pfeil = "&#8635;"
 					if (shot.ring < 10.3) {
 						pfeil = "<span style='margin-top:-2.2vh; display:block; margin-top: 5%; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
-						// if (shot.winkel >= 22.5 && shot.winkel < 67.5) pfeil = " &#8599;"
-						// else if (shot.winkel >= 67.5 && shot.winkel < 112.5) pfeil = " &#8593;"
-						// else if (shot.winkel >= 112.5 && shot.winkel < 157.5) pfeil = " &#8598;"
-						// else if (shot.winkel >= 157.5 && shot.winkel < 202.5) pfeil = " &#8592;"
-						// else if (shot.winkel >= 202.5 && shot.winkel < 247.5) pfeil = " &#8601;"
-						// else if (shot.winkel >= 247.5 && shot.winkel < 292.5) pfeil = " &#8595;"
-						// else if (shot.winkel >= 292.5 && shot.winkel < 337.5) pfeil = " &#8600;"
-						// else pfeil = " &#8594;"
 					}
 
 					if (i == session.selection.shot){
@@ -218,7 +212,9 @@ var modules = {
 					else {
 						$(".aktuelleSerie table").append("<tr onclick=\"socket.emit('setSelectedShot', '"+i+"')\"><td>"+(i+1)+".</td><td>"+shot.ring+"</td><td>"+pfeil+"</td></tr>")
 					}
-
+				}
+				if (serie.length > 0){
+					$(".aktuelleSerie").show()
 				}
 			}
 		}
@@ -267,29 +263,22 @@ var modules = {
 
 
 	aktuellerSchuss: function(){
-		function clear(){
+		function update(session){
 			$(".aktuellerSchuss .value").text("")
 			$(".aktuellerSchuss .value2").text("")
-		}
+			$(".aktuellerSchuss").hide()
 
-		function update(session){
 			var serie = session.serieHistory[session.selection.serie]
 
 			if (serie){
 				if (session.selection.shot < serie.length){
-					drawShot(serie[session.selection.shot])
-				}
-				else {
-					clear()
+					var shot = serie[session.selection.shot]
+
+					$(".aktuellerSchuss .value").text(shot.ring)
+					$(".aktuellerSchuss .value2").text((Math.round(shot.teiler*10)/10).toFixed(1) + " Teiler")
+					$(".aktuellerSchuss").show()
 				}
 			}
-			else {
-				clear()
-			}
-		}
-		function drawShot(shot){
-			$(".aktuellerSchuss .value").text(shot.ring)
-			$(".aktuellerSchuss .value2").text((Math.round(shot.teiler*10)/10).toFixed(1) + " Teiler")
 		}
 
 		var moduleObject = {}
@@ -306,12 +295,17 @@ var modules = {
 
 	anzahlShots: function(){
 		function update(session){
+			$(".anzahlShots .value").text("0")
+			$(".anzahlShots .value2").text("0")
+
 			var serie = session.serieHistory[session.selection.serie]
 
 			var anzahl = 0
 			for(i in session.serieHistory){
 				anzahl += session.serieHistory[i].length
 			}
+
+			console.log("u")
 
 			if (session.disziplin.anzahlShots == 0 || session.type == "probe"){
 				$(".anzahlShots .value").text(anzahl)
@@ -321,9 +315,6 @@ var modules = {
 			}
 			if (serie){
 				$(".anzahlShots .value2").text(serie.length)
-			}
-			else {
-				$(".anzahlShots .value2").text("")
 			}
 		}
 
@@ -341,6 +332,10 @@ var modules = {
 
 	schnitt: function(){
 		function update(session){
+			$(".schnitt .value").text("")
+			$(".schnitt .value2").text("")
+			$(".schnitt").hide()
+
 			var gesamt = 0
 			var anzahl = 0
 			for(i in session.serieHistory){
@@ -352,19 +347,15 @@ var modules = {
 			if (anzahl > 0){
 				var schnitt = (Math.round(gesamt/ anzahl * 10)/ 10).toFixed(1)
 				$(".schnitt .value").text(schnitt)
+
 				if (session.disziplin.anzahlShots > 0){
 					var textRingeM = "Ringe"
 					var textRinge = "Ring"
 					var hochrechnung = schnitt * session.disziplin.anzahlShots
 					$(".schnitt .value2").text(Math.round(hochrechnung) + " " + ((hochrechnung==1) ? textRinge : textRingeM))
 				}
-				else {
-					$(".schnitt .value2").text("")
-				}
-			}
-			else {
-				$(".schnitt .value").text("")
-				$(".schnitt .value2").text("")
+
+				$(".schnitt").show()
 			}
 		}
 
@@ -422,7 +413,7 @@ var modules = {
 
 
 		function update(session){
-			$(".name .value").text(session.user.lastName + " " + session.user.firstName)
+			$(".name .value").text(session.user.firstName + " " + session.user.lastName)
 		}
 		function updateConfig(config){
 			$(".name .value2").text(config.stand.title)
@@ -442,21 +433,19 @@ var modules = {
 
 	verein: function(){
 		function update(session){
+			$(".verein").hide()
+
+			$(".verein .title").text("")
+			$(".verein .value").text("")
+			$(".verein .value2").text("")
+
 			if (session.user.verein != "" || session.user.manschaft != ""){
-				$(".verein").width("auto")
+				$(".verein").show()
 
 				$(".verein .title").text("Verein")
 				$(".verein .value").text(session.user.verein)
 				$(".verein .value2").text(session.user.manschaft)
 			}
-			else {
-				$(".verein").width("0px")
-
-				$(".verein .title").text("")
-				$(".verein .value").text("")
-				$(".verein .value2").text("")
-			}
-
 		}
 
 		var moduleObject = {}
@@ -531,21 +520,20 @@ var modules = {
 			clearInterval(refreshIntervalId)
 
 			var refresh = function(){
+				$(".restTime").hide()
+
+				$(".restTime .title").text("")
+				$(".restTime .value").text("")
+				$(".restTime .value2").text("")
+
 				if(session.time.type == "full"){
 					var date = (session.time.end - (new Date().getTime()))/1000
 
-					$(".restTime").width("auto")
+					$(".restTime").show()
 
 					$(".restTime .title").text("Verbleibende Zeit")
 					$(".restTime .value").text(secondsToString(date))
 					$(".restTime .value2").text(secondsToString(session.disziplin.time.duration*60))
-				}
-				else {
-					$(".restTime").width("0px")
-
-					$(".restTime .title").text("")
-					$(".restTime .value").text("")
-					$(".restTime .value2").text("")
 				}
 			}
 			refreshIntervalId = setInterval(refresh, 1000)
@@ -566,6 +554,8 @@ var modules = {
 
 		function update(session){
 			$(".switchToMatch").unbind()
+			$(".switchToMatch .value").text("")
+			$(".switchToMatch .value2").text("")
 
 			if (session.type == "probe"){
 				$(".switchToMatch .value").text("Probe")
@@ -577,11 +567,6 @@ var modules = {
 			}
 			else if (session.type == "match"){
 				$(".switchToMatch .value").text("Match")
-				$(".switchToMatch .value2").text("")
-			}
-			else {
-				$(".switchToMatch .value").text("")
-				$(".switchToMatch .value2").text("")
 			}
 		}
 
@@ -597,8 +582,14 @@ var modules = {
 		function update(session){
 			$(".newTarget").unbind()
 
+			$(".newTarget").hide()
+
+			$(".newTarget .title").text("")
+			$(".newTarget .value").text("")
+			$(".newTarget .value2").text("")
+
 			if (session.type == "probe"){
-				$(".newTarget").width("auto")
+				$(".newTarget").show()
 
 				$(".newTarget .title").text("Scheibe")
 				$(".newTarget .value").text("Neue Scheibe")
@@ -609,18 +600,7 @@ var modules = {
 				})
 			}
 			else if (session.type == "match"){
-				$(".newTarget").width("0px")
 
-				$(".newTarget .title").text("")
-				$(".newTarget .value").text("")
-				$(".newTarget .value2").text("")
-			}
-			else {
-				$(".newTarget").width("0px")
-
-				$(".newTarget .title").text("")
-				$(".newTarget .value").text("")
-				$(".newTarget .value2").text("")
 			}
 
 
