@@ -33,9 +33,8 @@ var moduleAPI = {
 		modules.name(),
 		modules.verein(),
 		modules.disziplin(),
-		// modules.menu(),,
 		modules.restTime(),
-		modules.switchToMatch(),
+		modules.switchPart(),
 		modules.newTarget(),
 	],
 
@@ -54,7 +53,8 @@ var moduleAPI = {
 			session.serieHistory.push([])
 		}
 
-		if (disziplin.serienLength == lastObject(session.serieHistory).length){
+		var part = disziplin.parts[session.type]
+		if (part.serienLength == lastObject(session.serieHistory).length){
 			session.serieHistory.push([shot])
 		}
 		else {

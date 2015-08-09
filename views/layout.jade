@@ -71,5 +71,25 @@ html(lang="de")
 		
 		
 		
+		
+		div(class="modal" id="modeMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+			div(class="modal-dialog" role="document")
+				div(class="modal-content")
+					div(class="modal-header")
+						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+							span(aria-hidden="true") &times;
+						h4(class="modal-title" id="myModalLabel") Modes
+					div(class="modal-body")
+					
+						div(class="panel panel-default")
+							//- div(class="panel-heading")
+							//- div(class="panel-body")
+							div(class="list-group")
+								a(class="selectUser menuItem list-group-item")
+											
+					div(class="modal-footer")
+						button(type="button" class="btn btn-default" data-dismiss="modal") Close
+		
+		
 		script(src="/js/modules.js")
 		script(src="/js/index.js")

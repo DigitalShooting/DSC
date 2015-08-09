@@ -34,7 +34,7 @@ function lastObject(array){
 
 
 var activeDisziplin
-setDisziplin(config.disziplinen.lgTraining)
+setDisziplin(config.disziplinen.demo)
 
 var activeUser = {
 	firstName: "Gast",
@@ -43,26 +43,46 @@ var activeUser = {
 	manschaft: "",
 }
 
-var getNewSession = function(){
-	var end = ""
-	if (activeDisziplin.time.type == "full"){
-		end = (new Date()).getTime() + activeDisziplin.time.duration * 60 * 1000
+var getNewSession = function(partId){
+
+	if (partId == undefined){
+		partId = activeDisziplin.partsOrder[0]
 	}
 
-	return {
+
+	var time = {
+		enabled: false,
+	}
+	if (activeDisziplin.time.enabled == true){
+		time.enabled = activeDisziplin.time.enabled
+		time.end = (new Date()).getTime() + activeDisziplin.time.duration * 60 * 1000
+		time.duration = activeDisziplin.time.duration
+	}
+	else {
+		var part = activeDisziplin.parts[partId]
+		if (part.time.enabled == true){
+			time.enabled = part.time.enabled
+			time.end = (new Date()).getTime() + part.time.duration * 60 * 1000
+			time.duration = part.time.duration
+		}
+	}
+
+
+
+	var session = {
 		user: activeUser,
-		type: "probe",
+		type: partId,
 		disziplin: activeDisziplin,
 		serieHistory: [],
 		selection: {
 			serie: 0,
 			shot: 0,
 		},
-		time: {
-			type: activeDisziplin.time.type,
-			end: end,
-		}
+		time: time,
 	}
+
+
+	return session
 }
 
 // var sessions = [
@@ -73,14 +93,17 @@ var activeSession = getNewSession()
 
 
 
+
 function newShot(session, shot){
 	var disziplin = session.disziplin
+
+	var part = session.disziplin.parts[session.type]
 
 	if (lastObject(session.serieHistory) == undefined) {
 		session.serieHistory.push([])
 	}
 
-	if (disziplin.serienLength == lastObject(session.serieHistory).length){
+	if (part.serienLength == lastObject(session.serieHistory).length){
 		session.serieHistory.push([shot])
 	}
 	else {
@@ -92,6 +115,7 @@ function newShot(session, shot){
 
 	io.emit('newShot', shot);
 }
+
 
 
 
@@ -151,12 +175,15 @@ io.on('connection', function(socket){
 	});
 
 
-	socket.on('switchToMatch', function(socket){
-		activeSession = getNewSession()
-		activeSession.type = "match"
+
+	socket.on('switchToPart', function(partId){
+		var time = activeSession.time
+		activeSession = getNewSession(partId)
+		activeSession.time = time
 
 		io.emit('setSession', activeSession)
 	})
+
 
 })
 
@@ -173,7 +200,7 @@ function setDisziplin(disziplin){
 	if (interf) {
 		interf.stop()
 	}
-	
+
 	interf = config.interface[disziplin.interface]
 	interf = require(interf.path)(interf)
 

@@ -1,4 +1,7 @@
 
+
+
+// Zooms
 var zooms = {
 	lg: {
 		z1: {
@@ -56,6 +59,10 @@ var zooms = {
 }
 
 
+
+
+
+// Scheiben
 var scheiben = {
 	lg: {
 		title: "LG 10m",
@@ -117,103 +124,168 @@ var scheiben = {
 	},
 }
 
-var defaultMode = {
-	probe: {
-		title: "Probe",
-		anzahlShots: 0,
-	},
-	match: {
-		title: "Match",
-		anzahlShots: 40,
-	},
-}
 
+
+
+
+
+// Disziplinen
 module.exports = {
 	lgTraining: {
 		_id: "lgTraining",
+
 		title: "LG Training",
-		scheibe: scheiben.lg,
-		modes: defaultMode,
-		anzahlShots: 0,
-		serienLength: 10,
+
+		interface: "esa",
+
 		time: {
+			fullTime: false,
 			type: "none",
 		},
-		interface: "esa",
-	},
-	lgTraining5: {
-		_id: "lgTraining5",
-		title: "LG Training 5er",
-		scheibe: scheiben.lg,
-		modes: defaultMode,
-		serienLength: 5,
-		anzahlShots: 0,
-		time: 0,
-		time: {
-			type: "none",
+
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					type: "none",
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				scheibe: scheiben.lg,
+				time: {
+					type: "normal",
+					duration: 50,
+				},
+			},
 		},
-		interface: "esa",
+
+		partsOrder: [
+			"probe",
+			"match"
+		],
+
 	},
-	lgWettkampf: {
-		_id: "lgWettkampf",
-		title: "LG Wettkampf",
-		scheibe: scheiben.lg,
-		modes: defaultMode,
-		serienLength: 10,
-		anzahlShots: 40,
-		time: {
-			type: "full",
-			duration: 50,
-		},
-		interface: "esa",
-	},
-	lpTraining: {
-		_id: "lpTraining",
-		title: "LP Training",
-		scheibe: scheiben.lp,
-		modes: defaultMode,
-		serienLength: 10,
-		anzahlShots: 0,
-		time: {
-			type: "none",
-		},
-		interface: "esa",
-	},
-	lpTraining5: {
-		_id: "lpTraining5",
-		title: "LP Training 5er",
-		scheibe: scheiben.lp,
-		modes: defaultMode,
-		serienLength: 5,
-		anzahlShots: 0,
-		time: {
-			type: "none",
-		},
-		interface: "esa",
-	},
-	lpWettkampf: {
-		_id: "lpWettkampf",
-		title: "LP Wettkampf",
-		scheibe: scheiben.lp,
-		modes: defaultMode,
-		serienLength: 10,
-		anzahlShots: 40,
-		time: {
-			type: "full",
-			duration: 50,
-		},
-		interface: "esa",
-	},
+	// lgTraining5: {
+	// 	_id: "lgTraining5",
+	// 	title: "LG Training 5er",
+	// 	scheibe: scheiben.lg,
+	// 	modes: defaultMode,
+	// 	serienLength: 5,
+	// 	anzahlShots: 0,
+	// 	time: 0,
+	// 	time: {
+	// 		type: "none",
+	// 	},
+	// 	interface: "esa",
+	// },
+	// lgWettkampf: {
+	// 	_id: "lgWettkampf",
+	// 	title: "LG Wettkampf",
+	// 	scheibe: scheiben.lg,
+	// 	mode: defaultMode,
+	// 	serienLength: 10,
+	// 	anzahlShots: 40,
+	// 	time: {
+	// 		type: "full",
+	// 		duration: 50,
+	// 	},
+	// 	interface: "esa",
+	// },
+	// lpTraining: {
+	// 	_id: "lpTraining",
+	// 	title: "LP Training",
+	// 	scheibe: scheiben.lp,
+	// 	modes: defaultMode,
+	// 	serienLength: 10,
+	// 	anzahlShots: 0,
+	// 	time: {
+	// 		type: "none",
+	// 	},
+	// 	interface: "esa",
+	// },
+	// lpTraining5: {
+	// 	_id: "lpTraining5",
+	// 	title: "LP Training 5er",
+	// 	scheibe: scheiben.lp,
+	// 	modes: defaultMode,
+	// 	serienLength: 5,
+	// 	anzahlShots: 0,
+	// 	time: {
+	// 		type: "none",
+	// 	},
+	// 	interface: "esa",
+	// },
+	// lpWettkampf: {
+	// 	_id: "lpWettkampf",
+	// 	title: "LP Wettkampf",
+	// 	scheibe: scheiben.lp,
+	// 	modes: defaultMode,
+	// 	serienLength: 10,
+	// 	anzahlShots: 40,
+	// 	time: {
+	// 		type: "full",
+	// 		duration: 50,
+	// 	},
+	// 	interface: "esa",
+	// },
 	demo: {
 		_id: "demo",
+
+		// Title of the Disziplin
 		title: "Demo",
-		scheibe: scheiben.lg,
-		modes: defaultMode,
-		serienLength: 10,
-		anzahlShots: 40,
-		time: {
-			type: "none",
-		},
+
+		// Interface to use
 		interface: "demo",
+
+		// Time Settings for all parts
+		time: {
+
+			// One time for all parts, self change mode
+			enabled: false,
+
+			duration: 75,
+		},
+
+		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 15,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: true,
+					duration: 0.1,
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: true,
+					duration: 50,
+				},
+			},
+		},
+
+		// Order of the parts
+		partsOrder: [
+			"probe",
+			"match"
+		],
+
+
 	},
 }

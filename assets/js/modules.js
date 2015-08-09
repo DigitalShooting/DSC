@@ -42,8 +42,8 @@ var modules = {
 
 			context.clearRect(0, 0, a_canvas.width, a_canvas.height);
 
+			var scheibe = session.disziplin.parts[session.type].scheibe
 			if (serie != undefined && serie.length != 0) {
-				var scheibe = session.disziplin.scheibe
 				var ringInt = serie[session.selection.shot].ringInt
 				var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
 				if (ring){
@@ -51,15 +51,15 @@ var modules = {
 					zoom = ring.zoom
 				}
 				else {
-					zoom = session.disziplin.scheibe.defaultZoom
+					zoom = scheibe.defaultZoom
 				}
 			}
 			else {
-				zoom = session.disziplin.scheibe.defaultZoom
+				zoom = scheibe.defaultZoom
 			}
 
-			drawScheibe(session.disziplin.scheibe)
-			drawMode(session, session.disziplin.scheibe)
+			drawScheibe(scheibe)
+			drawMode(session, scheibe)
 		}
 
 		function drawScheibe(scheibe){
@@ -91,7 +91,8 @@ var modules = {
 			}
 
 			// Probeecke
-			if (session.type == "probe"){
+			var parts = session.disziplin.parts
+			if (parts[session.type].probe == true){
 				context.beginPath()
 				context.moveTo(1450,50)
 				context.lineTo(1950,50)
@@ -206,11 +207,12 @@ var modules = {
 						pfeil = "<span style='margin-top:-2.2vh; display:block; margin-top: 4%; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
 					}
 
+					var part = session.disziplin.parts[session.type]
 					if (i == session.selection.shot){
-						$(".aktuelleSerie table").append("<tr><td>"+(i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
+						$(".aktuelleSerie table").append("<tr><td>"+((session.serieHistory.length-1) * part.serienLength + i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
 					}
 					else {
-						$(".aktuelleSerie table").append("<tr onclick=\"socket.emit('setSelectedShot', '"+i+"')\"><td>"+(i+1)+".</td><td>"+shot.ring+"</td><td>"+pfeil+"</td></tr>")
+						$(".aktuelleSerie table").append("<tr onclick=\"socket.emit('setSelectedShot', '"+i+"')\"><td>"+((session.serieHistory.length-1) * part.serienLength + i+1)+".</td><td>"+shot.ring+"</td><td>"+pfeil+"</td></tr>")
 					}
 				}
 				if (serie.length > 0){
@@ -274,7 +276,12 @@ var modules = {
 				if (session.selection.shot < serie.length){
 					var shot = serie[session.selection.shot]
 
-					$(".aktuellerSchuss .value").text(shot.ring)
+					var pfeil = "<span style='font-size:9vmin; float:left; margin-left:1vw; position:fixed; display:block;'> &#8635;</span>"
+					if (shot.ring < 10.3) {
+						pfeil = "<span style='font-size:9vmin; float:left; margin-left:1vw; position:fixed; display:block;  transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
+					}
+
+					$(".aktuellerSchuss .value").html(pfeil +shot.ring)
 					$(".aktuellerSchuss .value2").text((Math.round(shot.teiler*10)/10).toFixed(1) + " Teiler")
 
 					$(".aktuellerSchuss").show()
@@ -306,11 +313,12 @@ var modules = {
 				anzahl += session.serieHistory[i].length
 			}
 
-			if (session.disziplin.anzahlShots == 0 || session.type == "probe"){
+			var part = session.disziplin.parts[session.type]
+			if (part.anzahlShots == 0){
 				$(".anzahlShots .value").text(anzahl)
 			}
 			else {
-				$(".anzahlShots .value").text(anzahl + "/ "+session.disziplin.anzahlShots)
+				$(".anzahlShots .value").text(anzahl + "/ "+part.anzahlShots)
 			}
 			if (serie){
 				$(".anzahlShots .value2").text(serie.length)
@@ -347,10 +355,11 @@ var modules = {
 				var schnitt = (Math.round(gesamt/ anzahl * 10)/ 10).toFixed(1)
 				$(".schnitt .value").text(schnitt)
 
-				if (session.disziplin.anzahlShots > 0){
+				var part = session.disziplin.parts[session.type]
+				if (part.anzahlShots > 0){
 					var textRingeM = "Ringe"
 					var textRinge = "Ring"
-					var hochrechnung = schnitt * session.disziplin.anzahlShots
+					var hochrechnung = schnitt * part.anzahlShots
 					$(".schnitt .value2").text(Math.round(hochrechnung) + " " + ((hochrechnung==1) ? textRinge : textRingeM))
 				}
 
@@ -463,7 +472,9 @@ var modules = {
 
 		function update(session){
 			$(".disziplin .value").text(session.disziplin.title)
-			$(".disziplin .value2").text(session.disziplin.scheibe.title)
+
+			var part = session.disziplin.parts[session.type]
+			$(".disziplin .value2").text(part.scheibe.title)
 		}
 		function updateConfig(config){
 			$("#disziplinMenu .list-group").html("")
@@ -525,14 +536,19 @@ var modules = {
 				$(".restTime .value").text("")
 				$(".restTime .value2").text("")
 
-				if(session.time.type == "full"){
+				if (session.time.enabled == true){
 					var date = (session.time.end - (new Date().getTime()))/1000
 
 					$(".restTime").show()
 
 					$(".restTime .title").text("Verbleibende Zeit")
-					$(".restTime .value").text(secondsToString(date))
-					$(".restTime .value2").text(secondsToString(session.disziplin.time.duration*60))
+					if (date > 0){
+						$(".restTime .value").text(secondsToString(date))
+						$(".restTime .value2").text(secondsToString(session.time.duration*60))
+					}
+					else {
+						$(".restTime .value").text("Zeit abgelaufen")
+					}
 				}
 			}
 			refreshIntervalId = setInterval(refresh, 1000)
@@ -549,24 +565,42 @@ var modules = {
 
 
 
-	switchToMatch: function(){
+	switchPart: function(){
 
 		function update(session){
 			$(".switchToMatch").unbind()
 			$(".switchToMatch .value").text("")
 			$(".switchToMatch .value2").text("")
 
-			if (session.type == "probe"){
-				$(".switchToMatch .value").text("Probe")
-				$(".switchToMatch .value2").text("")
+			$('#modeMenu .list-group').html("")
 
-				$(".switchToMatch").click(function(){
-					socket.emit("switchToMatch", {})
-				})
+			var parts = session.disziplin.parts
+			var partsOrder = session.disziplin.partsOrder
+			for (var i in partsOrder){
+				var id = partsOrder[i]
+				var part = parts[id]
+				var active = ""
+				if (id == session.type) {
+					active = " active"
+				}
+				$('#modeMenu .list-group').append("<a onclick=\"socket.emit('switchToPart', '"+id+"')\" class='menuItem list-group-item "+active+"'>"+part.title+"</a>")
+
+				var split = " - "
+				if (i == partsOrder.length-1) {
+					split = ""
+				}
+				var title = part.title
+				if (id == session.type) {
+					title = "<b>"+part.title+"</b>"
+				}
+				$(".switchToMatch .value2").append(title + split)
 			}
-			else if (session.type == "match"){
-				$(".switchToMatch .value").text("Match")
-			}
+
+			$(".switchToMatch .value").text(parts[session.type].title)
+
+			$(".switchToMatch").click(function(){
+				$('#modeMenu').modal('show')
+			})
 		}
 
 		var moduleObject = {}
@@ -587,7 +621,8 @@ var modules = {
 			$(".newTarget .value").text("")
 			$(".newTarget .value2").text("")
 
-			if (session.type == "probe"){
+			var parts = session.disziplin.parts
+			if (parts[session.type].probe == true){
 				$(".newTarget").show()
 
 				$(".newTarget .title").text("Scheibe")
@@ -598,9 +633,7 @@ var modules = {
 					socket.emit("newTarget", {})
 				})
 			}
-			else if (session.type == "match"){
 
-			}
 
 
 
