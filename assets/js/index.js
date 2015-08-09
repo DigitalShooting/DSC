@@ -154,6 +154,25 @@ shortcut.add("F8",function() {
 
 // Socket.io
 
+socket.on('disconnect', function(){
+	$(".status .socket").css("background-color", "black")
+});
+socket.on('connect', function(){
+	$(".status .socket").css("background-color", "transparent")
+});
+
+socket.on('setStatus', function(connected){
+	if (connected == true){
+		$(".status .interface").css("background-color", "transparent")
+	}
+	else {
+		$(".status .interface").css("background-color", "black")
+	}
+});
+
+
+
+
 socket.on('setSession', function(newSession){
 	session = newSession
 	moduleAPI.setSession(session)

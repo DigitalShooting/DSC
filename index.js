@@ -240,4 +240,7 @@ function setDisziplin(disziplin){
 	interf.onNewData = function(data){
 		console.log(data)
 	}
+	interf.onNewStatus = function(connected){
+		io.emit('setStatus', connected)
+	}
 }

@@ -10,13 +10,16 @@ block title
 	| SCC
 
 block body
+	div(class="status" style="position:absolute;")
+		div(class="socket")
+		div(class="interface")
 	table(class="navbar-cutsom navbar-default")
 		tr
 			+navItem("", "restTime")
 			+navItem("Schüsse", "anzahlShots")
 			+navItem("Schnitt", "schnitt")
 			+navItem("Gesamt", "ringeGesamt")
-		
+	
 	div(id="modules")
 		div(class="col-xs-7 grafik noPadding fullHeight")
 			canvas(id="grafik" width="2000" height="2000")
