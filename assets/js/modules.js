@@ -516,13 +516,7 @@ var modules = {
 			$("#disziplinMenu .list-group").html("")
 			for (var i in config.disziplinen){
 				var disziplin = config.disziplinen[i]
-				$("#disziplinMenu .list-group").append("<a class='menuItem type_"+i+" list-group-item'>" + disziplin.title + "<input type='hidden' value='"+i+"'" + "</a>")
-
-				$("#disziplinMenu .type_"+i).click(function(){
-					var key = $(this).find('input').val()
-					console.log(key)
-					socket.emit("setDisziplin", key)
-				})
+				$("#disziplinMenu .row").append("<div class='col-xs-6 item' onclick=\"socket.emit('setDisziplin', $(this).find('input').val())\"><p class='menuItem'>" + disziplin.title + "<input type='hidden' value='"+i+"'" + "</p></div>")
 			}
 
 			$("#disziplinMenu .menuItem").click(function(){
