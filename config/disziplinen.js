@@ -131,18 +131,17 @@ var scheiben = {
 
 // Disziplinen
 module.exports = {
+
+
+
 	lgTraining: {
 		_id: "lgTraining",
-
 		title: "LG Training",
-
 		interface: "esa",
-
 		time: {
-			fullTime: false,
-			type: "none",
+			enabled: false,
+			duration: 0,
 		},
-
 		parts: {
 			probe: {
 				title: "Probe",
@@ -151,7 +150,8 @@ module.exports = {
 				anzahlShots: 0,
 				scheibe: scheiben.lg,
 				time: {
-					type: "none",
+					enabled: false,
+					duration: 0,
 				},
 			},
 			match: {
@@ -161,81 +161,363 @@ module.exports = {
 				anzahlShots: 40,
 				scheibe: scheiben.lg,
 				time: {
-					type: "normal",
-					duration: 50,
+					enabled: false,
+					duration: 0,
 				},
 			},
 		},
-
 		partsOrder: [
 			"probe",
 			"match"
 		],
-
 	},
-	// lgTraining5: {
-	// 	_id: "lgTraining5",
-	// 	title: "LG Training 5er",
-	// 	scheibe: scheiben.lg,
-	// 	modes: defaultMode,
-	// 	serienLength: 5,
-	// 	anzahlShots: 0,
-	// 	time: 0,
-	// 	time: {
-	// 		type: "none",
-	// 	},
-	// 	interface: "esa",
-	// },
-	// lgWettkampf: {
-	// 	_id: "lgWettkampf",
-	// 	title: "LG Wettkampf",
-	// 	scheibe: scheiben.lg,
-	// 	mode: defaultMode,
-	// 	serienLength: 10,
-	// 	anzahlShots: 40,
-	// 	time: {
-	// 		type: "full",
-	// 		duration: 50,
-	// 	},
-	// 	interface: "esa",
-	// },
-	// lpTraining: {
-	// 	_id: "lpTraining",
-	// 	title: "LP Training",
-	// 	scheibe: scheiben.lp,
-	// 	modes: defaultMode,
-	// 	serienLength: 10,
-	// 	anzahlShots: 0,
-	// 	time: {
-	// 		type: "none",
-	// 	},
-	// 	interface: "esa",
-	// },
-	// lpTraining5: {
-	// 	_id: "lpTraining5",
-	// 	title: "LP Training 5er",
-	// 	scheibe: scheiben.lp,
-	// 	modes: defaultMode,
-	// 	serienLength: 5,
-	// 	anzahlShots: 0,
-	// 	time: {
-	// 		type: "none",
-	// 	},
-	// 	interface: "esa",
-	// },
-	// lpWettkampf: {
-	// 	_id: "lpWettkampf",
-	// 	title: "LP Wettkampf",
-	// 	scheibe: scheiben.lp,
-	// 	modes: defaultMode,
-	// 	serienLength: 10,
-	// 	anzahlShots: 40,
-	// 	time: {
-	// 		type: "full",
-	// 		duration: 50,
-	// 	},
-	// 	interface: "esa",
-	// },
+
+
+
+
+
+	lgTraining5: {
+		_id: "lgTraining5",
+		title: "LG Training 5er",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
+
+
+	lgWettkampf: {
+		_id: "lgWettkampf",
+		title: "LG Wettkampf",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
+
+
+	lgAuflage: {
+		_id: "lgAuflage",
+		title: "LG Auflage",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 30,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
+	lg3Stellung: {
+		_id: "lg3Stellung",
+		title: "LG 3 Stellung",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe1: {
+				title: "Probe 1",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match1: {
+				title: "Match 1",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 20,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			probe2: {
+				title: "Probe 2",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match2: {
+				title: "Match 2",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 20,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			probe3: {
+				title: "Probe 3",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match3: {
+				title: "Match 3",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 20,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe1",
+			"match1",
+			"probe2",
+			"match2",
+			"probe3",
+			"match3",
+		],
+	},
+
+
+
+
+	lpTraining: {
+		_id: "lpTraining",
+		title: "LP Training",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
+
+	lpTraining5: {
+		_id: "lpTraining5",
+		title: "LP Training 5er",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
+
+	lpWettkampf: {
+		_id: "lpWettkampf",
+		title: "LP Wettkampf",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe: {
+				title: "Probe",
+				probe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				scheibe: scheiben.lg,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
+
 	demo: {
 		_id: "demo",
 
@@ -263,8 +545,8 @@ module.exports = {
 				anzahlShots: 15,
 				scheibe: scheiben.lg,
 				time: {
-					enabled: true,
-					duration: 0.1,
+					enabled: false,
+					duration: 0,
 				},
 			},
 			match: {

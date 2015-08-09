@@ -157,12 +157,21 @@ shortcut.add("F8",function() {
 socket.on('setSession', function(newSession){
 	session = newSession
 	moduleAPI.setSession(session)
+	$(".infoBox").hide()
 });
 
 socket.on('setConfig', function(config){
 	moduleAPI.setConfig(config)
+	$(".infoBox").hide()
 });
 
 socket.on('newShot', function(shot){
 	moduleAPI.newShot(shot)
+	$(".infoBox").hide()
+});
+
+socket.on('info', function(message){
+	$(".infoBox .title").text(message.title)
+	$(".infoBox .text").text(message.text)
+	$(".infoBox").show()
 });

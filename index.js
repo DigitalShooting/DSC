@@ -67,8 +67,6 @@ var getNewSession = function(partId){
 		}
 	}
 
-
-
 	var session = {
 		user: activeUser,
 		type: partId,
@@ -96,8 +94,37 @@ var activeSession = getNewSession()
 
 function newShot(session, shot){
 	var disziplin = session.disziplin
-
 	var part = session.disziplin.parts[session.type]
+
+
+	var date = (session.time.end - (new Date().getTime()))/1000
+	if (date < 0){
+		console.log("WARNING [Time over]")
+		io.emit('info', {
+			type: "warning",
+			title: "Zeit abgelaufen",
+			text: "Der Schuss wird nicht gewertet.",
+		});
+		return
+	}
+
+
+	var anzahl = 0
+	for(i in session.serieHistory){
+		anzahl += session.serieHistory[i].length
+	}
+	if (part.anzahlShots <= anzahl && part.anzahlShots != 0){
+		console.log("WARNING [Max shot limit]")
+		io.emit('info', {
+			type: "warning",
+			title: "Schusslimit erreicht",
+			text: "Es wurden bereits alle Schüsse abgegeben.",
+		});
+		return
+	}
+
+
+
 
 	if (lastObject(session.serieHistory) == undefined) {
 		session.serieHistory.push([])
@@ -179,7 +206,9 @@ io.on('connection', function(socket){
 	socket.on('switchToPart', function(partId){
 		var time = activeSession.time
 		activeSession = getNewSession(partId)
-		activeSession.time = time
+		if (activeDisziplin.time.enabled == true){
+			activeSession.time = time
+		}
 
 		io.emit('setSession', activeSession)
 	})

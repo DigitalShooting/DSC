@@ -536,6 +536,8 @@ var modules = {
 				$(".restTime .value").text("")
 				$(".restTime .value2").text("")
 
+				console.log(session.time)
+
 				if (session.time.enabled == true){
 					var date = (session.time.end - (new Date().getTime()))/1000
 
@@ -544,11 +546,11 @@ var modules = {
 					$(".restTime .title").text("Verbleibende Zeit")
 					if (date > 0){
 						$(".restTime .value").text(secondsToString(date))
-						$(".restTime .value2").text(secondsToString(session.time.duration*60))
 					}
 					else {
 						$(".restTime .value").text("Zeit abgelaufen")
 					}
+					$(".restTime .value2").text(secondsToString(session.time.duration*60))
 				}
 			}
 			refreshIntervalId = setInterval(refresh, 1000)
@@ -585,15 +587,15 @@ var modules = {
 				}
 				$('#modeMenu .list-group').append("<a onclick=\"socket.emit('switchToPart', '"+id+"')\" class='menuItem list-group-item "+active+"'>"+part.title+"</a>")
 
-				var split = " - "
-				if (i == partsOrder.length-1) {
-					split = ""
-				}
-				var title = part.title
-				if (id == session.type) {
-					title = "<b>"+part.title+"</b>"
-				}
-				$(".switchToMatch .value2").append(title + split)
+				// var split = " - "
+				// if (i == partsOrder.length-1) {
+				// 	split = ""
+				// }
+				// var title = part.title
+				// if (id == session.type) {
+				// 	title = "<b>"+part.title+"</b>"
+				// }
+				// $(".switchToMatch .value2").append(title + split)
 			}
 
 			$(".switchToMatch .value").text(parts[session.type].title)
