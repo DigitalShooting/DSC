@@ -64,6 +64,7 @@ var modules = {
 
 		function drawScheibe(scheibe){
 			var lastRing = scheibe.ringe[scheibe.ringe.length-1]
+
 			for (var i = scheibe.ringe.length-1; i >= 0; i--){
 				var ring = scheibe.ringe[i]
 
@@ -80,7 +81,6 @@ var modules = {
 				context.fillStyle = "black";
 
 				if (ring.text == true){
-					// context.font = (10*zoom.zoom.scale)+" px";
 					context.font = "bold "+(scheibe.text.size*zoom.scale)+"px verdana, sans-serif";
 					context.fillStyle = ring.textColor
 					context.fillText(ring.value, (lastRing.width/2 - ring.width/2 + scheibe.text.left)*zoom.scale+zoom.offset.x, (lastRing.width/2+scheibe.text.width)*zoom.scale+zoom.offset.y);
@@ -90,9 +90,25 @@ var modules = {
 				}
 			}
 
+			for (var i = scheibe.ringeDrawOnly.length-1; i >= 0; i--){
+				var ring = scheibe.ringeDrawOnly[i]
+
+				context.globalAlpha = 1.0
+				context.fillStyle = ring.color;
+				context.beginPath();
+				context.arc(lastRing.width/2*zoom.scale+zoom.offset.x, lastRing.width/2*zoom.scale+zoom.offset.y, ring.width/2*zoom.scale, 0, 2*Math.PI);
+				context.closePath();
+
+				context.fill();
+				context.strokeStyle = ring.textColor
+				context.lineWidth = 4;
+				context.stroke();
+				context.fillStyle = "black";
+			}
+
 			// Probeecke
 			var parts = session.disziplin.parts
-			if (parts[session.type].probe == true){
+			if (parts[session.type].probeEcke == true){
 				context.beginPath()
 				context.moveTo(1450,50)
 				context.lineTo(1950,50)
@@ -161,6 +177,9 @@ var modules = {
 			$(".serien ul").html("")
 			$(".serien").hide()
 
+			var part = session.disziplin.parts[session.type]
+			if (part.showInfos == false) { return }
+
 			for(i in session.serieHistory){
 				var ringeSerie = 0
 				for(ii in session.serieHistory[i]){
@@ -195,6 +214,9 @@ var modules = {
 		function update(session){
 			$(".aktuelleSerie table").html("")
 			$(".aktuelleSerie").hide()
+
+			var part = session.disziplin.parts[session.type]
+			if (part.showInfos == false) { return }
 
 			var serie = session.serieHistory[session.selection.serie]
 
@@ -235,6 +257,13 @@ var modules = {
 
 	ringeGesamt: function(){
 		function update(session){
+			$(".ringeGesamt .value").text("")
+			$(".ringeGesamt .value2").text("")
+			$(".ringeGesamt").hide()
+
+			var part = session.disziplin.parts[session.type]
+			if (part.showInfos == false) { return }
+
 			var gesamt = 0
 			var gesamtSerie = 0
 			for(i in session.serieHistory){
@@ -250,6 +279,7 @@ var modules = {
 			var textRinge = "Ring"
 			$(".ringeGesamt .value").text(gesamt + " " + ((gesamt==1) ? textRinge : textRingeM))
 			$(".ringeGesamt .value2").text(gesamtSerie + " " + ((gesamt==1) ? textRinge : textRingeM))
+			$(".ringeGesamt").show()
 		}
 
 		var moduleObject = {}
@@ -269,6 +299,9 @@ var modules = {
 			$(".aktuellerSchuss .value").text("")
 			$(".aktuellerSchuss .value2").text("")
 			$(".aktuellerSchuss").hide()
+
+			var part = session.disziplin.parts[session.type]
+			if (part.showInfos == false) { return }
 
 			var serie = session.serieHistory[session.selection.serie]
 
@@ -342,6 +375,9 @@ var modules = {
 			$(".schnitt .value").text("")
 			$(".schnitt .value2").text("")
 			$(".schnitt").hide()
+
+			var part = session.disziplin.parts[session.type]
+			if (part.showInfos == false) { return }
 
 			var gesamt = 0
 			var anzahl = 0
@@ -624,7 +660,7 @@ var modules = {
 			$(".newTarget .value2").text("")
 
 			var parts = session.disziplin.parts
-			if (parts[session.type].probe == true){
+			if (parts[session.type].neueScheibe == true){
 				$(".newTarget").show()
 
 				$(".newTarget .title").text("Scheibe")

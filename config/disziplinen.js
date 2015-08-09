@@ -78,6 +78,37 @@ var scheiben = {
 			{ value:  2, width: 40.5, color: "white", text: true, textColor: "black", zoom: zooms.lg.z1, hitColor: "#00bffF" },
 			{ value:  1, width: 45.5, color: "white", text: true, textColor: "black", zoom: zooms.lg.z1, hitColor: "#00bffF" },
 		],
+		ringeDrawOnly: [],
+		defaultZoom: zooms.lg.z1,
+		probeEcke: {
+			color: "#0f0",
+			alpha: 0.7,
+		},
+		text: {
+			size: 1.0,
+			width: 0.3,
+			up: 1.8,
+			down: -0.8,
+			left: 0.95,
+			right: -1.7,
+		},
+		kugelDurchmesser: 4.5,
+	},
+	lgBlank: {
+		title: "LG 10m (Blank)",
+		ringe: [
+			{ value: 10, width:  0.5, color: "black", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  9, width:  5.5, color: "black", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  8, width: 10.5, color: "black", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  7, width: 15.5, color: "black", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  6, width: 20.5, color: "black", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  5, width: 25.5, color: "black", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  4, width: 30.5, color: "black", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  3, width: 35.5, color: "white", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  2, width: 40.5, color: "white", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+			{ value:  1, width: 45.5, color: "white", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
+		],
+		ringeDrawOnly: [],
 		defaultZoom: zooms.lg.z1,
 		probeEcke: {
 			color: "#0f0",
@@ -106,6 +137,9 @@ var scheiben = {
 			{ value:  3, width: 123.5, color: "white", text: true, textColor: "black", zoom: zooms.lp.z1, hitColor: "#00bffF" },
 			{ value:  2, width: 139.5, color: "white", text: true, textColor: "black", zoom: zooms.lp.z1, hitColor: "#00bffF" },
 			{ value:  1, width: 155.5, color: "white", text: true, textColor: "black", zoom: zooms.lp.z1, hitColor: "#00bffF" },
+		],
+		ringeDrawOnly: [
+			{ width:  5.0, color: "black", textColor: "white" },
 		],
 		defaultZoom: zooms.lp.z1,
 		probeEcke: {
@@ -145,9 +179,11 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -156,9 +192,11 @@ module.exports = {
 			},
 			match: {
 				title: "Match",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 40,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -187,9 +225,11 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -198,9 +238,11 @@ module.exports = {
 			},
 			match: {
 				title: "Match",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 40,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -230,9 +272,11 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -241,9 +285,11 @@ module.exports = {
 			},
 			match: {
 				title: "Match",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 40,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -273,9 +319,11 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -284,9 +332,11 @@ module.exports = {
 			},
 			match: {
 				title: "Match",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 30,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -297,6 +347,37 @@ module.exports = {
 		partsOrder: [
 			"probe",
 			"match"
+		],
+	},
+
+
+
+
+	lgBlank: {
+		_id: "lgBlank",
+		title: "LG Blank",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		parts: {
+			probe: {
+				title: "Probe",
+				probeEcke: false,
+				neueScheibe: true,
+				serienLength: 100,
+				anzahlShots: 0,
+				showInfos: true,
+				scheibe: scheiben.lgBlank,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
 		],
 	},
 
@@ -314,9 +395,11 @@ module.exports = {
 		parts: {
 			probe1: {
 				title: "Probe 1",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -325,9 +408,11 @@ module.exports = {
 			},
 			match1: {
 				title: "Match 1",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 20,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -336,9 +421,11 @@ module.exports = {
 			},
 			probe2: {
 				title: "Probe 2",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -347,9 +434,11 @@ module.exports = {
 			},
 			match2: {
 				title: "Match 2",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 20,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -358,9 +447,11 @@ module.exports = {
 			},
 			probe3: {
 				title: "Probe 3",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -369,9 +460,11 @@ module.exports = {
 			},
 			match3: {
 				title: "Match 3",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 20,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
@@ -403,10 +496,12 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
-				scheibe: scheiben.lg,
+				showInfos: true,
+				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -414,10 +509,12 @@ module.exports = {
 			},
 			match: {
 				title: "Match",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 40,
-				scheibe: scheiben.lg,
+				showInfos: true,
+				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -445,10 +542,12 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
-				scheibe: scheiben.lg,
+				showInfos: true,
+				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -456,10 +555,12 @@ module.exports = {
 			},
 			match: {
 				title: "Match",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 40,
-				scheibe: scheiben.lg,
+				showInfos: true,
+				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -487,10 +588,12 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: true,
+				neueScheibe: true,
 				serienLength: 10,
 				anzahlShots: 0,
-				scheibe: scheiben.lg,
+				showInfos: true,
+				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -498,10 +601,12 @@ module.exports = {
 			},
 			match: {
 				title: "Match",
-				probe: false,
+				probeEcke: false,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 40,
-				scheibe: scheiben.lg,
+				showInfos: true,
+				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -540,24 +645,15 @@ module.exports = {
 		parts: {
 			probe: {
 				title: "Probe",
-				probe: true,
+				probeEcke: false,
+				neueScheibe: true,
 				serienLength: 10,
-				anzahlShots: 15,
+				anzahlShots: 0,
+				showInfos: true,
 				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
-				},
-			},
-			match: {
-				title: "Match",
-				probe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				scheibe: scheiben.lg,
-				time: {
-					enabled: true,
-					duration: 50,
 				},
 			},
 		},
@@ -565,7 +661,6 @@ module.exports = {
 		// Order of the parts
 		partsOrder: [
 			"probe",
-			"match"
 		],
 
 
