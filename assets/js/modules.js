@@ -513,7 +513,7 @@ var modules = {
 			$(".disziplin .value2").text(part.scheibe.title)
 		}
 		function updateConfig(config){
-			$("#disziplinMenu .list-group").html("")
+			$("#disziplinMenu .row").html("")
 			for (var i in config.disziplinen){
 				var disziplin = config.disziplinen[i]
 				$("#disziplinMenu .row").append("<div class='col-xs-6 item' onclick=\"socket.emit('setDisziplin', $(this).find('input').val())\"><p class='menuItem'>" + disziplin.title + "<input type='hidden' value='"+i+"'" + "</p></div>")
