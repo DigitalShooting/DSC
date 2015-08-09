@@ -139,6 +139,7 @@ module.exports = {
 		time: {
 			type: "none",
 		},
+		interface: "esa",
 	},
 	lgTraining5: {
 		_id: "lgTraining5",
@@ -151,6 +152,7 @@ module.exports = {
 		time: {
 			type: "none",
 		},
+		interface: "esa",
 	},
 	lgWettkampf: {
 		_id: "lgWettkampf",
@@ -163,6 +165,7 @@ module.exports = {
 			type: "full",
 			duration: 50,
 		},
+		interface: "esa",
 	},
 	lpTraining: {
 		_id: "lpTraining",
@@ -174,6 +177,7 @@ module.exports = {
 		time: {
 			type: "none",
 		},
+		interface: "esa",
 	},
 	lpTraining5: {
 		_id: "lpTraining5",
@@ -185,6 +189,7 @@ module.exports = {
 		time: {
 			type: "none",
 		},
+		interface: "esa",
 	},
 	lpWettkampf: {
 		_id: "lpWettkampf",
@@ -197,5 +202,18 @@ module.exports = {
 			type: "full",
 			duration: 50,
 		},
-	}
+		interface: "esa",
+	},
+	demo: {
+		_id: "demo",
+		title: "Demo",
+		scheibe: scheiben.lg,
+		modes: defaultMode,
+		serienLength: 10,
+		anzahlShots: 40,
+		time: {
+			type: "none",
+		},
+		interface: "demo",
+	},
 }

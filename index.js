@@ -4,9 +4,6 @@ var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
 var app = express()
 
-// var esa = require("./lib/esa.js")()
-var esa = require("./lib/esaTesting.js")()
-
 app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
 app.get("/", function(req, res){
@@ -36,7 +33,9 @@ function lastObject(array){
 
 
 
-var activeDisziplin = config.disziplinen.lgTraining
+var activeDisziplin
+setDisziplin(config.disziplinen.lgTraining)
+
 var activeUser = {
 	firstName: "Gast",
 	lastName: "",
@@ -91,22 +90,9 @@ function newShot(session, shot){
 	session.selection.serie = session.serieHistory.length-1
 	session.selection.shot = session.serieHistory[session.selection.serie].length-1
 
-
-
-
-
-
-
-
-
-
-
-
-
-	//console.log(shot)
-
 	io.emit('newShot', shot);
 }
+
 
 
 
@@ -125,7 +111,7 @@ io.on('connection', function(socket){
 	})
 
 	socket.on('setDisziplin', function(key){
-		activeDisziplin = config.disziplinen[key]
+		setDisziplin(config.disziplinen[key])
 
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
@@ -176,9 +162,26 @@ io.on('connection', function(socket){
 
 
 
-esa.onNewShot = function(shot){
-	newShot(activeSession, shot)
-}
-esa.onNewData = function(data){
-	console.log(data)
+
+
+
+
+var interf
+function setDisziplin(disziplin){
+	activeDisziplin = disziplin
+
+	if (interf) {
+		interf.stop()
+	}
+	
+	interf = config.interface[disziplin.interface]
+	interf = require(interf.path)(interf)
+
+
+	interf.onNewShot = function(shot){
+		newShot(activeSession, shot)
+	}
+	interf.onNewData = function(data){
+		console.log(data)
+	}
 }
