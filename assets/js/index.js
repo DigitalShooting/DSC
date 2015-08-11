@@ -119,7 +119,7 @@ shortcut.add("F3",function() {
 
 // Neue Scheibe
 shortcut.add("F5",function() {
-	if (session.type == "probe"){
+	if (session.disziplin.parts[session.type].neueScheibe == true)
 		socket.emit("newTarget", {})
 	}
 })
@@ -136,8 +136,22 @@ shortcut.add("F5",function() {
 
 // Abbrechen/ Probe/ Match
 shortcut.add("F8",function() {
-	if (session.type == "probe"){
-		socket.emit("switchToMatch", {})
+	var index = 0
+	for (var i = 0; i < session.disziplin.partsOrder.length; i++){
+		var key = session.disziplin.partsOrder[i]
+
+		if (key == session.type){
+			index = i
+			break
+		}
+	}
+
+	var nextIndex = i + 1
+
+	if (nextIndex < session.disziplin.partsOrder.length){
+		var key = session.disziplin.partsOrder[nextIndex]
+
+		socket.emit("switchToPart", key)
 	}
 })
 

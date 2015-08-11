@@ -266,8 +266,8 @@ module.exports = {
 		title: "LG Wettkampf",
 		interface: "esa",
 		time: {
-			enabled: false,
-			duration: 0,
+			enabled: true,
+			duration: 75,
 		},
 		parts: {
 			probe: {
