@@ -231,7 +231,7 @@ function setDisziplin(disziplin){
 	}
 
 	interf = config.interface[disziplin.interface]
-	interf = require(interf.path)(interf)
+	interf = require(interf.path)(interf, activeSession)
 
 
 	interf.onNewShot = function(shot){
