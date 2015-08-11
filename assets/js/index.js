@@ -119,7 +119,7 @@ shortcut.add("F3",function() {
 
 // Neue Scheibe
 shortcut.add("F5",function() {
-	if (session.disziplin.parts[session.type].neueScheibe == true)
+	if (session.disziplin.parts[session.type].neueScheibe == true){
 		socket.emit("newTarget", {})
 	}
 })
