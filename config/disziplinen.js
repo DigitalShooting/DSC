@@ -368,7 +368,7 @@ module.exports = {
 				neueScheibe: true,
 				serienLength: 100,
 				anzahlShots: 0,
-				showInfos: true,
+				showInfos: false,
 				scheibe: scheiben.lgBlank,
 				time: {
 					enabled: false,
