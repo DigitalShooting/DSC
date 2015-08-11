@@ -135,7 +135,7 @@ shortcut.add("F5",function() {
 // })
 
 // Abbrechen/ Probe/ Match
-shortcut.add("F8",function() {
+shortcut.add("F8",function(){
 	var index = 0
 	for (var i = 0; i < session.disziplin.partsOrder.length; i++){
 		var key = session.disziplin.partsOrder[i]

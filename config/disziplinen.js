@@ -273,7 +273,7 @@ module.exports = {
 			probe: {
 				title: "Probe",
 				probeEcke: true,
-				neueScheibe: true,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
@@ -396,7 +396,7 @@ module.exports = {
 			probe1: {
 				title: "Probe 1",
 				probeEcke: true,
-				neueScheibe: true,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
@@ -422,7 +422,7 @@ module.exports = {
 			probe2: {
 				title: "Probe 2",
 				probeEcke: true,
-				neueScheibe: true,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
@@ -448,7 +448,7 @@ module.exports = {
 			probe3: {
 				title: "Probe 3",
 				probeEcke: true,
-				neueScheibe: true,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
@@ -589,7 +589,7 @@ module.exports = {
 			probe: {
 				title: "Probe",
 				probeEcke: true,
-				neueScheibe: true,
+				neueScheibe: false,
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
