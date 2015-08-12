@@ -176,6 +176,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lg,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -222,6 +223,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lg,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -269,6 +271,7 @@ module.exports = {
 			enabled: true,
 			duration: 75,
 		},
+		scheibe: scheiben.lg,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -316,6 +319,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lg,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -361,6 +365,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lgBlank,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -392,6 +397,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lg,
 		parts: {
 			probe1: {
 				title: "Probe 1",
@@ -493,6 +499,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lp,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -539,6 +546,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lp,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -585,6 +593,7 @@ module.exports = {
 			enabled: false,
 			duration: 0,
 		},
+		scheibe: scheiben.lp,
 		parts: {
 			probe: {
 				title: "Probe",
@@ -640,6 +649,8 @@ module.exports = {
 
 			duration: 75,
 		},
+
+		scheibe: scheiben.lg,
 
 		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
 		parts: {
