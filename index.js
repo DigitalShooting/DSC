@@ -1,7 +1,7 @@
 var express = require("express")
 var http = require("http")
 var fs = require('fs')
-var pdf = require('html-pdf')
+// var pdf = require('html-pdf')
 var jade = require('jade')
 var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
@@ -223,23 +223,23 @@ io.on('connection', function(socket){
 
 
 	socket.on('print', function(partId){
-		var fn = jade.compileFile('./views/print.jade', options);
-		var html = fn({sessions: [activeSession], config: {stand: config.stand}});
-
-		var options = {
-			format: 'A4',
-			border: {
-				top: "10mm",
-				right: "10mm",
-				bottom: "10mm",
-				left: "10mm",
-			},
-		};
-
-		pdf.create(html, options).toFile('./print.pdf', function(err, res) {
-			if (err) return console.log(err);
-			console.log(res);
-		});
+		// var fn = jade.compileFile('./views/print.jade', options);
+		// var html = fn({sessions: [activeSession], config: {stand: config.stand}});
+		//
+		// var options = {
+		// 	format: 'A4',
+		// 	border: {
+		// 		top: "10mm",
+		// 		right: "10mm",
+		// 		bottom: "10mm",
+		// 		left: "10mm",
+		// 	},
+		// };
+		//
+		// pdf.create(html, options).toFile('./print.pdf', function(err, res) {
+		// 	if (err) return console.log(err);
+		// 	console.log(res);
+		// });
 	})
 
 
