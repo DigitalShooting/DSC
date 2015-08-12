@@ -1,5 +1,8 @@
 var express = require("express")
 var http = require("http")
+var fs = require('fs')
+var pdf = require('html-pdf')
+var jade = require('jade')
 var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
 var app = express()
@@ -8,6 +11,10 @@ app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
 app.get("/", function(req, res){
 	res.render("index")
+})
+app.get("/print", function(req, res){
+	res.locals = {sessions: [activeSession], config: {stand: config.stand}}
+	res.render("print")
 })
 app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
 app.use("/css/", express.static(__dirname + "/stylesheets"))
@@ -211,6 +218,20 @@ io.on('connection', function(socket){
 		}
 
 		io.emit('setSession', activeSession)
+	})
+
+
+
+	socket.on('print', function(partId){
+		var fn = jade.compileFile('./views/print.jade', options);
+		var html = fn({sessions: [activeSession], config: {stand: config.stand}});
+
+		var options = { format: 'A4' };
+
+		pdf.create(html, options).toFile('./businesscard.pdf', function(err, res) {
+			if (err) return console.log(err);
+			console.log(res); // { filename: '/app/businesscard.pdf' }
+		});
 	})
 
 

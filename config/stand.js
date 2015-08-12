@@ -1,3 +1,4 @@
 module.exports = {
-	title : "Stand 1"
+	title : "Stand 1",
+	hostVerein: "SV Diana Dettingen"
 }

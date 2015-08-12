@@ -1,0 +1,64 @@
+doctype html
+html(lang="de")
+	head
+		title Print
+			
+		//link(href="/css/print.css", rel="stylesheet")
+		link(href="http://127.0.0.1:3000/css/print.css", rel="stylesheet")
+	
+		meta(name="viewport", content="width=device-width")
+	body
+		h1 #{config.stand.hostVerein}
+			small  #{config.stand.title}
+	
+		- sessions.forEach(function(session){
+				h2 Name: #{session.user.firstName} #{session.user.lastName}
+				- if (session.user.verein) {
+					h2 Verein: #{session.user.verein}
+				- }
+				- if (session.user.manschaft) {
+					h2 Manschaft: #{session.user.manschaft}
+				- }
+				h2 Disziplin: #{session.disziplin.title} (#{session.disziplin.parts[session.type].title})
+				
+				- var i = 1
+				- session.serieHistory.forEach(function(serie){
+					table
+						tr
+							th Nr.
+							th Ring
+							th Winkel
+							th X
+							th Y
+							th Teiler
+							th Zeit
+					
+						- serie.forEach(function(shot){
+							tr
+								td #{i}.
+								td #{shot.ring}
+								
+								td
+									- if (shot.ring < 10.3) {
+										span(style='float:left; display:block; transform-origin: 50% 50%; -webkit-transform:rotate(-#{Math.round(shot.winkel)}deg)') &#8594;
+									- } else {
+										span(style='float:left; display:block; transform-origin: 50% 50%; -webkit-transform:rotate(-#{Math.round(shot.winkel)}deg)') &#9099;	
+									- }
+									span(style="margin-left:1vw;") #{Math.round(shot.winkel)}
+								
+								td #{Math.round(shot.x*10)/10}
+								td #{Math.round(shot.y*10)/10}
+								td #{Math.round(shot.teiler*10)/10}
+								
+								- Date.prototype.hhmmss = function() {
+									- var hh = this.getHours().toString()
+									- var mm = this.getMinutes().toString()
+									- var ss  = this.getSeconds().toString()
+									- return (hh[1]?hh:"0"+hh[0]) + ":" + (mm[1]?mm:"0"+mm[0]) + ":" + (ss[1]?ss:"0"+ss[0])
+								- }
+								td #{shot.time.hhmmss()}
+							
+							- i++
+						- })
+				- })
+		- })
