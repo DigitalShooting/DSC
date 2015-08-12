@@ -10,6 +10,7 @@ var app = express()
 app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
 app.get("/", function(req, res){
+	res.locals = {config: {stand: config.stand}}
 	res.render("index")
 })
 app.get("/print", function(req, res){
