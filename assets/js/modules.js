@@ -225,7 +225,7 @@ var modules = {
 					var shot = serie[i]
 
 					var pfeil
-					if (shot.ring < 10.3) {
+					if (shot.ring < 10.2) {
 						pfeil = "<span style='margin-top:-2.2vh; display:block; margin-top: 4%; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
 					}
 					else {
@@ -313,7 +313,7 @@ var modules = {
 					var shot = serie[session.selection.shot]
 
 					var pfeil
-					if (shot.ring < 10.3) {
+					if (shot.ring < 10.2) {
 						pfeil = "<span style='font-size:9vmin; float:left; margin-left:1vw; position:absolute; display:block;  transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
 					}
 					else {

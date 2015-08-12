@@ -5,7 +5,7 @@ module.exports = {
 	},
 	demo: {
 		path: "./lib/demo.js",
-		time: 2000,
+		time: 4000,
 	},
 
 
