@@ -226,11 +226,19 @@ io.on('connection', function(socket){
 		var fn = jade.compileFile('./views/print.jade', options);
 		var html = fn({sessions: [activeSession], config: {stand: config.stand}});
 
-		var options = { format: 'A4' };
+		var options = {
+			format: 'A4',
+			border: {
+				top: "10mm",
+				right: "10mm",
+				bottom: "10mm",
+				left: "10mm",
+			},
+		};
 
-		pdf.create(html, options).toFile('./businesscard.pdf', function(err, res) {
+		pdf.create(html, options).toFile('./print.pdf', function(err, res) {
 			if (err) return console.log(err);
-			console.log(res); // { filename: '/app/businesscard.pdf' }
+			console.log(res);
 		});
 	})
 
