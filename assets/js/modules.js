@@ -314,10 +314,10 @@ var modules = {
 
 					var pfeil
 					if (shot.ring < 10.3) {
-						pfeil = "<span style='font-size:9vmin; float:left; margin-left:1vw; position:fixed; display:block;  transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
+						pfeil = "<span style='font-size:9vmin; float:left; margin-left:1vw; position:absolute; display:block;  transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel)+"deg)'> &#8594;</span>"
 					}
 					else {
-						pfeil = "<span style='font-size:9vmin; float:left; margin-left:1vw; position:fixed; display:block; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel-135)+"deg)'> &#9099;</span>"
+						pfeil = "<span style='font-size:9vmin; float:left; margin-left:1vw; position:absolute; display:block; transform-origin: 50% 50%; -webkit-transform:rotate(-"+Math.round(shot.winkel-135)+"deg)'> &#9099;</span>"
 					}
 
 					$(".aktuellerSchuss .value").html(pfeil +shot.ring)
