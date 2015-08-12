@@ -34,7 +34,10 @@ html(lang="de")
 							th Teiler
 							th Zeit
 					
+						- var gesamt = 0
 						- serie.forEach(function(shot){
+							- gesamt += shot.ringInt
+							
 							tr
 								td #{i}.
 								td #{shot.ring}
@@ -61,5 +64,11 @@ html(lang="de")
 							
 							- i++
 						- })
+						
+						tr
+							td
+							td
+								b #{gesamt}
+					br
 				- })
 		- })
