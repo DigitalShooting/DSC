@@ -321,7 +321,7 @@ var modules = {
 					}
 
 					$(".aktuellerSchuss .value").html(pfeil +shot.ring)
-					$(".aktuellerSchuss .value2").text((Math.round(shot.teiler*10)/10).toFixed(1) + " Teiler")
+					$(".aktuellerSchuss .value2").text((Math.round(shot.teiler*10)/10).toFixed(0) + " Teiler")
 
 					$(".aktuellerSchuss").show()
 				}
