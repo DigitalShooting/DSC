@@ -631,6 +631,37 @@ module.exports = {
 
 
 
+	lpBlank: {
+		_id: "lpBlank",
+		title: "LP Blank",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		scheibe: scheiben.lpBlank,
+		parts: {
+			probe: {
+				title: "Probe",
+				probeEcke: false,
+				neueScheibe: true,
+				serienLength: 100,
+				anzahlShots: 0,
+				showInfos: false,
+				scheibe: scheiben.lpBlank,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+		],
+	},
+
+
+
 
 	demo: {
 		_id: "demo",
