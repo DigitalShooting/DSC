@@ -707,7 +707,7 @@ module.exports = {
 		},
 
 		// Scheibe
-		scheibe: scheiben.lp,
+		scheibe: scheiben.lg,
 
 		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
 		parts: {

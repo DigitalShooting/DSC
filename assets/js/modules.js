@@ -517,7 +517,7 @@ var modules = {
 		})
 
 		function update(session){
-			$(".disziplin .value").text(session.disziplin.title)å
+			$(".disziplin .value").text(session.disziplin.title)
 			$(".disziplin .value2").text(session.disziplin.scheibe.title)
 		}
 		function updateConfig(config){
@@ -573,8 +573,6 @@ var modules = {
 				$(".restTime .title").text("")
 				$(".restTime .value").text("")
 				$(".restTime .value2").text("")
-
-				console.log(session.time)
 
 				if (session.time.enabled == true){
 					var date = (session.time.end - (new Date().getTime()))/1000
