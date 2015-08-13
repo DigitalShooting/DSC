@@ -46,9 +46,14 @@ var modules = {
 			if (serie != undefined && serie.length != 0) {
 				var ringInt = serie[session.selection.shot].ringInt
 				var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
+
+				currentRing = undefined
 				if (ring){
 					currentRing = ring
 					zoom = ring.zoom
+				}
+				else if (ringInt == 0){
+					zoom = scheibe.minZoom
 				}
 				else {
 					zoom = scheibe.defaultZoom
@@ -126,10 +131,9 @@ var modules = {
 			if (last){
 				if (currentRing){
 					context.fillStyle = currentRing.hitColor
-					console.log(currentRing)
 				}
 				else {
-					context.fillStyle = "#ff0000";
+					context.fillStyle = scheibe.defaultHitColor
 				}
 
 				context.globalAlpha = 1.0
@@ -234,10 +238,10 @@ var modules = {
 
 					var part = session.disziplin.parts[session.type]
 					if (i == session.selection.shot){
-						$(".aktuelleSerie table").append("<tr><td>"+((session.serieHistory.length-1) * part.serienLength + i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
+						$(".aktuelleSerie table").append("<tr><td>"+(session.selection.serie * part.serienLength + i+1)+".</td><td><b>"+shot.ring+"</b></td><td>"+pfeil+"</td></tr>")
 					}
 					else {
-						$(".aktuelleSerie table").append("<tr onclick=\"socket.emit('setSelectedShot', '"+i+"')\"><td>"+((session.serieHistory.length-1) * part.serienLength + i+1)+".</td><td>"+shot.ring+"</td><td>"+pfeil+"</td></tr>")
+						$(".aktuelleSerie table").append("<tr onclick=\"socket.emit('setSelectedShot', '"+i+"')\"><td>"+(session.selection.serie * part.serienLength + i+1)+".</td><td>"+shot.ring+"</td><td>"+pfeil+"</td></tr>")
 					}
 				}
 				if (serie.length > 0){

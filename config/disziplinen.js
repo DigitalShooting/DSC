@@ -4,6 +4,13 @@
 // Zooms
 var zooms = {
 	lg: {
+		z0: {
+			scale: 30,
+			offset: {
+				x: 320,
+				y: 320,
+			},
+		},
 		z1: {
 			scale: 43.5,
 			offset: {
@@ -27,6 +34,13 @@ var zooms = {
 		},
 	},
 	lp: {
+		z0: {
+			scale: 8.6,
+			offset: {
+				x: 330,
+				y: 330,
+			},
+		},
 		z1: {
 			scale: 12.6,
 			offset: {
@@ -79,7 +93,9 @@ var scheiben = {
 			{ value:  1, width: 45.5, color: "white", text: true, textColor: "black", zoom: zooms.lg.z1, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
+		defaultHitColor: "#000000",
 		defaultZoom: zooms.lg.z1,
+		minZoom: zooms.lg.z0,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -109,7 +125,9 @@ var scheiben = {
 			{ value:  1, width: 45.5, color: "white", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
+		defaultHitColor: "#000000",
 		defaultZoom: zooms.lg.z1,
+		minZoom: zooms.lg.z0,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -141,7 +159,9 @@ var scheiben = {
 		ringeDrawOnly: [
 			{ width:  5.0, color: "black", textColor: "white" },
 		],
+		defaultHitColor: "#000000",
 		defaultZoom: zooms.lp.z1,
+		minZoom: zooms.lp.z0,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -171,7 +191,9 @@ var scheiben = {
 			{ value:  1, width: 155.5, color: "white", text: false, textColor: "transparent", zoom: zooms.lp.z1, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
+		defaultHitColor: "#000000",
 		defaultZoom: zooms.lp.z1,
+		minZoom: zooms.lp.z0,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -711,7 +733,7 @@ module.exports = {
 			duration: 75,
 		},
 
-		scheibe: scheiben.lg,
+		scheibe: scheiben.lp,
 
 		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
 		parts: {
@@ -722,7 +744,7 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
+				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
