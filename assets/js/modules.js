@@ -42,7 +42,7 @@ var modules = {
 
 			context.clearRect(0, 0, a_canvas.width, a_canvas.height);
 
-			var scheibe = session.disziplin.parts[session.type].scheibe
+			var scheibe = session.disziplin.scheibe
 			if (serie != undefined && serie.length != 0) {
 				var ringInt = serie[session.selection.shot].ringInt
 				var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
@@ -517,10 +517,8 @@ var modules = {
 		})
 
 		function update(session){
-			$(".disziplin .value").text(session.disziplin.title)
-
-			var part = session.disziplin.parts[session.type]
-			$(".disziplin .value2").text(part.scheibe.title)
+			$(".disziplin .value").text(session.disziplin.title)å
+			$(".disziplin .value2").text(session.disziplin.scheibe.title)
 		}
 		function updateConfig(config){
 			$("#disziplinMenu .row").html("")

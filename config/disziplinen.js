@@ -237,7 +237,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -250,7 +249,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 40,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -262,9 +260,6 @@ module.exports = {
 			"match"
 		],
 	},
-
-
-
 
 
 	lgTraining5: {
@@ -284,7 +279,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -297,7 +291,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 40,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -310,6 +303,36 @@ module.exports = {
 		],
 	},
 
+
+
+
+	lgBlank: {
+		_id: "lgBlank",
+		title: "LG Blank",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		scheibe: scheiben.lgBlank,
+		parts: {
+			probe: {
+				title: "Probe",
+				probeEcke: false,
+				neueScheibe: true,
+				serienLength: 100,
+				anzahlShots: 0,
+				showInfos: false,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+		],
+	},
 
 
 
@@ -332,7 +355,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -345,7 +367,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 40,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -380,7 +401,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -393,7 +413,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 30,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -405,39 +424,6 @@ module.exports = {
 			"match"
 		],
 	},
-
-
-
-
-	lgBlank: {
-		_id: "lgBlank",
-		title: "LG Blank",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lgBlank,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: false,
-				neueScheibe: true,
-				serienLength: 100,
-				anzahlShots: 0,
-				showInfos: false,
-				scheibe: scheiben.lgBlank,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-		],
-	},
-
 
 
 
@@ -458,7 +444,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -471,7 +456,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 20,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -484,7 +468,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -497,7 +480,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 20,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -510,7 +492,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -523,7 +504,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 20,
 				showInfos: true,
-				scheibe: scheiben.lg,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -560,7 +540,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -573,7 +552,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 40,
 				showInfos: true,
-				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -607,7 +585,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -620,54 +597,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 40,
 				showInfos: true,
-				scheibe: scheiben.lp,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
-
-
-
-
-
-	lpWettkampf: {
-		_id: "lpWettkampf",
-		title: "LP Wettkampf",
-		interface: "esa",
-		time: {
-			enabled: true,
-			duration: 75,
-		},
-		scheibe: scheiben.lp,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				scheibe: scheiben.lp,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				showInfos: true,
-				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -700,7 +629,6 @@ module.exports = {
 				serienLength: 100,
 				anzahlShots: 0,
 				showInfos: false,
-				scheibe: scheiben.lpBlank,
 				time: {
 					enabled: false,
 					duration: 0,
@@ -715,13 +643,57 @@ module.exports = {
 
 
 
+	lpWettkampf: {
+		_id: "lpWettkampf",
+		title: "LP Wettkampf",
+		interface: "esa",
+		time: {
+			enabled: true,
+			duration: 75,
+		},
+		scheibe: scheiben.lp,
+		parts: {
+			probe: {
+				title: "Probe",
+				probeEcke: true,
+				neueScheibe: false,
+				serienLength: 10,
+				anzahlShots: 0,
+				showInfos: true,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probeEcke: false,
+				neueScheibe: false,
+				serienLength: 10,
+				anzahlShots: 40,
+				showInfos: true,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
 	demo: {
 		_id: "demo",
 
 		// Title of the Disziplin
 		title: "Demo",
 
-		// Interface to use
+		// Interface to use (defined in interface.js)
 		interface: "demo",
 
 		// Time Settings for all parts
@@ -730,9 +702,11 @@ module.exports = {
 			// One time for all parts, self change mode
 			enabled: false,
 
+			// Duration in minutes
 			duration: 75,
 		},
 
+		// Scheibe
 		scheibe: scheiben.lp,
 
 		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
@@ -744,7 +718,6 @@ module.exports = {
 				serienLength: 10,
 				anzahlShots: 0,
 				showInfos: true,
-				scheibe: scheiben.lp,
 				time: {
 					enabled: false,
 					duration: 0,
