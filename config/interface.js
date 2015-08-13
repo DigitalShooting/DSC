@@ -1,10 +1,10 @@
 module.exports = {
 	esa: {
-		path: "./lib/esa.js",
+		path: "./lib/Haering/esa.js",
 		com : "/dev/ttyS0",
 	},
 	demo: {
-		path: "./lib/demo.js",
+		path: "./lib/Haering/demo.js",
 		time: 4000,
 	},
 
