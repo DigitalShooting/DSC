@@ -620,8 +620,8 @@ module.exports = {
 		title: "LP Wettkampf",
 		interface: "esa",
 		time: {
-			enabled: false,
-			duration: 0,
+			enabled: true,
+			duration: 75,
 		},
 		scheibe: scheiben.lp,
 		parts: {
