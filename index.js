@@ -177,12 +177,12 @@ io.on('connection', function(socket){
 	})
 
 	socket.on('setSelectedSerie', function(selectedSerie){
-		activeSession.selection.serie = selectedSerie
+		activeSession.selection.serie = parseInt(selectedSerie)
 		activeSession.selection.shot = activeSession.serieHistory[activeSession.selection.serie].length-1
 		io.emit('setSession', activeSession);
 	})
 	socket.on('setSelectedShot', function(selectedShot){
-		activeSession.selection.shot = selectedShot
+		activeSession.selection.shot = parseInt(selectedShot)
 		io.emit('setSession', activeSession);
 	})
 
