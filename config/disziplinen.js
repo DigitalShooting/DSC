@@ -70,6 +70,49 @@ var zooms = {
 			},
 		},
 	},
+
+
+
+	gewehr15: {
+		z0: {
+			scale: 8.6,
+			offset: {
+				x: 330,
+				y: 330,
+			},
+		},
+		z1: {
+			scale: 12.6,
+			offset: {
+				x: 20,
+				y: 20,
+			},
+		},
+		z2: {
+			scale: 20.3,
+			offset: {
+				x: -580,
+				y: -580,
+			},
+		},
+		z3: {
+			scale: 48,
+			offset: {
+				x: -1060,
+				y: -1060,
+			},
+		},
+		z4: {
+			scale: 62,
+			offset: {
+				x: -1660,
+				y: -1660,
+			},
+		},
+	},
+
+
+
 }
 
 
@@ -205,6 +248,38 @@ var scheiben = {
 			down: -2.6,
 			left: 2.6,
 			right: -4.8,
+		},
+		kugelDurchmesser: 4.5,
+	},
+	gewehr15: {
+		title: "15m Gewehr",
+		ringe: [
+			{ value: 10, width:  4.5, color: "black", text: false, textColor: "white", zoom: zooms.gewehr15.z4, hitColor: "red" },
+			{ value:  9, width:  13.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z4, hitColor: "green" },
+			{ value:  8, width:  22.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z3, hitColor: "yellow" },
+			{ value:  7, width:  31.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z3, hitColor: "#00bffF" },
+			{ value:  6, width:  40.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z3, hitColor: "#00bffF" },
+			{ value:  5, width:  49.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z2, hitColor: "#00bffF" },
+			{ value:  4, width:  58.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z2, hitColor: "#00bffF" },
+			{ value:  3, width:  67.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z2, hitColor: "#00bffF" },
+			{ value:  2, width:  76.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z1, hitColor: "#00bffF" },
+			{ value:  1, width:  85.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z1, hitColor: "#00bffF" },
+		],
+		ringeDrawOnly: [],
+		defaultHitColor: "#000000",
+		defaultZoom: zooms.gewehr15.z1,
+		minZoom: zooms.lp.z0,
+		probeEcke: {
+			color: "#0f0",
+			alpha: 0.7,
+		},
+		text: {
+			size: 2.6,
+			width: 0.9,
+			up: 3.2,
+			down: -1.2,
+			left: 1.4,
+			right: -3.2,
 		},
 		kugelDurchmesser: 4.5,
 	},
