@@ -3,9 +3,17 @@
 
 // Zooms
 var zooms = {
+
+	// Type
 	lg: {
+
+		// Level 0
 		z0: {
+
+			// Scale factor
 			scale: 30,
+
+			// Target offest
 			offset: {
 				x: 320,
 				y: 320,
@@ -122,9 +130,34 @@ var zooms = {
 // Scheiben
 var scheiben = {
 	lg: {
+
+		// Title label
 		title: "LG 10m",
+
+		// Ringe, first and last is used to calc a linear function to get the shot value
 		ringe: [
-			{ value: 10, width:  0.5, color: "white", text: false, textColor: "white", zoom: zooms.lg.z3, hitColor: "red" },
+			{
+				// Ring value
+				value: 10,
+
+				// Ring width (mm)
+				width:  0.5,
+
+				// Ring color (background)
+				color: "white",
+
+				// Show text
+				text: false,
+
+				// Text color (hex or title), used for text and border
+				textColor: "white",
+
+				// Shot zoom level
+				zoom: zooms.lg.z3,
+
+				// Shot hit color
+				hitColor: "red"
+			},
 			{ value:  9, width:  5.5, color: "black", text: false, textColor: "white", zoom: zooms.lg.z3, hitColor: "green" },
 			{ value:  8, width: 10.5, color: "black", text: true, textColor: "white", zoom: zooms.lg.z2, hitColor: "yellow" },
 			{ value:  7, width: 15.5, color: "black", text: true, textColor: "white", zoom: zooms.lg.z2, hitColor: "#00bffF" },
@@ -135,22 +168,42 @@ var scheiben = {
 			{ value:  2, width: 40.5, color: "white", text: true, textColor: "black", zoom: zooms.lg.z1, hitColor: "#00bffF" },
 			{ value:  1, width: 45.5, color: "white", text: true, textColor: "black", zoom: zooms.lg.z1, hitColor: "#00bffF" },
 		],
+
+		// Draw only rings, used in lp for inner 10
 		ringeDrawOnly: [],
+
+		// used for 0
 		defaultHitColor: "#000000",
+
+		// used for start
 		defaultZoom: zooms.lg.z1,
+
+		// used for 0
 		minZoom: zooms.lg.z0,
+
+		// pobe ecke
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
 		},
+
+		// text label configs
 		text: {
+
+			// text size
 			size: 1.0,
+
+			// text width
 			width: 0.3,
+
+			// some offests
 			up: 1.8,
 			down: -0.8,
 			left: 0.95,
 			right: -1.7,
 		},
+
+		// kaliber width
 		kugelDurchmesser: 4.5,
 	},
 	lgBlank: {
@@ -763,6 +816,7 @@ module.exports = {
 
 
 	demo: {
+		// has to be the object key
 		_id: "demo",
 
 		// Title of the Disziplin
