@@ -36,6 +36,12 @@ Hoch | Wählt den vorhergehenden Schuss aus
 Runter | Wählt den nachfolgenden Schuss aus
 
 
+## Status
+Der aktuelle Verbindungsstatus ist erkennbar an den 2 schwarzen Blöcken links oben in der Infoleiste. Sind diese nicht vorhanden, ist alles in Ordnung.
+- Oben: Keine Verbindung zum Server
+- Unten: Keine Verbindung zum Interface
+
+
 ## Bugreport/ Feature Request
 Bitte für jeden Fehler ein paar Dinge notieren, unter anderem:
 - Art
