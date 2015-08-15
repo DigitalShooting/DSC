@@ -36,7 +36,6 @@
 ````
 
 ### Daten
-7,6 Links (ca. 5 clicks bei hoch)
 ````
 55 01 1D
 00 00 30 CD
@@ -46,7 +45,6 @@ A3 AA
 ````
 
 
-8,8 Rechts (ca. 3 clicks bei tief)
 ````
 55 01 1D
 00 00 3C 5F
