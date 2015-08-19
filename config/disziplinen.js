@@ -83,24 +83,24 @@ var zooms = {
 
 	gewehr15: {
 		z0: {
-			scale: 8.6,
+			scale: 12.6,
 			offset: {
-				x: 330,
-				y: 330,
+				x: 460,
+				y: 460,
 			},
 		},
 		z1: {
-			scale: 12.6,
+			scale: 20.6,
 			offset: {
-				x: 20,
-				y: 20,
+				x: 120,
+				y: 120,
 			},
 		},
 		z2: {
-			scale: 20.3,
+			scale: 30.3,
 			offset: {
-				x: -580,
-				y: -580,
+				x: -300,
+				y: -300,
 			},
 		},
 		z3: {
@@ -311,17 +311,17 @@ var scheiben = {
 			{ value:  9, width:  13.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z4, hitColor: "green" },
 			{ value:  8, width:  22.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z3, hitColor: "yellow" },
 			{ value:  7, width:  31.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z3, hitColor: "#00bffF" },
-			{ value:  6, width:  40.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z3, hitColor: "#00bffF" },
+			{ value:  6, width:  40.5, color: "black", text: true, textColor: "white", zoom: zooms.gewehr15.z2, hitColor: "#00bffF" },
 			{ value:  5, width:  49.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z2, hitColor: "#00bffF" },
 			{ value:  4, width:  58.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z2, hitColor: "#00bffF" },
-			{ value:  3, width:  67.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z2, hitColor: "#00bffF" },
+			{ value:  3, width:  67.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z1, hitColor: "#00bffF" },
 			{ value:  2, width:  76.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z1, hitColor: "#00bffF" },
 			{ value:  1, width:  85.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z1, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.gewehr15.z1,
-		minZoom: zooms.lp.z0,
+		minZoom: zooms.gewehr15.z0,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -815,6 +815,55 @@ module.exports = {
 
 
 
+
+
+
+	zimmerstutzen: {
+		_id: "zimmerstutzen",
+		title: "Zimmerstutzen",
+		interface: "esa",
+		time: {
+			enabled: false,
+			duration: 0,
+		},
+		scheibe: scheiben.gewehr15,
+		parts: {
+			probe: {
+				title: "Probe",
+				probeEcke: true,
+				neueScheibe: false,
+				serienLength: 10,
+				anzahlShots: 0,
+				showInfos: true,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+			match: {
+				title: "Match",
+				probeEcke: false,
+				neueScheibe: false,
+				serienLength: 10,
+				anzahlShots: 30,
+				showInfos: true,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+		partsOrder: [
+			"probe",
+			"match"
+		],
+	},
+
+
+
+
+
+
 	demo: {
 		// has to be the object key
 		_id: "demo",
@@ -832,11 +881,112 @@ module.exports = {
 			enabled: false,
 
 			// Duration in minutes
-			duration: 75,
+			duration: 0,
 		},
 
 		// Scheibe
 		scheibe: scheiben.lg,
+
+		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
+		parts: {
+			probe: {
+				title: "Probe",
+				probeEcke: false,
+				neueScheibe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				showInfos: true,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+
+		// Order of the parts
+		partsOrder: [
+			"probe",
+		],
+
+
+	},
+
+
+
+
+
+	demoBlank: {
+		// has to be the object key
+		_id: "demoBlank",
+
+		// Title of the Disziplin
+		title: "Demo Blank",
+
+		// Interface to use (defined in interface.js)
+		interface: "demo",
+
+		// Time Settings for all parts
+		time: {
+
+			// One time for all parts, self change mode
+			enabled: false,
+
+			// Duration in minutes
+			duration: 0,
+		},
+
+		// Scheibe
+		scheibe: scheiben.lgBlank,
+
+		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
+		parts: {
+			probe: {
+				title: "Probe",
+				probeEcke: false,
+				neueScheibe: true,
+				serienLength: 10,
+				anzahlShots: 0,
+				showInfos: true,
+				time: {
+					enabled: false,
+					duration: 0,
+				},
+			},
+		},
+
+		// Order of the parts
+		partsOrder: [
+			"probe",
+		],
+
+
+	},
+
+
+
+
+	demoLP: {
+		// has to be the object key
+		_id: "demoLP",
+
+		// Title of the Disziplin
+		title: "Demo LP",
+
+		// Interface to use (defined in interface.js)
+		interface: "demo",
+
+		// Time Settings for all parts
+		time: {
+
+			// One time for all parts, self change mode
+			enabled: false,
+
+			// Duration in minutes
+			duration: 0,
+		},
+
+		// Scheibe
+		scheibe: scheiben.lp,
 
 		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
 		parts: {
