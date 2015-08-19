@@ -27,6 +27,10 @@ server.on('listening', function() {
 	console.log('Express server started on at %s:%s', server.address().address, server.address().port)
 })
 
+var database
+var mongodb = require("./lib/mongodb")(function(db){
+	database = db
+})
 
 
 
@@ -44,6 +48,10 @@ function lastObject(array){
 var activeDisziplin
 setDisziplin(config.disziplinen.demo)
 
+
+
+
+
 var activeUser = {
 	firstName: "Gast",
 	lastName: "",
@@ -51,12 +59,28 @@ var activeUser = {
 	manschaft: "",
 }
 
+
+
+
+
+var activeSessionParts = {}
+function setNewActiveSessionParts() {
+	saveActiveSession()
+
+	activeSessionParts = {
+		date: "00",
+		sessionParts: [],
+	}
+}
+setNewActiveSessionParts()
+
+
 var getNewSession = function(partId){
+	saveActiveSession()
 
 	if (partId == undefined){
 		partId = activeDisziplin.partsOrder[0]
 	}
-
 
 	var time = {
 		enabled: false,
@@ -87,13 +111,12 @@ var getNewSession = function(partId){
 		time: time,
 	}
 
+	activeSessionParts.sessionParts.push(session)
+	saveSessionParts(activeSessionParts)
 
 	return session
 }
 
-// var sessions = [
-// 	session,
-// ]
 
 var activeSession = getNewSession()
 
@@ -149,6 +172,40 @@ function newShot(session, shot){
 	session.selection.shot = session.serieHistory[session.selection.serie].length-1
 
 	io.emit('newShot', shot);
+
+	saveActiveSession()
+}
+
+
+function saveActiveSession(){
+	if (activeSession != undefined){
+		activeSessionParts.sessionParts[activeSessionParts.sessionParts.length-1] = activeSession
+		saveSessionParts(activeSessionParts)
+	}
+}
+function saveSessionParts(sessionParts){
+	if (database != undefined){
+
+		console.log(sessionParts)
+
+		collection = database.collection(config.database.collection)
+		collection.save(sessionParts, function(err, results){
+			console.log("222")
+			if (results){
+				console.log("22882")
+				if (results.ops){
+					console.log("22992")
+					if (results.ops.length > 0){
+						console.log("2220")
+						sessionParts._id = results.ops[0]._id
+					}
+				}
+			}
+		})
+	}
+	// collection.find().toArray(function(err, results) {
+	// 	console.log(results)
+	// })
 }
 
 
@@ -254,6 +311,10 @@ io.on('connection', function(socket){
 
 var interf
 function setDisziplin(disziplin){
+
+	setNewActiveSessionParts()
+
+
 	activeDisziplin = disziplin
 
 	if (interf) {

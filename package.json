@@ -10,7 +10,8 @@
 		"less-middleware": "x",
 		"jade": "x",
 		"socket.io": "^1.3.6",
-		"bootstrap": "x"
+		"bootstrap": "x",
+		"mongodb": "x"
 	},
 	"main": "index.js",
 	"scripts": {
