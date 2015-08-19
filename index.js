@@ -185,18 +185,11 @@ function saveActiveSession(){
 }
 function saveSessionParts(sessionParts){
 	if (database != undefined){
-
-		console.log(sessionParts)
-
 		collection = database.collection(config.database.collection)
 		collection.save(sessionParts, function(err, results){
-			console.log("222")
 			if (results){
-				console.log("22882")
 				if (results.ops){
-					console.log("22992")
 					if (results.ops.length > 0){
-						console.log("2220")
 						sessionParts._id = results.ops[0]._id
 					}
 				}
