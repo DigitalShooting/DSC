@@ -944,9 +944,9 @@ module.exports = {
 				title: "Probe",
 				probeEcke: false,
 				neueScheibe: true,
-				serienLength: 10,
+				serienLength: 100,
 				anzahlShots: 0,
-				showInfos: true,
+				showInfos: false,
 				time: {
 					enabled: false,
 					duration: 0,

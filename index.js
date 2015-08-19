@@ -46,7 +46,7 @@ function lastObject(array){
 
 
 var activeDisziplin
-setDisziplin(config.disziplinen.demo)
+setDisziplin(config.disziplinen.lgTraining)
 
 
 
