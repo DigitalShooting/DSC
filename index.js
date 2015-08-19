@@ -57,22 +57,23 @@ var activeUser = {
 	lastName: "",
 	verein: "",
 	manschaft: "",
+	stand: config.stand.id,
 }
 
 
 
 
 
-var activeSessionParts = {}
-function setNewActiveSessionParts() {
-	saveActiveSession()
+var activeData = {}
+function setNewActiveData() {
+	saveActiveData()
 
-	activeSessionParts = {
-		date: "00",
+	activeData = {
+		date: new Date().getTime(),
 		sessionParts: [],
 	}
 }
-setNewActiveSessionParts()
+setNewActiveData()
 
 
 var getNewSession = function(partId){
@@ -111,8 +112,8 @@ var getNewSession = function(partId){
 		time: time,
 	}
 
-	activeSessionParts.sessionParts.push(session)
-	saveSessionParts(activeSessionParts)
+	activeData.sessionParts.push(session)
+	saveActiveData(activeData)
 
 	return session
 }
@@ -179,18 +180,21 @@ function newShot(session, shot){
 
 function saveActiveSession(){
 	if (activeSession != undefined){
-		activeSessionParts.sessionParts[activeSessionParts.sessionParts.length-1] = activeSession
-		saveSessionParts(activeSessionParts)
+		activeData.sessionParts[activeData.sessionParts.length-1] = activeSession
+		saveActiveData(activeData)
 	}
 }
-function saveSessionParts(sessionParts){
+function saveActiveData(activeData){
 	if (database != undefined){
 		collection = database.collection(config.database.collection)
-		collection.save(sessionParts, function(err, results){
+		collection.save(activeData, function(err, results){
+
+			console.log(err, results)
+
 			if (results){
 				if (results.ops){
 					if (results.ops.length > 0){
-						sessionParts._id = results.ops[0]._id
+						activeData._id = results.ops[0]._id
 					}
 				}
 			}
@@ -305,7 +309,7 @@ io.on('connection', function(socket){
 var interf
 function setDisziplin(disziplin){
 
-	setNewActiveSessionParts()
+	setNewActiveData()
 
 
 	activeDisziplin = disziplin
