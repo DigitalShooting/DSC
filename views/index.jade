@@ -15,10 +15,22 @@ block body
 		div(class="interface")
 	table(class="navbar-cutsom navbar-default")
 		tr
-			+navItem("", "restTime")
-			+navItem("Schüsse", "anzahlShots")
-			+navItem("Schnitt", "schnitt")
-			+navItem("Gesamt", "ringeGesamt")
+			td(ng-controller="restTime" ng-hide="hidden")
+				h4 {{label}}
+				h3 {{rest}}
+				h4 {{gesamt}}
+			td(ng-controller="anzahlShots" ng-hide="hidden")
+				h4 Schüsse
+				h3 {{gesamt}}
+				h4 {{serie}}
+			td(ng-controller="schnitt" ng-hide="hidden")
+				h4 Schnitt
+				h3 {{schnitt}}
+				h4 {{schnittCalc}}
+			td(ng-controller="ringeGesamt" ng-hide="hidden")
+				h4 Gesamt
+				h3 {{gesamt}}
+				h4 {{gesamtSerie}}
 	
 	div(id="modules")
 		div(class="col-xs-7 grafik noPadding fullHeight")
@@ -26,37 +38,61 @@ block body
 		
 		div(class="col-xs-5 noPadding fullHeight")
 			.col-xs-12
-				div(class="aktuellerSchuss grayBox")
+				div(class="grayBox" ng-controller="aktuellerSchuss" ng-hide="hidden")
+					span(style='font-size:9vmin; float:left; margin-left:1vw; margin-top:-0.4vw; position:absolute; display:block; transform-origin: 50% 50%; -webkit-transform:rotate({{currentShot.winkel}}deg)' ng-bind-html="currentShot.pfeil")
 					table
 						tr
 							td
-								h1(class="value")
+								h1 {{currentShot.ring}}
 						tr
 							td
-								h2(class="value2")
-						tr
-							td(class="infoBox")
-								br
-								h3(class="title")
-								p(class="text")
+								h2 {{currentShot.teiler}} Teiler
 		
 			div(class="col-xs-6 fullHeight")
-				div(class="aktuelleSerie grayBox")
+				div(class="aktuelleSerie grayBox" ng-controller="aktuelleSerie" ng-hide="hidden")
 					h3 Aktuelle Serie
 					table
+						tr(
+							ng-repeat="shot in aktuelleSerie track by $index" 
+							ng-click="selectShot(shot.index-1)" 
+							)
+							td {{shot.index}}.
+							td(class="{{shot.selectedClass}}") {{shot.value}}
+							td
+								span(style="margin-top:-2.2vh; display:block; margin-top: 4%; transform-origin: 50% 50%; -webkit-transform:rotate({{shot.winkel}}deg)" ng-bind-html="shot.arrow")
+			
 			div(class="col-xs-6 fullHeight")
-				div(class="serien grayBox")
+				div(class="serien grayBox" ng-controller="serien" ng-hide="hidden")
 					h3 Serien
-					ul(class="list-inline")
+					ul(class="list-inline" )
+						li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
 					
 				
 			
 	table(class="navbar-cutsom navbar-default")
 		tr
-			+navItem("Name", "name")
-			+navItem("", "verein")
-			+navItem("Uhr", "time")
-			+navItem("Disziplin", "disziplin")
-			+navItem("Scheibe", "newTarget")
-			+navItem("Modus", "switchToMatch")
+			td(ng-controller="name" ng-hide="hidden" ng-click="openUserMenu()")
+				h4 Name
+				h3 {{name}}
+				h4 {{stand}}
+			td(ng-controller="verein" ng-hide="hidden")
+				h4 Name
+				h3 {{verein}}
+				h4 {{manschaft}}
+			td(ng-controller="time" ng-hide="hidden")
+				h4 Uhr
+				h3 {{time}}
+				h4 {{date}}
+			td(ng-controller="disziplin" ng-hide="hidden" ng-click="openDisziplinMenu()")
+				h4 Disziplin
+				h3 {{disziplin}}
+				h4 {{scheibe}}
+			td(ng-controller="newTarget" ng-hide="hidden" ng-click="newTarget()")
+				h4 Scheibe
+				h3 Neue Scheibe
+				h4
+			td(ng-controller="changePart" ng-hide="hidden" ng-click="openPartsMenu()")
+				h4 Modus
+				h3 {{activePart}}
+				h4
 		

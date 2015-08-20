@@ -23,19 +23,6 @@ var activeSerie = 0
 var moduleAPI = {
 	activeModules: [
 		modules.draw(),
-		modules.serien(),
-		modules.aktuelleSerie(),
-		modules.ringeGesamt(),
-		modules.aktuellerSchuss(),
-		modules.anzahlShots(),
-		modules.schnitt(),
-		modules.time(),
-		modules.name(),
-		modules.verein(),
-		modules.disziplin(),
-		modules.restTime(),
-		modules.switchPart(),
-		modules.newTarget(),
 	],
 
 	setSession: function(session){
@@ -208,3 +195,19 @@ socket.on('info', function(message){
 	$(".infoBox .text").text(message.text)
 	$(".infoBox").show()
 });
+
+
+
+
+
+
+angular.module('myApp', [
+	'dsc.services.socketio',
+	"dsc.services.timeFunctions",
+
+	'dsc.controllers.info',
+	'dsc.controllers.session',
+
+	// 3rd party dependencies
+	"btford.socket-io"
+])

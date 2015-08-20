@@ -1,0 +1,19 @@
+{
+  "name": "DSC",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/DigitalShooting/DSC",
+  "authors": [
+    "Jannik Lorenz <dev@janniklorenz.de>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "GPL v2",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angularjs": "~1.4.4",
+    "angular-socket-io": "~0.7.0",
+    "angular-route": "~1.4.4"
+  }
+}

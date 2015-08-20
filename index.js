@@ -9,6 +9,7 @@ var app = express()
 
 app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
+app.use("/libs/", express.static("./assets/libs"))
 app.get("/", function(req, res){
 	res.locals = {config: {stand: config.stand}}
 	res.render("index")
@@ -57,7 +58,7 @@ var activeUser = {
 	lastName: "",
 	verein: "",
 	manschaft: "",
-	stand: config.stand.id,
+	stand: config.stand,
 }
 
 
@@ -173,6 +174,7 @@ function newShot(session, shot){
 	session.selection.shot = session.serieHistory[session.selection.serie].length-1
 
 	io.emit('newShot', shot);
+	io.emit('setSession', activeSession);
 
 	saveActiveSession()
 }
@@ -211,6 +213,8 @@ function saveActiveData(activeData){
 
 
 io.on('connection', function(socket){
+	console.log("user connect")
+
 	io.emit('setSession', activeSession);
 	io.emit('setConfig', {
 		disziplinen: config.disziplinen,

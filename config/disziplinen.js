@@ -369,6 +369,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 40,
+				},
 			},
 			match: {
 				title: "Match",
@@ -380,6 +384,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 40,
 				},
 			},
 		},
@@ -411,6 +419,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 40,
+				},
 			},
 			match: {
 				title: "Match",
@@ -422,6 +434,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 40,
 				},
 			},
 		},
@@ -455,6 +471,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: false,
+					anzahl: 0,
+				},
 			},
 		},
 		partsOrder: [
@@ -487,6 +507,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 40,
+				},
 			},
 			match: {
 				title: "Match",
@@ -498,6 +522,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 40,
 				},
 			},
 		},
@@ -533,6 +561,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 30,
+				},
 			},
 			match: {
 				title: "Match",
@@ -544,6 +576,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 30,
 				},
 			},
 		},
@@ -576,6 +612,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 20,
+				},
 			},
 			match1: {
 				title: "Match 1",
@@ -587,6 +627,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 20,
 				},
 			},
 			probe2: {
@@ -600,6 +644,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 20,
+				},
 			},
 			match2: {
 				title: "Match 2",
@@ -611,6 +659,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 20,
 				},
 			},
 			probe3: {
@@ -624,6 +676,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 20,
+				},
 			},
 			match3: {
 				title: "Match 3",
@@ -635,6 +691,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 20,
 				},
 			},
 		},
@@ -672,6 +732,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 40,
+				},
 			},
 			match: {
 				title: "Match",
@@ -683,6 +747,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 40,
 				},
 			},
 		},
@@ -717,6 +785,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 40,
+				},
 			},
 			match: {
 				title: "Match",
@@ -728,6 +800,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 40,
 				},
 			},
 		},
@@ -761,6 +837,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: false,
+					anzahl: 0,
+				},
 			},
 		},
 		partsOrder: [
@@ -792,6 +872,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 40,
+				},
 			},
 			match: {
 				title: "Match",
@@ -803,6 +887,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 40,
 				},
 			},
 		},
@@ -839,6 +927,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 30,
+				},
 			},
 			match: {
 				title: "Match",
@@ -850,6 +942,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 30,
 				},
 			},
 		},
@@ -869,7 +965,7 @@ module.exports = {
 		_id: "demo",
 
 		// Title of the Disziplin
-		title: "Demo",
+		title: "LG Demo",
 
 		// Interface to use (defined in interface.js)
 		interface: "demo",
@@ -900,6 +996,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: true,
+					anzahl: 40,
+				},
 			},
 		},
 
@@ -920,7 +1020,7 @@ module.exports = {
 		_id: "demoBlank",
 
 		// Title of the Disziplin
-		title: "Demo Blank",
+		title: "LG Demo Blank",
 
 		// Interface to use (defined in interface.js)
 		interface: "demo",
@@ -951,6 +1051,10 @@ module.exports = {
 					enabled: false,
 					duration: 0,
 				},
+				average: {
+					enabled: false,
+					anzahl: 0,
+				},
 			},
 		},
 
@@ -970,7 +1074,7 @@ module.exports = {
 		_id: "demoLP",
 
 		// Title of the Disziplin
-		title: "Demo LP",
+		title: "LP Demo",
 
 		// Interface to use (defined in interface.js)
 		interface: "demo",
@@ -1000,6 +1104,10 @@ module.exports = {
 				time: {
 					enabled: false,
 					duration: 0,
+				},
+				average: {
+					enabled: true,
+					anzahl: 40,
 				},
 			},
 		},

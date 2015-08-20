@@ -1,15 +1,27 @@
 doctype html
-html(lang="de")
+html(lang="de" ng-app="myApp")
 	head
 		title 
 			block title
 			
 		link(href="/css/style.css", rel="stylesheet")
 		
-		script(src="/js/jquery-2.1.4.min.js")
+		script(src="/libs/jquery/dist/jquery.js")
+		script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+		script(src="/libs/angularjs/angular.min.js")
+		script(src='libs/angular-route/angular-route.js')
+		script(src="/libs/angular-socket-io/socket.js")
+		
 		script(src="/js/shortcut.js")
 		script(src="/socket.io/socket.io.js")
-		script(src="/js/bootstrap.min.js")
+		
+		script(src='js/services/socketio.js')
+		script(src='js/services/timeFunctions.js')
+		script(src='js/controllers/info.js')
+		script(src='js/controllers/session.js')
+
+		
+		
 	
 		meta(name="viewport", content="width=device-width")
 	body
@@ -31,10 +43,10 @@ html(lang="de")
 									
 					div(class="modal-footer")
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
-
-
-
-		div(class="modal" id="disziplinMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+		
+		
+		
+		div(class="modal" id="disziplinMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuDisziplinen")
 			div(class="modal-dialog" role="document")
 				div(class="modal-content")
 					div(class="modal-header")
@@ -42,15 +54,15 @@ html(lang="de")
 							span(aria-hidden="true") &times;
 						h4(class="modal-title" id="myModalLabel") Disziplin
 					div(class="modal-body")
-					
-						//- div(class="list-group")
-						div(class="row")
+						div(class="row" ng-repeat="disziplin in disziplien track by $index")
+							div(class="col-xs-6 item" ng-click="setDisziplien(disziplin.id)")
+								p(class='menuItem') {{disziplin.title}}
 									
 					div(class="modal-footer")
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
-
-
-
+		
+		
+		
 		div(class="modal" id="userMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
 			div(class="modal-dialog" role="document")
 				div(class="modal-content")
@@ -73,7 +85,7 @@ html(lang="de")
 		
 		
 		
-		div(class="modal" id="modeMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+		div(class="modal" id="modeMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="parts")
 			div(class="modal-dialog" role="document")
 				div(class="modal-content")
 					div(class="modal-header")
@@ -83,11 +95,9 @@ html(lang="de")
 					div(class="modal-body")
 					
 						div(class="panel panel-default")
-							//- div(class="panel-heading")
-							//- div(class="panel-body")
-							div(class="list-group")
-								a(class="selectUser menuItem list-group-item")
-											
+							div(class="list-group" ng-repeat="part in parts track by $index")
+								a(class="menuItem list-group-item {{part.active}}" ng-click="switchToPart(part.id)") {{part.title}}
+					
 					div(class="modal-footer")
 						button(type="button" class="btn btn-primary" style="float:left;" onclick="socket.emit('print', {}); $('#modeMenu').modal('hide')") Drucken
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
