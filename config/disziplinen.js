@@ -368,6 +368,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lg,
 			parts: {
@@ -381,6 +382,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -398,6 +400,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -420,6 +423,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lg,
 			parts: {
@@ -433,6 +437,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -450,6 +455,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -474,6 +480,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lgBlank,
 			parts: {
@@ -487,6 +494,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: false,
@@ -511,6 +519,7 @@ module.exports = {
 			time: {
 				enabled: true,
 				duration: 75,
+				instantStart: false,
 			},
 			scheibe: scheiben.lg,
 			parts: {
@@ -524,6 +533,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -541,6 +551,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -567,6 +578,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lg,
 			parts: {
@@ -580,6 +592,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -597,6 +610,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -620,6 +634,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lg,
 			parts: {
@@ -633,6 +648,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -650,6 +666,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -667,6 +684,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -684,6 +702,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -701,6 +720,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -718,6 +738,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -746,6 +767,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lp,
 			parts: {
@@ -759,6 +781,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -776,6 +799,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -801,6 +825,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lp,
 			parts: {
@@ -814,6 +839,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -831,6 +857,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -855,6 +882,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.lpBlank,
 			parts: {
@@ -868,6 +896,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: false,
@@ -891,6 +920,7 @@ module.exports = {
 			time: {
 				enabled: true,
 				duration: 75,
+				instantStart: false,
 			},
 			scheibe: scheiben.lp,
 			parts: {
@@ -904,6 +934,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -921,6 +952,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -948,6 +980,7 @@ module.exports = {
 			time: {
 				enabled: false,
 				duration: 0,
+				instantStart: false,
 			},
 			scheibe: scheiben.gewehr15,
 			parts: {
@@ -961,6 +994,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -978,6 +1012,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -1015,6 +1050,8 @@ module.exports = {
 
 				// Duration in minutes
 				duration: 0,
+
+				instantStart: false,
 			},
 
 			// Scheibe
@@ -1032,6 +1069,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -1071,6 +1109,8 @@ module.exports = {
 
 				// Duration in minutes
 				duration: 0,
+
+				instantStart: false,
 			},
 
 			// Scheibe
@@ -1088,6 +1128,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: false,
@@ -1122,10 +1163,13 @@ module.exports = {
 			time: {
 
 				// One time for all parts, self change mode
-				enabled: false,
+				enabled: true,
 
 				// Duration in minutes
-				duration: 0,
+				duration: 6,
+
+				// if true, start instantly, otherwise after the first shot
+				instantStart: false,
 			},
 
 			// Scheibe
@@ -1143,6 +1187,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,
@@ -1160,6 +1205,7 @@ module.exports = {
 					time: {
 						enabled: false,
 						duration: 0,
+						instantStart: false,
 					},
 					average: {
 						enabled: true,

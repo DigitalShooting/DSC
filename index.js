@@ -78,6 +78,43 @@ function setNewActiveData() {
 setNewActiveData()
 
 
+
+
+
+var setTimers = function(session){
+	if (session != undefined){
+		if (session.time.enabled == false){
+
+			var time = {
+				enabled: false,
+			}
+			if (activeDisziplin.time.enabled == true){
+				if (activeDisziplin.time.instantStart == true || (activeDisziplin.time.instantStart == false && session.serieHistory.length != 0)){
+					time.enabled = true
+					time.end = (new Date()).getTime() + activeDisziplin.time.duration * 60 * 1000
+					time.duration = activeDisziplin.time.duration
+					time.type = "full"
+				}
+			}
+			else {
+				var part = activeDisziplin.parts[session.type]
+				if (part.time.instantStart == true || (part.time.instantStart == false && session.serieHistory.length != 0) ){
+					if (part.time.enabled == true){
+						time.enabled = true
+						time.end = (new Date()).getTime() + part.time.duration * 60 * 1000
+						time.duration = part.time.duration
+						time.type = "part"
+					}
+				}
+			}
+
+			session.time = time
+
+		}
+	}
+	return session
+}
+
 var getNewSession = function(partId){
 	saveActiveSession()
 
@@ -85,22 +122,26 @@ var getNewSession = function(partId){
 		partId = activeDisziplin.partsOrder[0]
 	}
 
-	var time = {
-		enabled: false,
-	}
-	if (activeDisziplin.time.enabled == true){
-		time.enabled = activeDisziplin.time.enabled
-		time.end = (new Date()).getTime() + activeDisziplin.time.duration * 60 * 1000
-		time.duration = activeDisziplin.time.duration
-	}
-	else {
-		var part = activeDisziplin.parts[partId]
-		if (part.time.enabled == true){
-			time.enabled = part.time.enabled
-			time.end = (new Date()).getTime() + part.time.duration * 60 * 1000
-			time.duration = part.time.duration
-		}
-	}
+	// var time = {
+	// 	enabled: false,
+	// }
+	// if (activeDisziplin.time.enabled == true){
+	// 	if (activeDisziplin.time.instantStart == false){
+	// 		time.enabled = activeDisziplin.time.enabled
+	// 		time.end = (new Date()).getTime() + activeDisziplin.time.duration * 60 * 1000
+	// 		time.duration = activeDisziplin.time.duration
+	// 	}
+	// }
+	// else {
+	// 	var part = activeDisziplin.parts[partId]
+	// 	if (part.time.instantStart == false){
+	// 		if (part.time.enabled == true){
+	// 			time.enabled = part.time.enabled
+	// 			time.end = (new Date()).getTime() + part.time.duration * 60 * 1000
+	// 			time.duration = part.time.duration
+	// 		}
+	// 	}
+	// }
 
 	var session = {
 		user: activeUser,
@@ -111,11 +152,17 @@ var getNewSession = function(partId){
 			serie: 0,
 			shot: 0,
 		},
-		time: time,
+		time: {
+			enabled: false,
+		},
 	}
+
+	session = setTimers(session)
 
 	activeData.sessionParts.push(session)
 	saveActiveData(activeData)
+
+	console.log(session.time)
 
 	return session
 }
@@ -174,6 +221,8 @@ function newShot(session, shot){
 	session.selection.serie = session.serieHistory.length-1
 	session.selection.shot = session.serieHistory[session.selection.serie].length-1
 
+	session = setTimers(session)
+
 	io.emit('newShot', shot);
 	io.emit('setSession', activeSession);
 
@@ -203,9 +252,6 @@ function saveActiveData(activeData){
 			}
 		})
 	}
-	// collection.find().toArray(function(err, results) {
-	// 	console.log(results)
-	// })
 }
 
 
@@ -291,6 +337,13 @@ io.on('connection', function(socket){
 			if (activeDisziplin.time.enabled == true){
 				activeSession.time = time
 			}
+			else if (activeSession.time.type != "full"){
+				activeSession.time = {
+					enabled: false,
+				}
+			}
+
+			activeSession = setTimers(activeSession)
 
 			io.emit('setSession', activeSession)
 		}
