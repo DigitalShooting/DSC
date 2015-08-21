@@ -15,7 +15,7 @@ controller('aktuelleSerie', ['$scope', '$sce', "socket", function ($scope, $sce,
 
 				var pfeil
 				var winkel
-				if (shot.ring < 10.2) {
+				if (shot.teiler > session.disziplin.scheibe.innenZehner) {
 					pfeil = "&#8594;"
 					winkel = - Math.round(shot.winkel)
 				}
@@ -64,7 +64,7 @@ controller('aktuellerSchuss', ['$scope', '$sce', "socket", function ($scope, $sc
 				winkel: serie[session.selection.shot].winkel,
 			}
 			if (currentShot){
-				if (currentShot.ring < 10.2) {
+				if (currentShot.teiler > session.disziplin.scheibe.innenZehner) {
 					currentShot.pfeil = $sce.trustAsHtml("&#8594;")
 					currentShot.winkel = - Math.round(currentShot.winkel)
 				}

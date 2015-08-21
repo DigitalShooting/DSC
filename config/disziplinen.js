@@ -181,6 +181,9 @@ var scheiben = {
 		// used for 0
 		minZoom: zooms.lg.z0,
 
+		// InnenZehner Teiler
+		innenZehner: 200,
+
 		// pobe ecke
 		probeEcke: {
 			color: "#0f0",
@@ -224,6 +227,7 @@ var scheiben = {
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.lg.z1,
 		minZoom: zooms.lg.z0,
+		innenZehner: 200,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -258,6 +262,7 @@ var scheiben = {
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.lp.z1,
 		minZoom: zooms.lp.z0,
+		innenZehner: 475,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -290,6 +295,7 @@ var scheiben = {
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.lp.z1,
 		minZoom: zooms.lp.z0,
+		innenZehner: 475,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
@@ -322,6 +328,7 @@ var scheiben = {
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.gewehr15.z1,
 		minZoom: zooms.gewehr15.z0,
+		innenZehner: 0,
 		probeEcke: {
 			color: "#0f0",
 			alpha: 0.7,
