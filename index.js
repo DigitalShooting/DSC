@@ -47,7 +47,7 @@ function lastObject(array){
 
 
 var activeDisziplin
-setDisziplin(config.disziplinen.lgTraining)
+setDisziplin(config.disziplinen.all.lgTraining)
 
 
 
@@ -228,7 +228,7 @@ io.on('connection', function(socket){
 	})
 
 	socket.on('setDisziplin', function(key){
-		setDisziplin(config.disziplinen[key])
+		setDisziplin(config.disziplinen.all[key])
 
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
@@ -270,13 +270,26 @@ io.on('connection', function(socket){
 
 
 	socket.on('switchToPart', function(partId){
-		var time = activeSession.time
-		activeSession = getNewSession(partId)
-		if (activeDisziplin.time.enabled == true){
-			activeSession.time = time
-		}
+		if (partId != activeSession.type){
 
-		io.emit('setSession', activeSession)
+			var exitType = activeSession.disziplin.parts[activeSession.type].exitType
+			if (exitType == "beforeFirst"){
+				if (activeSession.serieHistory.length != 0) {
+					return
+				}
+			}
+			else if (exitType == "none"){
+				return
+			}
+
+			var time = activeSession.time
+			activeSession = getNewSession(partId)
+			if (activeDisziplin.time.enabled == true){
+				activeSession.time = time
+			}
+
+			io.emit('setSession', activeSession)
+		}
 	})
 
 

@@ -346,777 +346,831 @@ var scheiben = {
 // Disziplinen
 module.exports = {
 
+	groups: [
+		{title: "LG", disziplinen: ["lgTraining", "lgTraining5", "lgBlank", "lgWettkampf", "lgAuflage", "lg3Stellung"]},
+		{title: "LP", disziplinen: ["lpTraining", "lpTraining5", "lpBlank", "lpWettkampf"]},
+		{title: "Zimmerstutzen", disziplinen: ["zimmerstutzen"]},
+		{title: "Demo", disziplinen: ["demo", "demoBlank", "demoLP"]},
+	],
 
-
-	lgTraining: {
-		_id: "lgTraining",
-		title: "LG Training",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lg,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: true,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
+	all: {
+		lgTraining: {
+			_id: "lgTraining",
+			title: "LG Training",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lg,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
-				average: {
-					enabled: true,
-					anzahl: 40,
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 40,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
 			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
+			partsOrder: [
+				"probe",
+				"match"
+			],
+		},
+
+
+		lgTraining5: {
+			_id: "lgTraining5",
+			title: "LG Training 5er",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lg,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
-				average: {
-					enabled: true,
-					anzahl: 40,
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 40,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
 			},
+			partsOrder: [
+				"probe",
+				"match"
+			],
 		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
 
 
-	lgTraining5: {
-		_id: "lgTraining5",
-		title: "LG Training 5er",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lg,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: true,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
+
+
+		lgBlank: {
+			_id: "lgBlank",
+			title: "LG Blank",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lgBlank,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 100,
+					anzahlShots: 0,
+					showInfos: false,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: false,
+						anzahl: 0,
+					},
+					exitType: "",
 				},
 			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
+			partsOrder: [
+				"probe",
+			],
+		},
+
+
+
+
+
+		lgWettkampf: {
+			_id: "lgWettkampf",
+			title: "LG Wettkampf",
+			interface: "esa",
+			time: {
+				enabled: true,
+				duration: 75,
+			},
+			scheibe: scheiben.lg,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
-				average: {
-					enabled: true,
-					anzahl: 40,
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 40,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "beforeFirst",
 				},
 			},
+			partsOrder: [
+				"probe",
+				"match"
+			],
 		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
 
 
 
 
-	lgBlank: {
-		_id: "lgBlank",
-		title: "LG Blank",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lgBlank,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: false,
-				neueScheibe: true,
-				serienLength: 100,
-				anzahlShots: 0,
-				showInfos: false,
-				time: {
-					enabled: false,
-					duration: 0,
+
+
+		lgAuflage: {
+			_id: "lgAuflage",
+			title: "LG Auflage",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lg,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 30,
+					},
+					exitType: "",
 				},
-				average: {
-					enabled: false,
-					anzahl: 0,
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 30,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 30,
+					},
+					exitType: "beforeFirst",
 				},
 			},
+			partsOrder: [
+				"probe",
+				"match"
+			],
 		},
-		partsOrder: [
-			"probe",
-		],
-	},
 
 
 
-
-
-	lgWettkampf: {
-		_id: "lgWettkampf",
-		title: "LG Wettkampf",
-		interface: "esa",
-		time: {
-			enabled: true,
-			duration: 75,
-		},
-		scheibe: scheiben.lg,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
+		lg3Stellung: {
+			_id: "lg3Stellung",
+			title: "LG 3 Stellung",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lg,
+			parts: {
+				probeL: {
+					title: "Probe (Liegend)",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "",
 				},
-				average: {
-					enabled: true,
-					anzahl: 40,
+				matchL: {
+					title: "Match (Liegend)",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 20,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "beforeFirst",
+				},
+				probeK: {
+					title: "Probe (Kniend)",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "",
+				},
+				matchK: {
+					title: "Match (Kniend)",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 20,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "beforeFirst",
+				},
+				probeS: {
+					title: "Probe (Stehend)",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "",
+				},
+				matchS: {
+					title: "Match (Stehend)",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 20,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "beforeFirst",
 				},
 			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
-
-
-
-
-
-
-	lgAuflage: {
-		_id: "lgAuflage",
-		title: "LG Auflage",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lg,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: true,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 30,
-				},
-			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 30,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 30,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
-
-
-
-	lg3Stellung: {
-		_id: "lg3Stellung",
-		title: "LG 3 Stellung",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lg,
-		parts: {
-			probe1: {
-				title: "Probe 1",
-				probeEcke: true,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 20,
-				},
-			},
-			match1: {
-				title: "Match 1",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 20,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 20,
-				},
-			},
-			probe2: {
-				title: "Probe 2",
-				probeEcke: true,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 20,
-				},
-			},
-			match2: {
-				title: "Match 2",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 20,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 20,
-				},
-			},
-			probe3: {
-				title: "Probe 3",
-				probeEcke: true,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 20,
-				},
-			},
-			match3: {
-				title: "Match 3",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 20,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 20,
-				},
-			},
-		},
-		partsOrder: [
-			"probe1",
-			"match1",
-			"probe2",
-			"match2",
-			"probe3",
-			"match3",
-		],
-	},
-
-
-
-
-	lpTraining: {
-		_id: "lpTraining",
-		title: "LP Training",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lp,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: true,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
-				},
-			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
-
-
-
-
-
-	lpTraining5: {
-		_id: "lpTraining5",
-		title: "LP Training 5er",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lp,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: true,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
-				},
-			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
-
-
-
-
-	lpBlank: {
-		_id: "lpBlank",
-		title: "LP Blank",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.lpBlank,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: false,
-				neueScheibe: true,
-				serienLength: 100,
-				anzahlShots: 0,
-				showInfos: false,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: false,
-					anzahl: 0,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-		],
-	},
-
-
-
-
-	lpWettkampf: {
-		_id: "lpWettkampf",
-		title: "LP Wettkampf",
-		interface: "esa",
-		time: {
-			enabled: true,
-			duration: 75,
-		},
-		scheibe: scheiben.lp,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
-				},
-			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 40,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
-
-
-
-
-
-
-
-	zimmerstutzen: {
-		_id: "zimmerstutzen",
-		title: "Zimmerstutzen",
-		interface: "esa",
-		time: {
-			enabled: false,
-			duration: 0,
-		},
-		scheibe: scheiben.gewehr15,
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: true,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 30,
-				},
-			},
-			match: {
-				title: "Match",
-				probeEcke: false,
-				neueScheibe: false,
-				serienLength: 10,
-				anzahlShots: 30,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 30,
-				},
-			},
-		},
-		partsOrder: [
-			"probe",
-			"match"
-		],
-	},
-
-
-
-
-
-
-	demo: {
-		// has to be the object key
-		_id: "demo",
-
-		// Title of the Disziplin
-		title: "LG Demo",
-
-		// Interface to use (defined in interface.js)
-		interface: "demo",
-
-		// Time Settings for all parts
-		time: {
-
-			// One time for all parts, self change mode
-			enabled: false,
-
-			// Duration in minutes
-			duration: 0,
+			partsOrder: [
+				"probeL",
+				"matchL",
+				"probeK",
+				"matchK",
+				"probeS",
+				"matchS",
+			],
 		},
 
-		// Scheibe
-		scheibe: scheiben.lg,
 
-		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: false,
-				neueScheibe: true,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
+
+
+		lpTraining: {
+			_id: "lpTraining",
+			title: "LP Training",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lp,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
-				average: {
-					enabled: true,
-					anzahl: 40,
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 40,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
 			},
+			partsOrder: [
+				"probe",
+				"match"
+			],
 		},
 
-		// Order of the parts
-		partsOrder: [
-			"probe",
-		],
-
-
-	},
 
 
 
 
-
-	demoBlank: {
-		// has to be the object key
-		_id: "demoBlank",
-
-		// Title of the Disziplin
-		title: "LG Demo Blank",
-
-		// Interface to use (defined in interface.js)
-		interface: "demo",
-
-		// Time Settings for all parts
-		time: {
-
-			// One time for all parts, self change mode
-			enabled: false,
-
-			// Duration in minutes
-			duration: 0,
-		},
-
-		// Scheibe
-		scheibe: scheiben.lgBlank,
-
-		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: false,
-				neueScheibe: true,
-				serienLength: 100,
-				anzahlShots: 0,
-				showInfos: false,
-				time: {
-					enabled: false,
-					duration: 0,
+		lpTraining5: {
+			_id: "lpTraining5",
+			title: "LP Training 5er",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lp,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
-				average: {
-					enabled: false,
-					anzahl: 0,
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 40,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
 				},
 			},
+			partsOrder: [
+				"probe",
+				"match"
+			],
 		},
 
-		// Order of the parts
-		partsOrder: [
-			"probe",
-		],
-
-
-	},
 
 
 
-
-	demoLP: {
-		// has to be the object key
-		_id: "demoLP",
-
-		// Title of the Disziplin
-		title: "LP Demo",
-
-		// Interface to use (defined in interface.js)
-		interface: "demo",
-
-		// Time Settings for all parts
-		time: {
-
-			// One time for all parts, self change mode
-			enabled: false,
-
-			// Duration in minutes
-			duration: 0,
-		},
-
-		// Scheibe
-		scheibe: scheiben.lp,
-
-		// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
-		parts: {
-			probe: {
-				title: "Probe",
-				probeEcke: false,
-				neueScheibe: true,
-				serienLength: 10,
-				anzahlShots: 0,
-				showInfos: true,
-				time: {
-					enabled: false,
-					duration: 0,
-				},
-				average: {
-					enabled: true,
-					anzahl: 40,
+		lpBlank: {
+			_id: "lpBlank",
+			title: "LP Blank",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.lpBlank,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 100,
+					anzahlShots: 0,
+					showInfos: false,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: false,
+						anzahl: 0,
+					},
+					exitType: "",
 				},
 			},
+			partsOrder: [
+				"probe",
+			],
 		},
 
-		// Order of the parts
-		partsOrder: [
-			"probe",
-		],
 
 
-	},
+
+		lpWettkampf: {
+			_id: "lpWettkampf",
+			title: "LP Wettkampf",
+			interface: "esa",
+			time: {
+				enabled: true,
+				duration: 75,
+			},
+			scheibe: scheiben.lp,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
+				},
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 40,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "beforeFirst",
+				},
+			},
+			partsOrder: [
+				"probe",
+				"match"
+			],
+		},
+
+
+
+
+
+
+
+		zimmerstutzen: {
+			_id: "zimmerstutzen",
+			title: "Zimmerstutzen",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+			},
+			scheibe: scheiben.gewehr15,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 30,
+					},
+					exitType: "",
+				},
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 30,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 30,
+					},
+					exitType: "beforeFirst",
+				},
+			},
+			partsOrder: [
+				"probe",
+				"match"
+			],
+		},
+
+
+
+
+
+
+		demo: {
+			// has to be the object key
+			_id: "demo",
+
+			// Title of the Disziplin
+			title: "LG Demo",
+
+			// Interface to use (defined in interface.js)
+			interface: "demo",
+
+			// Time Settings for all parts
+			time: {
+
+				// One time for all parts, self change mode
+				enabled: false,
+
+				// Duration in minutes
+				duration: 0,
+			},
+
+			// Scheibe
+			scheibe: scheiben.lg,
+
+			// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
+				},
+			},
+
+			// Order of the parts
+			partsOrder: [
+				"probe",
+			],
+
+
+		},
+
+
+
+
+
+		demoBlank: {
+			// has to be the object key
+			_id: "demoBlank",
+
+			// Title of the Disziplin
+			title: "LG Demo Blank",
+
+			// Interface to use (defined in interface.js)
+			interface: "demo",
+
+			// Time Settings for all parts
+			time: {
+
+				// One time for all parts, self change mode
+				enabled: false,
+
+				// Duration in minutes
+				duration: 0,
+			},
+
+			// Scheibe
+			scheibe: scheiben.lgBlank,
+
+			// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 100,
+					anzahlShots: 0,
+					showInfos: false,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: false,
+						anzahl: 0,
+					},
+					exitType: "",
+				},
+			},
+
+			// Order of the parts
+			partsOrder: [
+				"probe",
+			],
+
+
+		},
+
+
+
+
+		demoLP: {
+			// has to be the object key
+			_id: "demoLP",
+
+			// Title of the Disziplin
+			title: "LP Demo",
+
+			// Interface to use (defined in interface.js)
+			interface: "demo",
+
+			// Time Settings for all parts
+			time: {
+
+				// One time for all parts, self change mode
+				enabled: false,
+
+				// Duration in minutes
+				duration: 0,
+			},
+
+			// Scheibe
+			scheibe: scheiben.lp,
+
+			// Parts are subsets of actions in a disziplin, like probe/ match or probe1/match1/probe2/...
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "", // none (no exit)/ beforeFirst (exit before first shot)/ empty (always)
+				},
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "beforeFirst", // none (no exit)/ beforeFirst (exit before first shot)/
+				},
+			},
+
+			// Order of the parts
+			partsOrder: [
+				"probe",
+				"probe1",
+			],
+
+
+		},
+	}
+
+
 }

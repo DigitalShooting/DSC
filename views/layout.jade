@@ -47,16 +47,18 @@ html(lang="de" ng-app="myApp")
 		
 		
 		div(class="modal" id="disziplinMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuDisziplinen")
-			div(class="modal-dialog" role="document")
+			div(class="modal-dialog modal-lg" role="document")
 				div(class="modal-content")
 					div(class="modal-header")
 						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 							span(aria-hidden="true") &times;
 						h4(class="modal-title" id="myModalLabel") Disziplin
 					div(class="modal-body")
-						div(class="row" ng-repeat="disziplin in disziplien track by $index")
-							div(class="col-xs-6 item" ng-click="setDisziplien(disziplin.id)")
-								p(class='menuItem') {{disziplin.title}}
+						div(class="row")
+							div(class="col-xs-4" ng-repeat="group in disziplinen.groups track by $index")
+								p(class='menuItem') {{group.title}}
+								ul(class="list-group")
+									a(class="list-group-item {{isActive(id)}}" ng-repeat="id in group.disziplinen track by $index" ng-click="setDisziplien(id)") {{disziplinen.all[id].title}}
 									
 					div(class="modal-footer")
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
@@ -85,7 +87,7 @@ html(lang="de" ng-app="myApp")
 		
 		
 		
-		div(class="modal" id="modeMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="parts")
+		div(class="modal" id="modeMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuParts")
 			div(class="modal-dialog" role="document")
 				div(class="modal-content")
 					div(class="modal-header")
@@ -93,10 +95,11 @@ html(lang="de" ng-app="myApp")
 							span(aria-hidden="true") &times;
 						h4(class="modal-title" id="myModalLabel") Modes
 					div(class="modal-body")
-					
-						div(class="panel panel-default")
-							div(class="list-group" ng-repeat="part in parts track by $index")
-								a(class="menuItem list-group-item {{part.active}}" ng-click="switchToPart(part.id)") {{part.title}}
+						div(class="row")
+							div(class="col-xs-10 col-xs-offset-1")
+								p(class="menuItem") {{disziplin}}
+								ul(class="list-group")
+									a(class="list-group-item {{part.active}}" ng-repeat="part in parts track by $index" ng-click="switchToPart(part.id)") {{part.title}}
 					
 					div(class="modal-footer")
 						button(type="button" class="btn btn-primary" style="float:left;" onclick="socket.emit('print', {}); $('#modeMenu').modal('hide')") Drucken

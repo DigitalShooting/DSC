@@ -77,7 +77,7 @@ controller('newTarget', function ($scope, socket) {
 
 
 
-controller('changePart', function ($scope, socket) {
+controller('part', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		var parts = session.disziplin.parts
 
@@ -92,8 +92,9 @@ controller('changePart', function ($scope, socket) {
 
 
 
-controller('parts', function ($scope, socket) {
+controller('menuParts', function ($scope, socket) {
 	socket.on("setSession", function (session) {
+		$scope.disziplin = session.disziplin.title
 		$scope.parts = []
 		for (var id in session.disziplin.parts){
 			var part = session.disziplin.parts[id]
@@ -115,7 +116,7 @@ controller('parts', function ($scope, socket) {
 
 controller('disziplin', function ($scope, socket) {
 	socket.on("setSession", function (session) {
-		$scope.disziplin = session.disziplin.parts[session.type].title
+		$scope.disziplin = session.disziplin.title
 		$scope.scheibe = session.disziplin.scheibe.title
 
 		$scope.openDisziplinMenu = function(){
@@ -129,21 +130,20 @@ controller('disziplin', function ($scope, socket) {
 
 
 controller('menuDisziplinen', function ($scope, socket) {
+	$scope.setDisziplien = function(disziplin){
+		socket.emit('setDisziplin', disziplin)
+		$('#disziplinMenu').modal('hide')
+	}
+
 	socket.on("setConfig", function (config) {
+		$scope.disziplinen = config.disziplinen
 
-		$scope.disziplien = []
-		for (var id in config.disziplinen){
-			var disziplin = config.disziplinen[id]
-			$scope.disziplien.push({
-				id: id,
-				title: disziplin.title,
-				// active: id == session.type ? "active" : ""
-			})
-		}
-
-		$scope.setDisziplien = function(disziplin){
-			socket.emit('setDisziplin', disziplin)
-			$('#disziplinMenu').modal('hide')
+		$scope.hidden = false
+	});
+	socket.on("setSession", function (session) {
+		// $scope.session = session
+		$scope.isActive = function(id){
+			return id == session.disziplin._id ? "active" : ""
 		}
 
 		$scope.hidden = false
