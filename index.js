@@ -47,7 +47,7 @@ function lastObject(array){
 
 
 var activeDisziplin
-setDisziplin(config.disziplinen.all.demoLP)
+setDisziplin(config.disziplinen.all.lgTraining)
 
 
 
@@ -273,6 +273,8 @@ io.on('connection', function(socket){
 
 	socket.on('switchToPart', function(partId){
 		if (partId != activeSession.type){
+
+			interf.band()
 
 			var exitType = activeSession.disziplin.parts[activeSession.type].exitType
 			if (exitType == "beforeFirst"){
