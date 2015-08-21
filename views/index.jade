@@ -68,7 +68,8 @@ block body
 						li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
 					
 				
-			
+	div(class="version") 
+		p #{config.version.version}	
 	table(class="navbar-cutsom navbar-default")
 		tr
 			td(ng-controller="name" ng-hide="hidden" ng-click="openUserMenu()")
@@ -95,4 +96,3 @@ block body
 				h4 Modus
 				h3 {{activePart}}
 				h4
-		

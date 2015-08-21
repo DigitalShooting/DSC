@@ -11,11 +11,11 @@ app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
 app.use("/libs/", express.static("./assets/libs"))
 app.get("/", function(req, res){
-	res.locals = {config: {stand: config.stand}}
+	res.locals = {config: {stand: config.stand, version: config.version,}}
 	res.render("index")
 })
 app.get("/print", function(req, res){
-	res.locals = {sessions: [activeSession], config: {stand: config.stand}}
+	res.locals = {sessions: [activeSession], config: {stand: config.stand, version: config.version,}}
 	res.render("print")
 })
 app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
@@ -47,7 +47,7 @@ function lastObject(array){
 
 
 var activeDisziplin
-setDisziplin(config.disziplinen.all.lgTraining)
+setDisziplin(config.disziplinen.all.demoLP)
 
 
 
@@ -59,6 +59,7 @@ var activeUser = {
 	verein: "",
 	manschaft: "",
 	stand: config.stand,
+	version: config.version,
 }
 
 
@@ -218,7 +219,8 @@ io.on('connection', function(socket){
 	io.emit('setSession', activeSession);
 	io.emit('setConfig', {
 		disziplinen: config.disziplinen,
-		stand: config.stand
+		stand: config.stand,
+		version: config.version,
 	})
 
 	socket.on('newTarget', function(socket){
@@ -296,7 +298,7 @@ io.on('connection', function(socket){
 
 	socket.on('print', function(partId){
 		// var fn = jade.compileFile('./views/print.jade', options);
-		// var html = fn({sessions: [activeSession], config: {stand: config.stand}});
+		// var html = fn({sessions: [activeSession], config: {stand: config.stand, version: config.version,}});
 		//
 		// var options = {
 		// 	format: 'A4',
