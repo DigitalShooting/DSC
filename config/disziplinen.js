@@ -354,8 +354,8 @@ var scheiben = {
 module.exports = {
 
 	groups: [
-		{title: "LG", disziplinen: ["lgTraining", "lgTraining5", "lgBlank", "lgWettkampf", "lgAuflage", "lg3Stellung"]},
-		{title: "LP", disziplinen: ["lpTraining", "lpTraining5", "lpBlank", "lpWettkampf"]},
+		{title: "LG", disziplinen: ["lgWettkampf", "lgTraining", "lgTraining5", "lgBlank", "lgAuflage", "lg3Stellung"]},
+		{title: "LP", disziplinen: ["lpWettkampf", "lpTraining", "lpTraining5", "lpBlank"]},
 		{title: "Zimmerstutzen", disziplinen: ["zimmerstutzen"]},
 		{title: "Demo", disziplinen: ["demo", "demoBlank", "demoLP"]},
 	],
