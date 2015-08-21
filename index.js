@@ -274,8 +274,6 @@ io.on('connection', function(socket){
 	socket.on('switchToPart', function(partId){
 		if (partId != activeSession.type){
 
-			interf.band()
-
 			var exitType = activeSession.disziplin.parts[activeSession.type].exitType
 			if (exitType == "beforeFirst"){
 				if (activeSession.serieHistory.length != 0) {
@@ -285,6 +283,8 @@ io.on('connection', function(socket){
 			else if (exitType == "none"){
 				return
 			}
+
+			interf.band()
 
 			var time = activeSession.time
 			activeSession = getNewSession(partId)
