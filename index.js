@@ -119,29 +119,8 @@ var getNewSession = function(partId){
 	saveActiveSession()
 
 	if (partId == undefined){
-		partId = activeDisziplin.partsOrder[0]
+		partId = Object.keys(activeDisziplin.parts)[0]
 	}
-
-	// var time = {
-	// 	enabled: false,
-	// }
-	// if (activeDisziplin.time.enabled == true){
-	// 	if (activeDisziplin.time.instantStart == false){
-	// 		time.enabled = activeDisziplin.time.enabled
-	// 		time.end = (new Date()).getTime() + activeDisziplin.time.duration * 60 * 1000
-	// 		time.duration = activeDisziplin.time.duration
-	// 	}
-	// }
-	// else {
-	// 	var part = activeDisziplin.parts[partId]
-	// 	if (part.time.instantStart == false){
-	// 		if (part.time.enabled == true){
-	// 			time.enabled = part.time.enabled
-	// 			time.end = (new Date()).getTime() + part.time.duration * 60 * 1000
-	// 			time.duration = part.time.duration
-	// 		}
-	// 	}
-	// }
 
 	var session = {
 		user: activeUser,
@@ -270,7 +249,7 @@ io.on('connection', function(socket){
 	})
 
 	socket.on('newTarget', function(socket){
-		activeSession = getNewSession()
+		activeSession = getNewSession(activeSession.type)
 
 		io.emit('setSession', activeSession);
 	})
@@ -319,7 +298,6 @@ io.on('connection', function(socket){
 
 	socket.on('switchToPart', function(partId){
 		if (partId != activeSession.type){
-
 			var exitType = activeSession.disziplin.parts[activeSession.type].exitType
 			if (exitType == "beforeFirst"){
 				if (activeSession.serieHistory.length != 0) {
@@ -330,10 +308,24 @@ io.on('connection', function(socket){
 				return
 			}
 
+
 			interf.band()
 
 			var time = activeSession.time
-			activeSession = getNewSession(partId)
+
+			activeSession = undefined
+			for (var i = activeData.sessionParts.length-1; i >= 0; i--){
+				var session = activeData.sessionParts[i]
+				if (session.type == partId){
+					activeSession = session
+					break
+				}
+			}
+			if (activeSession == undefined){
+				activeSession = getNewSession(partId)
+			}
+
+
 			if (activeDisziplin.time.enabled == true){
 				activeSession.time = time
 			}
@@ -344,6 +336,8 @@ io.on('connection', function(socket){
 			}
 
 			activeSession = setTimers(activeSession)
+
+			saveActiveSession()
 
 			io.emit('setSession', activeSession)
 		}

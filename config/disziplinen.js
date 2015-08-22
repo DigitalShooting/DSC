@@ -409,10 +409,6 @@ module.exports = {
 					exitType: "",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -464,10 +460,6 @@ module.exports = {
 					exitType: "",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -503,9 +495,6 @@ module.exports = {
 					exitType: "",
 				},
 			},
-			partsOrder: [
-				"probe",
-			],
 		},
 
 
@@ -560,10 +549,6 @@ module.exports = {
 					exitType: "beforeFirst",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -619,10 +604,6 @@ module.exports = {
 					exitType: "beforeFirst",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -638,42 +619,6 @@ module.exports = {
 			},
 			scheibe: scheiben.lg,
 			parts: {
-				probeL: {
-					title: "Probe (Liegend)",
-					probeEcke: true,
-					neueScheibe: false,
-					serienLength: 10,
-					anzahlShots: 0,
-					showInfos: true,
-					time: {
-						enabled: false,
-						duration: 0,
-						instantStart: false,
-					},
-					average: {
-						enabled: true,
-						anzahl: 20,
-					},
-					exitType: "",
-				},
-				matchL: {
-					title: "Match (Liegend)",
-					probeEcke: false,
-					neueScheibe: false,
-					serienLength: 10,
-					anzahlShots: 20,
-					showInfos: true,
-					time: {
-						enabled: false,
-						duration: 0,
-						instantStart: false,
-					},
-					average: {
-						enabled: true,
-						anzahl: 20,
-					},
-					exitType: "beforeFirst",
-				},
 				probeK: {
 					title: "Probe (Kniend)",
 					probeEcke: true,
@@ -694,6 +639,42 @@ module.exports = {
 				},
 				matchK: {
 					title: "Match (Kniend)",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 20,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "beforeFirst",
+				},
+				probeL: {
+					title: "Probe (Liegend)",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: true,
+						anzahl: 20,
+					},
+					exitType: "",
+				},
+				matchL: {
+					title: "Match (Liegend)",
 					probeEcke: false,
 					neueScheibe: false,
 					serienLength: 10,
@@ -747,14 +728,6 @@ module.exports = {
 					exitType: "beforeFirst",
 				},
 			},
-			partsOrder: [
-				"probeL",
-				"matchL",
-				"probeK",
-				"matchK",
-				"probeS",
-				"matchS",
-			],
 		},
 
 
@@ -808,10 +781,6 @@ module.exports = {
 					exitType: "",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -866,10 +835,6 @@ module.exports = {
 					exitType: "",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -905,9 +870,6 @@ module.exports = {
 					exitType: "",
 				},
 			},
-			partsOrder: [
-				"probe",
-			],
 		},
 
 
@@ -961,10 +923,6 @@ module.exports = {
 					exitType: "beforeFirst",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -1021,10 +979,6 @@ module.exports = {
 					exitType: "beforeFirst",
 				},
 			},
-			partsOrder: [
-				"probe",
-				"match"
-			],
 		},
 
 
@@ -1079,12 +1033,6 @@ module.exports = {
 				},
 			},
 
-			// Order of the parts
-			partsOrder: [
-				"probe",
-			],
-
-
 		},
 
 
@@ -1137,12 +1085,6 @@ module.exports = {
 					exitType: "",
 				},
 			},
-
-			// Order of the parts
-			partsOrder: [
-				"probe",
-			],
-
 
 		},
 
@@ -1211,16 +1153,9 @@ module.exports = {
 						enabled: true,
 						anzahl: 40,
 					},
-					exitType: "beforeFirst", // none (no exit)/ beforeFirst (exit before first shot)/
+					exitType: "", // none (no exit)/ beforeFirst (exit before first shot)/
 				},
 			},
-
-			// Order of the parts
-			partsOrder: [
-				"probe",
-				"probe1",
-			],
-
 
 		},
 	}
