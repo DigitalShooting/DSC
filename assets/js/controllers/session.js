@@ -156,7 +156,7 @@ controller('schnitt', function ($scope, socket) {
 
 		var part = session.disziplin.parts[session.type]
 		if (part.average.enabled == true){
-			var hochrechnung = $scope.schnitt * part.average.anzahl
+			var hochrechnung = gesamt/ count * part.average.anzahl
 			$scope.schnittCalc = Math.round(hochrechnung) + " " + ((hochrechnung==1) ? "Ring" : "Ringe")
 		}
 		else {
