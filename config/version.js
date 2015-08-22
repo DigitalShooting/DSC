@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = {
-	version: "0.0.1",
+	version: fs.readFileSync(__dirname + "/version.tmp"),
 }

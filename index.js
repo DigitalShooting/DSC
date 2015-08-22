@@ -141,8 +141,6 @@ var getNewSession = function(partId){
 	activeData.sessionParts.push(session)
 	saveActiveData(activeData)
 
-	console.log(session.time)
-
 	return session
 }
 
@@ -220,8 +218,6 @@ function saveActiveData(activeData){
 		collection = database.collection(config.database.collection)
 		collection.save(activeData, function(err, results){
 
-			console.log(err, results)
-
 			if (results){
 				if (results.ops){
 					if (results.ops.length > 0){
@@ -239,8 +235,6 @@ function saveActiveData(activeData){
 
 
 io.on('connection', function(socket){
-	console.log("user connect")
-
 	io.emit('setSession', activeSession);
 	io.emit('setConfig', {
 		disziplinen: config.disziplinen,
