@@ -148,4 +148,24 @@ controller('menuDisziplinen', function ($scope, socket) {
 
 		$scope.hidden = false
 	});
+}).
+
+
+
+controller('menuUser', function ($scope, socket) {
+	$scope.url = "ddd"
+
+	// socket.on("setConfig", function (config) {
+	// 	$scope.disziplinen = config.disziplinen
+	//
+	// 	$scope.hidden = false
+	// });
+	// socket.on("setSession", function (session) {
+	// 	// $scope.session = session
+	// 	$scope.isActive = function(id){
+	// 		return id == session.disziplin._id ? "active" : ""
+	// 	}
+	//
+	// 	$scope.hidden = false
+	// });
 })

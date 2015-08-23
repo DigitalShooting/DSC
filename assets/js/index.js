@@ -22,7 +22,7 @@ var activeSerie = 0
 
 var moduleAPI = {
 	activeModules: [
-		modules.draw(),
+		// modules.draw(),
 	],
 
 	setSession: function(session){
@@ -201,7 +201,7 @@ socket.on('info', function(message){
 
 
 
-angular.module('myApp', [
+angular.module('dsc', [
 	'dsc.services.socketio',
 	"dsc.services.timeFunctions",
 
@@ -209,5 +209,6 @@ angular.module('myApp', [
 	'dsc.controllers.session',
 
 	// 3rd party dependencies
-	"btford.socket-io"
+	"btford.socket-io",
+	"ja.qr",
 ])

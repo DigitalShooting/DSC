@@ -1,5 +1,5 @@
 doctype html
-html(lang="de" ng-app="myApp")
+html(lang="de" ng-app="dsc")
 	head
 		title 
 			block title
@@ -9,8 +9,11 @@ html(lang="de" ng-app="myApp")
 		script(src="/libs/jquery/dist/jquery.js")
 		script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
 		script(src="/libs/angularjs/angular.min.js")
-		script(src='libs/angular-route/angular-route.js')
+		script(src='/libs/angular-route/angular-route.js')
 		script(src="/libs/angular-socket-io/socket.js")
+		
+		script(src="/libs/qrcode/lib/qrcode.min.js")
+		script(src="/libs/angular-qr/angular-qr.min.js")
 		
 		script(src="/js/shortcut.js")
 		script(src="/socket.io/socket.io.js")
@@ -65,7 +68,7 @@ html(lang="de" ng-app="myApp")
 		
 		
 		
-		div(class="modal" id="userMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+		div(class="modal" id="userMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuUser")
 			div(class="modal-dialog" role="document")
 				div(class="modal-content")
 					div(class="modal-header")
@@ -74,12 +77,13 @@ html(lang="de" ng-app="myApp")
 						h4(class="modal-title" id="myModalLabel") Menü
 					div(class="modal-body")
 					
-						div(class="panel panel-default")
-							div(class="panel-heading") Benutzer
-							div(class="panel-body")
-								div(class="list-group")
-									a(class="selectUser menuItem list-group-item") Benutzer wählen
-									a(class="selectUserGast menuItem list-group-item") Gast
+						
+						p {{url}}
+						qr(text="url")
+					
+						//- div(class="list-group")
+						//- 	a(class="selectUser menuItem list-group-item") Benutzer wählen
+						//- 	a(class="selectUserGast menuItem list-group-item") Gast
 							
 					div(class="modal-footer")
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
