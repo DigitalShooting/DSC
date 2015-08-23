@@ -202,6 +202,7 @@ socket.on('info', function(message){
 
 
 angular.module('dsc', [
+	'dsc.services.grafik',
 	'dsc.services.socketio',
 	"dsc.services.timeFunctions",
 

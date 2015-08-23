@@ -1,5 +1,7 @@
-angular.module('dsc.controllers.info', []).
-controller('name', function ($scope, socket) {
+angular.module('dsc.controllers.info', [])
+
+
+.controller('name', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		$scope.name = session.user.firstName + " " + session.user.lastName
 		$scope.stand = session.user.stand.title
@@ -20,11 +22,11 @@ controller('name', function ($scope, socket) {
 
 		$scope.hidden = false
 	});
-}).
+})
 
 
 
-controller('verein', function ($scope, socket) {
+.controller('verein', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		$scope.verein = session.user.verein
 		$scope.manschaft = session.user.manschaft
@@ -35,11 +37,11 @@ controller('verein', function ($scope, socket) {
 		) $scope.hidden = true
 		else $scope.hidden = false
 	});
-}).
+})
 
 
 
-controller('time', ['$scope', 'timeFunctions', function ($scope, timeFunctions) {
+.controller('time', ['$scope', 'timeFunctions', function ($scope, timeFunctions) {
 	var refreshIntervalId
 
 	function n(n){
@@ -56,11 +58,11 @@ controller('time', ['$scope', 'timeFunctions', function ($scope, timeFunctions) 
 	timeFunctions.$clearInterval( refreshIntervalId );
 	refreshIntervalId = timeFunctions.$setInterval(refresh, 1000, $scope);
 	refresh($scope)
-}]).
+}])
 
 
 
-controller('newTarget', function ($scope, socket) {
+.controller('newTarget', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		$scope.newTarget = function(){
 			socket.emit("newTarget", {})
@@ -73,11 +75,11 @@ controller('newTarget', function ($scope, socket) {
 		) $scope.hidden = true
 		else $scope.hidden = false
 	});
-}).
+})
 
 
 
-controller('part', function ($scope, socket) {
+.controller('part', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		var parts = session.disziplin.parts
 
@@ -88,11 +90,11 @@ controller('part', function ($scope, socket) {
 
 		$scope.hidden = false
 	});
-}).
+})
 
 
 
-controller('menuParts', function ($scope, socket) {
+.controller('menuParts', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		$scope.disziplin = session.disziplin.title
 		$scope.parts = []
@@ -110,11 +112,11 @@ controller('menuParts', function ($scope, socket) {
 			$('#modeMenu').modal('hide')
 		}
 	});
-}).
+})
 
 
 
-controller('disziplin', function ($scope, socket) {
+.controller('disziplin', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		$scope.disziplin = session.disziplin.title
 		$scope.scheibe = session.disziplin.scheibe.title
@@ -125,11 +127,11 @@ controller('disziplin', function ($scope, socket) {
 
 		$scope.hidden = false
 	});
-}).
+})
 
 
 
-controller('menuDisziplinen', function ($scope, socket) {
+.controller('menuDisziplinen', function ($scope, socket) {
 	$scope.setDisziplien = function(disziplin){
 		socket.emit('setDisziplin', disziplin)
 		$('#disziplinMenu').modal('hide')
@@ -148,11 +150,11 @@ controller('menuDisziplinen', function ($scope, socket) {
 
 		$scope.hidden = false
 	});
-}).
+})
 
 
 
-controller('menuUser', function ($scope, socket) {
+.controller('menuUser', function ($scope, socket) {
 	$scope.url = "ddd"
 
 	// socket.on("setConfig", function (config) {

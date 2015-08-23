@@ -1,5 +1,7 @@
-angular.module('dsc.services.timeFunctions', []).
-factory('timeFunctions', ["$timeout", function timeFunctions($timeout) {
+angular.module('dsc.services.timeFunctions', [])
+
+
+.factory('timeFunctions', ["$timeout", function timeFunctions($timeout) {
 	var _intervals = {}, _intervalUID = 1;
 
 	return {
