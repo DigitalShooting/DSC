@@ -10,9 +10,9 @@ block title
 	| #{config.stand.title}
 
 block body
-	div(class="status" style="position:absolute;")
-		div(class="socket")
-		div(class="interface")
+	div(ng-controller="shortcut")
+	div(class="status" style="position:absolute;" ng-controller="connection")
+		div(style="background-color:{{color}}")
 	table(class="navbar-cutsom navbar-default")
 		tr
 			td(ng-controller="restTime" ng-hide="hidden")
@@ -33,10 +33,6 @@ block body
 				h4 {{gesamtSerie}}
 	
 	div(id="modules")
-		//- div(class="col-xs-7 grafik noPadding fullHeight")
-		//- 	canvas(id="grafik" width="2000" height="2000")
-			
-		
 		div(ng-controller="grafik" class="grafikController col-xs-7 noPadding")
 			target(session="session" class="grafik")
 		

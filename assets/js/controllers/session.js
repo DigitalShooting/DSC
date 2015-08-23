@@ -123,16 +123,19 @@ angular.module('dsc.controllers.session', [])
 .controller('ringeGesamt', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		var gesamt = 0
-		var ringeSerie
+		var ringeAktuelleSerie
 		for(i in session.serieHistory){
-			ringeSerie = 0
+			var ringeSerie = 0
 			for(ii in session.serieHistory[i]){
 				ringeSerie += session.serieHistory[i][ii].ringInt
+			}
+			if (i == session.selection.serie){
+				ringeAktuelleSerie = ringeSerie
 			}
 			gesamt += ringeSerie
 		}
 		$scope.gesamt = gesamt
-		$scope.gesamtSerie = ringeSerie
+		$scope.gesamtSerie = ringeAktuelleSerie
 
 		if (
 			session.serieHistory.length == 0 ||
@@ -181,7 +184,9 @@ angular.module('dsc.controllers.session', [])
 
 		for(i in session.serieHistory){
 			$scope.gesamt += session.serieHistory[i].length
-			$scope.serie = session.serieHistory[i].length
+			if (i == session.selection.serie){
+				$scope.serie = session.serieHistory[i].length
+			}
 		}
 
 		if (
@@ -239,10 +244,25 @@ angular.module('dsc.controllers.session', [])
 
 
 
-
-
 .controller('grafik', function ($scope, socket) {
+	$scope.session = undefined
+
 	socket.on("setSession", function (session) {
+		console.log(session)
 		$scope.session = session
+	});
+})
+
+
+
+.controller('connection', function ($scope, socket) {
+	socket.on('disconnect', function(){
+		$scope.color = "black"
+	});
+	socket.on('connect', function(){
+		$scope.color = "transparent"
+	});
+	socket.on('setStatus', function(connected){
+		$scope.color = connected == true ? "transparent" : "red"
 	});
 })

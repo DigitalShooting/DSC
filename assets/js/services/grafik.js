@@ -16,7 +16,7 @@ angular.module('dsc.services.grafik', [])
 			var zoom = {}
 			var currentRing = {}
 
-			function drawScheibe(context, scheibe){
+			function drawScheibe(context, session, scheibe){
 				var lastRing = scheibe.ringe[scheibe.ringe.length-1]
 
 				for (var i = scheibe.ringe.length-1; i >= 0; i--){
@@ -131,11 +131,10 @@ angular.module('dsc.services.grafik', [])
 			window.addEventListener('resize', resize, false);
 
 			var render = function(a_canvas){
-				var context = a_canvas.getContext("2d");
-
-				resize()
-
 				if (scope.session != undefined){
+					var context = a_canvas.getContext("2d");
+					resize()
+
 					var session = scope.session
 					var serie = session.serieHistory[session.selection.serie]
 
@@ -162,7 +161,7 @@ angular.module('dsc.services.grafik', [])
 						zoom = scheibe.defaultZoom
 					}
 
-					drawScheibe(context, scheibe)
+					drawScheibe(context, session, scheibe)
 					drawMode(context, session, scheibe)
 				}
 			};

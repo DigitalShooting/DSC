@@ -6,23 +6,32 @@ html(lang="de" ng-app="dsc")
 			
 		link(href="/css/style.css", rel="stylesheet")
 		
+		// jquery
 		script(src="/libs/jquery/dist/jquery.js")
+		
+		// bootstrap
 		script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+		
+		// Angular
 		script(src="/libs/angularjs/angular.min.js")
 		script(src='/libs/angular-route/angular-route.js')
-		script(src="/libs/angular-socket-io/socket.js")
 		
+		// Angular QR
 		script(src="/libs/qrcode/lib/qrcode.min.js")
 		script(src="/libs/angular-qr/angular-qr.min.js")
 		
-		script(src="/js/shortcut.js")
+		// Socket io
 		script(src="/socket.io/socket.io.js")
+		script(src="/libs/angular-socket-io/socket.js")
 		
 		script(src='js/services/grafik.js')
 		script(src='js/services/socketio.js')
 		script(src='js/services/timeFunctions.js')
 		script(src='js/controllers/info.js')
 		script(src='js/controllers/session.js')
+		
+		// Shortcut module
+		script(src="/js/services/shortcut.js")
 
 		
 		
@@ -112,12 +121,4 @@ html(lang="de" ng-app="dsc")
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		script(src="/js/modules.js")
 		script(src="/js/index.js")
