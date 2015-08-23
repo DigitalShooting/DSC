@@ -6,17 +6,20 @@ angular.module('dsc.services.grafik', [])
 	return {
 		template: '<canvas width="2000" height="2000" style="position: relative;"></canvas>',
 		scope: {
-			session: '=',
+			scheibe: '=',
+			serie: '=',
+			zoomlevel: '=',
+			selectedshotindex: '=',
+			probeecke: '=',
 		},
 		link: function postlink(scope, element, attrs){
 			var canvas = element.find('canvas')[0];
 			var canvas2D = !!$window.CanvasRenderingContext2D;
 
 
-			var zoom = {}
 			var currentRing = {}
 
-			function drawScheibe(context, session, scheibe){
+			function drawScheibe(context, scheibe, serie, zoom, selectedShotIndex, probeEcke){
 				var lastRing = scheibe.ringe[scheibe.ringe.length-1]
 
 				for (var i = scheibe.ringe.length-1; i >= 0; i--){
@@ -61,8 +64,7 @@ angular.module('dsc.services.grafik', [])
 				}
 
 				// Probeecke
-				var parts = session.disziplin.parts
-				if (parts[session.type].probeEcke == true){
+				if (probeEcke == true){
 					context.beginPath()
 					context.moveTo(1450,50)
 					context.lineTo(1950,50)
@@ -73,8 +75,9 @@ angular.module('dsc.services.grafik', [])
 				}
 			}
 
-			function drawShot(context, shot, scheibe, last){
+			function drawShot(context, scheibe, shot, zoom, last){
 				var lastRing = scheibe.ringe[scheibe.ringe.length-1]
+				var currentRing = scheibe.ringe[scheibe.ringe.length - shot.ringInt]
 
 				if (last){
 					if (currentRing){
@@ -95,17 +98,16 @@ angular.module('dsc.services.grafik', [])
 				context.fill();
 			}
 
-			function drawMode(context, session, scheibe){
-				var serie = session.serieHistory[session.selection.serie]
+			function drawMode(context, scheibe, serie, zoom, selectedShotIndex){
 				if (serie){
 					for (i in serie){
-						if (i != session.selection.shot){
-							drawShot(context, serie[i], scheibe, false)
+						if (i != selectedShotIndex){
+							drawShot(context, scheibe, serie[i], zoom, false)
 						}
 					}
-					if (serie.length > session.selection.shot){
-						var selectedShot = serie[session.selection.shot]
-						drawShot(context, selectedShot, scheibe, true)
+					if (serie.length > selectedShotIndex){
+						var selectedShot = serie[selectedShotIndex]
+						drawShot(context, scheibe, selectedShot, zoom, true)
 					}
 				}
 			}
@@ -131,43 +133,37 @@ angular.module('dsc.services.grafik', [])
 			window.addEventListener('resize', resize, false);
 
 			var render = function(a_canvas){
-				if (scope.session != undefined){
-					var context = a_canvas.getContext("2d");
-					resize()
+				var context = a_canvas.getContext("2d");
+				context.clearRect(0, 0, a_canvas.width, a_canvas.height);
+				resize()
 
-					var session = scope.session
-					var serie = session.serieHistory[session.selection.serie]
+				var scheibe = scope.scheibe
+				var serie = scope.serie
+				var zoomLevel = scope.zoomlevel
+				var selectedShotIndex = scope.selectedshotindex
+				var probeEcke = scope.probeecke
 
-					context.clearRect(0, 0, a_canvas.width, a_canvas.height);
-
-					var scheibe = session.disziplin.scheibe
-					if (serie != undefined && serie.length != 0) {
-						var ringInt = serie[session.selection.shot].ringInt
-						var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
-
-						currentRing = undefined
-						if (ring){
-							currentRing = ring
-							zoom = ring.zoom
-						}
-						else if (ringInt == 0){
-							zoom = scheibe.minZoom
-						}
-						else {
-							zoom = scheibe.defaultZoom
-						}
-					}
-					else {
-						zoom = scheibe.defaultZoom
-					}
-
-					drawScheibe(context, session, scheibe)
-					drawMode(context, session, scheibe)
+				if (scheibe != undefined && serie != undefined && zoomLevel != undefined && selectedShotIndex != undefined){
+					drawScheibe(context, scheibe, serie, zoomLevel, selectedShotIndex, probeEcke)
+					drawMode(context, scheibe, serie, zoomLevel, selectedShotIndex)
 				}
 			};
 
 			$timeout(function(){
-				scope.$watch('session', function(value, old){
+				scope.$watch('probeecke', function(value, old){
+					console.log(value)
+					render(canvas)
+				})
+				scope.$watch('scheibe', function(value, old){
+					render(canvas)
+				})
+				scope.$watch('serie', function(value, old){
+					render(canvas)
+				})
+				scope.$watch('zoomlevel', function(value, old){
+					render(canvas)
+				})
+				scope.$watch('selectedshotindex', function(value, old){
 					render(canvas)
 				})
 			});

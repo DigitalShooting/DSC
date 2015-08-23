@@ -177,60 +177,26 @@ angular.module('dsc.controllers.info', [])
 .controller('shortcut', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 
-		// UP - Previous shot
-		shortcut.remove("up")
-		shortcut.add("up", function(){
-			if (session.selection.shot > 0){
-				socket.emit('setSelectedShot', --session.selection.shot)
-			}
-			else if (session.selection.serie > 0){
-				socket.emit('setSelectedSerie', --session.selection.serie)
-			}
-		})
-
-		// DOWN - Next shot
-		shortcut.remove("down")
-		shortcut.add("down", function(){
-			if (session.selection.shot < session.serieHistory[session.selection.serie].length-1){
-				socket.emit('setSelectedShot', ++session.selection.shot)
-			}
-			else if (session.selection.serie < session.serieHistory.length-1){
-				socket.emit('setSelectedSerie', ++session.selection.serie)
-				socket.emit('setSelectedShot', 0)
-			}
-		})
-
-		// LEFT - Previous serie
-		shortcut.remove("left")
-		shortcut.add("left", function(){
+		var previousSerie = function(){
 			if (session.selection.serie > 0){
 				socket.emit('setSelectedSerie', --session.selection.serie)
 			}
-		})
-
-		// RIGHT - Next serie
-		shortcut.remove("right")
-		shortcut.add("right", function(){
+		}
+		var nextSerie = function(){
 			if (session.selection.serie < session.serieHistory.length-1){
 				socket.emit('setSelectedSerie', ++session.selection.serie)
 				socket.emit('setSelectedShot', 0)
 			}
-		})
-
-		// F1 (Down) - Previous shot
-		shortcut.remove("F1")
-		shortcut.add("F1",function() {
+		}
+		var previousShot = function(){
 			if (session.selection.shot > 0){
 				socket.emit('setSelectedShot', --session.selection.shot)
 			}
 			else if (session.selection.serie > 0){
 				socket.emit('setSelectedSerie', --session.selection.serie)
 			}
-		})
-
-		// // F2 (Up) - Next shot
-		shortcut.remove("F2")
-		shortcut.add("F2",function(){
+		}
+		var nextShot = function(){
 			if (session.selection.shot < session.serieHistory[session.selection.serie].length-1){
 				socket.emit('setSelectedShot', ++session.selection.shot)
 			}
@@ -238,46 +204,18 @@ angular.module('dsc.controllers.info', [])
 				socket.emit('setSelectedSerie', ++session.selection.serie)
 				socket.emit('setSelectedShot', 0)
 			}
-		})
-
-		// Enter/ Menu
-		// shortcut.remove("F3")
-		// shortcut.add("F3",function() {
-		// 	$('#disziplinMenu').modal('show')
-		// })
-
-		// Shutdown
-		// shortcut.remove("F4")
-		// shortcut.add("F4",function() {
-		// 	alert("Shutdown");
-		// })
-
-		// F5 - Neue Scheibe
-		shortcut.remove("F5")
-		shortcut.add("F5",function() {
+		}
+		var newTarget = function(){
 			if (session.disziplin.parts[session.type].neueScheibe == true){
 				socket.emit("newTarget", {})
 			}
-		})
-
-		// OK
-		// shortcut.remove("F6")
-		// shortcut.add("F6",function() {
-		// 	alert("OK");
-		// })
-
-		// Drucken
-		// shortcut.remove("F7")
-		// shortcut.add("F7",function() {
-		// 	alert("Drucken");
-		// })
-
-		// F8 - Abbrechen/ Probe/ Match
-		shortcut.remove("F8")
-		shortcut.add("F8",function(){
+		}
+		var togglePart = function(){
 			var index = 0
-			for (var i = 0; i < session.disziplin.partsOrder.length; i++){
-				var key = session.disziplin.partsOrder[i]
+			var partsOrder = Object.keys(session.disziplin.parts)
+
+			for (var i = 0; i < partsOrder.length; i++){
+				var key = partsOrder[i]
 
 				if (key == session.type){
 					index = i
@@ -286,14 +224,60 @@ angular.module('dsc.controllers.info', [])
 			}
 
 			var nextIndex = i + 1
-
-			if (nextIndex < session.disziplin.partsOrder.length){
-				var key = session.disziplin.partsOrder[nextIndex]
-
-				socket.emit("switchToPart", key)
+			var key
+			if (nextIndex < partsOrder.length){
+				key = partsOrder[nextIndex]
 			}
-		})
+			else {
+				key = partsOrder[0]
+			}
+			socket.emit("switchToPart", key)
+		}
+
+		// LEFT - Previous serie
+		shortcut.remove("left")
+		shortcut.add("left", previousSerie)
+
+		// RIGHT - Next serie
+		shortcut.remove("right")
+		shortcut.add("right", nextSerie)
+
+		// F1 (Up)/ UP - Previous shot
+		shortcut.remove("F1")
+		shortcut.remove("up")
+		shortcut.add("F1", previousShot)
+		shortcut.add("up", previousShot)
+
+		// F2 (Down)/ DOWN - Next shot
+		shortcut.remove("F2")
+		shortcut.remove("down")
+		shortcut.add("F2", nextShot)
+		shortcut.add("down", nextShot)
+
+		// Enter/ Menu
+		// shortcut.remove("F3")
+		// shortcut.add("F3", function(){})
+
+		// Shutdown
+		// shortcut.remove("F4")
+		// shortcut.add("F4", function(){})
+
+		// F5 - Neue Scheibe
+		shortcut.remove("F5")
+		shortcut.add("F5", newTarget)
+
+		// F6 - OK
+		// shortcut.remove("F6")
+		// shortcut.add("F6", function(){})
+
+		// F7 - Drucken
+		// shortcut.remove("F7")
+		// shortcut.add("F7", function(){})
+
+		// F8 / m - Abbrechen/ Probe/ Match
+		shortcut.remove("F8")
+		shortcut.remove("m")
+		shortcut.add("F8", togglePart)
+		shortcut.add("m", togglePart)
 	})
-
-
 })

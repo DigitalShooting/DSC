@@ -245,11 +245,48 @@ angular.module('dsc.controllers.session', [])
 
 
 .controller('grafik', function ($scope, socket) {
-	$scope.session = undefined
+	// $scope.session = undefined
+
+	$scope.scheibe = undefined
+	$scope.zoomlevel = undefined
+	$scope.serie = undefined
+	$scope.selectedshotindex = undefined
 
 	socket.on("setSession", function (session) {
-		console.log(session)
-		$scope.session = session
+		var serie = session.serieHistory[session.selection.serie]
+		if (serie == undefined) {
+			serie = []
+		}
+
+		var scheibe = session.disziplin.scheibe
+		var zoom
+
+		if (serie != undefined && serie.length != 0) {
+			var ringInt = serie[session.selection.shot].ringInt
+			var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
+
+			currentRing = undefined
+			if (ring){
+				currentRing = ring
+				zoom = ring.zoom
+			}
+			else if (ringInt == 0){
+				zoom = scheibe.minZoom
+			}
+			else {
+				zoom = scheibe.defaultZoom
+			}
+		}
+		else {
+			zoom = scheibe.defaultZoom
+		}
+
+		$scope.serie = serie
+		$scope.scheibe = scheibe
+		$scope.zoomlevel = zoom
+		$scope.selectedshotindex = session.selection.shot
+		$scope.probeecke = session.disziplin.parts[session.type].probeEcke
+	//
 	});
 })
 
