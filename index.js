@@ -1,8 +1,8 @@
 var express = require("express")
 var http = require("http")
 var fs = require('fs')
-var pdf = require('html-pdf')
 var jade = require('jade')
+var child_process = require('child_process')
 var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
 var app = express()
@@ -356,35 +356,9 @@ io.on('connection', function(socket){
 
 
 	socket.on('print', function(partId){
-
-
-		var client = require("jsreport-client")("http://127.0.0.1:3000/print", "", "");
-
-		client.render({
-			template: { content: "Hello World", recipe: "phantom-pdf"}
-		}, function(err, out) {
-			console.log(out, err)
+		child_process.exec(["wkhtmltopdf http://127.0.0.1:"+config.network.port+"/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
+			console.log(err, out, code)
 		});
-
-		// var fn = jade.compileFile('./views/print.jade', options);
-		// var html = fn({sessions: [activeSession], config: {stand: config.stand, version: config.version,}});
-		//
-		// console.log(html)
-		//
-		// var options = {
-		// 	format: 'A4',
-		// 	border: {
-		// 		top: "10mm",
-		// 		right: "10mm",
-		// 		bottom: "10mm",
-		// 		left: "10mm",
-		// 	},
-		// };
-		//
-		// pdf.create(html, options).toFile('./print.pdf', function(err, res) {
-		// 	if (err) return console.log(err);
-		// 	console.log(res);
-		// });
 	})
 
 

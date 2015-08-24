@@ -5,6 +5,7 @@ angular.module('dsc.controllers.print', [])
 .controller('grafik', function ($scope, socket) {
 	// $scope.session = undefined
 
+	$scope.size = "150px"
 	$scope.scheibe = undefined
 	$scope.zoomlevel = undefined
 	$scope.serie = undefined

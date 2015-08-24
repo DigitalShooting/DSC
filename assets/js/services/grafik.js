@@ -11,6 +11,7 @@ angular.module('dsc.services.grafik', [])
 			zoomlevel: '=',
 			selectedshotindex: '=',
 			probeecke: '=',
+			size: '=', // undefined for dynamic
 		},
 		link: function postlink(scope, element, attrs){
 			var canvas = element.find('canvas')[0];
@@ -113,23 +114,28 @@ angular.module('dsc.services.grafik', [])
 			}
 
 			function resize() {
-				// var width = element.parent().outerWidth(true)
-				// var height = element.parent().outerHeight(true)
-				//
-				// var newHeight = width
-				//
-				// if (newHeight > height) {
-				// 	width = height
-				// }
-				// else {
-				// 	height = newHeight
-				// }
-				//
-				// canvas.style.top = (element.parent().height() - height) / 2 + "px";
-				// canvas.style.width = width+'px';
-				// canvas.style.height = height+'px';
-				canvas.style.width = '150px';
-				canvas.style.height = '150px';
+				if (scope.size == undefined){
+					var width = element.parent().outerWidth(true)
+					var height = element.parent().outerHeight(true)
+
+					var newHeight = width
+
+					if (newHeight > height) {
+						width = height
+					}
+					else {
+						height = newHeight
+					}
+
+					canvas.style.top = (element.parent().height() - height) / 2 + "px";
+					canvas.style.width = width+'px';
+					canvas.style.height = height+'px';
+				}
+				else {
+					canvas.style.width = scope.size
+					canvas.style.height = scope.size
+				}
+
 			}
 			window.addEventListener('load', resize, false);
 			window.addEventListener('resize', resize, false);
@@ -167,6 +173,10 @@ angular.module('dsc.services.grafik', [])
 				scope.$watch('selectedshotindex', function(value, old){
 					render(canvas)
 				})
+				scope.$watch('size', function(value, old){
+					render(canvas)
+				})
+
 			});
 		}
 	};
