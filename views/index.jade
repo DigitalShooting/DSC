@@ -33,10 +33,10 @@ block body
 				h4 {{gesamtSerie}}
 	
 	div(id="modules")
-		div(ng-controller="grafik" class="grafikController col-xs-7 noPadding")
+		div(ng-controller="grafik" class="grafikController col-xs-7 noPadding grafik")
 			target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" class="grafik")
 		
-		div(class="col-xs-5 noPadding fullHeight")
+		div(class="col-xs-5 noPadding fullHeight info")
 			.col-xs-12
 				div(class="grayBox" ng-controller="aktuellerSchuss" ng-hide="hidden")
 					span(style='font-size:9vmin; float:left; margin-left:1vw; margin-top:-0.4vw; position:absolute; display:block; transform-origin: 50% 50%; -webkit-transform:rotate({{currentShot.winkel}}deg)' ng-bind-html="currentShot.pfeil")
@@ -55,7 +55,7 @@ block body
 						tr(
 							ng-repeat="shot in aktuelleSerie track by $index" 
 							ng-click="selectShot(shot.index-1)" 
-							)
+						)
 							td {{shot.index}}.
 							td(class="{{shot.selectedClass}}") {{shot.value}}
 							td
