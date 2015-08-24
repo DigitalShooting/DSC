@@ -117,7 +117,7 @@ html(lang="de" ng-app="dsc")
 									a(class="list-group-item {{part.active}}" ng-repeat="part in parts track by $index" ng-click="switchToPart(part.id)") {{part.title}}
 					
 					div(class="modal-footer")
-						//- button(type="button" class="btn btn-primary" style="float:left;" onclick="socket.emit('print', {}); $('#modeMenu').modal('hide')") Drucken
+						button(type="button" class="btn btn-primary" style="float:left;" ng-click="print(id)") Drucken
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
 		
 		

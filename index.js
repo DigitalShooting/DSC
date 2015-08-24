@@ -1,7 +1,7 @@
 var express = require("express")
 var http = require("http")
 var fs = require('fs')
-// var pdf = require('html-pdf')
+var pdf = require('html-pdf')
 var jade = require('jade')
 var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
@@ -182,11 +182,18 @@ function newShot(session, shot){
 	}
 
 
-
-
+	// add first serie
 	if (lastObject(session.serieHistory) == undefined) {
 		session.serieHistory.push([])
 	}
+
+	// Count shots
+	var anzahlShots = 0
+	for (var i in session.serieHistory){
+		anzahlShots += session.serieHistory[i].length
+	}
+	shot.number = anzahlShots+1
+
 
 	if (part.serienLength == lastObject(session.serieHistory).length){
 		session.serieHistory.push([shot])
@@ -202,6 +209,7 @@ function newShot(session, shot){
 
 	io.emit('newShot', shot);
 	io.emit('setSession', activeSession);
+	io.emit('setData', activeData)
 
 	saveActiveSession()
 }
@@ -236,6 +244,7 @@ function saveActiveData(activeData){
 
 io.on('connection', function(socket){
 	io.emit('setSession', activeSession);
+	io.emit('setData', activeData)
 	io.emit('setConfig', {
 		disziplinen: config.disziplinen,
 		stand: config.stand,
@@ -246,6 +255,7 @@ io.on('connection', function(socket){
 		activeSession = getNewSession(activeSession.type)
 
 		io.emit('setSession', activeSession);
+		io.emit('setData', activeData)
 	})
 
 	socket.on('setDisziplin', function(key){
@@ -253,16 +263,19 @@ io.on('connection', function(socket){
 
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession);
+		io.emit('setData', activeData)
 	})
 
 	socket.on('setSelectedSerie', function(selectedSerie){
 		activeSession.selection.serie = parseInt(selectedSerie)
 		activeSession.selection.shot = activeSession.serieHistory[activeSession.selection.serie].length-1
 		io.emit('setSession', activeSession);
+		io.emit('setData', activeData)
 	})
 	socket.on('setSelectedShot', function(selectedShot){
 		activeSession.selection.shot = parseInt(selectedShot)
 		io.emit('setSession', activeSession);
+		io.emit('setData', activeData)
 	})
 
 	socket.on('setUserGast', function(){
@@ -275,6 +288,7 @@ io.on('connection', function(socket){
 
 		activeSession = getNewSession()
 		io.emit('setSession', activeSession)
+		io.emit('setData', activeData)
 	});
 	socket.on('setUser', function(user){
 		activeUser = {
@@ -286,6 +300,7 @@ io.on('connection', function(socket){
 
 		activeSession.user = activeUser
 		io.emit('setSession', activeSession)
+		io.emit('setData', activeData)
 	});
 
 
@@ -334,14 +349,27 @@ io.on('connection', function(socket){
 			saveActiveSession()
 
 			io.emit('setSession', activeSession)
+			io.emit('setData', activeData)
 		}
 	})
 
 
 
 	socket.on('print', function(partId){
+
+
+		var client = require("jsreport-client")("http://127.0.0.1:3000/print", "", "");
+
+		client.render({
+			template: { content: "Hello World", recipe: "phantom-pdf"}
+		}, function(err, out) {
+			console.log(out, err)
+		});
+
 		// var fn = jade.compileFile('./views/print.jade', options);
 		// var html = fn({sessions: [activeSession], config: {stand: config.stand, version: config.version,}});
+		//
+		// console.log(html)
 		//
 		// var options = {
 		// 	format: 'A4',

@@ -105,7 +105,7 @@ angular.module('dsc.services.grafik', [])
 							drawShot(context, scheibe, serie[i], zoom, false)
 						}
 					}
-					if (serie.length > selectedShotIndex){
+					if (serie.length > selectedShotIndex && selectedShotIndex > -1){
 						var selectedShot = serie[selectedShotIndex]
 						drawShot(context, scheibe, selectedShot, zoom, true)
 					}
@@ -113,21 +113,23 @@ angular.module('dsc.services.grafik', [])
 			}
 
 			function resize() {
-				var width = element.parent().outerWidth(true)
-				var height = element.parent().outerHeight(true)
-
-				var newHeight = width
-
-				if (newHeight > height) {
-					width = height
-				}
-				else {
-					height = newHeight
-				}
-
-				canvas.style.top = (element.parent().height() - height) / 2 + "px";
-				canvas.style.width = width+'px';
-				canvas.style.height = height+'px';
+				// var width = element.parent().outerWidth(true)
+				// var height = element.parent().outerHeight(true)
+				//
+				// var newHeight = width
+				//
+				// if (newHeight > height) {
+				// 	width = height
+				// }
+				// else {
+				// 	height = newHeight
+				// }
+				//
+				// canvas.style.top = (element.parent().height() - height) / 2 + "px";
+				// canvas.style.width = width+'px';
+				// canvas.style.height = height+'px';
+				canvas.style.width = '150px';
+				canvas.style.height = '150px';
 			}
 			window.addEventListener('load', resize, false);
 			window.addEventListener('resize', resize, false);
@@ -151,7 +153,6 @@ angular.module('dsc.services.grafik', [])
 
 			$timeout(function(){
 				scope.$watch('probeecke', function(value, old){
-					console.log(value)
 					render(canvas)
 				})
 				scope.$watch('scheibe', function(value, old){

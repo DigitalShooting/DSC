@@ -111,6 +111,11 @@ angular.module('dsc.controllers.info', [])
 			socket.emit("switchToPart", id)
 			$('#modeMenu').modal('hide')
 		}
+
+		$scope.print = function(){
+			socket.emit('print', {});
+			$('#modeMenu').modal('hide')
+		}
 	});
 })
 
