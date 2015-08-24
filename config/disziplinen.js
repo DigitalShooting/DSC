@@ -1015,10 +1015,28 @@ module.exports = {
 			parts: {
 				probe: {
 					title: "Probe",
-					probeEcke: false,
+					probeEcke: true,
 					neueScheibe: true,
 					serienLength: 10,
 					anzahlShots: 0,
+					showInfos: true,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
+				},
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 40,
 					showInfos: true,
 					time: {
 						enabled: false,

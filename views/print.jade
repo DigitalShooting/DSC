@@ -34,30 +34,28 @@ html(lang="de" ng-app="dsc-print")
 			small  #{config.stand.title}
 	
 		div(ng-controller="sessions")
-			div(ng-repeat="session in sessions track by $index")
-				table(class="headerTable col-xs-4")
+			div(ng-repeat="session in sessions track by $index" class="session")
+				table(class="headerTable col-xs-4 shotTable")
 					tr
 						th Name
 						td {{session.user.firstName}} {{session.user.lastName}}
 					tr
 						th Datum
-						td {{currentDate}}
-						
-				table(class="headerTable col-xs-4")
+						td {{currentDate}}	
+				table(class="headerTable col-xs-4 shotTable")
 					tr
 						th Verein
 						td {{session.user.verein}}
 					tr
 						th Manschaft
 						td {{session.user.manschaft}}
-				table(class="headerTable col-xs-4")
+				table(class="headerTable col-xs-4 shotTable")
 					tr
 						th Disziplin
 						td {{session.disziplin.title}}
 					tr
 						th Modus
 						td {{session.disziplin.parts[session.type].title}}
-				
 				div(class="col-xs-12" ng-repeat="serie in session.serieHistory track by $index")
 					table(class="col-xs-8 shotTable")
 						tr
