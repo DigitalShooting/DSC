@@ -12,7 +12,8 @@ angular.module('dsc.controllers.session', [])
 				var shot = {
 					ring: serie[i].ring,
 					teiler: serie[i].teiler,
-					winkel: serie[i].winkel
+					winkel: serie[i].winkel,
+					number: serie[i].number,
 				}
 
 				var pfeil
@@ -28,7 +29,7 @@ angular.module('dsc.controllers.session', [])
 
 
 				aktuelleSerie.push({
-					index: i+1,
+					index: shot.number,
 					value: shot.ring,
 					arrow: $sce.trustAsHtml(pfeil),
 					winkel: winkel,
