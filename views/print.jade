@@ -57,7 +57,7 @@ html(lang="de" ng-app="dsc-print")
 						th Modus
 						td {{session.disziplin.parts[session.type].title}}
 				div(class="col-xs-12" ng-repeat="serie in session.serieHistory track by $index")
-					table(class="col-xs-8 shotTable")
+					table(class="col-xs-9 shotTable")
 						tr
 							th Nr.
 							th Ring
@@ -71,7 +71,7 @@ html(lang="de" ng-app="dsc-print")
 							td {{shot.teiler}}
 							td {{shot.time | formatDate}}
 							
-					div(ng-controller="grafik" ng-init='init($parent.$parent.$index, $parent.$index)' class="grafikController col-xs-4")
+					div(ng-controller="grafik" ng-init='init($parent.$parent.$index, $parent.$index)' class="grafikController col-xs-3")
 						target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" size="size" class="grafik")
 		
 		
