@@ -17,7 +17,7 @@ module.exports = {
 		path: "./lib/Haering/demo.js",
 
 		// Shot frequenze (ms)
-		time: 400,
+		time: 2000,
 	},
 
 }

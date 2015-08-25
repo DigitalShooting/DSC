@@ -43,10 +43,10 @@ block body
 					table
 						tr
 							td
-								h1 {{currentShot.ring}}
+								h1(animate-on-change='currentShot') {{currentShot.ring}}
 						tr
 							td
-								h2 {{currentShot.teiler}} Teiler
+								h2(animate-on-change='currentShot') {{currentShot.teiler}} Teiler
 		
 			div(class="col-xs-6 fullHeight")
 				div(class="aktuelleSerie grayBox" ng-controller="aktuelleSerie" ng-hide="hidden")
@@ -54,7 +54,7 @@ block body
 					table
 						tr(
 							ng-repeat="shot in aktuelleSerie track by $index" 
-							ng-click="selectShot(shot.index-1)" 
+							ng-click="selectShot(shot.index-1)" class="aktuellerSchussAnim"
 						)
 							td {{shot.index}}.
 							td(class="{{shot.selectedClass}}") {{shot.value}}
@@ -65,7 +65,7 @@ block body
 				div(class="serien grayBox" ng-controller="serien" ng-hide="hidden")
 					h3 Serien
 					ul(class="list-inline" )
-						li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
+						li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}} serienAnim") {{shot.value}}
 					
 				
 	div(class="version") 
@@ -96,3 +96,11 @@ block body
 				h4 Modus
 				h3 {{activePart}}
 				h4
+				
+	script.
+		angular.module('dsc', [
+			'dsc.services.grafik', 'dsc.services.socketio', "dsc.services.timeFunctions",
+			'dsc.controllers.info', 'dsc.controllers.session',
+			"ngAnimate",
+			"btford.socket-io", "ja.qr",
+		])

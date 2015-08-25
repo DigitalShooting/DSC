@@ -357,7 +357,9 @@ io.on('connection', function(socket){
 
 	socket.on('print', function(partId){
 		child_process.exec(["xvfb-run -a -s '-screen 0 640x480x16' wkhtmltopdf http://127.0.0.1:3000/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
-			console.log(err, out, code)
+			child_process.exec(["lp -d ENFY tmp.pdf"], function(err, out, code) {
+				console.log(err, out, code)
+			});
 		});
 	})
 
