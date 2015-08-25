@@ -59,21 +59,39 @@ html(lang="de" ng-app="dsc-print")
 				div(class="col-xs-12" ng-repeat="serie in session.serieHistory track by $index")
 					table(class="col-xs-9 shotTable")
 						tr
-							th Nr.
-							th Ring
-							th Winkel
-							th Teiler
-							th Zeit
+							th
+								u Nr
+							th
+								u Ring
+							th
+								u Winkel
+							th
+								u Teiler
+							th
+								u Zeit
 						tr(ng-repeat="shot in serie track by $index")
 							td {{shot.number}}.
-							td {{shot.ring}}
+							th {{shot.ring}}
 							td {{shot.winkel}}
 							td {{shot.teiler}}
 							td {{shot.time | formatDate}}
 							
 					div(ng-controller="grafik" ng-init='init($parent.$parent.$index, $parent.$index)' class="grafikController col-xs-3")
 						target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" size="size" class="grafik")
-		
+				div(ng-controller="summary" ng-init='init($parent.$index)' ng-hide="hidden" class="col-xs-12")
+					table(class="col-xs-9 shotTable")
+						tr
+							th Anzahl
+							th Gesamt
+							th
+							th Schnitt
+							th Dauer
+						tr
+							td {{anzahlShots}}
+							td {{gesamt}}
+							td
+							td {{teilerSchnitt}}
+							td {{duration}}
 		
 		script.
 			var app = angular.module('dsc-print', [

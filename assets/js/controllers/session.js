@@ -208,12 +208,6 @@ angular.module('dsc.controllers.session', [])
 		var numminutes = Math.floor((seconds % 3600) / 60)
 		var numseconds = (seconds % 3600) % 60
 
-		Number.prototype.toFixedDown = function(digits) {
-			var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
-				m = this.toString().match(re);
-				return m ? parseFloat(m[1]) : this.valueOf();
-		};
-
 		var string = ""
 		if(numhours > 0){ string += numhours.toFixedDown(0) + "h " }
 		if(numminutes > 0){ string += numminutes.toFixedDown(0) + "m " }
