@@ -2,7 +2,10 @@
 
 NodeJS Project to visualize shots on an socket.io based webpage with an API for Häring ESA.
 
-![Demo](./_doku/demo1.png)
+![Demo](https://raw.githubusercontent.com/DigitalShooting/assets/master/demo1.png)
+
+[Print](https://raw.githubusercontent.com/DigitalShooting/assets/master/print1.pdf)
+
 
 ## Install
 ````
