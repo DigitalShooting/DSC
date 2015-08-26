@@ -20,11 +20,11 @@ angular.module('dsc.controllers.session', [])
 				var winkel
 				if (shot.teiler > session.disziplin.scheibe.innenZehner) {
 					pfeil = "&#8594;"
-					winkel = - Math.round(shot.winkel)
+					winkel = - parseInt(shot.winkel)
 				}
 				else {
 					pfeil = "&#9099;"
-					winkel = - Math.round(shot.winkel+225)
+					winkel = - parseInt(shot.winkel) - 225
 				}
 
 
@@ -69,11 +69,12 @@ angular.module('dsc.controllers.session', [])
 			if (currentShot){
 				if (currentShot.teiler > session.disziplin.scheibe.innenZehner) {
 					currentShot.pfeil = $sce.trustAsHtml("&#8594;")
-					currentShot.winkel = - Math.round(currentShot.winkel)
+					currentShot.winkel = - parseInt(currentShot.winkel)
 				}
 				else {
 					currentShot.pfeil = $sce.trustAsHtml("&#9099;")
-					currentShot.winkel = - Math.round(currentShot.winkel+225)
+
+					currentShot.winkel = - parseInt(currentShot.winkel) - 225
 				}
 			}
 		}
