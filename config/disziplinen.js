@@ -393,7 +393,7 @@ module.exports = {
 				match: {
 					title: "Match",
 					probeEcke: false,
-					neueScheibe: false,
+					neueScheibe: true,
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
@@ -747,7 +747,7 @@ module.exports = {
 				match: {
 					title: "Match",
 					probeEcke: false,
-					neueScheibe: false,
+					neueScheibe: true,
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
