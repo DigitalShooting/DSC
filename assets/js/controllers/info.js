@@ -238,6 +238,9 @@ angular.module('dsc.controllers.info', [])
 			}
 			socket.emit("switchToPart", key)
 		}
+		var print = function(){
+			socket.emit('print', {});
+		}
 
 		// LEFT - Previous serie
 		shortcut.remove("left")
@@ -276,8 +279,8 @@ angular.module('dsc.controllers.info', [])
 		// shortcut.add("F6", function(){})
 
 		// F7 - Drucken
-		// shortcut.remove("F7")
-		// shortcut.add("F7", function(){})
+		shortcut.remove("F7")
+		shortcut.add("F7", print)
 
 		// F8 / m - Abbrechen/ Probe/ Match
 		shortcut.remove("F8")
