@@ -427,7 +427,7 @@ module.exports = {
 					title: "Probe",
 					probeEcke: true,
 					neueScheibe: true,
-					serienLength: 10,
+					serienLength: 5,
 					anzahlShots: 0,
 					showInfos: true,
 					time: {
@@ -436,26 +436,8 @@ module.exports = {
 						instantStart: false,
 					},
 					average: {
-						enabled: true,
-						anzahl: 40,
-					},
-					exitType: "",
-				},
-				match: {
-					title: "Match",
-					probeEcke: false,
-					neueScheibe: false,
-					serienLength: 10,
-					anzahlShots: 0,
-					showInfos: true,
-					time: {
 						enabled: false,
-						duration: 0,
-						instantStart: false,
-					},
-					average: {
-						enabled: true,
-						anzahl: 40,
+						anzahl: 0,
 					},
 					exitType: "",
 				},
@@ -802,7 +784,7 @@ module.exports = {
 					title: "Probe",
 					probeEcke: true,
 					neueScheibe: true,
-					serienLength: 10,
+					serienLength: 5,
 					anzahlShots: 0,
 					showInfos: true,
 					time: {
@@ -811,26 +793,8 @@ module.exports = {
 						instantStart: false,
 					},
 					average: {
-						enabled: true,
-						anzahl: 40,
-					},
-					exitType: "",
-				},
-				match: {
-					title: "Match",
-					probeEcke: false,
-					neueScheibe: false,
-					serienLength: 10,
-					anzahlShots: 0,
-					showInfos: true,
-					time: {
 						enabled: false,
-						duration: 0,
-						instantStart: false,
-					},
-					average: {
-						enabled: true,
-						anzahl: 40,
+						anzahl: 0,
 					},
 					exitType: "",
 				},
