@@ -1,4 +1,6 @@
-angular.module('dsc.services.socketio', [])
+angular.module('dsc.services.socketio', [
+	"btford.socket-io",
+])
 
 
 .factory('socket', function (socketFactory) {

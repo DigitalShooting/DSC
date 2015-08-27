@@ -243,13 +243,30 @@ function saveActiveData(activeData){
 
 
 io.on('connection', function(socket){
+	socket.on('getSession', function(key){
+		socket.emit('setSession', activeSession);
+	})
 	io.emit('setSession', activeSession);
+
+	socket.on('getData', function(key){
+		socket.emit('setData', activeData)
+	})
 	io.emit('setData', activeData)
+
+	socket.on('getConfig', function(key){
+		socket.emit('setConfig', {
+			disziplinen: config.disziplinen,
+			stand: config.stand,
+			version: config.version,
+		})
+	})
 	io.emit('setConfig', {
 		disziplinen: config.disziplinen,
 		stand: config.stand,
 		version: config.version,
 	})
+
+
 
 	socket.on('newTarget', function(socket){
 		activeSession = getNewSession(activeSession.type)
