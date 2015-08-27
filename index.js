@@ -269,6 +269,10 @@ io.on('connection', function(socket){
 
 
 	socket.on('newTarget', function(socket){
+		if (activeSession.serieHistory.length == 0){
+			return
+		}
+
 		activeSession = getNewSession(activeSession.type)
 
 		io.emit('setSession', activeSession);
