@@ -246,12 +246,12 @@ io.on('connection', function(socket){
 	socket.on('getSession', function(key){
 		socket.emit('setSession', activeSession);
 	})
-	io.emit('setSession', activeSession);
+	socket.emit('setSession', activeSession);
 
 	socket.on('getData', function(key){
 		socket.emit('setData', activeData)
 	})
-	io.emit('setData', activeData)
+	socket.emit('setData', activeData)
 
 	socket.on('getConfig', function(key){
 		socket.emit('setConfig', {
@@ -260,7 +260,7 @@ io.on('connection', function(socket){
 			version: config.version,
 		})
 	})
-	io.emit('setConfig', {
+	socket.emit('setConfig', {
 		disziplinen: config.disziplinen,
 		stand: config.stand,
 		version: config.version,
@@ -422,3 +422,43 @@ function setDisziplin(disziplin){
 		io.emit('setStatus', connected)
 	}
 }
+
+
+
+
+
+
+/*
+var app = require('app');  // Module to control application life.
+var BrowserWindow = require('browser-window');  // Module to create native browser window.
+
+// Quit when all windows are closed.
+app.on('window-all-closed', function() {
+	// On OS X it is common for applications and their menu bar
+	// to stay active until the user quits explicitly with Cmd + Q
+	if (process.platform != 'darwin') {
+		app.quit();
+	}
+});
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+app.on('ready', function() {
+	// Create the browser window.
+	mainWindow = new BrowserWindow({width: 800, height: 600, "node-integration": false});
+
+	// and load the index.html of the app.
+	mainWindow.loadUrl('http://127.0.0.1:3000');
+
+	// Open the devtools.
+	mainWindow.openDevTools();
+
+	// Emitted when the window is closed.
+	mainWindow.on('closed', function() {
+		// Dereference the window object, usually you would store windows
+		// in an array if your app supports multi windows, this is the time
+		// when you should delete the corresponding element.
+		mainWindow = null;
+	});
+});
+*/
