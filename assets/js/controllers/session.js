@@ -29,7 +29,8 @@ angular.module('dsc.controllers.session', [])
 
 
 				aktuelleSerie.push({
-					index: shot.number,
+					index: i,
+					number: shot.number,
 					value: shot.ring,
 					arrow: $sce.trustAsHtml(pfeil),
 					winkel: winkel,

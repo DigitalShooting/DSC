@@ -54,9 +54,9 @@ block body
 					table
 						tr(
 							ng-repeat="shot in aktuelleSerie track by $index" 
-							ng-click="selectShot(shot.index-1)"
+							ng-click="selectShot(shot.index)"
 						)
-							td {{shot.index}}.
+							td {{shot.number}}.
 							td(class="{{shot.selectedClass}}") {{shot.value}}
 							td
 								span(style="margin-top:-2.2vh; display:block; margin-top: 4%; transform-origin: 50% 50%; -webkit-transform:rotate({{shot.winkel}}deg)" ng-bind-html="shot.arrow")
