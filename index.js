@@ -315,7 +315,7 @@ io.on('connection', function(socket){
 		activeUser = {
 			firstName: user.vorname,
 			lastName: user.name,
-			verein: user.verien,
+			verein: user.verein,
 			manschaft: user.manschaft,
 		}
 
