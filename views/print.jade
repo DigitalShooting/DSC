@@ -30,8 +30,8 @@ html(lang="de" ng-app="dsc-print")
 		
 		meta(name="viewport", content="width=device-width")
 	body
-		h1 #{config.stand.hostVerein}
-			small  #{config.stand.title}
+		h1 #{config.line.hostVerein}
+			small  #{config.line.title}
 	
 		div(ng-controller="sessions")
 			div(ng-repeat="session in sessions track by $index" class="session")

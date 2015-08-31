@@ -11,11 +11,11 @@ app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
 app.use("/libs/", express.static("./assets/libs"))
 app.get("/", function(req, res){
-	res.locals = {config: {stand: config.stand, version: config.version,}}
+	res.locals = {config: {line: config.line, version: config.version,}}
 	res.render("index")
 })
 app.get("/print", function(req, res){
-	res.locals = {sessions: [activeSession], config: {stand: config.stand, version: config.version,}}
+	res.locals = {sessions: [activeSession], config: {line: config.line, version: config.version,}}
 	res.render("print")
 })
 app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
@@ -58,7 +58,7 @@ var activeUser = {
 	lastName: "",
 	verein: "",
 	manschaft: "",
-	stand: config.stand,
+	line: config.line,
 	version: config.version,
 }
 
@@ -256,13 +256,13 @@ io.on('connection', function(socket){
 	socket.on('getConfig', function(key){
 		socket.emit('setConfig', {
 			disziplinen: config.disziplinen,
-			stand: config.stand,
+			line: config.line,
 			version: config.version,
 		})
 	})
 	socket.emit('setConfig', {
 		disziplinen: config.disziplinen,
-		stand: config.stand,
+		line: config.line,
 		version: config.version,
 	})
 

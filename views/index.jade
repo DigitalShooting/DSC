@@ -7,7 +7,7 @@ mixin navItem(title, classValue)
 		h4(class="value2")
 
 block title
-	| #{config.stand.title}
+	| #{config.line.title}
 
 block body
 	div(ng-controller="shortcut")
@@ -75,7 +75,7 @@ block body
 			td(ng-controller="name" ng-hide="hidden" ng-click="openUserMenu()")
 				h4 Name
 				h3 {{name}}
-				h4 {{stand}}
+				h4 {{line}}
 			td(ng-controller="verein" ng-hide="hidden")
 				h4 Verein
 				h3 {{verein}}

@@ -1,5 +1,3 @@
-var stand = require("./stand.js")
-
 module.exports = {
 	/**
 		mongodb

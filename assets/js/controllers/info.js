@@ -4,7 +4,7 @@ angular.module('dsc.controllers.info', [])
 .controller('name', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		$scope.name = session.user.firstName + " " + session.user.lastName
-		$scope.stand = session.user.stand.title
+		$scope.line = session.user.line.title
 
 		$scope.openUserMenu = function(){
 			$('#userMenu').modal('show')
