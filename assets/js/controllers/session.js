@@ -168,7 +168,7 @@ angular.module('dsc.controllers.session', [])
 			$scope.schnittCalc = Math.round(hochrechnung) + " " + ((hochrechnung==1) ? "Ring" : "Ringe")
 		}
 		else {
-			$scope.schnittCalc = 0
+			$scope.schnittCalc = ""
 		}
 
 		if (
