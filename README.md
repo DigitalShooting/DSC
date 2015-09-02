@@ -76,12 +76,6 @@ Der aktuelle Verbindungsstatus ist erkennbar an dem schwarzen Block links oben i
 
 
 
-## Bugreport/ Feature Request
-Mail an: diana@janniklorenz.de
-
-
-
-
 ## API
 Als API kann aktuell nur die Socket.io Schnittstelle genutzt werden, die die Aktuelle Session bereitstellt.
 TODO: REST API
@@ -138,6 +132,13 @@ setConfig | Config Object
 
 ### 2.0
 - [ ] REST API als Zugang zum Backend
+
+
+
+
+## Bugreport/ Feature Request
+Mail an: diana@janniklorenz.de
+
 
 
 
