@@ -38,7 +38,7 @@ node index.js
 Die Disziplin kann durch einen Klick auf "Disziplin/ Aktuelle Disziplin" gewechselt werden.
 
 Disziplin | Parts | Beschreibung
---- | --- | ---
+---|---|---
 LG Training | Probe/ Match | Keine limitierung der Schüsse
 LG Training 5er | Probe/ Match | Keine limitierung der Schüsse/ 5er Serien
 LG Wettkampf | Probe/ Match | 40 Schuss Match/ 75 min
@@ -62,7 +62,7 @@ Probe ist erkennbar an der Farbigen oberen rechten Ecke, sowie an dem Label "Pro
 Folgende Tasten sind Belegt:
 
 Taste | Aktion
---- | --- | ---
+---|---|---
 Probe/ Match | Schaltet auf den nächsten Part
 Neue Scheibe | Erzeugt eine neue Session mit dem gleichen Part Type
 Hoch | Wählt den vorhergehenden Schuss aus
@@ -83,7 +83,7 @@ TODO: REST API
 
 ### Socket Client -> Server
 Methode | Parameter | Beschreibung
---- | ---
+---|---
 getSession | | Sendet die Aktuelle Session
 getData | | Sendet das Aktuelle Data Obejct (Alle Sessions)
 getConfig| | Sendet die Aktuelle Config
@@ -97,7 +97,7 @@ print | Alle Sessions Drucken
 
 ### Socket Server -> Client
 Methode | Parameter | Beschreibung
---- | ---
+---|---
 setSession | Session Object | Sendet die aktuelle Session bei Veränderung
 setData | Data Object | Sendet alle Session (Data) (bei Veränderung)
 setConfig | Config Object
