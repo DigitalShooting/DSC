@@ -83,7 +83,7 @@ TODO: REST API
 
 ### Socket Client -> Server
 Methode | Parameter | Beschreibung
----|---
+---|---|---
 getSession | | Sendet die Aktuelle Session
 getData | | Sendet das Aktuelle Data Obejct (Alle Sessions)
 getConfig| | Sendet die Aktuelle Config
