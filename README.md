@@ -97,7 +97,7 @@ print | Alle Sessions Drucken
 
 ### Socket Server -> Client
 Methode | Parameter | Beschreibung
----|---
+---|---|---
 setSession | Session Object | Sendet die aktuelle Session bei Veränderung
 setData | Data Object | Sendet alle Session (Data) (bei Veränderung)
 setConfig | Config Object
