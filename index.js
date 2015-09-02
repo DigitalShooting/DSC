@@ -299,18 +299,6 @@ io.on('connection', function(socket){
 		io.emit('setData', activeData)
 	})
 
-	socket.on('setUserGast', function(){
-		activeUser = {
-			firstName: "Gast",
-			lastName: "",
-			verein: "",
-			manschaft: "",
-		}
-
-		activeSession = getNewSession()
-		io.emit('setSession', activeSession)
-		io.emit('setData', activeData)
-	});
 	socket.on('setUser', function(user){
 		activeUser = {
 			firstName: user.vorname,
