@@ -11,6 +11,7 @@ Client zum erfassen von Schüssen mit Anbindung an Häring ESA.
 ### Abhängigkeiten
 - NodeJS
 - NPM
+- g++
 
 ### Git Installation
 ````
