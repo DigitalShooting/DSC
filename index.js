@@ -58,8 +58,6 @@ var activeUser = {
 	lastName: "",
 	verein: "",
 	manschaft: "",
-	line: config.line,
-	version: config.version,
 }
 
 
@@ -300,13 +298,6 @@ io.on('connection', function(socket){
 	})
 
 	socket.on('setUser', function(user){
-		// activeUser = {
-		// 	firstName: user.vorname,
-		// 	lastName: user.name,
-		// 	verein: user.verein,
-		// 	manschaft: user.manschaft,
-		// }
-
 		activeSession.user = user
 		io.emit('setSession', activeSession)
 		io.emit('setData', activeData)
