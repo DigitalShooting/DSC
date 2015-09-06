@@ -46,10 +46,7 @@ block body
 				div(class="aktuelleSerie grayBox" ng-controller="aktuelleSerie" ng-hide="hidden")
 					h3 Aktuelle Serie
 					table
-						tr(
-							ng-repeat="shot in aktuelleSerie track by $index" 
-							ng-click="selectShot(shot.index)"
-						)
+						tr(ng-repeat="shot in aktuelleSerie track by $index" ng-click="selectShot(shot.index)")
 							td {{shot.number}}.
 							td(class="{{shot.selectedClass}}") {{shot.value}}
 							td
@@ -58,7 +55,7 @@ block body
 			div(class="col-xs-6 fullHeight")
 				div(class="serien grayBox" ng-controller="serien" ng-hide="hidden")
 					h3 Serien
-					ul(class="list-inline" )
+					ul(class="list-inline")
 						li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
 					
 				

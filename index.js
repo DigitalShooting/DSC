@@ -51,8 +51,7 @@ setDisziplin(config.disziplinen.all.lgTraining)
 
 
 
-
-
+// Init user object
 var activeUser = {
 	firstName: "Gast",
 	lastName: "",
@@ -62,8 +61,7 @@ var activeUser = {
 
 
 
-
-
+// main data storage
 var activeData = {}
 function setNewActiveData() {
 	saveActiveData()
@@ -77,8 +75,7 @@ setNewActiveData()
 
 
 
-
-
+// update timers for given session
 var setTimers = function(session){
 	if (session != undefined){
 		if (session.time.enabled == false){
@@ -107,12 +104,15 @@ var setTimers = function(session){
 			}
 
 			session.time = time
-
 		}
 	}
 	return session
 }
 
+
+
+// generate new session object
+//  - partId | (optional) when given, this part will be used for the new session
 var getNewSession = function(partId){
 	saveActiveSession()
 
@@ -141,13 +141,11 @@ var getNewSession = function(partId){
 
 	return session
 }
-
-
 var activeSession = getNewSession()
 
 
 
-
+// include shot into session
 function newShot(session, shot){
 	var disziplin = session.disziplin
 	var part = session.disziplin.parts[session.type]
@@ -213,12 +211,17 @@ function newShot(session, shot){
 }
 
 
+// save active session to the active data
 function saveActiveSession(){
 	if (activeSession != undefined){
 		activeData.sessionParts[activeData.sessionParts.length-1] = activeSession
 		saveActiveData(activeData)
 	}
 }
+
+
+
+// save acitve data into db
 function saveActiveData(activeData){
 	if (database != undefined){
 		collection = database.collection(config.database.collection)
@@ -237,7 +240,7 @@ function saveActiveData(activeData){
 
 
 
-
+// perform callback if auth object ist valid
 function checkAuth(auth, callback){
 	if (auth.key == "123"){
 		if (callback != undefined) callback()
@@ -249,7 +252,7 @@ function checkAuth(auth, callback){
 
 
 
-
+// socket stuff
 io.on('connection', function(socket){
 	socket.on('getSession', function(key){
 		socket.emit('setSession', activeSession);
@@ -333,52 +336,7 @@ io.on('connection', function(socket){
 
 	socket.on('setPart', function(object){
 		checkAuth(object.auth, function(){
-			var partId = object.partId
-			if (partId != activeSession.type){
-				var exitType = activeSession.disziplin.parts[activeSession.type].exitType
-				if (exitType == "beforeFirst"){
-					if (activeSession.serieHistory.length != 0) {
-						return
-					}
-				}
-				else if (exitType == "none"){
-					return
-				}
-
-
-				interf.band()
-
-				var time = activeSession.time
-
-				activeSession = undefined
-				for (var i = activeData.sessionParts.length-1; i >= 0; i--){
-					var session = activeData.sessionParts[i]
-					if (session.type == partId){
-						activeSession = session
-						break
-					}
-				}
-				if (activeSession == undefined){
-					activeSession = getNewSession(partId)
-				}
-
-
-				if (activeDisziplin.time.enabled == true){
-					activeSession.time = time
-				}
-				else if (activeSession.time.type != "full"){
-					activeSession.time = {
-						enabled: false,
-					}
-				}
-
-				activeSession = setTimers(activeSession)
-
-				saveActiveSession()
-
-				io.emit('setSession', activeSession)
-				io.emit('setData', activeData)
-			}
+			setPart(object.partId)
 		})
 	})
 
@@ -396,6 +354,54 @@ io.on('connection', function(socket){
 
 
 
+// change active part
+function setPart(partId){
+	if (partId != activeSession.type){
+		var exitType = activeSession.disziplin.parts[activeSession.type].exitType
+		if (exitType == "beforeFirst"){
+			if (activeSession.serieHistory.length != 0) {
+				return
+			}
+		}
+		else if (exitType == "none"){
+			return
+		}
+
+
+		interf.band()
+
+		var time = activeSession.time
+
+		activeSession = undefined
+		for (var i = activeData.sessionParts.length-1; i >= 0; i--){
+			var session = activeData.sessionParts[i]
+			if (session.type == partId){
+				activeSession = session
+				break
+			}
+		}
+		if (activeSession == undefined){
+			activeSession = getNewSession(partId)
+		}
+
+
+		if (activeDisziplin.time.enabled == true){
+			activeSession.time = time
+		}
+		else if (activeSession.time.type != "full"){
+			activeSession.time = {
+				enabled: false,
+			}
+		}
+
+		activeSession = setTimers(activeSession)
+
+		saveActiveSession()
+
+		io.emit('setSession', activeSession)
+		io.emit('setData', activeData)
+	}
+}
 
 
 
