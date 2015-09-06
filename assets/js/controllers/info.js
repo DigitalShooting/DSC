@@ -111,8 +111,8 @@ angular.module('dsc.controllers.info', [])
 			$('#modeMenu').modal('hide')
 		}
 
-		$scope.print = function(){
-			dscAPI.print(false)
+		$scope.print = function(type){
+			dscAPI.print(type)
 			$('#modeMenu').modal('hide')
 		}
 	});
