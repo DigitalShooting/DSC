@@ -17,9 +17,6 @@ angular.module('dsc.controllers.info', [])
 			$("#userMenu .selectUser").click(function(){
 
 			})
-			$("#userMenu .selectUserGast").click(function(){
-				socket.emit("setUserGast", {})
-			})
 		}
 
 		$scope.hidden = false
@@ -64,10 +61,10 @@ angular.module('dsc.controllers.info', [])
 
 
 
-.controller('newTarget', function ($scope, socket) {
+.controller('newTarget', function ($scope, socket, dscAPI) {
 	socket.on("setSession", function (session) {
 		$scope.newTarget = function(){
-			socket.emit("newTarget", {})
+			dscAPI.setNewTarget()
 		}
 
 
@@ -96,7 +93,7 @@ angular.module('dsc.controllers.info', [])
 
 
 
-.controller('menuParts', function ($scope, socket) {
+.controller('menuParts', function ($scope, socket, dscAPI) {
 	socket.on("setSession", function (session) {
 		$scope.disziplin = session.disziplin.title
 		$scope.parts = []
@@ -110,12 +107,12 @@ angular.module('dsc.controllers.info', [])
 		}
 
 		$scope.switchToPart = function(id){
-			socket.emit("switchToPart", id)
+			dscAPI.setPart(id)
 			$('#modeMenu').modal('hide')
 		}
 
 		$scope.print = function(){
-			socket.emit('print', {});
+			dscAPI.print(false)
 			$('#modeMenu').modal('hide')
 		}
 	});
@@ -138,9 +135,9 @@ angular.module('dsc.controllers.info', [])
 
 
 
-.controller('menuDisziplinen', function ($scope, socket) {
+.controller('menuDisziplinen', function ($scope, socket, dscAPI) {
 	$scope.setDisziplien = function(disziplin){
-		socket.emit('setDisziplin', disziplin)
+		dscAPI.setDisziplin(disziplin)
 		$('#disziplinMenu').modal('hide')
 	}
 
@@ -161,60 +158,47 @@ angular.module('dsc.controllers.info', [])
 
 
 
-.controller('menuUser', function ($scope, socket) {
-	$scope.url = "ddd"
-
-	// socket.on("setConfig", function (config) {
-	// 	$scope.disziplinen = config.disziplinen
-	//
-	// 	$scope.hidden = false
-	// });
-	// socket.on("setSession", function (session) {
-	// 	// $scope.session = session
-	// 	$scope.isActive = function(id){
-	// 		return id == session.disziplin._id ? "active" : ""
-	// 	}
-	//
-	// 	$scope.hidden = false
-	// });
+.controller('menuUser', function ($scope, socket, auth) {
+	$scope.url = location.protocol + '//' + location.host + location.pathname
+	$scope.adminUrl = window.location.href
 })
 
 
 
-.controller('shortcut', function ($scope, socket) {
+.controller('shortcut', function ($scope, socket, dscAPI) {
 	socket.on("setSession", function (session) {
 
 		var previousSerie = function(){
 			if (session.selection.serie > 0){
-				socket.emit('setSelectedSerie', --session.selection.serie)
+				dscAPI.setSelectedSerie(--session.selection.serie)
 			}
 		}
 		var nextSerie = function(){
 			if (session.selection.serie < session.serieHistory.length-1){
-				socket.emit('setSelectedSerie', ++session.selection.serie)
-				socket.emit('setSelectedShot', 0)
+				dscAPI.setSelectedSerie(++session.selection.serie)
+				dscAPI.setSelectedShot(0)
 			}
 		}
 		var previousShot = function(){
 			if (session.selection.shot > 0){
-				socket.emit('setSelectedShot', --session.selection.shot)
+				dscAPI.setSelectedShot(--session.selection.shot)
 			}
 			else if (session.selection.serie > 0){
-				socket.emit('setSelectedSerie', --session.selection.serie)
+				dscAPI.setSelectedSerie(--session.selection.serie)
 			}
 		}
 		var nextShot = function(){
 			if (session.selection.shot < session.serieHistory[session.selection.serie].length-1){
-				socket.emit('setSelectedShot', ++session.selection.shot)
+				dscAPI.setSelectedShot(++session.selection.shot)
 			}
 			else if (session.selection.serie < session.serieHistory.length-1){
-				socket.emit('setSelectedSerie', ++session.selection.serie)
-				socket.emit('setSelectedShot', 0)
+				dscAPI.setSelectedSerie(++session.selection.serie)
+				dscAPI.setSelectedShot(0)
 			}
 		}
 		var newTarget = function(){
 			if (session.disziplin.parts[session.type].neueScheibe == true){
-				socket.emit("newTarget", {})
+				dscAPI.setNewTarget()
 			}
 		}
 		var togglePart = function(){
@@ -238,10 +222,10 @@ angular.module('dsc.controllers.info', [])
 			else {
 				key = partsOrder[0]
 			}
-			socket.emit("switchToPart", key)
+			dscAPI.setPart(key)
 		}
 		var print = function(){
-			socket.emit('print', {});
+			dscAPI.print(false)
 		}
 
 		// LEFT - Previous serie

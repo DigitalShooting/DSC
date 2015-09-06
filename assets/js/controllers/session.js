@@ -1,7 +1,7 @@
 angular.module('dsc.controllers.session', [])
 
 
-.controller('aktuelleSerie', ['$scope', '$sce', "socket", function ($scope, $sce, socket) {
+.controller('aktuelleSerie', ['$scope', '$sce', "socket", "dscAPI", function ($scope, $sce, socket, dscAPI) {
 	socket.on("setSession", function (session) {
 		var aktuelleSerie
 
@@ -49,7 +49,7 @@ angular.module('dsc.controllers.session', [])
 		else $scope.hidden = false
 
 		$scope.selectShot = function(index){
-			socket.emit('setSelectedShot', index)
+			dscAPI.setSelectedShot(index)
 		}
 	});
 }])
@@ -117,7 +117,7 @@ angular.module('dsc.controllers.session', [])
 	});
 
 	$scope.selectSerie = function(index){
-		socket.emit('setSelectedSerie', index)
+		dscAPI.setSelectedSerie(index)
 	}
 })
 

@@ -83,18 +83,21 @@ html(lang="de" ng-app="dsc")
 			div(class="modal-dialog" role="document")
 				div(class="modal-content")
 					div(class="modal-header")
-						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
-							span(aria-hidden="true") &times;
-						h4(class="modal-title" id="myModalLabel") Menü
+					
+						ul(class="nav nav nav-pills nav-justified" role="tablist")
+							li(role="presentation" class="active")
+								a(href="#view" aria-controls="view" role="tab" data-toggle="tab") Betrachten
+							li(role="presentation")
+								a(href="#manage" aria-controls="manage" role="tab" data-toggle="tab") Verwalten
+								
 					div(class="modal-body")
-					
-						
-						p {{url}}
-						qr(text="url")
-					
-						//- div(class="list-group")
-						//- 	a(class="selectUser menuItem list-group-item") Benutzer wählen
-						//- 	a(class="selectUserGast menuItem list-group-item") Gast
+						div(class="tab-content")
+							div(role="tabpanel" class="tab-pane active" id="view")
+								qr(text="url")
+								p {{url}}
+							div(role="tabpanel" class="tab-pane" id="manage")
+								qr(text="adminUrl")
+								p {{adminUrl}}
 							
 					div(class="modal-footer")
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen

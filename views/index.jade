@@ -1,13 +1,7 @@
 extends ./layout.jade
-		
-mixin navItem(title, classValue)
-	td(class=classValue)
-		h4(class="title") #{title}
-		h3(class="value")
-		h4(class="value2")
 
 block title
-	| #{config.line.title}
+	| DSC - #{config.line.title}
 
 block body
 	div(ng-controller="shortcut")
@@ -98,6 +92,9 @@ block body
 				h4
 				
 	script.
+		//- var auth = {
+		//- 	key: "123",
+		//- }
 		angular.module("dsc", [
 			"dsc.services.grafik", "dsc.services.socketio", "dsc.services.timeFunctions",
 			"dsc.controllers.info", "dsc.controllers.session",

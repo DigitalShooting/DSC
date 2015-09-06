@@ -238,6 +238,16 @@ function saveActiveData(activeData){
 
 
 
+function checkAuth(auth, callback){
+	if (auth.key == "123"){
+		if (callback != undefined) callback()
+	}
+	else {
+		console.log("[INFO] Wrong auth key")
+	}
+}
+
+
 
 
 io.on('connection', function(socket){
@@ -266,107 +276,122 @@ io.on('connection', function(socket){
 
 
 
-	socket.on('newTarget', function(socket){
-		if (activeSession.serieHistory.length == 0){
-			return
-		}
+	socket.on('newTarget', function(object){
+		checkAuth(object.auth, function(){
+			if (activeSession.serieHistory.length == 0){
+				return
+			}
 
-		activeSession = getNewSession(activeSession.type)
+			activeSession = getNewSession(activeSession.type)
 
-		io.emit('setSession', activeSession);
-		io.emit('setData', activeData)
+			io.emit('setSession', activeSession);
+			io.emit('setData', activeData)
+		})
 	})
 
-	socket.on('setDisziplin', function(key){
-		setDisziplin(config.disziplinen.all[key])
+	socket.on('setDisziplin', function(object){
+		checkAuth(object.auth, function(){
+			var key = object.disziplin
+			setDisziplin(config.disziplinen.all[key])
 
-		activeSession = getNewSession()
-		io.emit('setSession', activeSession);
-		io.emit('setData', activeData)
+			activeSession = getNewSession()
+			io.emit('setSession', activeSession);
+			io.emit('setData', activeData)
+		})
 	})
 
-	socket.on('setSelectedSerie', function(selectedSerie){
-		activeSession.selection.serie = parseInt(selectedSerie)
-		activeSession.selection.shot = activeSession.serieHistory[activeSession.selection.serie].length-1
-		io.emit('setSession', activeSession);
-		io.emit('setData', activeData)
+	socket.on('setSelectedSerie', function(object){
+		checkAuth(object.auth, function(){
+			var selectedSerie = object.index
+
+			activeSession.selection.serie = parseInt(selectedSerie)
+			activeSession.selection.shot = activeSession.serieHistory[activeSession.selection.serie].length-1
+			io.emit('setSession', activeSession);
+			io.emit('setData', activeData)
+		})
 	})
-	socket.on('setSelectedShot', function(selectedShot){
-		activeSession.selection.shot = parseInt(selectedShot)
-		io.emit('setSession', activeSession);
-		io.emit('setData', activeData)
+	socket.on('setSelectedShot', function(object){
+		checkAuth(object.auth, function(){
+			var selectedShot = object.index
+
+			activeSession.selection.shot = parseInt(selectedShot)
+			io.emit('setSession', activeSession);
+			io.emit('setData', activeData)
+		})
 	})
 
-	socket.on('setUser', function(user){
-		activeSession.user = user
-		io.emit('setSession', activeSession)
-		io.emit('setData', activeData)
+	socket.on('setUser', function(object){
+		checkAuth(object.auth, function(){
+			var user = object.user
+			activeSession.user = user
+			io.emit('setSession', activeSession)
+			io.emit('setData', activeData)
+		})
 	});
 
 
 
-	socket.on('switchToPart', function(partId){
-		if (partId != activeSession.type){
-			var exitType = activeSession.disziplin.parts[activeSession.type].exitType
-			if (exitType == "beforeFirst"){
-				if (activeSession.serieHistory.length != 0) {
+	socket.on('setPart', function(object){
+		checkAuth(object.auth, function(){
+			var partId = object.partId
+			if (partId != activeSession.type){
+				var exitType = activeSession.disziplin.parts[activeSession.type].exitType
+				if (exitType == "beforeFirst"){
+					if (activeSession.serieHistory.length != 0) {
+						return
+					}
+				}
+				else if (exitType == "none"){
 					return
 				}
-			}
-			else if (exitType == "none"){
-				return
-			}
 
 
-			interf.band()
+				interf.band()
 
-			var time = activeSession.time
+				var time = activeSession.time
 
-			activeSession = undefined
-			for (var i = activeData.sessionParts.length-1; i >= 0; i--){
-				var session = activeData.sessionParts[i]
-				if (session.type == partId){
-					activeSession = session
-					break
+				activeSession = undefined
+				for (var i = activeData.sessionParts.length-1; i >= 0; i--){
+					var session = activeData.sessionParts[i]
+					if (session.type == partId){
+						activeSession = session
+						break
+					}
 				}
-			}
-			if (activeSession == undefined){
-				activeSession = getNewSession(partId)
-			}
-
-
-			if (activeDisziplin.time.enabled == true){
-				activeSession.time = time
-			}
-			else if (activeSession.time.type != "full"){
-				activeSession.time = {
-					enabled: false,
+				if (activeSession == undefined){
+					activeSession = getNewSession(partId)
 				}
+
+
+				if (activeDisziplin.time.enabled == true){
+					activeSession.time = time
+				}
+				else if (activeSession.time.type != "full"){
+					activeSession.time = {
+						enabled: false,
+					}
+				}
+
+				activeSession = setTimers(activeSession)
+
+				saveActiveSession()
+
+				io.emit('setSession', activeSession)
+				io.emit('setData', activeData)
 			}
-
-			activeSession = setTimers(activeSession)
-
-			saveActiveSession()
-
-			io.emit('setSession', activeSession)
-			io.emit('setData', activeData)
-		}
+		})
 	})
 
 
 
 	socket.on('print', function(partId){
-		child_process.exec(["xvfb-run -a -s '-screen 0 640x480x16' wkhtmltopdf http://127.0.0.1:3000/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
-			child_process.exec(["lp -d Printer1 tmp.pdf"], function(err, out, code) {
-				// console.log(err, out, code)
+		checkAuth(object.auth, function(){
+			child_process.exec(["xvfb-run -a -s '-screen 0 640x480x16' wkhtmltopdf http://127.0.0.1:3000/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
+				child_process.exec(["lp -d Printer1 tmp.pdf"], function(err, out, code) {
+				});
 			});
-		});
-		// child_process.exec(["wkhtmltopdf http://127.0.0.1:3000/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
-		//
-		// });
+		})
 	})
-
-
 })
 
 

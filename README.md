@@ -82,25 +82,25 @@ Als API kann aktuell nur die Socket.io Schnittstelle genutzt werden, die die Akt
 TODO: REST API
 
 ### Socket Client -> Server
-Methode | Parameter | Beschreibung
----|---|---
-getSession | | Sendet die Aktuelle Session
-getData | | Sendet das Aktuelle Data Obejct (Alle Sessions)
-getConfig| | Sendet die Aktuelle Config
-newTarget | | Neue Scheibe (TODO: Validation if enabled)
-setDisziplin | id | Wechselt die Disziplin
-setSelectedSerie | index | Ausgewählte Serie ändern
-setSelectedShot | index | Ausgewählte Serie ändern
-setUser | user object | Aktuelle Session neuem User zuweisen
-switchToPart | id | Aktiven Part ändern
-print | Alle Sessions Drucken
+Methode | Parameter | Beschreibung | Auth
+---|---|---|---
+getSession | | Sendet die Aktuelle Session | false
+getData | | Sendet das Aktuelle Data Obejct (Alle Sessions) | false
+getConfig| | Sendet die Aktuelle Config | false
+newTarget | | Neue Scheibe (TODO: Validation if enabled) | true
+setDisziplin | id | Wechselt die Disziplin | true
+setSelectedSerie | index | Ausgewählte Serie ändern | true
+setSelectedShot | index | Ausgewählte Serie ändern | true
+setUser | user object | Aktuelle Session neuem User zuweisen | true
+switchToPart | id | Aktiven Part ändern | true
+print | | Alle Sessions Drucken | true
 
 ### Socket Server -> Client
 Methode | Parameter | Beschreibung
 ---|---|---
 setSession | Session Object | Sendet die aktuelle Session bei Veränderung
 setData | Data Object | Sendet alle Session (Data) (bei Veränderung)
-setConfig | Config Object
+setConfig | Config Object | Sendet die aktuelle Config
 
 
 
