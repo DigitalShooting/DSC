@@ -84,23 +84,23 @@ TODO: REST API
 ### Socket Client -> Server
 Methode | Parameter | Beschreibung | Auth
 ---|---|---|---
-getSession | | Sendet die Aktuelle Session | false
-getData | | Sendet das Aktuelle Data Obejct (Alle Sessions) | false
-getConfig| | Sendet die Aktuelle Config | false
-newTarget | | Neue Scheibe (TODO: Validation if enabled) | true
-setDisziplin | id | Wechselt die Disziplin | true
-setSelectedSerie | index | Ausgewählte Serie ändern | true
-setSelectedShot | index | Ausgewählte Serie ändern | true
-setUser | user object | Aktuelle Session neuem User zuweisen | true
-switchToPart | id | Aktiven Part ändern | true
-print | | Alle Sessions Drucken | true
+`getSession` | | Sendet die Aktuelle Session | false
+`getData` | | Sendet das Aktuelle Data Obejct (Alle Sessions) | false
+`getConfig` | | Sendet die Aktuelle Config | false
+`setNewTarget` | | Neue Scheibe (TODO: Validation if enabled) | true
+`setDisziplin` | id | Wechselt die Disziplin | true
+`setSelectedSerie` | index | Ausgewählte Serie ändern | true
+`setSelectedShot` | index | Ausgewählte Serie ändern | true
+`setUser` | user object | Aktuelle Session neuem User zuweisen | true
+`setPart` | id | Aktiven Part ändern | true
+`print` | | Alle Sessions Drucken | true
 
 ### Socket Server -> Client
 Methode | Parameter | Beschreibung
 ---|---|---
-setSession | Session Object | Sendet die aktuelle Session bei Veränderung
-setData | Data Object | Sendet alle Session (Data) (bei Veränderung)
-setConfig | Config Object | Sendet die aktuelle Config
+`setSession` | Session Object | Sendet die aktuelle Session bei Veränderung
+`setData` | Data Object | Sendet alle Session (Data) (bei Veränderung)
+`setConfig` | Config Object | Sendet die aktuelle Config
 
 
 
@@ -119,6 +119,7 @@ setConfig | Config Object | Sendet die aktuelle Config
 	- [ ] Printing confirm alert
 
 ### v1.0
+- [x] Auth
 - [ ] MongoDB Backend
 	- Sessions have to be saved.
 - [ ] Backup solution
