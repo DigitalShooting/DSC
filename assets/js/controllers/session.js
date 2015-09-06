@@ -92,7 +92,7 @@ angular.module('dsc.controllers.session', [])
 
 
 
-.controller('serien', function ($scope, socket) {
+.controller('serien', function ($scope, socket, dscAPI) {
 	socket.on("setSession", function (session) {
 		var serien = []
 		for(i in session.serieHistory){
