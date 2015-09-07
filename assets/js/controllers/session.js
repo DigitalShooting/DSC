@@ -123,6 +123,85 @@ angular.module('dsc.controllers.session', [])
 
 
 
+.controller('ringeGesamt', function ($scope, socket) {
+	socket.on("setSession", function (session) {
+		var gesamt = 0
+		var ringeAktuelleSerie
+		for(i in session.serieHistory){
+			var ringeSerie = 0
+			for(ii in session.serieHistory[i]){
+				ringeSerie += session.serieHistory[i][ii].ringInt
+			}
+			if (i == session.selection.serie){
+				ringeAktuelleSerie = ringeSerie
+			}
+			gesamt += ringeSerie
+		}
+		$scope.gesamt = gesamt
+		$scope.gesamtSerie = ringeAktuelleSerie
+
+		if (
+			session.serieHistory.length == 0 ||
+			session.disziplin.parts[session.type].showInfos == false
+		) $scope.hidden = true
+		else $scope.hidden = false
+	});
+})
+
+
+
+.controller('schnitt', function ($scope, socket) {
+	socket.on("setSession", function (session) {
+		var gesamt = 0
+		var count = 0
+		for(i in session.serieHistory){
+			count += session.serieHistory[i].length
+			for(ii in session.serieHistory[i]){
+				gesamt += session.serieHistory[i][ii].ringInt
+			}
+		}
+		$scope.schnitt = (Math.round(gesamt/ count * 10)/ 10).toFixed(1)
+
+		var part = session.disziplin.parts[session.type]
+		if (part.average.enabled == true){
+			var hochrechnung = gesamt/ count * part.average.anzahl
+			$scope.schnittCalc = Math.round(hochrechnung) + " " + ((hochrechnung==1) ? "Ring" : "Ringe")
+		}
+		else {
+			$scope.schnittCalc = ""
+		}
+
+		if (
+			count == 0 ||
+			session.disziplin.parts[session.type].showInfos == false
+		) $scope.hidden = true
+		else $scope.hidden = false
+	});
+})
+
+
+
+.controller('anzahlShots', function ($scope, socket) {
+	socket.on("setSession", function (session) {
+		$scope.gesamt = session.anzahl
+		$scope.serie = session.serien[session.selection.serie].shots.length
+
+		console.log($scope.gesamt)
+
+		// for(i in session.serieHistory){
+		// 	$scope.gesamt += session.serieHistory[i].length
+		// 	if (i == session.selection.serie){
+		// 		$scope.serie = session.serieHistory[i].length
+		// 	}
+		// }
+
+		if (
+			$scope.gesamt == 0
+		) $scope.hidden = true
+		else $scope.hidden = false
+	});
+})
+
 
 
 .controller('restTime', ['$scope', "socket", 'timeFunctions', function ($scope, socket, timeFunctions) {

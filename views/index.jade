@@ -13,18 +13,18 @@ block body
 				h4 {{label}}
 				h3 {{rest}}
 				h4 {{gesamt}}
-			td(ng-hide="hidden")
+			td(ng-controller="anzahlShots" ng-hide="hidden")
 				h4 Schüsse
-				h3 {{session.anzahl}}
-				h4 {{session.serien[session.serien.length-1].anzahl}}
-			td(ng-hide="hidden")
+				h3 {{gesamt}}
+				h4 {{serie}}
+			td(ng-controller="schnitt" ng-hide="hidden")
 				h4 Schnitt
-				h3 {{session.schnitt}}
-				h4 {{session.schnittCalc}}
-			td(ng-hide="hidden")
+				h3 {{schnitt}}
+				h4 {{schnittCalc}}
+			td(ng-controller="ringeGesamt" ng-hide="hidden")
 				h4 Gesamt
-				h3 {{session.gesamt}}
-				h4 {{session.serien[session.serien.length-1].gesamt}}
+				h3 {{gesamt}}
+				h4 {{gesamtSerie}}
 	
 	div(id="modules")
 		div(ng-controller="grafik" class="grafikController col-xs-7 noPadding grafik")
