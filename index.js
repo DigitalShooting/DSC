@@ -63,7 +63,7 @@ dscDataAPI.onStatusChanged = function(connected){
 
 // perform callback if auth object ist valid
 function checkAuth(auth, callback){
-	if (auth.key == "123"){
+	if (config.auth.key == auth.key || config.auth.tempKey == auth.key){
 		if (callback != undefined) callback()
 	}
 	else {
@@ -158,6 +158,15 @@ io.on('connection', function(socket){
 				child_process.exec(["lp -d Printer1 tmp.pdf"], function(err, out, code) {
 				});
 			});
+		})
+	})
+
+
+
+	// Returns the current temp token to manipulate the session
+	socket.on('getTempToken', function(object){
+		checkAuth(object.auth, function(){
+			socket.emit("setTempToken", config.auth.tempKey)
 		})
 	})
 })

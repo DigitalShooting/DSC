@@ -51,6 +51,11 @@ angular.module('dsc.services.socketio', [
 				all: all,
 			})
 		},
+		getTempToken: function(){
+			socket.emit("getTempToken", {
+				auth: auth,
+			})
+		},
 	}
 })
 

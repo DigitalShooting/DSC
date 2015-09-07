@@ -158,9 +158,15 @@ angular.module('dsc.controllers.info', [])
 
 
 
-.controller('menuUser', function ($scope, socket, auth) {
+.controller('menuUser', function ($scope, dscAPI, socket, auth) {
 	$scope.url = location.protocol + '//' + location.host + location.pathname
 	$scope.adminUrl = window.location.href
+
+	dscAPI.getTempToken()
+	setInterval(dscAPI.getTempToken, 30000)
+	socket.on("setTempToken", function (token) {
+		$scope.adminUrl = location.protocol + '//' + location.host + location.pathname + "?key=" + token
+	})
 })
 
 

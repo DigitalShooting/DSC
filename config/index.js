@@ -4,6 +4,7 @@ var interf = require("./interface.js")
 var disziplinen = require("./disziplinen.js")
 var network = require("./network.js")
 var version = require("./version.js")
+var auth = require("./auth.js")
 
 module.exports = {
 	database: database,
@@ -12,4 +13,5 @@ module.exports = {
 	disziplinen: disziplinen,
 	network: network,
 	version: version,
+	auth: auth,
 }
