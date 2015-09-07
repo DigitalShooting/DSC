@@ -147,4 +147,4 @@ Mail an: diana@janniklorenz.de
 
 
 ## Licence
-GNU GENERAL PUBLIC LICENSE Version 2
+GNU GENERAL PUBLIC LICENSE Version 3
