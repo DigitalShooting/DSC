@@ -262,6 +262,8 @@ angular.module('dsc.controllers.session', [])
 	$scope.selectedshotindex = undefined
 
 	socket.on("setSession", function (session) {
+		console.log(session)
+
 		var serie = session.serieHistory[session.selection.serie]
 		if (serie == undefined) {
 			serie = []
