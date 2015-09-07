@@ -43,83 +43,83 @@ html(lang="de" ng-app="dsc")
 
 		div(class="modal" id="mainMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
 			div(class="modal-dialog" role="document")
-				div(class="modal-content")
-					div(class="modal-header")
+				.modal-content
+					.modal-header
 						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 							span(aria-hidden="true") &times;
 						h4(class="modal-title" id="myModalLabel") Sitzung
-					div(class="modal-body")
-						
-						div(class="list-group")
+					.modal-body
+						.list-group
 							a(class="actionNewTarget menuItem list-group-item") Neue Scheibe
 							a(class="actionMatch menuItem list-group-item") Match
 							a(class="loadSession menuItem list-group-item") Sitzung laden
-									
-					div(class="modal-footer")
+					.modal-footer
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
 		
 		
 		
 		div(class="modal" id="disziplinMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuDisziplinen")
 			div(class="modal-dialog modal-lg" role="document")
-				div(class="modal-content")
-					div(class="modal-header")
+				.modal-content
+					.modal-header
 						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 							span(aria-hidden="true") &times;
 						h4(class="modal-title" id="myModalLabel") Disziplin
-					div(class="modal-body")
-						div(class="row")
+					.modal-body
+						.row
 							div(class="col-xs-4" ng-repeat="group in disziplinen.groups track by $index")
 								p(class='menuItem') {{group.title}}
 								ul(class="list-group")
 									a(class="list-group-item {{isActive(id)}}" ng-repeat="id in group.disziplinen track by $index" ng-click="setDisziplien(id)") {{disziplinen.all[id].title}}
 									
-					div(class="modal-footer")
+					.modal-footer
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
 		
 		
 		
 		div(class="modal" id="userMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuUser")
 			div(class="modal-dialog" role="document")
-				div(class="modal-content")
-					div(class="modal-header")
-					
+				.modal-content
+					.modal-header
 						ul(class="nav nav nav-pills nav-justified" role="tablist")
 							li(role="presentation" class="active")
 								a(href="#view" aria-controls="view" role="tab" data-toggle="tab") Betrachten
 							li(role="presentation")
-								a(href="#manage" aria-controls="manage" role="tab" data-toggle="tab") Verwalten
+								a(href="#manage" aria-controls="manage" role="tab" data-toggle="tab") Verwalten		
+					.tab-content
+						div(role="tabpanel" class="tab-pane active" id="view")
+							div(class="modal-body qr")
+								qr(text="url" size="400")
+							.modal-footer
+								button(type="button" class="btn btn-link" style="float:left;") {{url}}
+								button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
+						div(role="tabpanel" class="tab-pane" id="manage")
+							div(class="modal-body qr")
+								qr(text="adminUrl" size="400")
+							.modal-footer
+								button(type="button" class="btn btn-link" style="float:left;") {{adminUrl}}
+								button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
+									
 								
-					div(class="modal-body")
-						div(class="tab-content")
-							div(role="tabpanel" class="tab-pane active" id="view")
-								qr(text="url")
-								p {{url}}
-							div(role="tabpanel" class="tab-pane" id="manage")
-								qr(text="adminUrl")
-								p {{adminUrl}}
-							
-					div(class="modal-footer")
-						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
+						
 		
 		
 		
 		
 		div(class="modal" id="modeMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuParts")
 			div(class="modal-dialog" role="document")
-				div(class="modal-content")
-					div(class="modal-header")
+				.modal-content
+					.modal-header
 						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 							span(aria-hidden="true") &times;
 						h4(class="modal-title" id="myModalLabel") Modus
-					div(class="modal-body")
-						div(class="row")
+					.modal-body
+						.row
 							div(class="col-xs-10 col-xs-offset-1")
 								p(class="menuItem") {{disziplin}}
 								ul(class="list-group")
 									a(class="list-group-item {{part.active}}" ng-repeat="part in parts track by $index" ng-click="switchToPart(part.id)") {{part.title}}
-					
-					div(class="modal-footer")
+					.modal-footer
 						div(class="btn-group" role="group" style="float:left;" aria-label="...")
 							button(type="button" class="btn btn-success" ng-click="print(false)") Serien Drucken
 							button(type="button" class="btn btn-default" ng-click="print(true)") Alles Drucken
