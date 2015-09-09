@@ -9,6 +9,10 @@ block body
 		div(style="background-color:{{color}}")
 	table(class="navbar-cutsom navbar-default")
 		tr
+			td(ng-controller="time" ng-hide="hidden")
+				h4 Uhr
+				h3 {{time}}
+				h4 {{date}}
 			td(ng-controller="restTime" ng-hide="hidden")
 				h4 {{label}}
 				h3 {{rest}}
@@ -71,10 +75,6 @@ block body
 				h4 Verein
 				h3 {{verein}}
 				h4 {{manschaft}}
-			td(ng-controller="time" ng-hide="hidden")
-				h4 Uhr
-				h3 {{time}}
-				h4 {{date}}
 			td(ng-controller="disziplin" ng-hide="hidden" ng-click="openDisziplinMenu()")
 				h4 Disziplin
 				h3 {{disziplin}}
@@ -93,7 +93,7 @@ block body
 		//- 	key: "123",
 		//- }
 		angular.module("dsc", [
-			"dsc.services.grafik", "dsc.services.socketio", "dsc.services.timeFunctions",
+			"dsc.services.grafik", "dsc.services.socketio", "dsc.services.timeFunctions", "dsc.services.dscAPI",
 			"dsc.controllers.info", "dsc.controllers.session",
 			"ja.qr",
 		])
