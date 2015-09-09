@@ -184,9 +184,10 @@ angular.module('dsc.controllers.session', [])
 .controller('anzahlShots', function ($scope, socket) {
 	socket.on("setSession", function (session) {
 		$scope.gesamt = session.anzahl
-		$scope.serie = session.serien[session.selection.serie].shots.length
 
-		console.log($scope.gesamt)
+		if (session.serien[session.selection.serie] != undefined){
+			$scope.serie = session.serien[session.selection.serie].shots.length
+		}
 
 		// for(i in session.serieHistory){
 		// 	$scope.gesamt += session.serieHistory[i].length
@@ -265,8 +266,6 @@ angular.module('dsc.controllers.session', [])
 	$scope.selectedshotindex = undefined
 
 	socket.on("setSession", function (session) {
-		console.log(session)
-
 		var serie = session.serieHistory[session.selection.serie]
 		if (serie == undefined) {
 			serie = []
