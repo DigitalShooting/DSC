@@ -16,7 +16,7 @@ app.get("/", function(req, res){
 	res.render("index")
 })
 app.get("/print", function(req, res){
-	res.locals = {sessions: [activeSession], config: {line: config.line, version: config.version,}}
+	res.locals = {sessions: [dscDataAPI.getActiveSession()], config: {line: config.line, version: config.version,}}
 	res.render("print")
 })
 app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))

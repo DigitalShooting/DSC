@@ -6,15 +6,16 @@ h1 {
 }
 
 table {
-	width: 100%;
+	// width: 100%;
+	border: 1px solid #ccc;
 	table-layout: fixed;
-	font-size: 9px;
+	font-size: 10px;
 }
 
 
 .headerTable {
 	margin-bottom: 10px;
-	border-top: 1px solid #eee;
+	border-top: 1px solid #ccc;
 	font-size: 11px;
 }
 .session{
@@ -24,12 +25,22 @@ table {
 .shotTable {
 	margin-bottom: 10px;
 
+	tr {
+		white-space:nowrap;
+		width:1%;
+	}
+
 	td, th {
-		border-right: 1px solid #eee;
+		border-right: 1px solid #ccc;
 		padding-left: 10px;
 		border-collapse: collapse;
 	}
 }
+
+.summary {
+	border-top: 1px solid #ccc;
+}
+
 
 
 .grafikController{

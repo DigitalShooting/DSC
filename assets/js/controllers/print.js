@@ -14,7 +14,7 @@ angular.module('dsc.controllers.print', [])
 	function setSession(){
 		if ($scope.sessions != undefined && $scope.indexSession != undefined){
 			$scope.session = $scope.sessions[$scope.indexSession]
-
+			
 			$scope.scheibe = $scope.session.disziplin.scheibe
 			$scope.zoomlevel = $scope.session.disziplin.scheibe.defaultZoom
 			setSerie()
