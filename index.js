@@ -8,20 +8,30 @@ var config = require("./config/index.js")
 var DSCDataAPI = require("./lib/DSCDataAPI.js")
 var app = express()
 
+// jade
 app.set('view engine', 'jade');
+
+// asset routes
 app.use("/js/", express.static("./assets/js"))
 app.use("/libs/", express.static("./assets/libs"))
+
+app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
+app.use("/css/", express.static(__dirname + "/stylesheets"))
+
+// main route
 app.get("/", function(req, res){
 	res.locals = {config: {line: config.line, version: config.version,}}
 	res.render("index")
 })
+
+// print page
 app.get("/print", function(req, res){
 	res.locals = {sessions: [dscDataAPI.getActiveSession()], config: {line: config.line, version: config.version,}}
 	res.render("print")
 })
-app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
-app.use("/css/", express.static(__dirname + "/stylesheets"))
 
+
+// express & socket io server init
 var server = http.Server(app)
 var io = require('socket.io')(server);
 server.listen(config.network.port, config.network.address)
@@ -29,16 +39,15 @@ server.on('listening', function() {
 	console.log('Express server started on at %s:%s', server.address().address, server.address().port)
 })
 
+
+// database init
 var database
 var mongodb = require("./lib/mongodb")(function(db){
 	database = db
 })
 
 
-
-
-
-
+// dsc api init
 var dscDataAPI = DSCDataAPI()
 
 dscDataAPI.setUser({
