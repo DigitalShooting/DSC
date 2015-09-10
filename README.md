@@ -132,7 +132,7 @@ Methode | Parameter | Beschreibung
 	- When the last shot was done or the time is over an alert should pop up (auto close/ manual OK Button???)
 - [ ] Ring Count List
 - [ ] Zehntel
-- [ ] Calculate Sereinsum etc into session -> less logic in client
+- [x] Calculate Sereinsum etc into session -> less logic in client
 
 ### 2.0
 - [ ] REST API als Zugang zum Backend
