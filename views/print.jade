@@ -76,11 +76,11 @@ html(lang="de" ng-app="dsc-print")
 							td {{shot.teiler}}
 							td {{shot.time | formatDate}}
 						tr(class="summary")
-							td {{serie.anzahl}}.
-							th {{serie.gesamt}}
+							td {{serie.anzahl}}
+							th {{serie.gesamt}} Ringe
 							td
 							td
-							td {{serie.duration | formatDate}}
+							td {{serie.duration | formatDuration}}
 							
 					div(ng-controller="grafik" ng-init='init($parent.$parent.$index, $parent.$index)' class="grafikController col-xs-3")
 						target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" size="size" class="grafik")
@@ -90,14 +90,14 @@ html(lang="de" ng-app="dsc-print")
 							th Anzahl
 							th Gesamt
 							th
-							th Schnitt
+							th
 							th Dauer
 						tr
-							td {{anzahlShots}}
-							td {{gesamt}}
+							td {{session.anzahl}}
+							th {{session.gesamt}} Ringe
 							td
-							td {{teilerSchnitt}}
-							td {{duration}}
+							td
+							td {{session.duration | formatDuration}}
 		
 		script.
 			var app = angular.module('dsc-print', [

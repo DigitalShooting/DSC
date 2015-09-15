@@ -14,7 +14,7 @@ angular.module('dsc.controllers.print', [])
 	function setSession(){
 		if ($scope.sessions != undefined && $scope.indexSession != undefined){
 			$scope.session = $scope.sessions[$scope.indexSession]
-			
+
 			$scope.scheibe = $scope.session.disziplin.scheibe
 			$scope.zoomlevel = $scope.session.disziplin.scheibe.defaultZoom
 			setSerie()
@@ -50,54 +50,6 @@ angular.module('dsc.controllers.print', [])
 	function setSession(){
 		if ($scope.sessions != undefined && $scope.indexSession != undefined){
 			$scope.session = $scope.sessions[$scope.indexSession]
-
-
-			function secondsToString(seconds){
-				var numhours = Math.floor(seconds / 3600)
-				var numminutes = Math.floor((seconds % 3600) / 60)
-				var numseconds = (seconds % 3600) % 60
-
-				Number.prototype.toFixedDown = function(digits) {
-					var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
-						m = this.toString().match(re);
-						return m ? parseFloat(m[1]) : this.valueOf();
-				};
-
-				var string = ""
-				if(numhours > 0){ string += numhours.toFixedDown(0) + "h " }
-				if(numminutes > 0){ string += numminutes.toFixedDown(0) + "m " }
-				if(numseconds > 0){ string += numseconds.toFixedDown(0) + "s " }
-
-				return string
-			}
-
-			var dateFrom
-			var dateTo
-			if ($scope.session.serieHistory.length > 0){
-				if ($scope.session.serieHistory[0].length > 0){
-					dateFrom = new Date($scope.session.serieHistory[0][0].time).getTime()/1000
-
-					var i = $scope.session.serieHistory.length-1
-					var ii = $scope.session.serieHistory[i].length-1
-					dateTo = new Date($scope.session.serieHistory[i][ii].time).getTime()/1000
-				}
-			}
-			$scope.duration = secondsToString(dateTo-dateFrom)
-
-			$scope.gesamt = 0
-			$scope.anzahlShots = 0
-			var schnitt = 0
-			for (var i in $scope.session.serieHistory){
-				for (var ii in $scope.session.serieHistory[i]){
-					var shot = $scope.session.serieHistory[i][ii]
-					$scope.gesamt += shot.ringInt
-					schnitt += shot.ringInt
-					$scope.anzahlShots++
-				}
-			}
-
-			$scope.teilerSchnitt = Math.round(schnitt / $scope.anzahlShots).toFixed(1)
-
 		}
 	}
 
@@ -129,6 +81,26 @@ angular.module('dsc.controllers.print', [])
 
 
 
+.filter("formatDuration", function(){
+	return function(seconds){
+		var numhours = Math.floor(seconds / 3600)
+		var numminutes = Math.floor((seconds % 3600) / 60)
+		var numseconds = (seconds % 3600) % 60
+
+		Number.prototype.toFixedDown = function(digits) {
+			var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
+				m = this.toString().match(re);
+				return m ? parseFloat(m[1]) : this.valueOf();
+		};
+
+		var string = ""
+		if(numhours > 0){ string += numhours.toFixedDown(0) + "h " }
+		if(numminutes > 0){ string += numminutes.toFixedDown(0) + "m " }
+		if(numseconds > 0){ string += numseconds.toFixedDown(0) + "s " }
+
+		return string
+	}
+})
 .filter("formatDate", function(){
 	return function(input){
 		var date = new Date(input)
