@@ -3,8 +3,6 @@ angular.module('dsc.controllers.print', [])
 
 
 .controller('grafik', function ($scope, socket) {
-	// $scope.session = undefined
-
 	$scope.size = "130px"
 	$scope.scheibe = undefined
 	$scope.zoomlevel = undefined
@@ -25,7 +23,7 @@ angular.module('dsc.controllers.print', [])
 	}
 	function setSerie(){
 		if ($scope.session != undefined && $scope.serieIndex != undefined){
-			$scope.serie = $scope.session.serieHistory[$scope.serieIndex]
+			$scope.serie = $scope.session.serien[$scope.serieIndex].shots
 		}
 	}
 

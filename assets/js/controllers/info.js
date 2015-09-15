@@ -180,7 +180,7 @@ angular.module('dsc.controllers.info', [])
 			}
 		}
 		var nextSerie = function(){
-			if (session.selection.serie < session.serieHistory.length-1){
+			if (session.selection.serie < session.serien.length-1){
 				dscAPI.setSelectedSerie(++session.selection.serie)
 				dscAPI.setSelectedShot(0)
 			}
@@ -194,10 +194,10 @@ angular.module('dsc.controllers.info', [])
 			}
 		}
 		var nextShot = function(){
-			if (session.selection.shot < session.serieHistory[session.selection.serie].length-1){
+			if (session.selection.shot < session.serien[session.selection.serie].shots.length-1){
 				dscAPI.setSelectedShot(++session.selection.shot)
 			}
-			else if (session.selection.serie < session.serieHistory.length-1){
+			else if (session.selection.serie < session.serien.length-1){
 				dscAPI.setSelectedSerie(++session.selection.serie)
 				dscAPI.setSelectedShot(0)
 			}

@@ -5,15 +5,15 @@ angular.module('dsc.controllers.session', [])
 	socket.on("setSession", function (session) {
 		var aktuelleSerie
 
-		var serie = session.serieHistory[session.selection.serie]
+		var serie = session.serien[session.selection.serie]
 		if (serie){
 			aktuelleSerie = []
-			for (var i = 0; i < serie.length; i++){
+			for (var i = 0; i < serie.shots.length; i++){
 				var shot = {
-					ring: serie[i].ring,
-					teiler: serie[i].teiler,
-					winkel: serie[i].winkel,
-					number: serie[i].number,
+					ring: serie.shots[i].ring,
+					teiler: serie.shots[i].teiler,
+					winkel: serie.shots[i].winkel,
+					number: serie.shots[i].number,
 				}
 
 				var pfeil
@@ -60,12 +60,12 @@ angular.module('dsc.controllers.session', [])
 	socket.on("setSession", function (session) {
 		var currentShot
 
-		var serie = session.serieHistory[session.selection.serie]
+		var serie = session.serien[session.selection.serie]
 		if (serie){
 			currentShot = {
-				teiler: serie[session.selection.shot].teiler,
-				ring: serie[session.selection.shot].ring,
-				winkel: serie[session.selection.shot].winkel,
+				teiler: serie.shots[session.selection.shot].teiler,
+				ring: serie.shots[session.selection.shot].ring,
+				winkel: serie.shots[session.selection.shot].winkel,
 			}
 			if (currentShot){
 				if (currentShot.teiler > session.disziplin.scheibe.innenZehner) {
@@ -95,14 +95,10 @@ angular.module('dsc.controllers.session', [])
 .controller('serien', function ($scope, socket, dscAPI) {
 	socket.on("setSession", function (session) {
 		var serien = []
-		for(i in session.serieHistory){
-			var ringeSerie = 0
-			for(ii in session.serieHistory[i]){
-				ringeSerie += session.serieHistory[i][ii].ringInt
-			}
+		for(i in session.serien){
 			serien.push({
 				index: i,
-				value: ringeSerie,
+				value: session.serien[i].gesamt,
 				selectedClass: i == session.selection.serie ? "bold" : "",
 			})
 		}
@@ -125,23 +121,13 @@ angular.module('dsc.controllers.session', [])
 
 .controller('ringeGesamt', function ($scope, socket) {
 	socket.on("setSession", function (session) {
-		var gesamt = 0
-		var ringeAktuelleSerie
-		for(i in session.serieHistory){
-			var ringeSerie = 0
-			for(ii in session.serieHistory[i]){
-				ringeSerie += session.serieHistory[i][ii].ringInt
-			}
-			if (i == session.selection.serie){
-				ringeAktuelleSerie = ringeSerie
-			}
-			gesamt += ringeSerie
+		$scope.gesamt = session.gesamt
+		if (session.selection.serie < session.serien.length){
+			$scope.gesamtSerie = session.serien[session.selection.serie].gesamt
 		}
-		$scope.gesamt = gesamt
-		$scope.gesamtSerie = ringeAktuelleSerie
 
 		if (
-			session.serieHistory.length == 0 ||
+			session.serien.length == 0 ||
 			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true
 		else $scope.hidden = false
@@ -152,27 +138,19 @@ angular.module('dsc.controllers.session', [])
 
 .controller('schnitt', function ($scope, socket) {
 	socket.on("setSession", function (session) {
-		var gesamt = 0
-		var count = 0
-		for(i in session.serieHistory){
-			count += session.serieHistory[i].length
-			for(ii in session.serieHistory[i]){
-				gesamt += session.serieHistory[i][ii].ringInt
-			}
-		}
-		$scope.schnitt = (Math.round(gesamt/ count * 10)/ 10).toFixed(1)
+		$scope.schnitt = session.schnitt
+		$scope.schnittCalc = session.schnittCalc
 
 		var part = session.disziplin.parts[session.type]
 		if (part.average.enabled == true){
-			var hochrechnung = gesamt/ count * part.average.anzahl
-			$scope.schnittCalc = Math.round(hochrechnung) + " " + ((hochrechnung==1) ? "Ring" : "Ringe")
+			$scope.schnittCalc = Math.round(session.schnittCalc) + " " + ((session.schnittCalc==1) ? "Ring" : "Ringe")
 		}
 		else {
 			$scope.schnittCalc = ""
 		}
 
 		if (
-			count == 0 ||
+			session.anzahl == 0 ||
 			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true
 		else $scope.hidden = false
@@ -188,13 +166,6 @@ angular.module('dsc.controllers.session', [])
 		if (session.serien[session.selection.serie] != undefined){
 			$scope.serie = session.serien[session.selection.serie].shots.length
 		}
-
-		// for(i in session.serieHistory){
-		// 	$scope.gesamt += session.serieHistory[i].length
-		// 	if (i == session.selection.serie){
-		// 		$scope.serie = session.serieHistory[i].length
-		// 	}
-		// }
 
 		if (
 			$scope.gesamt == 0
@@ -266,9 +237,13 @@ angular.module('dsc.controllers.session', [])
 	$scope.selectedshotindex = undefined
 
 	socket.on("setSession", function (session) {
-		var serie = session.serieHistory[session.selection.serie]
-		if (serie == undefined) {
+		var serieTmp = session.serien[session.selection.serie]
+		var serie
+		if (serieTmp == undefined) {
 			serie = []
+		}
+		else {
+			serie = serieTmp.shots
 		}
 
 		var scheibe = session.disziplin.scheibe
