@@ -281,3 +281,17 @@ angular.module('dsc.controllers.info', [])
 		shortcut.add("m", togglePart)
 	})
 })
+
+
+.controller('overlayController', function ($scope, socket, dscAPI) {
+	socket.on("info", function (info) {
+		$('#overlayMenu').modal('hide')
+
+		$scope.infoObject = info
+		$('#overlayMenu').modal('show')
+
+		setTimeout(function(){
+			$('#overlayMenu').modal('hide')
+		}, 5000)
+	})
+})

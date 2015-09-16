@@ -35,6 +35,17 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 	
 		meta(name="viewport", content="width=device-width")
 	body
+	
+		div(class="modal" id="overlayMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="overlayController")
+			div(class="modal-dialog" role="document")
+				.modal-content
+					.modal-header
+						h2(class="modal-title" id="myModalLabel") {{infoObject.title}}
+					.modal-body
+						br
+						p {{infoObject.text}}
+						br
+			
 		
 		div(class="modal" id="mainMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
 			div(class="modal-dialog" role="document")

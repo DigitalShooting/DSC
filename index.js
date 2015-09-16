@@ -163,8 +163,16 @@ io.on('connection', function(socket){
 
 	socket.on('print', function(object){
 		checkAuth(object.auth, function(){
+			io.emit('info', {
+				title: "Druckauftrag wird bearbeitet...",
+				text: "Der Ausdruck wird erstellt.",
+			})
 			child_process.exec(["xvfb-run -a -s '-screen 0 640x480x16' wkhtmltopdf http://127.0.0.1:3000/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
 				child_process.exec(["lp -d Printer1 tmp.pdf"], function(err, out, code) {
+					io.emit('info', {
+						title: "Drucken erfolgreich",
+						text: "Der Ausdruck wurde erstellt.",
+					})
 				});
 			});
 		})
