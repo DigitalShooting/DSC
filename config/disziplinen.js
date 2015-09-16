@@ -489,7 +489,7 @@ module.exports = {
 			interface: "esa",
 			time: {
 				enabled: true,
-				duration: 75,
+				duration: 65,
 				instantStart: false,
 			},
 			scheibe: scheiben.lg,
@@ -845,7 +845,7 @@ module.exports = {
 			interface: "esa",
 			time: {
 				enabled: true,
-				duration: 75,
+				duration: 65,
 				instantStart: false,
 			},
 			scheibe: scheiben.lp,

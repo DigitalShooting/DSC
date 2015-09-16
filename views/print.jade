@@ -2,8 +2,7 @@ doctype html
 html(lang="de" ng-app="dsc-print")
 	head
 		title Print
-			
-		//link(href="/css/print.css", rel="stylesheet")
+		
 		link(href="/css/print.css", rel="stylesheet")
 	
 		// jquery
@@ -101,13 +100,8 @@ html(lang="de" ng-app="dsc-print")
 		
 		script.
 			var app = angular.module('dsc-print', [
-				'dsc.services.socketio',
-				'dsc.services.grafik',
-				
+				'dsc.services.socketio', 'dsc.services.grafik',
 				'dsc.controllers.print',
-
-				// 3rd party dependencies
-				"btford.socket-io",
-				"ja.qr",
+				"btford.socket-io", "ja.qr",
 			])
 		
