@@ -31,25 +31,27 @@ node index.js
 
 
 
-
 ## Bedienung
 
 ### Disziplinen
 Die Disziplin kann durch einen Klick auf "Disziplin/ Aktuelle Disziplin" gewechselt werden.
 
-Disziplin | Parts | Beschreibung
----|---|---
-LG Training | Probe/ Match | Keine limitierung der Schüsse
-LG Training 5er | Probe/ Match | Keine limitierung der Schüsse/ 5er Serien
-LG Wettkampf | Probe/ Match | 40 Schuss Match/ 75 min
- | | 
-LG Auflage | Probe/ Match | 30 Schuss Match/ 75 min
- | | 
-LP Training | Probe/ Match | Keine limitierung der Schüsse
-LP Training 5er | Probe/ Match | Keine limitierung der Schüsse/ 5er Serien
-LP Wettkampf | Probe/ Match | 40 Schuss Match/ 75 min
- | | 
-Demo | Probe | Zufallsschüsse
+Disziplin 		| Parts 					| Beschreibung
+----------------|---------------------------|------------------------------------------
+LG Training 	| Probe/ Match 				| Keine limitierung der Schüsse
+LG Training 5er | Probe/ Match 				| Keine limitierung der Schüsse/ 5er Serien
+LG Wettkampf 	| Probe/ Match 				| 40 Schuss Match/ 65 min
+LG 3 Stellung 	| Probe/ Match (K, L, S) 	| 40 Schuss Match/ 65 min
+                 | 							| 
+LG Auflage 		| Probe/ Match 				| 30 Schuss Match/ 75 min
+                 | 							| 
+LP Training 	| Probe/ Match 				| Keine limitierung der Schüsse
+LP Training 5er | Probe/ Match 				| Keine limitierung der Schüsse/ 5er Serien
+LP Wettkampf 	| Probe/ Match 				| 40 Schuss Match/ 65 min
+                | 							| 
+Demo LG 		| Probe 					| Zufallsschüsse
+Demo LG Blank 	| Probe 					| Zufallsschüsse
+Demo LP 		| Probe/ Match 				| Zufallsschüsse/ 6 min
 
 
 ### Probe/ Match
@@ -58,15 +60,26 @@ Die beiden Modie Probe/ Match sind in "Parts" eingeteilt um einer Disziplin mehr
 Probe ist erkennbar an der Farbigen oberen rechten Ecke, sowie an dem Label "Probe" unter Modus.
 
 
-### Bedienelement Häring
+### Eingabegeräte
+
+#### Bedienelement Häring
 Folgende Tasten sind Belegt:
 
-Taste | Aktion
----|---|---
-Probe/ Match | Schaltet auf den nächsten Part
-Neue Scheibe | Erzeugt eine neue Session mit dem gleichen Part Type
-Hoch | Wählt den vorhergehenden Schuss aus
-Runter | Wählt den nachfolgenden Schuss aus
+Taste 			| Aktion
+----------------|-----------------------------------------------------
+Probe/ Match 	| Schaltet auf den nächsten Part
+Neue Scheibe 	| Erzeugt eine neue Session mit dem gleichen Part Type
+Hoch 			| Wählt den vorhergehenden Schuss aus
+Runter 			| Wählt den nachfolgenden Schuss aus
+
+#### Tastatur
+Taste 			| Aktion
+----------------|------------------------------------
+`M` 			| Schaltet auf den nächsten Part
+UP 				| Wählt den vorhergehenden Schuss aus
+DOWN 			| Wählt den nachfolgenden Schuss aus
+RIGHT 			| Wählt den nachfolgenden Serie aus
+LEFT 			| Wählt den vorhergehenden Serie aus
 
 
 ### Status
@@ -82,25 +95,25 @@ Als API kann aktuell nur die Socket.io Schnittstelle genutzt werden, die die Akt
 TODO: REST API
 
 ### Socket Client -> Server
-Methode | Parameter | Beschreibung | Auth
----|---|---|---
-`getSession` | | Sendet die Aktuelle Session | false
-`getData` | | Sendet das Aktuelle Data Obejct (Alle Sessions) | false
-`getConfig` | | Sendet die Aktuelle Config | false
-`setNewTarget` | | Neue Scheibe (TODO: Validation if enabled) | true
-`setDisziplin` | id | Wechselt die Disziplin | true
-`setSelectedSerie` | index | Ausgewählte Serie ändern | true
-`setSelectedShot` | index | Ausgewählte Serie ändern | true
-`setUser` | user object | Aktuelle Session neuem User zuweisen | true
-`setPart` | id | Aktiven Part ändern | true
-`print` | | Alle Sessions Drucken | true
+Methode 			| Parameter		| Auth	| Beschreibung
+--------------------|---------------|-------|------------------------------------------------
+`getSession` 		| 				| false | Sendet die Aktuelle Session
+`getData` 			| 				| false | Sendet das Aktuelle Data Obejct (Alle Sessions)
+`getConfig` 		| 				| false | Sendet die Aktuelle Config
+`setNewTarget` 		| 				| true 	| Neue Scheibe (TODO: Validation if enabled)
+`setDisziplin` 		| id 			| true 	| Wechselt die Disziplin
+`setSelectedSerie` 	| index 		| true 	| Ausgewählte Serie ändern
+`setSelectedShot` 	| index 		| true 	| Ausgewählte Serie ändern
+`setUser` 			| user object 	| true 	| Aktuelle Session neuem User zuweisen
+`setPart` 			| id 			| true 	| Aktiven Part ändern
+`print` 			| 				| true 	| Alle Sessions Drucken
 
 ### Socket Server -> Client
-Methode | Parameter | Beschreibung
----|---|---
-`setSession` | Session Object | Sendet die aktuelle Session bei Veränderung
-`setData` | Data Object | Sendet alle Session (Data) (bei Veränderung)
-`setConfig` | Config Object | Sendet die aktuelle Config
+Methode 		| Parameter 		| Beschreibung
+----------------|-------------------|---------------------------------------------
+`setSession` 	| Session Object 	| Sendet die aktuelle Session bei Veränderung
+`setData` 		| Data Object 		| Sendet alle Session (Data) (bei Veränderung)
+`setConfig` 	| Config Object 	| Sendet die aktuelle Config
 
 
 
@@ -108,28 +121,28 @@ Methode | Parameter | Beschreibung
 
 ### v0.7
 - [x] Changeing Parts
-	- Changing the active Part should get a config which provides:
-		- Free mode
-		- Change bevor first shot
-		- Disabled
-	- [x] Toggle Band
+    - Changing the active Part should get a config which provides:
+        - Free mode
+        - Change bevor first shot
+        - Disabled
+    - [x] Toggle Band
 - [x] Inner 10
-	- Each Target should have a inner 10 property (Teiler).
+    - Each Target should have a inner 10 property (Teiler).
 - [x] Print
-	- [ ] Printing confirm alert
+    - [ ] Printing confirm alert
 
 ### v1.0
 - [x] Auth
 - [ ] MongoDB Backend
-	- Sessions have to be saved.
+    - Sessions have to be saved.
 - [ ] Backup solution
-	- Maybe a dedicated MongoDB server which we try to connect to.
+    - Maybe a dedicated MongoDB server which we try to connect to.
 - [ ] Logging
-	- Crashed should get logged, also the arrived data from the interface.
+    - Crashed should get logged, also the arrived data from the interface.
 - [ ] Rest Time Color
-	- The Rest time should get oringe/ red when coming near the end.
+    - The Rest time should get oringe/ red when coming near the end.
 - [ ] Last shot/ Time over alert
-	- When the last shot was done or the time is over an alert should pop up (auto close/ manual OK Button???)
+    - When the last shot was done or the time is over an alert should pop up (auto close/ manual OK Button???)
 - [ ] Ring Count List
 - [ ] Zehntel
 - [x] Calculate Sereinsum etc into session -> less logic in client

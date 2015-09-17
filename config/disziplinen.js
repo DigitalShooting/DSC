@@ -119,6 +119,16 @@ var zooms = {
 		},
 	},
 
+	strichBreit: {
+		z0: {
+			scale: 10,
+			offset: {
+				x: 1000,
+				y: 1000,
+			},
+		},
+	}
+
 
 
 }
@@ -172,6 +182,9 @@ var scheiben = {
 		// Draw only rings, used in lp for inner 10
 		ringeDrawOnly: [],
 
+
+		rechteckDrawOnly: [],
+
 		// used for 0
 		defaultHitColor: "#000000",
 
@@ -224,6 +237,7 @@ var scheiben = {
 			{ value:  1, width: 45.5, color: "white", text: false, textColor: "transparent", zoom: zooms.lg.z1, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
+		rechteckDrawOnly: [],
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.lg.z1,
 		minZoom: zooms.lg.z0,
@@ -259,6 +273,7 @@ var scheiben = {
 		ringeDrawOnly: [
 			{ width:  5.0, color: "black", textColor: "white" },
 		],
+		rechteckDrawOnly: [],
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.lp.z1,
 		minZoom: zooms.lp.z0,
@@ -292,6 +307,7 @@ var scheiben = {
 			{ value:  1, width: 155.5, color: "white", text: false, textColor: "transparent", zoom: zooms.lp.z1, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
+		rechteckDrawOnly: [],
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.lp.z1,
 		minZoom: zooms.lp.z0,
@@ -325,6 +341,7 @@ var scheiben = {
 			{ value:  1, width:  85.5, color: "white", text: true, textColor: "black", zoom: zooms.gewehr15.z1, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
+		rechteckDrawOnly: [],
 		defaultHitColor: "#000000",
 		defaultZoom: zooms.gewehr15.z1,
 		minZoom: zooms.gewehr15.z0,
@@ -343,6 +360,26 @@ var scheiben = {
 		},
 		kugelDurchmesser: 4.5,
 	},
+	strichBreit: {
+		title: "Strich Breit",
+		ringe: [
+			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
+			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
+		],
+		ringeDrawOnly: [],
+		rechteckDrawOnly: [
+			{ width:  29, height:  161, color: "black", hitColor: "#00bffF" },
+		],
+		defaultHitColor: "#00bffF",
+		defaultZoom: zooms.strichBreit.z0,
+		minZoom: zooms.strichBreit.z0,
+		innenZehner: 0,
+		probeEcke: {
+			color: "#0f0",
+			alpha: 0.7,
+		},
+		kugelDurchmesser: 4.5,
+	},
 }
 
 
@@ -355,9 +392,9 @@ module.exports = {
 
 	groups: [
 		{title: "LG", disziplinen: ["lgWettkampf", "lgTraining", "lgTraining5", "lgBlank", "lgAuflage", "lg3Stellung"]},
-		{title: "LP", disziplinen: ["lpWettkampf", "lpTraining", "lpTraining5", "lpBlank"]},
+		{title: "LP", disziplinen: ["lpWettkampf", "lpTraining", "lpTraining5", "lpBlank", "lpStrich"]},
 		{title: "Zimmerstutzen", disziplinen: ["zimmerstutzen"]},
-		{title: "Demo", disziplinen: ["demo", "demoBlank", "demoLP"]},
+		{title: "Demo", disziplinen: ["demo", "demoBlank", "demoLP", "demoStrich"]},
 	],
 
 	all: {
@@ -891,6 +928,41 @@ module.exports = {
 
 
 
+		lpStrich: {
+			_id: "lpStrich",
+			title: "LP Strich",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+				instantStart: false,
+			},
+			scheibe: scheiben.strichBreit,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 100,
+					anzahlShots: 0,
+					showInfos: false,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: false,
+						anzahl: 0,
+					},
+					exitType: "",
+				},
+			},
+		},
+
+
+
+
 
 
 
@@ -1015,6 +1087,41 @@ module.exports = {
 				},
 			},
 
+		},
+
+
+
+
+		demoStrich: {
+			_id: "demoStrich",
+			title: "LP Demo Strich",
+			interface: "demo",
+			time: {
+				enabled: false,
+				duration: 0,
+				instantStart: false,
+			},
+			scheibe: scheiben.strichBreit,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: false,
+					neueScheibe: true,
+					serienLength: 100,
+					anzahlShots: 0,
+					showInfos: false,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: false,
+						anzahl: 0,
+					},
+					exitType: "",
+				},
+			},
 		},
 
 
