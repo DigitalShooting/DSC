@@ -363,8 +363,8 @@ var scheiben = {
 	strichBreit: {
 		title: "LP Strich",
 		ringe: [
-			{ value: 10, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
-			{ value: 1, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
+			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
+			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
 		],
 		ringeDrawOnly: [],
 		rechteckDrawOnly: [
