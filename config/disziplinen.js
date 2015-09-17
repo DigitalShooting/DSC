@@ -360,8 +360,8 @@ var scheiben = {
 		},
 		kugelDurchmesser: 4.5,
 	},
-	strichBreitH: {
-		title: "Strich Breit Hochkant",
+	strichBreit: {
+		title: "LP Strich",
 		ringe: [
 			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
 			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
@@ -369,26 +369,6 @@ var scheiben = {
 		ringeDrawOnly: [],
 		rechteckDrawOnly: [
 			{ width:  29, height:  161, color: "black", hitColor: "#00bffF" },
-		],
-		defaultHitColor: "#00bffF",
-		defaultZoom: zooms.strichBreit.z0,
-		minZoom: zooms.strichBreit.z0,
-		innenZehner: 0,
-		probeEcke: {
-			color: "#0f0",
-			alpha: 0.7,
-		},
-		kugelDurchmesser: 4.5,
-	},
-	strichBreitQ: {
-		title: "Strich Breit Quer",
-		ringe: [
-			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
-			{ value: 0, width: 0, color: "transparent", text: false, textColor: "transparent", zoom: zooms.strichBreit.z0, hitColor: "#00bffF" },
-		],
-		ringeDrawOnly: [],
-		rechteckDrawOnly: [
-			{ width:  161, height:  29, color: "black", hitColor: "#00bffF" },
 		],
 		defaultHitColor: "#00bffF",
 		defaultZoom: zooms.strichBreit.z0,
@@ -412,7 +392,7 @@ module.exports = {
 
 	groups: [
 		{title: "LG", disziplinen: ["lgWettkampf", "lgTraining", "lgTraining5", "lgBlank", "lgAuflage", "lg3Stellung"]},
-		{title: "LP", disziplinen: ["lpWettkampf", "lpTraining", "lpTraining5", "lpBlank", "lpStrichH", "lpStrichQ"]},
+		{title: "LP", disziplinen: ["lpWettkampf", "lpTraining", "lpTraining5", "lpBlank", "lpStrich"]},
 		{title: "Zimmerstutzen", disziplinen: ["zimmerstutzen"]},
 		{title: "Demo", disziplinen: ["demo", "demoBlank", "demoLP", "demoStrich"]},
 	],
@@ -948,16 +928,16 @@ module.exports = {
 
 
 
-		lpStrichH: {
-			_id: "lpStrichH",
-			title: "LP Strich Hochkant",
+		lpStrich: {
+			_id: "lpStrich",
+			title: "LP Strich",
 			interface: "esa",
 			time: {
 				enabled: false,
 				duration: 0,
 				instantStart: false,
 			},
-			scheibe: scheiben.strichBreitH,
+			scheibe: scheiben.strichBreit,
 			parts: {
 				probe: {
 					title: "Probe",
@@ -979,38 +959,6 @@ module.exports = {
 				},
 			},
 		},
-		lpStrichQ: {
-			_id: "lpStrichH",
-			title: "LP Strich Quer",
-			interface: "esa",
-			time: {
-				enabled: false,
-				duration: 0,
-				instantStart: false,
-			},
-			scheibe: scheiben.strichBreitQ,
-			parts: {
-				probe: {
-					title: "Probe",
-					probeEcke: false,
-					neueScheibe: true,
-					serienLength: 100,
-					anzahlShots: 0,
-					showInfos: false,
-					time: {
-						enabled: false,
-						duration: 0,
-						instantStart: false,
-					},
-					average: {
-						enabled: false,
-						anzahl: 0,
-					},
-					exitType: "",
-				},
-			},
-		},
-
 
 
 
@@ -1152,7 +1100,7 @@ module.exports = {
 				duration: 0,
 				instantStart: false,
 			},
-			scheibe: scheiben.strichBreitQ,
+			scheibe: scheiben.strichBreit,
 			parts: {
 				probe: {
 					title: "Probe",
