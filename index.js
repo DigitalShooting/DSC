@@ -14,6 +14,7 @@ app.set('view engine', 'jade');
 // asset routes
 app.use("/js/", express.static("./assets/js"))
 app.use("/libs/", express.static("./assets/libs"))
+app.use("/favicon.ico", express.static("./assets/img/favicon.ico"))
 
 app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
 app.use("/css/", express.static(__dirname + "/stylesheets"))
