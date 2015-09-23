@@ -1196,7 +1196,7 @@ module.exports = {
 				enabled: true,
 
 				// Duration in minutes
-				duration: 6,
+				duration: 1,
 
 				// if true, start instantly, otherwise after the first shot
 				instantStart: false,

@@ -9,29 +9,23 @@ html, body {
 	padding: 0;
 	font-size: 2.0vmin;
 
+	// disable selection
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 
+	// prevent line breaks
 	white-space:nowrap;
+
 	text-align: center;
 	font-weight: 300;
-
-	// background-color: gray;
-}
-
-// html {
-// 	-webkit-filter: invert(100%);
-// }
-
-
-.bold {
-	font-weight: bold;
 }
 
 
+
+// Headers
 h1 {
 	font-size: 6vmin;
 }
@@ -51,13 +45,6 @@ table {
 	width: 100%;
 }
 
-
-
-// DEBUG
-// h1, h2, h3, h4, p, span {
-// 	border: 1px dotted black;
-// }
-
 // this displays the element with normal height, even when enpthy
 p:after, h1:after, h2:after, h3:after, h4:after {
 	content: '\a0';
@@ -67,6 +54,7 @@ h1, h2, h3, h4, p {
 	padding: 0;
 	margin: 0;
 }
+
 
 
 // Helper classes
@@ -83,13 +71,13 @@ h1, h2, h3, h4, p {
 	background-color: #f8f8f8;
 	border: 1px #eee solid;
 }
+.bold {
+	font-weight: bold;
+}
 
 
 
-
-
-
-
+// Used as nav bar on top and bottom
 .navbar-cutsom {
 	height: 10%;
 	max-height: 10%;
@@ -99,97 +87,108 @@ h1, h2, h3, h4, p {
 
 	table-layout: fixed;
 }
-#modules {
+
+// central block
+.modules {
 	height: 80%;
 	max-height: 80%;
 	max-width: 100%;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+
+	.grafikController{
+		height: 100%;
+	}
+
+	.aktuelleSerie {
+		overflow: hidden;
+		table-layout: fixed;
+
+		td {
+			font-size: 2.3vmin;
+		}
+		table td {
+			padding: 0.5vh;
+			margin: 0;
+		}
+		.table {
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	.serien {
+		overflow: hidden;
+
+		li {
+			font-size: 2.5vmin;
+		}
+	}
+
+	.serien, .aktuelleSerie {
+		position: relative;
+
+		h3 {
+			margin-bottom: 1em;
+		}
+	}
+
+	.aktuellerSchuss {
+		height: 9%;
+		max-height: 9%;
+		padding: 1vh 0 1vh 0;
+	}
+
+	@media only screen and (max-width: 500px) {
+		.grafik {
+			width: 100%;
+			height: 35%;
+		}
+		.info {
+			width: 100%;
+			height: 65%;
+		}
+	}
 }
 
 
 
+// Custom Modal
+.modal {
+	// enable line breaks for modals
+	white-space:normal;
 
-
-// Module Styling
-
-.grafikController{
-	height: 100%;
-}
-
-.aktuelleSerie {
-	overflow: hidden;
-	table-layout: fixed;
-
-	td {
-		font-size: 2.3vmin;
-	}
-	table td {
-		padding: 0.5vh;
-		margin: 0;
-	}
-	.table {
-		padding: 0;
-		margin: 0;
-	}
-}
-
-.serien {
-	overflow: hidden;
-
-	li {
+	.modal-body {
+		padding-top: 0;
+		padding-bottom: 0;
 		font-size: 2.5vmin;
+
+		.item {
+			// background-color: green;
+			padding: 1vmin;
+			border: 1px #eee solid;
+			border-radius: 0;
+		}
+		.item:hover {
+			background-color: #eee;
+		}
+
+		.qr {
+			margin: 2vmin;
+		}
+	}
+
+	.menuItem {
+		margin-top: 1vmin;
+		margin-bottom: 1vmin;
+		font-weight: bold;
 	}
 }
 
-.serien, .aktuelleSerie {
-	position: relative;
-
-	h3 {
-		margin-bottom: 1em;
-	}
-}
-
-.aktuellerSchuss {
-	height: 9%;
-	max-height: 9%;
-	padding: 1vh 0 1vh 0;
-}
 
 
-
-
-
-
-
-
-.modal-body {
-	padding-top: 0;
-	padding-bottom: 0;
-	font-size: 2.5vmin;
-
-	.item {
-		// background-color: green;
-		padding: 1vmin;
-		border: 1px #eee solid;
-		border-radius: 0;
-	}
-	.item:hover {
-		background-color: #eee;
-	}
-}
-
-.menuItem {
-	margin-top: 1vmin;
-	margin-bottom: 1vmin;
-	font-weight: bold;
-}
-
-
-
-
-
+// The Status block
 .status {
 	position:absolute;
 	height: 10%;
@@ -199,26 +198,12 @@ h1, h2, h3, h4, p {
 		height: 100%;
 	}
 }
+
+// version label
 .version {
 	position:absolute;
 	text-align: right;
 	width: 100%;
 	float: right;
 	opacity: 0.1;
-}
-
-
-@media only screen and (max-width: 500px) {
-	.grafik {
-		width: 100%;
-		height: 35%;
-	}
-	.info {
-		width: 100%;
-		height: 65%;
-	}
-}
-
-.qr {
-	margin: 2vmin;
 }

@@ -129,7 +129,7 @@ Methode 		| Parameter 		| Beschreibung
 - [x] Inner 10
     - Each Target should have a inner 10 property (Teiler).
 - [x] Print
-    - [ ] Printing confirm alert
+    - [x] Printing confirm alert
 
 ### v1.0
 - [x] Auth
@@ -141,7 +141,7 @@ Methode 		| Parameter 		| Beschreibung
     - Crashed should get logged, also the arrived data from the interface.
 - [ ] Rest Time Color
     - The Rest time should get oringe/ red when coming near the end.
-- [ ] Last shot/ Time over alert
+- [x] Last shot/ Time over alert
     - When the last shot was done or the time is over an alert should pop up (auto close/ manual OK Button???)
 - [ ] Ring Count List
 - [ ] Zehntel

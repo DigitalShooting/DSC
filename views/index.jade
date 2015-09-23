@@ -49,24 +49,6 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 						br
 						p {{infoObject.text}}
 						br
-			
-		
-		div(class="modal" id="mainMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
-			div(class="modal-dialog" role="document")
-				.modal-content
-					.modal-header
-						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
-							span(aria-hidden="true") &times;
-						h4(class="modal-title" id="myModalLabel") Sitzung
-					.modal-body
-						.list-group
-							a(class="actionNewTarget menuItem list-group-item") Neue Scheibe
-							a(class="actionMatch menuItem list-group-item") Match
-							a(class="loadSession menuItem list-group-item") Sitzung laden
-					.modal-footer
-						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
-		
-		
 		
 		div(class="modal" id="disziplinMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuDisziplinen")
 			div(class="modal-dialog modal-lg" role="document")
@@ -109,10 +91,6 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 							.modal-footer
 								button(type="button" class="btn btn-link" style="float:left;") {{adminUrl}}
 								button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
-									
-								
-						
-		
 		
 		
 		
@@ -135,8 +113,6 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 							button(type="button" class="btn btn-default" ng-click="print(true)") Alles Drucken
 						
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
-		
-
 
 
 
@@ -166,7 +142,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					h3 {{gesamt}}
 					h4 {{gesamtSerie}}
 		
-		div(id="modules")
+		div(class="modules")
 			div(ng-controller="grafik" class="grafikController col-xs-7 noPadding grafik")
 				target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" class="grafik")
 			

@@ -60,12 +60,26 @@ dscDataAPI.setUser({
 
 dscDataAPI.setDisziplin(config.disziplinen.all.lgTraining)
 
-dscDataAPI.onDataChanged = function(){
-	io.emit('setSession', dscDataAPI.getActiveSession());
-	io.emit('setData', dscDataAPI.getActiveData())
-}
-dscDataAPI.onStatusChanged = function(connected){
-	io.emit('setStatus', connected)
+dscDataAPI.on = function(event){
+	if (event.type == "dataChanged"){
+		io.emit('setSession', dscDataAPI.getActiveSession());
+		io.emit('setData', dscDataAPI.getActiveData())
+	}
+	else if (event.type == "statusChanged"){
+		io.emit('setStatus', event.connected)
+	}
+	else if (event.type == "alertTimeOverShot"){
+		io.emit('info', {
+			title: "Zeit ist abgelaufen",
+			text: "Der Schuss wurde nach Ablauf der Zeit abgegeben.",
+		})
+	}
+	else if (event.type == "alertShotLimit"){
+		io.emit('info', {
+			title: "Alle Schüsse abgegeben",
+			text: "Es wurden bereits alle Schüsse abgegeben.",
+		})
+	}
 }
 
 
@@ -170,10 +184,18 @@ io.on('connection', function(socket){
 			})
 			child_process.exec(["xvfb-run -a -s '-screen 0 640x480x16' wkhtmltopdf http://127.0.0.1:3000/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
 				child_process.exec(["lp -d Printer1 tmp.pdf"], function(err, out, code) {
-					io.emit('info', {
-						title: "Drucken erfolgreich",
-						text: "Der Ausdruck wurde erstellt.",
-					})
+					if (err){
+						io.emit('info', {
+							title: "Drucken fehlgeschlagen.",
+							text: "Beim erstellen des Ausdruck ist ein Fehler aufgetreten. ("+err+")",
+						})
+					}
+					else {
+						io.emit('info', {
+							title: "Drucken erfolgreich",
+							text: "Der Ausdruck wurde erstellt.",
+						})
+					}
 				});
 			});
 		})
