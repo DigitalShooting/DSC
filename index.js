@@ -37,7 +37,7 @@ var server = http.Server(app)
 var io = require('socket.io')(server);
 server.listen(config.network.port, config.network.address)
 server.on('listening', function() {
-	console.log('Express server started on at %s:%s', server.address().address, server.address().port)
+	console.log('[INFO] Express server started on at %s:%s', server.address().address, server.address().port)
 })
 
 
