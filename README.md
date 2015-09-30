@@ -118,12 +118,6 @@ Methode 		| Parameter 		| Beschreibung
 
 
 
-### Other
-- [ ] REST API als Zugang zum Backend
-
-
-
-
 ## Bugreport/ Feature Request
 Mail an: diana@janniklorenz.de
 
