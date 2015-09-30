@@ -175,8 +175,8 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 							li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
 						
 					
-		div(class="version") 
-			p #{config.version.version}	
+		div(class="version" ng-controller="version") 
+			p {{version}}	
 		table(class="navbar-cutsom navbar-default")
 			tr
 				td(ng-controller="name" ng-hide="hidden" ng-click="openUserMenu()")

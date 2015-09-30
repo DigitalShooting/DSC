@@ -21,13 +21,21 @@ app.use("/css/", express.static(__dirname + "/stylesheets"))
 
 // main route
 app.get("/", function(req, res){
-	res.locals = {config: {line: config.line, version: config.version,}}
+	res.locals = {
+		config: {
+			line: config.line,
+		}
+	}
 	res.render("index")
 })
 
 // print page
 app.get("/print", function(req, res){
-	res.locals = {sessions: [dscDataAPI.getActiveSession()], config: {line: config.line, version: config.version,}}
+	res.locals = {
+		config: {
+			line: config.line
+		}
+	}
 	res.render("print")
 })
 
@@ -100,6 +108,9 @@ function checkAuth(auth, callback){
 // socket stuff
 io.on('connection', function(socket){
 
+	// set about
+	socket.emit('setAbout', config.about);
+
 	// get/ set session
 	socket.on('getSession', function(key){
 		socket.emit('setSession', dscDataAPI.getActiveSession());
@@ -119,13 +130,11 @@ io.on('connection', function(socket){
 		socket.emit('setConfig', {
 			disziplinen: config.disziplinen,
 			line: config.line,
-			version: config.version,
 		})
 	})
 	socket.emit('setConfig', {
 		disziplinen: config.disziplinen,
 		line: config.line,
-		version: config.version,
 	})
 
 

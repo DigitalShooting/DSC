@@ -42,13 +42,13 @@ LG Training 	| Probe/ Match 				| Keine limitierung der Schüsse
 LG Training 5er | Probe/ Match 				| Keine limitierung der Schüsse/ 5er Serien
 LG Wettkampf 	| Probe/ Match 				| 40 Schuss Match/ 65 min
 LG 3 Stellung 	| Probe/ Match (K, L, S) 	| 40 Schuss Match/ 65 min
-                 | 							| 
+				 | 							| 
 LG Auflage 		| Probe/ Match 				| 30 Schuss Match/ 75 min
-                 | 							| 
+				 | 							| 
 LP Training 	| Probe/ Match 				| Keine limitierung der Schüsse
 LP Training 5er | Probe/ Match 				| Keine limitierung der Schüsse/ 5er Serien
 LP Wettkampf 	| Probe/ Match 				| 40 Schuss Match/ 65 min
-                | 							| 
+				| 							| 
 Demo LG 		| Probe 					| Zufallsschüsse
 Demo LG Blank 	| Probe 					| Zufallsschüsse
 Demo LP 		| Probe/ Match 				| Zufallsschüsse/ 6 min
@@ -117,37 +117,8 @@ Methode 		| Parameter 		| Beschreibung
 
 
 
-## Changelog
 
-### v0.7
-- [x] Changeing Parts
-    - Changing the active Part should get a config which provides:
-        - Free mode
-        - Change bevor first shot
-        - Disabled
-    - [x] Toggle Band
-- [x] Inner 10
-    - Each Target should have a inner 10 property (Teiler).
-- [x] Print
-    - [x] Printing confirm alert
-
-### v1.0
-- [x] Auth
-- [ ] MongoDB Backend
-    - Sessions have to be saved.
-- [ ] Backup solution
-    - Maybe a dedicated MongoDB server which we try to connect to.
-- [ ] Logging
-    - Crashed should get logged, also the arrived data from the interface.
-- [ ] Rest Time Color
-    - The Rest time should get oringe/ red when coming near the end.
-- [x] Last shot/ Time over alert
-    - When the last shot was done or the time is over an alert should pop up (auto close/ manual OK Button???)
-- [ ] Ring Count List
-- [ ] Zehntel
-- [x] Calculate Sereinsum etc into session -> less logic in client
-
-### 2.0
+### Other
 - [ ] REST API als Zugang zum Backend
 
 

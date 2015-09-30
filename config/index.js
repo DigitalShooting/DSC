@@ -3,7 +3,7 @@ var line = require("./line.js")
 var interf = require("./interface.js")
 var disziplinen = require("./disziplinen.js")
 var network = require("./network.js")
-var version = require("./version.js")
+var about = require("./about.js")
 var auth = require("./auth.js")
 
 module.exports = {
@@ -12,6 +12,6 @@ module.exports = {
 	interface: interf,
 	disziplinen: disziplinen,
 	network: network,
-	version: version,
+	about: about,
 	auth: auth,
 }

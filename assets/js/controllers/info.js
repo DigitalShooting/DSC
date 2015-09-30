@@ -283,6 +283,17 @@ angular.module('dsc.controllers.info', [])
 })
 
 
+.controller('version', function ($scope, socket) {
+	socket.on("setAbout", function(about){
+		if ($scope.version != undefined && $scope.version != about.version){
+			location.reload();
+		}
+		else {
+			$scope.version = about.version
+		}
+	})
+})
+
 .controller('overlayController', function ($scope, socket, dscAPI) {
 	socket.on("info", function (info) {
 		$('#overlayMenu').modal('hide')
