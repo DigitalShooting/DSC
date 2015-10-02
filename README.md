@@ -107,6 +107,8 @@ Methode 			| Parameter		| Auth	| Beschreibung
 `setUser` 			| user object 	| true 	| Aktuelle Session neuem User zuweisen
 `setPart` 			| id 			| true 	| Aktiven Part ändern
 `print` 			| 				| true 	| Alle Sessions Drucken
+`showMessage`		| Mesage Object	| true	| Zeigt ein Overlay mit `title` vom `type` (alert | default) an
+`hideMessage`		|				| true	| Schliest die Message
 
 ### Socket Server -> Client
 Methode 		| Parameter 		| Beschreibung
@@ -114,6 +116,8 @@ Methode 		| Parameter 		| Beschreibung
 `setSession` 	| Session Object 	| Sendet die aktuelle Session bei Veränderung
 `setData` 		| Data Object 		| Sendet alle Session (Data) (bei Veränderung)
 `setConfig` 	| Config Object 	| Sendet die aktuelle Config
+`showMessage`	| Mesage Object		| Zeigt ein Overlay mit `title` vom `type` (alert | default) an
+`hideMessage`	|					| Schliest die Message
 
 
 

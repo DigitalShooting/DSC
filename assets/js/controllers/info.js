@@ -306,3 +306,15 @@ angular.module('dsc.controllers.info', [])
 		}, 5000)
 	})
 })
+
+.controller('messageController', function ($scope, socket, dscAPI) {
+	$scope.hidden = true
+
+	socket.on("showMessage", function (message) {
+		$scope.hidden = false
+		$scope.message = message
+	})
+	socket.on("hideMessage", function (message) {
+		$scope.hidden = true
+	})
+})

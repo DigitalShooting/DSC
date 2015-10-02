@@ -218,4 +218,23 @@ io.on('connection', function(socket){
 			socket.emit("setTempToken", config.auth.tempKey)
 		})
 	})
+
+
+
+
+	socket.on("showMessage", function(object){
+		checkAuth(object.auth, function(){
+			io.emit('showMessage', {
+				type: object.type,
+				title: object.title
+			});
+		})
+	})
+	socket.on("hideMessage", function(object){
+		checkAuth(object.auth, function(){
+			io.emit('hideMessage', {})
+		})
+	})
+
+
 })

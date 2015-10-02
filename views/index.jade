@@ -40,6 +40,10 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 		meta(name="viewport", content="width=device-width")
 	body
 	
+		div(class="overlay" ng-controller="messageController" ng-hide="hidden")
+			div(class="alert alert-{{message.type}}")
+				h1 {{message.title}}
+	
 		div(class="modal" id="overlayMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="overlayController")
 			div(class="modal-dialog" role="document")
 				.modal-content
