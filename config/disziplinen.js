@@ -416,6 +416,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -434,6 +435,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -467,6 +469,7 @@ module.exports = {
 					serienLength: 5,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -502,6 +505,7 @@ module.exports = {
 					serienLength: 100,
 					anzahlShots: 0,
 					showInfos: false,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -538,6 +542,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -556,6 +561,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 40,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -593,6 +599,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -611,6 +618,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 30,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -645,6 +653,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -663,6 +672,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 20,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -681,6 +691,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -699,6 +710,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 20,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -717,6 +729,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -735,6 +748,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 20,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -770,6 +784,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -788,6 +803,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -824,6 +840,7 @@ module.exports = {
 					serienLength: 5,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -859,6 +876,7 @@ module.exports = {
 					serienLength: 100,
 					anzahlShots: 0,
 					showInfos: false,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -894,6 +912,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -912,6 +931,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 40,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -946,6 +966,7 @@ module.exports = {
 					serienLength: 100,
 					anzahlShots: 0,
 					showInfos: false,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -984,6 +1005,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -1002,6 +1024,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 30,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -1055,6 +1078,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: true,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -1073,6 +1097,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 40,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -1109,6 +1134,7 @@ module.exports = {
 					serienLength: 100,
 					anzahlShots: 0,
 					showInfos: false,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -1161,6 +1187,7 @@ module.exports = {
 					serienLength: 100,
 					anzahlShots: 0,
 					showInfos: false,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -1214,6 +1241,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -1232,6 +1260,7 @@ module.exports = {
 					serienLength: 10,
 					anzahlShots: 0,
 					showInfos: true,
+					zehntel: false,
 					time: {
 						enabled: false,
 						duration: 0,

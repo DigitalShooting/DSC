@@ -10,7 +10,7 @@ angular.module('dsc.controllers.session', [])
 			aktuelleSerie = []
 			for (var i = 0; i < serie.shots.length; i++){
 				var shot = {
-					ring: serie.shots[i].ring,
+					ring: serie.shots[i].ring.display,
 					teiler: serie.shots[i].teiler,
 					winkel: serie.shots[i].winkel,
 					number: serie.shots[i].number,
@@ -26,7 +26,6 @@ angular.module('dsc.controllers.session', [])
 					pfeil = "&#9099;"
 					winkel = - parseInt(shot.winkel) - 225
 				}
-
 
 				aktuelleSerie.push({
 					index: i,
@@ -64,7 +63,7 @@ angular.module('dsc.controllers.session', [])
 		if (serie){
 			currentShot = {
 				teiler: serie.shots[session.selection.shot].teiler,
-				ring: serie.shots[session.selection.shot].ring,
+				ring: serie.shots[session.selection.shot].ring.display,
 				winkel: serie.shots[session.selection.shot].winkel,
 			}
 			if (currentShot){
@@ -143,7 +142,7 @@ angular.module('dsc.controllers.session', [])
 
 		var part = session.disziplin.parts[session.type]
 		if (part.average.enabled == true){
-			$scope.schnittCalc = Math.round(session.schnittCalc) + " " + ((session.schnittCalc==1) ? "Ring" : "Ringe")
+			$scope.schnittCalc = session.schnittCalc + " " + ((session.schnittCalc==1) ? "Ring" : "Ringe")
 		}
 		else {
 			$scope.schnittCalc = ""
@@ -250,7 +249,7 @@ angular.module('dsc.controllers.session', [])
 		var zoom
 
 		if (serie != undefined && serie.length != 0) {
-			var ringInt = serie[session.selection.shot].ringInt
+			var ringInt = serie[session.selection.shot].ring.value
 			var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
 
 			currentRing = undefined
@@ -274,7 +273,6 @@ angular.module('dsc.controllers.session', [])
 		$scope.zoomlevel = zoom
 		$scope.selectedshotindex = session.selection.shot
 		$scope.probeecke = session.disziplin.parts[session.type].probeEcke
-	//
 	});
 })
 
