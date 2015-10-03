@@ -391,8 +391,8 @@ var scheiben = {
 module.exports = {
 
 	groups: [
-		{title: "LG", disziplinen: ["lgWettkampf", "lgTraining", "lgTraining5", "lgBlank", "lgAuflage", "lg3Stellung"]},
-		{title: "LP", disziplinen: ["lpWettkampf", "lpTraining", "lpTraining5", "lpBlank", "lpStrich"]},
+		{title: "LG", disziplinen: ["lgWettkampf", "lgFinale", "lgTraining", "lgTraining5", "lgBlank", "lgAuflage", "lg3Stellung"]},
+		{title: "LP", disziplinen: ["lpWettkampf", "lpFinale",, "lpTraining", "lpTraining5", "lpBlank", "lpStrich"]},
 		{title: "Zimmerstutzen", disziplinen: ["zimmerstutzen"]},
 		{title: "Demo", disziplinen: ["demo", "demoBlank", "demoLP", "demoStrich"]},
 	],
@@ -562,6 +562,60 @@ module.exports = {
 					anzahlShots: 40,
 					showInfos: true,
 					zehntel: false,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "beforeFirst",
+				},
+			},
+		},
+
+
+
+		lgFinale: {
+			_id: "lgFinale",
+			title: "LG Finale",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+				instantStart: false,
+			},
+			scheibe: scheiben.lg,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					zehntel: false,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
+				},
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 10,
+					showInfos: true,
+					zehntel: true,
 					time: {
 						enabled: false,
 						duration: 0,
@@ -932,6 +986,60 @@ module.exports = {
 					anzahlShots: 40,
 					showInfos: true,
 					zehntel: false,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "beforeFirst",
+				},
+			},
+		},
+
+
+
+		lpFinale: {
+			_id: "lpFinale",
+			title: "LP Finale",
+			interface: "esa",
+			time: {
+				enabled: false,
+				duration: 0,
+				instantStart: false,
+			},
+			scheibe: scheiben.lp,
+			parts: {
+				probe: {
+					title: "Probe",
+					probeEcke: true,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 0,
+					showInfos: true,
+					zehntel: false,
+					time: {
+						enabled: false,
+						duration: 0,
+						instantStart: false,
+					},
+					average: {
+						enabled: true,
+						anzahl: 40,
+					},
+					exitType: "",
+				},
+				match: {
+					title: "Match",
+					probeEcke: false,
+					neueScheibe: false,
+					serienLength: 10,
+					anzahlShots: 10,
+					showInfos: true,
+					zehntel: true,
 					time: {
 						enabled: false,
 						duration: 0,
