@@ -1,7 +1,7 @@
 # DigitalShootingClient (DSC)
 Client zum erfassen von Schüssen mit Anbindung an Häring ESA.
 
-![Demo](https://raw.githubusercontent.com/DigitalShooting/assets/master/DSC_1.png)
+![Demo](https://raw.githubusercontent.com/DigitalShooting/assets/master/DSC_1.gif)
 
 
 
