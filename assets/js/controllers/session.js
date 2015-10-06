@@ -249,7 +249,7 @@ angular.module('dsc.controllers.session', [])
 		var zoom
 
 		if (serie != undefined && serie.length != 0) {
-			var ringInt = serie[session.selection.shot].ring.value
+			var ringInt = serie[session.selection.shot].ring.int
 			var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
 
 			currentRing = undefined

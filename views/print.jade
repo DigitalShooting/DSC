@@ -70,7 +70,7 @@ html(lang="de" ng-app="dsc-print")
 								u Zeit
 						tr(ng-repeat="shot in serie.shots track by $index")
 							td {{shot.number}}.
-							td {{shot.ring}}
+							td {{shot.ring.display}}
 							td {{shot.winkel}}
 							td {{shot.teiler}}
 							td {{shot.time | formatDate}}
