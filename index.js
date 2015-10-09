@@ -105,11 +105,23 @@ function checkAuth(auth, callback){
 
 
 
+// Store the activeMessage object to push it to new clients
+var activeMessage = undefined
+
+
 // socket stuff
 io.on('connection', function(socket){
 
 	// set about
 	socket.emit('setAbout', config.about);
+
+	if (activeMessage != undefined){
+		socket.emit('showMessage', {
+			type: activeMessage.type,
+			title: activeMessage.title,
+		});
+	}
+
 
 	// get/ set session
 	socket.on('getSession', function(key){
@@ -224,14 +236,16 @@ io.on('connection', function(socket){
 
 	socket.on("showMessage", function(object){
 		checkAuth(object.auth, function(){
+			activeMessage = object
 			io.emit('showMessage', {
 				type: object.type,
-				title: object.title
+				title: object.title,
 			});
 		})
 	})
 	socket.on("hideMessage", function(object){
 		checkAuth(object.auth, function(){
+			activeMessage = undefined
 			io.emit('hideMessage', {})
 		})
 	})
