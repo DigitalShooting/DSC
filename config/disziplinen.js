@@ -339,7 +339,7 @@ module.exports = {
 					probeEcke: true,
 					neueScheibe: true,
 					serienLength: 10,
-					anzahlShots: 0,
+					anzahlShots: 40,
 					showInfos: true,
 					zehntel: true,
 					time: {
@@ -467,7 +467,7 @@ module.exports = {
 
 
 
-		
+
 		lgTraining: {
 			_id: "lgTraining",
 			title: "LG Training",

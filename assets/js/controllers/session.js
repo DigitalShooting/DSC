@@ -162,15 +162,20 @@ angular.module('dsc.controllers.session', [])
 	socket.on("setSession", function (session) {
 		$scope.gesamt = session.anzahl
 
+		var part = session.disziplin.parts[session.type]
+		if (part.anzahlShots != 0) {
+			$scope.gesamt += "/ " + part.anzahlShots
+		}
+
 		if (session.serien[session.selection.serie] != undefined){
-			$scope.serie = session.serien[session.selection.serie].shots.length
+			$scope.serie = session.serien[session.selection.serie].shots.length + "/ " + part.serienLength
 		}
 
 		if (
-			$scope.gesamt == 0
+			session.anzahl == 0
 		) $scope.hidden = true
 		else $scope.hidden = false
-	});
+	})
 })
 
 
