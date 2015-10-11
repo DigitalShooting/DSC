@@ -23,6 +23,9 @@ html(lang="de" ng-app="dsc-print")
 		script(src="/libs/qrcode/lib/qrcode.min.js")
 		script(src="/libs/angular-qr/angular-qr.min.js")
 		
+		// FitText
+		script(src="/libs/ngFitText/src/ng-FitText.js")
+		
 		script(src='/js/controllers/print.js')
 		script(src='/js/services/grafik.js')
 		script(src='js/services/socketio.js')
@@ -102,6 +105,6 @@ html(lang="de" ng-app="dsc-print")
 			var app = angular.module('dsc-print', [
 				'dsc.services.socketio', 'dsc.services.grafik',
 				'dsc.controllers.print',
-				"btford.socket-io", "ja.qr",
+				"btford.socket-io", "ja.qr", "ngFitText",
 			])
 		

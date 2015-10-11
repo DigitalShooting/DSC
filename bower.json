@@ -11,10 +11,11 @@
   ],
   "license": "GPL v2",
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "angularjs": "~1.4.4",
-    "angular-socket-io": "~0.7.0",
+    "angular-qr": "~0.2.0",
     "angular-route": "~1.4.4",
-    "angular-qr": "~0.2.0"
+    "angular-socket-io": "~0.7.0",
+    "angularjs": "~1.4.4",
+    "bootstrap": "~3.3.5",
+    "ngFitText": "~3.3.3"
   }
 }

@@ -27,6 +27,9 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 		script(src="/socket.io/socket.io.js")
 		script(src="/libs/angular-socket-io/socket.js")
 		
+		// FitText
+		script(src="/libs/ngFitText/src/ng-FitText.js")
+		
 		script(src='js/services/grafik.js')
 		script(src='js/services/socketio.js')
 		script(src='js/services/dscAPI.js')
@@ -127,23 +130,23 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 			tr
 				td(ng-controller="time" ng-hide="hidden")
 					h4 Uhr
-					h3 {{time}}
+					h3(data-fittext data-fittext-max="30ex") {{time}}
 					h4 {{date}}
 				td(ng-controller="restTime" ng-hide="hidden")
 					h4 {{label}}
-					h3 {{rest}}
+					h3(data-fittext data-fittext-max="30ex") {{rest}}
 					h4 {{gesamt}}
 				td(ng-controller="anzahlShots" ng-hide="hidden")
 					h4 Schüsse
-					h3 {{gesamt}}
+					h3(data-fittext data-fittext-max="30ex") {{gesamt}}
 					h4 {{serie}}
 				td(ng-controller="schnitt" ng-hide="hidden")
 					h4 Schnitt
-					h3 {{schnitt}}
+					h3(data-fittext data-fittext-max="30ex") {{schnitt}}
 					h4 {{schnittCalc}}
 				td(ng-controller="ringeGesamt" ng-hide="hidden")
 					h4 Gesamt
-					h3 {{gesamt}}
+					h3(data-fittext data-fittext-max="30ex") {{gesamt}}
 					h4 {{gesamtSerie}}
 		
 		div(class="modules")
@@ -185,28 +188,28 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 			tr
 				td(ng-controller="name" ng-hide="hidden" ng-click="openUserMenu()")
 					h4 Name
-					h3 {{name}}
+					h3(data-fittext data-fittext-max="30ex") {{name}}
 					h4 {{line}}
-				td(ng-controller="verein" ng-hide="hidden")
+				td(ng-controller="verein" ng-hide="_hidden")
 					h4 Verein
-					h3 {{verein}}
+					h3(data-fittext data-fittext-max="30ex") {{verein}}
 					h4 {{manschaft}}
 				td(ng-controller="disziplin" ng-hide="hidden" ng-click="openDisziplinMenu()")
 					h4 Disziplin
-					h3 {{disziplin}}
+					h3(data-fittext data-fittext-max="30ex") {{disziplin}}
 					h4 {{scheibe}}
 				td(ng-controller="newTarget" ng-hide="hidden" ng-click="newTarget()")
 					h4 Scheibe
-					h3 Neue Scheibe
+					h3(data-fittext data-fittext-max="30ex") Neue Scheibe
 					h4
 				td(ng-controller="part" ng-hide="hidden" ng-click="openPartsMenu()")
 					h4 Modus
-					h3 {{activePart}}
+					h3(data-fittext data-fittext-max="30ex") {{activePart}}
 					h4
 					
 		script.
 			angular.module("dsc", [
 				"dsc.services.grafik", "dsc.services.socketio", "dsc.services.timeFunctions", "dsc.services.dscAPI",
 				"dsc.controllers.info", "dsc.controllers.session",
-				"ja.qr",
+				"ja.qr", "ngFitText",
 			])
