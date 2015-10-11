@@ -132,7 +132,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					h4 Uhr
 					h3(data-fittext data-fittext-max="30ex") {{time}}
 					h4 {{date}}
-				td(ng-controller="restTime" ng-hide="hidden")
+				td(ng-controller="restTime" ng-hide="hidden" style="color:{{textColor}};")
 					h4 {{label}}
 					h3(data-fittext data-fittext-max="30ex") {{rest}}
 					h4 {{gesamt}}

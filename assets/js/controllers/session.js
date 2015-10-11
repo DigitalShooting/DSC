@@ -178,6 +178,8 @@ angular.module('dsc.controllers.session', [])
 .controller('restTime', ['$scope', "socket", 'timeFunctions', function ($scope, socket, timeFunctions) {
 	var refreshIntervalId
 
+	$scope.textColor = "#000"
+
 	function secondsToString(seconds){
 
 		var numhours = Math.floor(seconds / 3600)
@@ -206,9 +208,21 @@ angular.module('dsc.controllers.session', [])
 				$scope.label = "Verbleibende Zeit"
 				if (date > 0){
 					$scope.rest = secondsToString(date)
+
+					var percentOver = 1 - (date / (session.time.duration*60))
+					if (percentOver < 0.8) {
+						$scope.textColor = "#000000"
+					}
+					else if (percentOver < 0.9) {
+						$scope.textColor = "#ffa500"
+					}
+					else {
+						$scope.textColor = "#ff0000"
+					}
 				}
 				else {
 					$scope.rest = "Zeit abgelaufen"
+					$scope.textColor = "#ff0000"
 				}
 				$scope.gesamt = secondsToString(session.time.duration*60)
 			}
