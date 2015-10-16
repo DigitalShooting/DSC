@@ -339,7 +339,7 @@ module.exports = {
 					probeEcke: true,
 					neueScheibe: true,
 					serienLength: 10,
-					anzahlShots: 40,
+					anzahlShots: 0,
 					showInfos: true,
 					zehntel: true,
 					time: {
