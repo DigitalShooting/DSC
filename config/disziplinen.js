@@ -152,6 +152,16 @@ var scheiben = {
 		// InnenZehner Teiler
 		innenZehner: 200,
 
+		// Bandvorschub
+		band: {
+
+			// Vorschub bei wechsel des Parts
+			onChangePart: 8,
+
+			// Vorschub nach jedem Schuss
+			onShot: 3,
+		},
+
 		// pobe ecke
 		probeEcke: { color: "#0f0", alpha: 0.7 },
 
@@ -194,6 +204,10 @@ var scheiben = {
 		defaultZoom: zooms.lg.z1,
 		minZoom: zooms.lg.z0,
 		innenZehner: 200,
+		band: {
+			onChangePart: 8,
+			onShot: 3,
+		},
 		probeEcke: { color: "#0f0", alpha: 0.7 },
 		text: { size: 1.0, width: 0.3, up: 1.8, down: -0.8, left: 0.95, right: -1.7 },
 		kugelDurchmesser: 4.5,
@@ -220,6 +234,10 @@ var scheiben = {
 		defaultZoom: zooms.lp.z1,
 		minZoom: zooms.lp.z0,
 		innenZehner: 475,
+		band: {
+			onChangePart: 8,
+			onShot: 3,
+		},
 		probeEcke: { color: "#0f0", alpha: 0.7 },
 		text: { size: 3.0, width: 0.9, up: 4.8, down: -2.6, left: 2.6, right: -4.8 },
 		kugelDurchmesser: 4.5,
@@ -244,6 +262,10 @@ var scheiben = {
 		defaultZoom: zooms.lp.z1,
 		minZoom: zooms.lp.z0,
 		innenZehner: 475,
+		band: {
+			onChangePart: 8,
+			onShot: 3,
+		},
 		probeEcke: { color: "#0f0", alpha: 0.7 },
 		text: { size: 3.0, width: 0.9, up: 4.8, down: -2.6, left: 2.6, right: -4.8 },
 		kugelDurchmesser: 4.5,
@@ -268,6 +290,10 @@ var scheiben = {
 		defaultZoom: zooms.gewehr15.z1,
 		minZoom: zooms.gewehr15.z0,
 		innenZehner: 0,
+		band: {
+			onChangePart: 8,
+			onShot: 3,
+		},
 		probeEcke: { color: "#0f0", alpha: 0.7 },
 		text: { size: 2.6, width: 0.9, up: 3.2, down: -1.2, left: 1.4, right: -3.2 },
 		kugelDurchmesser: 4.5,
@@ -286,6 +312,10 @@ var scheiben = {
 		defaultZoom: zooms.strichBreit.z0,
 		minZoom: zooms.strichBreit.z0,
 		innenZehner: 0,
+		band: {
+			onChangePart: 8,
+			onShot: 3,
+		},
 		probeEcke: { color: "#0f0", alpha: 0.7 },
 		kugelDurchmesser: 4.5,
 	},

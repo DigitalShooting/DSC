@@ -1,9 +1,9 @@
-#include <stdio.h>   /* Standard input/output definitions */
-#include <string.h>  /* String function definitions */
-#include <unistd.h>  /* UNIX standard function definitions */
-#include <fcntl.h>   /* File control definitions */
-#include <errno.h>   /* Error number definitions */
-#include <termios.h> /* POSIX terminal control definitions */
+#include <stdio.h>   		// Standard input/output definitions
+#include <string.h>  		// String function definitions
+#include <unistd.h>  		// UNIX standard function definitions
+#include <fcntl.h>   		// File control definitions
+#include <errno.h>   		// Error number definitions
+#include <termios.h> 		// POSIX terminal control definitions
 
 #include <sys/ioctl.h>
 #include <sys/types.h>
@@ -15,7 +15,6 @@
 #include <iostream>
 
 using namespace std;
-
 
 class HaeringAPI {
 	int fd;
@@ -56,11 +55,6 @@ class HaeringAPI {
 		}
 		seq[sizeof(seq)-2] = xorBit;
 
-		// for (int i = 0; i < sizeof(seq); i++){
-		//      printf("%02x ", seq[i]);
-		// }
-
-
 		setRTS(fd,0);
 		write(fd,seq,sizeof(seq));
 		usleep(1041*sizeof(seq));
@@ -73,10 +67,8 @@ class HaeringAPI {
 		int i = 0;
 		unsigned char arr[length];
 		while (i < length){
-			// char chout[1];
 			int err = read(fd, &arr[i], 1);
 			if (err != -1) {
-				//printf("%i %02x\n", i, arr[i]);
 				printf("%02x", arr[i]);
 			}
 			usleep(50000);
@@ -92,32 +84,26 @@ class HaeringAPI {
 		HaeringAPI(char device[]) {
 			struct termios options;
 
-			fd = open(device, O_RDWR);// | O_NOCTTY | O_NDELAY);
+			fd = open(device, O_RDWR);						// | O_NOCTTY | O_NDELAY);
 			if (fd == 1) {
 				fprintf(stderr, "open_port: Unable to open %s - %s\n", device, strerror(errno));
 			}
 
-			fcntl(fd, F_SETFL, FNDELAY);   /* Configure port reading */
-
-			/* Get the current options for the port */
+			fcntl(fd, F_SETFL, FNDELAY);   					// Configure port reading
 			tcgetattr(fd, &options);
-			cfsetispeed(&options, B9600); /* Set the baud rates to 19200 */
+			cfsetispeed(&options, B9600); 					// Set the baud rates to 19200
 			cfsetospeed(&options, B9600);
-			cfmakeraw(&options);
+			cfmakeraw(&options);							// Get the current options for the port
 
-			/* Enable the receiver and set local mode */
-			options.c_cflag |= (CLOCAL | CREAD);
-			options.c_cflag &= ~PARENB; /* Mask the character size to 8 bits, no parity */
+			options.c_cflag |= (CLOCAL | CREAD);			// Enable the receiver and set local mode
+			options.c_cflag &= ~PARENB;						// Mask the character size to 8 bits, no parity
 			options.c_cflag &= ~CSTOPB;
 			options.c_cflag &= ~CSIZE;
-			options.c_cflag |=  CS8;/* Select 8 data bits */
-			options.c_cflag &= ~CRTSCTS;/* Disable hardware flow control */
+			options.c_cflag |=  CS8;						// Select 8 data bits
+			options.c_cflag &= ~CRTSCTS;					// Disable hardware flow control
+			options.c_lflag &= ~(ICANON | ECHO | ISIG);		// Enable data to be processed as raw input
 
-			/* Enable data to be processed as raw input */
-			options.c_lflag &= ~(ICANON | ECHO | ISIG);
-
-			/* Set the new options for the port */
-			tcsetattr(fd, TCSANOW, &options);
+			tcsetattr(fd, TCSANOW, &options);				// Set the new options for the port
 		}
 		~HaeringAPI() {
 			close(fd);
@@ -125,8 +111,8 @@ class HaeringAPI {
 
 
 
-		void sendBand() {
-			unsigned char seq[] = { 0x17, 0x08 };
+		void sendBand(unsigned char time) {
+			unsigned char seq[] = { 0x17, time };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
@@ -135,8 +121,8 @@ class HaeringAPI {
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
-		void sendSet() {
-			unsigned char seq[] = { 0x14, 0x05, 0xFA, 0x14, 0x03, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90 };
+		void sendSet(unsigned char time) {
+			unsigned char seq[] = { 0x14, 0x05, 0xFA, 0x14, time, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90 };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 0);
 		}
@@ -145,5 +131,69 @@ class HaeringAPI {
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 26);
 		}
-
 };
+
+
+
+
+// main
+//
+// Ussage: 		[device] 	[mode] 			[mode settings]
+//				/dev/ttyS1	band			8 (Band Move)
+//				/dev/ttyS1	nop
+//				/dev/ttyS1	set				3 (Shot Band Move)
+//				/dev/ttyS1	readSettings
+//
+// Description: Opens new HaeringAPI object with given device and calls given mode.
+//
+int main( int argc, char* argv[]){
+	if (argc >= 3){
+		HaeringAPI api(argv[1]);
+
+		// ------------------ BAND ----------------------
+		if (strcmp(argv[2], "band") == 0){
+			if (argc >= 4){
+				char band_time = atoi(argv[3]);
+				api.sendBand(band_time);
+			}
+			else {
+				printf("[ERROR] onChangePart Move Time not defined\n");
+			}
+		}
+		// ----------------------------------------------
+
+
+		// ------------------ NOP -----------------------
+		else if (strcmp(argv[2], "nop") == 0){
+			api.sendNOP();
+		}
+		// ----------------------------------------------
+
+
+		// ----------------- SET ------------------------
+		else if (strcmp(argv[2], "set") == 0){
+			if (argc >= 4){
+				char band_time = atoi(argv[3]);
+				api.sendSet(band_time);
+			}
+			else {
+				printf("[ERROR] onShot Move Time not defined\n");
+			}
+		}
+		// ----------------------------------------------
+
+
+		// ---------------- READSETTINGS ----------------
+		else if (strcmp(argv[2], "readSettings") == 0){
+			api.sendReadSettings();
+		}
+		// ----------------------------------------------
+
+		else {
+			printf("[ERROR] Mode not defined!\n");
+		}
+	}
+	else {
+		printf("Ussage: [device] [mode] [mode settings]\n");
+	}
+}
