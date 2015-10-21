@@ -261,8 +261,13 @@ angular.module('dsc.controllers.info', [])
 		})
 
 		// Shutdown
-		// shortcut.remove("F4")
-		// shortcut.add("F4", function(){})
+		shortcut.remove("F4")
+		shortcut.add("F4", function(){
+			$('#disziplinMenu').modal('hide')
+			$('#overlayMenu').modal('hide')
+			$('#userMenu').modal('hide')
+			$('#modeMenu').modal('hide')
+		})
 
 		// F5 - Neue Scheibe
 		shortcut.remove("F5")
