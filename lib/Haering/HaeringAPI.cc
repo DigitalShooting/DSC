@@ -4,21 +4,24 @@
 #include <fcntl.h>   		// File control definitions
 #include <errno.h>   		// Error number definitions
 #include <termios.h> 		// POSIX terminal control definitions
-
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
-
-
 #include <iostream>
 
 using namespace std;
 
+// API for Haering ESA interface
 class HaeringAPI {
-	int fd;
+	int fd;												// Serial Device
 
+
+
+	// Enable/ Dsiable RTS Pins of oure serial device
+	// int fd: 		Serial device
+	// int level: 	0/1 to disable/ enable RTS
 	int setRTS(int fd, int level) {
 		int status;
 
@@ -39,48 +42,57 @@ class HaeringAPI {
 
 
 
+	// Write binary data to Serial Device
+	// int fd: 					Serial device
+	// unsigned char data[]:	Content Bytes
+	// int length:				Length of the content bytes array
 	void writeToHaering(int fd, unsigned char data[], int length) {
-		unsigned char seq[4+length];
-		seq[0] = 0x55;
-		seq[1] = 0x01;
-		for (int i = 0; i < length; i++){
+		unsigned char seq[4+length];					// Alloc array for complete send buffer
+
+		seq[0] = 0x55;									// Start Byte
+		seq[1] = 0x01;									// Address Byte
+		for (int i = 0; i < length; i++){				// Content Bytes
 			seq[i+2] = data[i];
 		}
-		seq[sizeof(seq)-1] = 0xaa;
-
-
-		unsigned char xorBit = 0x00;
+		unsigned char xorBit = 0x00;					// Checksum Byte
 		for (int i = 0; i < sizeof(seq)-2; i++){
 			 xorBit ^= seq[i];
 		}
 		seq[sizeof(seq)-2] = xorBit;
+		seq[sizeof(seq)-1] = 0xaa;						// End Byte
 
-		setRTS(fd,0);
-		write(fd,seq,sizeof(seq));
+		setRTS(fd, 0);									// Disable RTS to send
+		write(fd, seq, sizeof(seq));					// Write data
 		usleep(1041*sizeof(seq));
 	}
-	void readFromHaering(int fd, int length) {
-		setRTS(fd,1);
 
-		length = (length+3);
+
+
+	// Read binary data from Serial Device
+	// int fd: 					Serial device
+	// int length:				Length to read
+	void readFromHaering(int fd, int length) {
+		setRTS(fd, 1);									// Enable RTS to send
+
+		length = (length+3);							// Read 3 more bytes than requested (otherwise it did not work)
 
 		int i = 0;
 		unsigned char arr[length];
 		while (i < length){
-			int err = read(fd, &arr[i], 1);
+			int err = read(fd, &arr[i], 1);				// Read byte after byte
 			if (err != -1) {
-				printf("%02x", arr[i]);
+				printf("%02x", arr[i]);					// Print it out as HEX
 			}
-			usleep(50000);
+			usleep(50000);								// Wait for the next one
 			i++;
 		}
 	}
 
 
 
-
-
 	public:
+		// Init HaeringAPI
+		// char device[]: 		Path to serial device
 		HaeringAPI(char device[]) {
 			struct termios options;
 
@@ -105,34 +117,57 @@ class HaeringAPI {
 
 			tcsetattr(fd, TCSANOW, &options);				// Set the new options for the port
 		}
+
+
+
+		// Deinit HaeringAPI
 		~HaeringAPI() {
 			close(fd);
 		}
 
 
 
+		// Send paper move to serial device
+		// unsigned char time:		Time to move (0-255)
 		void sendBand(unsigned char time) {
 			unsigned char seq[] = { 0x17, time };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
+
+
+
+		// Send NOP to serial device
+		// output: 					Recived bytes
 		void sendNOP() {
 			unsigned char seq[] = { 0x00 };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 17);
 		}
+
+
+
+		// Send Config to serial device
+		// unsigned char time:		Time to move after each shot (0-255)
 		void sendSet(unsigned char time) {
 			unsigned char seq[] = { 0x14, 0x05, 0xFA, 0x14, time, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90 };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 0);
 		}
+
+
+
+		// Read settings from serial device
+		// output: 					Settings
 		void sendReadSettings() {
 			unsigned char seq[] = { 0x13, 0x00 };
 			writeToHaering(fd, seq, sizeof(seq));
 			readFromHaering(fd, 26);
 		}
-};
 
+
+		
+};
 
 
 
