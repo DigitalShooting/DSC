@@ -2,4 +2,4 @@
 .DS_Store
 /stylesheets/*.css
 /config/version.tmp
-/lib/Haering/API/bin/
+/lib/Haering/bin/
