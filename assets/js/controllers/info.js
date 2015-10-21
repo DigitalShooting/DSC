@@ -254,7 +254,7 @@ angular.module('dsc.controllers.info', [])
 		shortcut.add("F2", nextShot)
 		shortcut.add("down", nextShot)
 
-		Enter/ Menu
+		// Enter/ Menu
 		shortcut.remove("F3")
 		shortcut.add("F3", function(){
 			$('#disziplinMenu').modal('show')
