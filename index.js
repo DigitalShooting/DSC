@@ -66,7 +66,7 @@ dscDataAPI.setUser({
 	manschaft: "",
 })
 
-dscDataAPI.setDisziplin(config.disziplinen.all.lgTraining)
+dscDataAPI.setDisziplin(config.disziplinen.all.lg_training)
 
 dscDataAPI.on = function(event){
 	if (event.type == "dataChanged"){
