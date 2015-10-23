@@ -6,14 +6,14 @@ Client zum erfassen von Schüssen mit Anbindung an Häring ESA.
 
 
 
-## Installation
+## 1 Installation
 
-### Abhängigkeiten
+### 1.1 Abhängigkeiten
 - NodeJS (>0.10)
 - NPM
 - g++ (Haering API)
 
-### Git Installation
+### 1.2 Git
 ````
 # clone
 git clone https://github.com/DigitalShooting/DSC.git
@@ -22,7 +22,7 @@ cd DSC
 # NPM install
 npm install
 
-# configure
+# configure (more under /docs/config.md)
 ls config/
 
 # start
@@ -31,49 +31,36 @@ node index.js
 
 
 
-## Bedienung
+## 2 Bedienung
 
-### Disziplinen
-Die Disziplin kann durch einen Klick auf "Disziplin/ Aktuelle Disziplin" gewechselt werden.
-
-Disziplin         | Parts                     | Beschreibung
-----------------|---------------------------|------------------------------------------
-LG Training     | Probe/ Match              | Keine limitierung der Schüsse
-LG Training 5er | Probe/ Match              | Keine limitierung der Schüsse/ 5er Serien
-LG Wettkampf    | Probe/ Match              | 40 Schuss Match/ 65 min
-LG 3 Stellung   | Probe/ Match (K, L, S)    | 40 Schuss Match/ 65 min
-                |                           | 
-LG Auflage      | Probe/ Match              | 30 Schuss Match/ 75 min
-                |                           | 
-LP Training     | Probe/ Match              | Keine limitierung der Schüsse
-LP Training 5er | Probe/ Match              | Keine limitierung der Schüsse/ 5er Serien
-LP Wettkampf    | Probe/ Match              | 40 Schuss Match/ 65 min
-                |                           | 
-Demo LG         | Probe                     | Zufallsschüsse
-Demo LG Blank   | Probe                     | Zufallsschüsse
-Demo LP         | Probe/ Match              | Zufallsschüsse/ 6 min
-
-
-### Probe/ Match
+### 2.1 Probe/ Match
 Die beiden Modie Probe/ Match sind in "Parts" eingeteilt um einer Disziplin mehrere  Parts zuweisen zu können.
 
 Probe ist erkennbar an der Farbigen oberen rechten Ecke, sowie an dem Label "Probe" unter Modus.
 
 
-### Eingabegeräte
+### 2.2 Eingabegeräte
 
-#### Bedienelement Häring
+#### 2.2.1 Bedienelement Häring
 Folgende Tasten sind Belegt:
 
-Taste             | Aktion
+Taste           | Aktion
 ----------------|-----------------------------------------------------
-Probe/ Match    | Schaltet auf den nächsten Part
-Neue Scheibe    | Erzeugt eine neue Session mit dem gleichen Part Type
+Links           | Wählt die nachfolgende Serie aus
+Rechts          | Wählt die vorhergehenden Serie aus
 Hoch            | Wählt den vorhergehenden Schuss aus
 Runter          | Wählt den nachfolgenden Schuss aus
+Menu            | Öffnet das Disziplinen Menü
+Exit            | Schließt alle Overlays
+Neue Scheibe    | Erzeugt eine neue Session mit dem gleichen Part Type
+Drucken         | Druckt die Gesamte Session
+Probe/ Match    | Schaltet auf den nächsten Part
 
-#### Tastatur
-Taste             | Aktion
+
+
+
+#### 2.2.2 Tastatur
+Taste           | Aktion
 ----------------|------------------------------------
 `M`             | Schaltet auf den nächsten Part
 UP              | Wählt den vorhergehenden Schuss aus
@@ -82,7 +69,7 @@ RIGHT           | Wählt den nachfolgenden Serie aus
 LEFT            | Wählt den vorhergehenden Serie aus
 
 
-### Status
+### 2.3 Status
 Der aktuelle Verbindungsstatus ist erkennbar an dem schwarzen Block links oben in der Infoleiste. Ist dieser nicht vorhanden, ist alles in Ordnung.
 - Schwarz: Keine Verbindung zum Server
 - Rot: Keine Verbindung zum Interface
@@ -90,11 +77,11 @@ Der aktuelle Verbindungsstatus ist erkennbar an dem schwarzen Block links oben i
 
 
 
-## API
+## 3 API
 Als API kann aktuell nur die Socket.io Schnittstelle genutzt werden, die die Aktuelle Session bereitstellt.
 TODO: REST API
 
-### Socket Client -> Server
+### 3.1 Socket Client -> Server
 Methode             | Parameter     | Auth  | Beschreibung
 --------------------|---------------|-------|------------------------------------------------
 `getSession`        |               | false | Sendet die Aktuelle Session
@@ -110,7 +97,7 @@ Methode             | Parameter     | Auth  | Beschreibung
 `showMessage`       | Mesage Object | true  | Zeigt ein Overlay mit `title` vom `type` (alert | default) an
 `hideMessage`       |               | true  | Schliest die Message
 
-### Socket Server -> Client
+### 3.2 Socket Server -> Client
 Methode         | Parameter         | Beschreibung
 ----------------|-------------------|---------------------------------------------
 `setSession`    | Session Object    | Sendet die aktuelle Session bei Veränderung
@@ -122,11 +109,11 @@ Methode         | Parameter         | Beschreibung
 
 
 
-## Bugreport/ Feature Request
+## 4 Bugreport/ Feature Request
 Mail an: diana@janniklorenz.de
 
 
 
 
-## Licence
+## 5 Licence
 GNU GENERAL PUBLIC LICENSE Version 3
