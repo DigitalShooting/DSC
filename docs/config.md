@@ -53,7 +53,6 @@ module.exports = {
 	innenZehner: 200,
 	// pobe ecke
 	probeEcke: { color: "#0f0", alpha: 0.7 },
-
 	// text label configs
 	text: {
 		// text size
