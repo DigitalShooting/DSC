@@ -49,13 +49,6 @@ server.on('listening', function() {
 })
 
 
-// database init
-var database
-var mongodb = require("./lib/mongodb")(function(db){
-	database = db
-})
-
-
 // dsc api init
 var dscDataAPI = DSCDataAPI()
 
