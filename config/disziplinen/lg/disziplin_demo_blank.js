@@ -1,7 +1,7 @@
 var scheibe = require("./scheibe_blank.js")
 
 module.exports = {
-	_id: "lp_demo_blank",
+	_id: "lg_demo_blank",
 	title: "LG Demo Blank",
 	interface: {
 		name: "demo",
