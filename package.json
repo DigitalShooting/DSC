@@ -14,6 +14,7 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"preinstall": "./lib/Haering/buildAPI.sh && ./config/setVersion.sh"
+		"preinstall": "./lib/Haering/buildAPI.sh && ./config/setVersion.sh",
+		"test": "./node_modules/mocha/bin/mocha ./test/DSCDataAPI.js"
 	}
 }
