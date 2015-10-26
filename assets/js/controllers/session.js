@@ -292,6 +292,11 @@ angular.module('dsc.controllers.session', [])
 		$scope.zoomlevel = zoom
 		$scope.selectedshotindex = session.selection.shot
 		$scope.probeecke = session.disziplin.parts[session.type].probeEcke
+
+		if (
+			session.disziplin.parts[session.type].showInfos == false
+		) $scope.hidden = true
+		else $scope.hidden = false
 	});
 })
 

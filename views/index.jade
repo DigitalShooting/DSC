@@ -150,7 +150,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					h4 {{gesamtSerie}}
 		
 		div(class="modules")
-			div(ng-controller="grafik" class="grafikController col-xs-7 noPadding grafik")
+			div(ng-controller="grafik" class="grafikController {{hidden == true ? 'col-xs-12' : 'col-xs-7'}} noPadding grafik")
 				target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" class="grafik")
 			
 			div(class="col-xs-5 noPadding fullHeight info")

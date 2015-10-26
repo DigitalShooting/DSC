@@ -8,6 +8,7 @@
 ----
 
 ## v1.2
+- `ADD` Center target when `showInfos` is `false`
 - `ADD` Clean up codebase and configs
 - `ADD` Combine ESA C++ API to one single binary
 - `ADD` Review documentation, fixing minor bugs
