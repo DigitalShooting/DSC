@@ -5,5 +5,8 @@ module.exports = {
 	id: "stand1",
 
 	// Host Verein (Print log)
-	hostVerein: "SV Diana Dettingen",
+	hostVerein: {
+		name: "SV Diana Dettingen",
+		logoPath: __dirname + "/logo.png",
+	},
 }

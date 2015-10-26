@@ -126,7 +126,9 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 		div(ng-controller="shortcut")
 		div(class="status" style="position:absolute;" ng-controller="connection")
 			div(style="background-color:{{color}}")
-		table(class="navbar-cutsom navbar-default")
+		div(class="logo") 
+			img(src="./logo.png")
+		table(class="navbar-cutsom navbar-default navbar-top")
 			tr
 				td(ng-controller="time" ng-hide="hidden")
 					h4 Uhr

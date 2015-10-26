@@ -15,6 +15,7 @@ app.set('view engine', 'jade');
 app.use("/js/", express.static("./assets/js"))
 app.use("/libs/", express.static("./assets/libs"))
 app.use("/favicon.ico", express.static("./assets/img/favicon.ico"))
+app.use("/logo.png", express.static(config.line.hostVerein.logoPath))
 
 app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
 app.use("/css/", express.static(__dirname + "/stylesheets"))
