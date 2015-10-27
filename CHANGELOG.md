@@ -2,12 +2,12 @@
 
 ## Future
 - `FEATURE` Backup Soultion
-- `FEATURE` Branding
 - `FEATURE` BigData
 
 ----
 
 ## v1.2
+- `ADD` Branding (Logo in top left bar)
 - `ADD` Center target when `showInfos` is `false`
 - `ADD` Clean up codebase and configs
 - `ADD` Combine ESA C++ API to one single binary
