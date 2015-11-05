@@ -50,7 +50,7 @@ module.exports = {
 				enabled: true,
 				anzahl: 40,
 			},
-			exitType: "",
+			exitType: "beforeFirst",
 		},
 	},
 }
