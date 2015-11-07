@@ -6,6 +6,10 @@
 
 ----
 
+## v1.2.1
+- `FIX` ExitType handling
+- `FIX` NPM package name
+
 ## v1.2
 - `ADD` Branding (Logo in top left bar)
 - `ADD` Center target when `showInfos` is `false`
