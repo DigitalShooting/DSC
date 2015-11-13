@@ -3,3 +3,4 @@
 /stylesheets/*.css
 /config/version.tmp
 /lib/Haering/bin/
+/config/ssl/server*

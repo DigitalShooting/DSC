@@ -1,5 +1,6 @@
 var express = require("express")
 var http = require("http")
+var https = require("https")
 var fs = require('fs')
 var jade = require('jade')
 var child_process = require('child_process')
@@ -41,13 +42,20 @@ app.get("/print", function(req, res){
 })
 
 
-// express & socket io server init
-var server = http.Server(app)
+var server
+if (config.network.https.enabled){
+	server = https.createServer(config.network.https.options, app);
+}
+else {
+	server = http.Server(app)
+}
+
 var io = require('socket.io')(server);
 server.listen(config.network.port, config.network.address)
 server.on('listening', function() {
 	console.log('[INFO] Express server started on at %s:%s', server.address().address, server.address().port)
 })
+
 
 
 // dsc api init
