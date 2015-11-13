@@ -12,7 +12,7 @@ module.exports = {
 
 	// HTTPS
 	https: {
-		enabled: true,
+		enabled: false,
 		options: {
 			key: fs.readFileSync(__dirname+"/ssl/server.key"),
 			cert: fs.readFileSync(__dirname+"/ssl/server.crt")
