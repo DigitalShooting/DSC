@@ -42,14 +42,23 @@ app.get("/print", function(req, res){
 })
 
 
+
+// Init HTTP/ HTTPs
 var server
 if (config.network.https.enabled){
-	server = https.createServer(config.network.https.options, app);
+	var options = {
+		key: fs.readFileSync(config.network.https.keyPath),
+		cert: fs.readFileSync(config.network.https.crtPath),
+	}
+	server = https.createServer(options, app);
 }
 else {
 	server = http.Server(app)
 }
 
+
+
+// Init server on port and socket.io
 var io = require('socket.io')(server);
 server.listen(config.network.port, config.network.address)
 server.on('listening', function() {
@@ -61,6 +70,7 @@ server.on('listening', function() {
 // dsc api init
 var dscDataAPI = DSCDataAPI()
 
+// set default user
 dscDataAPI.setUser({
 	firstName: "Gast",
 	lastName: "",
@@ -68,8 +78,10 @@ dscDataAPI.setUser({
 	manschaft: "",
 })
 
-dscDataAPI.setDisziplin(config.disziplinen.all.lg_training)
+// set default disziplin
+dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin)
 
+// listen to dsc api events
 dscDataAPI.on = function(event){
 	if (event.type == "dataChanged"){
 		io.emit('setSession', dscDataAPI.getActiveSession());
@@ -92,10 +104,7 @@ dscDataAPI.on = function(event){
 	}
 }
 
-
-
-
-// perform callback if auth object ist valid
+// helper to perform callback if auth object ist valid
 function checkAuth(auth, callback){
 	if (config.auth.key == auth.key || config.auth.tempKey == auth.key){
 		if (callback != undefined) callback()
@@ -105,10 +114,9 @@ function checkAuth(auth, callback){
 	}
 }
 
-
-
 // Store the activeMessage object to push it to new clients
 var activeMessage = undefined
+
 
 
 // socket stuff

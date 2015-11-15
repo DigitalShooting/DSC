@@ -87,5 +87,10 @@ module.exports = {
 			]
 		},
 	],
+
+
 	all: all,
+
+	// Default to start with
+	defaultDisziplin: lg.training,
 }
