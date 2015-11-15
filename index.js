@@ -102,6 +102,18 @@ dscDataAPI.on = function(event){
 			text: "Es wurden bereits alle Schüsse abgegeben.",
 		})
 	}
+	else if (event.type == "exitTypeWarning_beforeFirst"){
+		io.emit('info', {
+			title: "Wechsel nicht möglich",
+			text: "Ein Wechsel ist nur vor dem erstem Schuss erlaubt.",
+		})
+	}
+	else if (event.type == "exitTypeWarning_none"){
+		io.emit('info', {
+			title: "Wechsel nicht möglich",
+			text: "Ein Wechsel ist nicht erlaubt.",
+		})
+	}
 }
 
 // helper to perform callback if auth object ist valid
