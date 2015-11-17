@@ -1,0 +1,51 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{pdfpages}
+\usepackage{siunitx}
+\usepackage{booktabs,lipsum,calc}
+\usepackage{multirow}
+\usepackage{graphicx}
+% \usepackage[margin=0.5in]{geometry}
+
+\ihead{Stand 0\\ }
+\ohead{SV Diana Dettingen\\ Jannik Lorenz}
+
+\begin{document}
+
+
+\section*{LG Training}
+
+\subsection*{Probe}
+\begin{table}[h!]
+	\begin{center}
+		\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} c|c|c|cc}
+			\toprule
+			Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
+			\midrule
+			1. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \multirow{0}[0]{*}{
+				\begin{minipage}{.3\textwidth}
+					\centering
+					\includegraphics[height=4cm, keepaspectratio]{out.pdf}
+				\end{minipage} }\\
+			2. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			3. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			4. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			5. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			6. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			7. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			8. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			9. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			10. & 9.5 & \SI{1}{\degree} & 500 & 19 Uhr & \\
+			\hline
+			10 & 80 Ringe & &  & 19 min & 8,7 \O \\
+			\bottomrule
+		\end{tabular*}
+	\end{center}
+\end{table}
+
+
+
+\end{document}
