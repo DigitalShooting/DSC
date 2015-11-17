@@ -4,3 +4,4 @@
 /config/version.tmp
 /lib/Haering/bin/
 /config/ssl/server*
+/config/database.js.my
