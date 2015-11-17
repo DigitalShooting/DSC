@@ -7,7 +7,7 @@ var child_process = require('child_process')
 var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
 var DSCDataAPI = require("./lib/DSCDataAPI.js")
-var Print = require("./print/print.js")
+var Print = require("./lib/print/print.js")
 var app = express()
 
 // jade
