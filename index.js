@@ -227,31 +227,20 @@ io.on('connection', function(socket){
 				text: "Der Ausdruck wird erstellt.",
 			})
 
-			console.log(dscDataAPI.getActiveData())
-			Print(dscDataAPI.getActiveData())
-
-			io.emit('info', {
-				title: "Drucken erfolgreich",
-				text: "Der Ausdruck wurde erstellt.",
+			Print(dscDataAPI.getActiveData(), function(err){
+				if (err){
+					io.emit('info', {
+						title: "Drucken fehlgeschlagen.",
+						text: "Beim erstellen des Ausdruck ist ein Fehler aufgetreten. ("+err+")",
+					})
+				}
+				else {
+					io.emit('info', {
+						title: "Drucken erfolgreich",
+						text: "Der Ausdruck wurde erstellt.",
+					})
+				}
 			})
-
-
-			// child_process.exec(["xvfb-run -a -s '-screen 0 640x480x16' wkhtmltopdf http://127.0.0.1:3000/print --javascript-delay 10000 tmp.pdf"], function(err, out, code) {
-			// 	child_process.exec(["lp -d Printer1 tmp.pdf"], function(err, out, code) {
-			// 		if (err){
-			// 			io.emit('info', {
-			// 				title: "Drucken fehlgeschlagen.",
-			// 				text: "Beim erstellen des Ausdruck ist ein Fehler aufgetreten. ("+err+")",
-			// 			})
-			// 		}
-			// 		else {
-			// 			io.emit('info', {
-			// 				title: "Drucken erfolgreich",
-			// 				text: "Der Ausdruck wurde erstellt.",
-			// 			})
-			// 		}
-			// 	});
-			// });
 		})
 	})
 

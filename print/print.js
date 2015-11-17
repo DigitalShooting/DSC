@@ -1,9 +1,8 @@
 var fs = require('fs')
 var Canvas = require('canvas')
-var dot = require('dot')
 var config = require("../config/")
 var child_process = require('child_process')
-
+var swig  = require('swig')
 
 var currentRing = {}
 var context
@@ -141,7 +140,11 @@ function resize() {
 }
 
 
-module.exports = function(data){
+
+// Trigges PDF generation and printing
+// data: DSC Data Object
+// callback: function(error)
+module.exports = function(data, callback){
 	for (session_i in data.sessionParts){
 		var session = data.sessionParts[session_i]
 		session.index = session_i
@@ -153,7 +156,7 @@ module.exports = function(data){
 			var scheibe = session.disziplin.scheibe
 			var zoomLevel = scheibe.defaultZoom
 			var selectedShotIndex = -1
-			var probeEcke = scheibe.probeEcke
+			var probeEcke = session.disziplin.parts[session.type].probeEcke
 
 			if (scheibe != undefined && serie != undefined && zoomLevel != undefined && selectedShotIndex != undefined){
 				var canvas = new Canvas(2000, 2000, 'pdf');
@@ -164,25 +167,37 @@ module.exports = function(data){
 
 				fs.writeFile(__dirname+"/tmp/scheibe_"+session_i+"_"+serien_i+".pdf", canvas.toBuffer());
 			}
-			console.log(serie)
+			// console.log(serie)
 		}
-		console.log(session)
+		// console.log(session)
 	}
 
-	var swig  = require('swig');
 	var htmlOutput = swig.renderFile(__dirname+"/templates/default.tex", {
 		data: data,
 		serie: serie,
 	});
 
 	fs.writeFile(__dirname+"/tmp/print.tex", htmlOutput, function(err) {
-		if(err) {
-			return console.log(err);
+		if (err) {
+			callback(true)
+			console.log(err);
 		}
 		else {
 			child_process.exec(["cd print/tmp && pdflatex print.tex"], function(err, out, code) {
-				if(err) {
-					return console.log(err);
+				if (err) {
+					callback(true)
+					console.log(err);
+				}
+				else {
+					// child_process.exec(["cd print/tmp && lp -d Printer1 print.pdf"], function(err, out, code) {
+					// 	if (err){
+					// 		callback(true)
+					// 	}
+					// 	else {
+					// 		callback(false)
+					// 	}
+					// });
+					callback(false)
 				}
 			});
 		}
