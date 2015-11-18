@@ -5,7 +5,7 @@ module.exports = {
 	title: "LG Demo",
 	interface: {
 		name: "demo",
-		time: 2500,
+		time: 250,
 	},
 	time: {
 		enabled: false,

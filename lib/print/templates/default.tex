@@ -1,9 +1,9 @@
-\documentclass[a4paper,10pt]{scrartcl}
+\documentclass[a4paper,7pt]{scrartcl}
 \usepackage[
-	top    = 2.75cm,
-	bottom = 2.50cm,
-	left   = 3.00cm,
-	right  = 2.50cm
+	top    = 2.00cm,
+	bottom = 1.00cm,
+	left   = 0.50cm,
+	right  = 0.50cm
 ]{geometry}
 \usepackage{scrpage2}
 \pagestyle{scrheadings}
@@ -14,6 +14,7 @@
 \usepackage{booktabs,lipsum,calc}
 \usepackage{multirow}
 \usepackage{graphicx}
+\usepackage{float}
 % \usepackage[margin=0.5in]{geometry}
 
 \ihead{Stand 0\\ \today}
@@ -21,41 +22,36 @@
 
 \begin{document}
 
-
 {% for session in data.sessionParts %}
-	{% if loop.first %}
-		\section*{ {{ session.disziplin.title|title }} }
-	{% endif %}
-	\subsection*{ {{ session.disziplin.parts[session.type].title|title }} }
-	{% for serie in session.serien %}
-		\begin{table}[h!]
-			\begin{center}
-				\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} c|c|c|cc}
-					\toprule
-					Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
-					\midrule
-
-					{% for shot in serie.shots %}
-						{{ shot.number|title }}. & {{ shot.ring.display|title }} & \SI{ {{ shot.winkel|title }} }{\degree} & {{ shot.teiler|title }} & {{ shot.time|date("H:i:s") }} Uhr &
-						{% if loop.first %}
-							\multirow{0}[0]{*}{
-							\begin{minipage}{.3\textwidth}
-								\centering
-								\includegraphics[height=4cm, keepaspectratio]{scheibe_{{ session.index|title }}_{{ serie.index|title }}.pdf}
-							\end{minipage} }\\
-						{% else %}
-							\\
-						{% endif %}
-					{% endfor %}
-
-					\hline
-					10 & 80 Ringe & &  & 19 min & 8,7 \O \\
-					\bottomrule
-				\end{tabular*}
-			\end{center}
-		\end{table}
-	{% endfor %}
+	{% if loop.first %}\section*{ {{ session.disziplin.title|title }} }{% endif %}
+	\begin{table}[H]
+		\subsection*{ {{ session.disziplin.parts[session.type].title|title }} }
+		\vspace{-5mm}
+		{% for serie in session.serien %}\begin{minipage}{0.5\textwidth}
+			\vspace{5mm}
+			% \begin{tabular}{|l||l|l|l|l|l|}
+			\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} c|c|c|cc}
+				% \toprule
+				% Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
+				% \midrule{% for shot in serie.shots %}
+				{{ shot.number|title }}. & {{ shot.ring.display|title }} & \SI{ {{ shot.winkel|title }} }{\degree} & {{ shot.teiler|title }} & {{ shot.time|date("H:i:s") }} &
+				{% if loop.first %}
+					\multirow{0}[0]{*}{
+					\begin{minipage}{.3\textwidth}
+						\centering
+						\includegraphics[height=2.5cm, keepaspectratio]{scheibe_{{ session.index|title }}_{{ serie.index|title }}.pdf}
+					\end{minipage} }
+					\\
+				{% else %}
+					\\
+				{% endif %}
+				{% endfor %}
+				\hline
+				10 & 80 Ringe & &  & 19 min & 8,7 \O \\
+				% \bottomrule
+			\end{tabular*}
+		\end{minipage}\hfill{% endfor %}
+	\end{table}
 {% endfor %}
-
 
 \end{document}
