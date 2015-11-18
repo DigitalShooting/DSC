@@ -6,6 +6,10 @@
 
 ----
 
+## v1.3
+- `ADD` Exit type warning
+- `ADD` MySQL connection
+
 ## v1.2.1
 - `FIX` ExitType handling
 - `FIX` NPM package name
