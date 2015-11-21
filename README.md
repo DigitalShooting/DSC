@@ -32,6 +32,16 @@ node index.js
 Access DSC in you browser for localhost on http://127.0.0.1 (read), or with auth key http://127.0.0.1/?key=123 (write). `123` is the default auth key, defined in config/auth.js.
 
 
+### 1.3 Konfiguration
+
+### 1.3.1 Authentifizierung
+Alle APIs mit Schreibzugriff erfordern eine Authentifizierung mittels mitgeschicktem code. Der Code wird mittels GET Parameter an den URL vom DSC angefügt, z.b. `https://<url>:<port>/?key?<code>`.
+
+Zur Authentifizierung werden 2 Passwörter akzeptiert, welche unter `config/auth.js` festgelegt werden. Eine statisches für den Standrechner/ DSM, sowie ein beim Start dynamisch erzeugtes, z.b. zum anzeigen als QR-Code.
+
+
+
+
 ## 2 Bedienung
 
 ### 2.1 Probe/ Match
