@@ -29,7 +29,7 @@ ls config/
 node index.js
 ````
 
-Access DSC in you browser for localhost on http://127.0.0.1 (read), or with auth key http://127.0.0.1/p?123 (write). `123` is the default auth key, defined in config/auth.js.
+Access DSC in you browser for localhost on http://127.0.0.1 (read), or with auth key http://127.0.0.1/?key=123 (write). `123` is the default auth key, defined in config/auth.js.
 
 
 ## 2 Bedienung
