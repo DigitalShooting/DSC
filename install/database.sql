@@ -1,3 +1,15 @@
+
+-- Create Database
+CREATE DATABASE dsc;
+USE dsc;
+
+
+-- Create User (Change Password)
+CREATE USER 'dsc'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON dsc.* TO 'dsc'@'%' WITH GRANT OPTION;
+
+
+-- Create Tables
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
