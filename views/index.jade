@@ -210,6 +210,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					h4
 					
 		script.
+			var scaleFactor = "#{config.line.scaleFactor}"
 			angular.module("dsc", [
 				"dsc.services.grafik", "dsc.services.socketio", "dsc.services.timeFunctions", "dsc.services.dscAPI",
 				"dsc.controllers.info", "dsc.controllers.session",
