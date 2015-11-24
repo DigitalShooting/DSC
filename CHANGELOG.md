@@ -9,6 +9,8 @@
 ## v1.3
 - `ADD` Exit type warning
 - `ADD` MySQL connection
+- `ADD` Scale factor to use custom size for graphic
+- `ADD` Update bower components
 
 ## v1.2.1
 - `FIX` ExitType handling
