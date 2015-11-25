@@ -43,6 +43,7 @@ app.get("/print", function(req, res){
 
 
 
+
 // Init HTTP/ HTTPs
 var server
 if (config.network.https.enabled){
@@ -51,6 +52,11 @@ if (config.network.https.enabled){
 		cert: fs.readFileSync(config.network.https.crtPath),
 	}
 	server = https.createServer(options, app);
+
+	app.get("/crt", function(req, res){
+		res.type("text/plain");
+		res.send(options.cert);
+	})
 }
 else {
 	server = http.Server(app)
