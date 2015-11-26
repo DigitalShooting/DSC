@@ -5,8 +5,10 @@ USE dsc;
 
 
 -- Create User (Change Password)
-CREATE USER 'dsc'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON dsc.* TO 'dsc'@'%' WITH GRANT OPTION;
+-- CREATE USER 'dsc'@'%' IDENTIFIED BY 'password';
+-- GRANT ALL PRIVILEGES ON dsc.* TO 'dsc'@'%' WITH GRANT OPTION;
+
+GRANT ALL ON `dsc`.* TO 'dsc'@'%' IDENTIFIED BY 'password';
 
 
 -- Create Tables
