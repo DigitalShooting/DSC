@@ -43,23 +43,8 @@ app.get("/print", function(req, res){
 
 
 
-
-// Init HTTP/ HTTPs
-var server
-if (config.network.https.enabled){
-	var options = {
-		key: fs.readFileSync(config.network.https.key),
-		cert: fs.readFileSync(config.network.https.cert),
-	}
-	server = https.createServer(options, app);
-}
-else {
-	server = http.Server(app)
-}
-
-
-
 // Init server on port and socket.io
+var server = http.Server(app)
 var io = require("socket.io")(server);
 server.listen(config.network.port, config.network.address)
 server.on("listening", function() {
