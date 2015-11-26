@@ -1,6 +1,6 @@
 
 -- Create Database
-CREATE DATABASE dsc;
+CREATE DATABASE IF NOT EXISTS dsc;
 USE dsc;
 
 
