@@ -210,9 +210,13 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					h4
 					
 		script.
+			// env vars
 			var scaleFactor = "#{config.line.scaleFactor}"
+			
+			// init angular app
 			angular.module("dsc", [
-				"dsc.services.grafik", "dsc.services.socketio", "dsc.services.timeFunctions", "dsc.services.dscAPI",
+				"ds.services.grafik",
+				"dsc.services.socketio", "dsc.services.timeFunctions", "dsc.services.dscAPI",
 				"dsc.controllers.info", "dsc.controllers.session",
 				"ja.qr", "ngFitText",
 			])

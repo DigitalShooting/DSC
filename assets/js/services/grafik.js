@@ -1,4 +1,4 @@
-angular.module('dsc.services.grafik', [])
+angular.module('ds.services.grafik', [])
 
 
 .directive('target', ['$timeout', '$window', function($timeout, $window){

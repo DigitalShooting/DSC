@@ -102,9 +102,12 @@ html(lang="de" ng-app="dsc-print")
 							td {{session.duration | formatDuration}}
 		
 		script.
+			// env vars
+			var scaleFactor = "#{config.line.scaleFactor}"
+		
+			// init angular app
 			var app = angular.module('dsc-print', [
-				'dsc.services.socketio', 'dsc.services.grafik',
-				'dsc.controllers.print',
+				"ds.services.grafik",
+				"dsc.services.socketio", "dsc.controllers.print",
 				"btford.socket-io", "ja.qr", "ngFitText",
 			])
-		
