@@ -40,10 +40,10 @@
 
 |\documentclass[a4paper,7pt]{scrartcl}
 |\usepackage[
-|	top    = 2.00cm,
+|	top    = 2.50cm,
 |	bottom = 1.50cm,
-|	left   = 0.50cm,
-|	right  = 0.50cm
+|	left   = 1.00cm,
+|	right  = 1.00cm
 |]{geometry}
 |\usepackage{scrpage2}
 |\pagestyle{scrheadings}
@@ -74,10 +74,9 @@ each session, index in data.sessionParts
 	|\subsection*{ #{session.disziplin.parts[session.type].title} }
 
 	each serie, index in session.serien
-		|\vspace{5mm}
-		|\begin{minipage}[t]{.48\textwidth}\vspace{0pt}
+		|\begin{minipage}[t]{.47\textwidth}\vspace{10pt}
 		|	\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} |c|c|c|cc}
-		|		\multicolumn{3}{l}{\textbf{#{index+1}. Serie}} \\
+		|		\multicolumn{6}{c}{\textbf{#{index+1}. Serie}} \\
 		|		\toprule
 		|		Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
 		|		\midrule
@@ -87,14 +86,14 @@ each session, index in data.sessionParts
 				|\multirow{0}[0]{*}{
 				|\begin{minipage}{.3\textwidth}
 				|	\centering
-				|	\includegraphics[height=2.5cm, keepaspectratio]{scheibe_#{session.index}_#{serie.index}.pdf}
+				|	\includegraphics[height=2.3cm, keepaspectratio]{scheibe_#{session.index}_#{serie.index}.pdf}
 				|\end{minipage} }
-				|\\
+				| \\
 			- else
-				|\\
+				| \\
 		- var i = serie.shots.length
 		- var min = session.disziplin.parts[session.type].serienLength
-		- if (min < 9) {min = 9}
+		- if (min < 8) {min = 8}
 		while i < min
 			|\\
 			- i++
@@ -104,6 +103,18 @@ each session, index in data.sessionParts
 		|	\end{tabular*}
 		|\end{minipage}
 		|\hfill
+	
+	|\newline
+	|\begin{minipage}[t]{1.0\textwidth}\vspace{10pt}
+	|	\begin{tabularx}{\textwidth}{@{}l *5{>{\centering\arraybackslash}X}@{}}
+	|		\multicolumn{4}{c}{\textbf{Gesamt (#{session.disziplin.parts[session.type].title})}} \\
+	|		\toprule
+	|		Anzahl & Ringe & Schnitt & Zeit \\
+	|		\midrule
+	|		#{session.anzahl} & #{session.gesamt} & #{session.schnitt} & #{formatDuration(session.duration)} \\
+	|		\bottomrule
+	|	\end{tabularx}
+	|\end{minipage}
 
 
 
