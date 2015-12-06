@@ -1,0 +1,110 @@
+
+
+- function formatTime(dateString){
+	- var date = new Date(dateString);
+	- return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+- }
+
+- function formatDate(dateString){
+	- var date = new Date(dateString);
+	- var d = date.getDate();
+	- var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+	- var m = monthNames[date.getMonth()];
+	- var y = date.getFullYear();
+	- return d+' '+m+' '+y;
+- }
+
+
+- function formatDuration(totalSeconds){
+	- totalSeconds = Math.round(totalSeconds)
+	
+	- var h = Math.floor(totalSeconds / 3600);
+	- if (h > 0) h = h + " h "
+	- else {h = ""}
+	
+	- totalSeconds = totalSeconds % 3600;
+	
+	- var m = Math.floor(totalSeconds / 60);
+	- if (m > 0) m = m + " min "
+	- else {m = ""}
+	
+	- var s = totalSeconds % 60;
+	- if (s > 0) s = s + " sec"
+	- else {s = ""}
+	
+	- return h+m+s;
+- }
+
+
+
+
+|\documentclass[a4paper,7pt]{scrartcl}
+|\usepackage[
+|	top    = 2.00cm,
+|	bottom = 1.50cm,
+|	left   = 0.50cm,
+|	right  = 0.50cm
+|]{geometry}
+|\usepackage{scrpage2}
+|\pagestyle{scrheadings}
+|\usepackage[utf8]{inputenc}
+|\usepackage[ngerman]{babel}
+|\usepackage{pdfpages}
+|\usepackage{siunitx}
+|\usepackage{booktabs,lipsum,calc}
+|\usepackage{multirow}
+|\usepackage{graphicx}
+|\usepackage{float}
+|% \usepackage[margin=0.5in]{geometry}
+
+|\usepackage{lmodern}
+|\usepackage{tabularx}
+
+
+|\begin{document}
+
+
+each session, index in data.sessionParts
+	- if (index == 0)
+		|\ihead{#{line.title}\\ \today}
+		|\ohead{#{session.user.verein} #{session.user.manschaft}\\ #{session.user.firstName} #{session.user.lastName}}
+		
+		| \section*{#{session.disziplin.title}}
+
+	|\subsection*{ #{session.disziplin.parts[session.type].title} }
+
+	each serie, index in session.serien
+		|\vspace{5mm}
+		|\begin{minipage}[t]{.48\textwidth}\vspace{0pt}
+		|	\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} |c|c|c|cc}
+		|		\multicolumn{3}{l}{\textbf{#{index+1}. Serie}} \\
+		|		\toprule
+		|		Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
+		|		\midrule
+		each shot, index in serie.shots
+			|#{ shot.number}. & #{shot.ring.display} & \SI{ #{shot.winkel} }{\degree} & #{shot.teiler} & #{formatTime(shot.time)} &
+			- if (index == 0)
+				|\multirow{0}[0]{*}{
+				|\begin{minipage}{.3\textwidth}
+				|	\centering
+				|	\includegraphics[height=2.5cm, keepaspectratio]{scheibe_#{session.index}_#{serie.index}.pdf}
+				|\end{minipage} }
+				|\\
+			- else
+				|\\
+		- var i = serie.shots.length
+		- var min = session.disziplin.parts[session.type].serienLength
+		- if (min < 9) {min = 9}
+		while i < min
+			|\\
+			- i++
+		|		\hline
+		|		#{serie.anzahl} & #{serie.gesamt} Ringe & &  & #{formatDuration(serie.duration)} & #{serie.schnitt} \O \\
+		|		\bottomrule
+		|	\end{tabular*}
+		|\end{minipage}
+		|\hfill
+
+
+
+|\end{document}

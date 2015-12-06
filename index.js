@@ -75,7 +75,7 @@ var dscDataAPI = DSCDataAPI()
 dscDataAPI.setUser({
 	firstName: "Gast",
 	lastName: "",
-	verein: "",
+	verein: config.line.hostVerein.name,
 	manschaft: "",
 })
 
