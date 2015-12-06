@@ -2,4 +2,8 @@
 
 MY_PATH="`dirname \"$0\"`"
 
-git rev-parse --short HEAD > $MY_PATH/version.tmp
+# Use current git head
+# git rev-parse --short HEAD > $MY_PATH/version.tmp
+
+# Use unixtime
+date +%s > $MY_PATH/version.tmp
