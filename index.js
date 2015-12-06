@@ -23,47 +23,33 @@ app.use("/css/", lessMiddleware(__dirname + "/stylesheets"))
 app.use("/css/", express.static(__dirname + "/stylesheets"))
 
 // main route
-app.get("/", function(req, res){
+app.use("*", function(req, res, next){
 	res.locals = {
 		config: {
 			line: config.line,
 		}
 	}
+	next()
+})
+
+// default page
+app.get("/", function(req, res, next){
 	res.render("index")
 })
 
 // print page
 app.get("/print", function(req, res){
-	res.locals = {
-		config: {
-			line: config.line
-		}
-	}
 	res.render("print")
 })
 
 
 
-// Init HTTP/ HTTPs
-var server
-if (config.network.https.enabled){
-	var options = {
-		key: fs.readFileSync(config.network.https.keyPath),
-		cert: fs.readFileSync(config.network.https.crtPath),
-	}
-	server = https.createServer(options, app);
-}
-else {
-	server = http.Server(app)
-}
-
-
-
 // Init server on port and socket.io
-var io = require('socket.io')(server);
+var server = http.Server(app)
+var io = require("socket.io")(server);
 server.listen(config.network.port, config.network.address)
-server.on('listening', function() {
-	console.log('[INFO] Express server started on at %s:%s', server.address().address, server.address().port)
+server.on("listening", function() {
+	console.log("[INFO] DSC started (%s:%s)", server.address().address, server.address().port)
 })
 
 
