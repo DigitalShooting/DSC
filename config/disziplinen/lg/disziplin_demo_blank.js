@@ -14,7 +14,7 @@ module.exports = {
 			title: "Probe",
 			probeEcke: false,
 			neueScheibe: true,
-			serienLength: 100,
+			serienLength: 50,
 			anzahlShots: 0,
 			showInfos: false,
 			zehntel: false,
