@@ -67,14 +67,13 @@ angular.module('dsc.controllers.session', [])
 				winkel: serie.shots[session.selection.shot].winkel,
 			}
 			if (currentShot){
-				if (currentShot.teiler > session.disziplin.scheibe.innenZehner) {
-					currentShot.pfeil = $sce.trustAsHtml("&#8594;")
-					currentShot.winkel = - parseInt(currentShot.winkel)
+				if (currentShot.innenZehner) {
+					currentShot.pfeil = $sce.trustAsHtml("&#9099;")
+					currentShot.winkel = - parseInt(currentShot.winkel) - 225
 				}
 				else {
-					currentShot.pfeil = $sce.trustAsHtml("&#9099;")
-
-					currentShot.winkel = - parseInt(currentShot.winkel) - 225
+					currentShot.pfeil = $sce.trustAsHtml("&#8594;")
+					currentShot.winkel = - parseInt(currentShot.winkel)
 				}
 			}
 		}

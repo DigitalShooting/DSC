@@ -2,7 +2,7 @@
 
 - function formatTime(dateString){
 	- var date = new Date(dateString);
-	- return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+	- return (date.getHours()<10?'0':'') + date.getHours()+':'+(date.getMinutes()<10?'0':'') + date.getMinutes()+':'+(date.getSeconds()<10?'0':'') + date.getSeconds();
 - }
 
 - function formatDate(dateString){
@@ -81,7 +81,7 @@ each session, index in data.sessionParts
 		|		Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
 		|		\midrule
 		each shot, index in serie.shots
-			|#{ shot.number}. & #{shot.ring.display} & \SI{ #{shot.winkel} }{\degree} & #{shot.teiler} & #{formatTime(shot.time)} &
+			|#{ shot.number}. & #{shot.ring.display} & \rotatebox[origin=c]{#{shot.winkel}}{$\rightarrow$} \SI{ #{shot.winkel} }{\degree} & #{shot.teiler} & #{formatTime(shot.time)} &
 			- if (index == 0)
 				|\multirow{0}[0]{*}{
 				|\begin{minipage}{.3\textwidth}
@@ -106,12 +106,12 @@ each session, index in data.sessionParts
 	
 	|\newline
 	|\begin{minipage}[t]{1.0\textwidth}\vspace{10pt}
-	|	\begin{tabularx}{\textwidth}{@{}l *5{>{\centering\arraybackslash}X}@{}}
-	|		\multicolumn{4}{c}{\textbf{Gesamt (#{session.disziplin.parts[session.type].title})}} \\
+	|	\begin{tabularx}{\textwidth}{@{}l *9{>{\centering\arraybackslash}X}@{}}
+	|		\multicolumn{8}{c}{\textbf{Gesamt (#{session.disziplin.parts[session.type].title})}} \\
 	|		\toprule
-	|		Anzahl & Ringe & Schnitt & Zeit \\
+	|		Anzahl & Ringe & Schnitt & Innenzehner & Bester Teiler & 9.9er & 10.0er & Zeit \\
 	|		\midrule
-	|		#{session.anzahl} & #{session.gesamt} & #{session.schnitt} & #{formatDuration(session.duration)} \\
+	|		#{session.anzahl} & \textbf{#{session.gesamt}} & #{session.schnitt} \O & #{session.counts.innenZehner} & #{session.bestTeiler} & #{session.counts.neunNeun} & #{session.counts.zehnNull} & #{formatDuration(session.duration)} \\
 	|		\bottomrule
 	|	\end{tabularx}
 	|\end{minipage}
