@@ -9,9 +9,11 @@ Client zum erfassen von Schüssen mit Anbindung an Häring ESA.
 ## 1 Installation
 
 ### 1.1 Abhängigkeiten
-- NodeJS (>0.10)
-- NPM
+- nodejs (>0.12)
+- npm
 - g++ (Haering API)
+- [node-canvas](https://github.com/Automattic/node-canvas) (Latex Print)
+- texlive-full (Latex Print)
 
 ### 1.2 Git
 ````

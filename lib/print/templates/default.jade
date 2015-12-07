@@ -97,6 +97,7 @@ each session, index in data.sessionParts
 		- var i = serie.shots.length
 		- var min = session.disziplin.parts[session.type].serienLength
 		- if (min < 8) {min = 8}
+		- if (min > 10) {min = 10}
 		while i < min
 			|\\
 			- i++
