@@ -1,9 +1,9 @@
 doctype html
-html(lang="de" ng-app="dsc-print")
+html(lang="de" ng-app="dsc-log")
 	head
-		title Print
+		title Log
 		
-		link(href="/css/print.css", rel="stylesheet")
+		link(href="/css/log.css", rel="stylesheet")
 	
 		// jquery
 		script(src="/libs/jquery/dist/jquery.js")
@@ -26,7 +26,7 @@ html(lang="de" ng-app="dsc-print")
 		// FitText
 		script(src="/libs/ngFitText/src/ng-FitText.js")
 		
-		script(src='/js/controllers/print.js')
+		script(src='/js/controllers/log.js')
 		script(src='/js/services/grafik.js')
 		script(src='js/services/socketio.js')
 		
@@ -106,8 +106,8 @@ html(lang="de" ng-app="dsc-print")
 			var scaleFactor = "#{config.line.scaleFactor}"
 		
 			// init angular app
-			var app = angular.module('dsc-print', [
+			var app = angular.module('dsc-log', [
 				"ds.services.grafik",
-				"dsc.services.socketio", "dsc.controllers.print",
+				"dsc.services.socketio", "dsc.controllers.log",
 				"btford.socket-io", "ja.qr", "ngFitText",
 			])

@@ -40,10 +40,9 @@ angular.module('dsc.services.dscAPI', [
 				disziplin: disziplin,
 			})
 		},
-		print: function(all){
+		print: function(){
 			socket.emit("print", {
 				auth: auth,
-				all: all,
 			})
 		},
 		getTempToken: function(){

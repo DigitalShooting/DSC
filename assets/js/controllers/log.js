@@ -1,4 +1,4 @@
-angular.module('dsc.controllers.print', [])
+angular.module('dsc.controllers.log', [])
 
 
 

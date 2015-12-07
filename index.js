@@ -37,9 +37,9 @@ app.get("/", function(req, res, next){
 	res.render("index")
 })
 
-// print page
-app.get("/print", function(req, res){
-	res.render("print")
+// log page
+app.get("/log", function(req, res){
+	res.render("log")
 })
 
 

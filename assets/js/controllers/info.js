@@ -111,8 +111,8 @@ angular.module('dsc.controllers.info', [])
 			$('#modeMenu').modal('hide')
 		}
 
-		$scope.print = function(type){
-			dscAPI.print(type)
+		$scope.print = function(){
+			dscAPI.print()
 			$('#modeMenu').modal('hide')
 		}
 	});
@@ -231,7 +231,7 @@ angular.module('dsc.controllers.info', [])
 			dscAPI.setPart(key)
 		}
 		var print = function(){
-			dscAPI.print(false)
+			dscAPI.print()
 		}
 
 		// LEFT - Previous serie

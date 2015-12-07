@@ -60,6 +60,9 @@
 |\usepackage{lmodern}
 |\usepackage{tabularx}
 
+|\usepackage{titlesec}
+|\titlespacing*{\section} {0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+|\titlespacing*{\subsection} {0pt}{2.25ex plus 1ex minus .2ex}{-5.0ex plus .2ex}
 
 |\begin{document}
 
@@ -75,7 +78,7 @@ each session, index in data.sessionParts
 
 	each serie, index in session.serien
 		|\begin{minipage}[t]{.47\textwidth}\vspace{10pt}
-		|	\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} |c|c|c|cc}
+		|	\begin{tabular*}{\textwidth}{c|c|c|c|c @{\extracolsep{\fill}} c}
 		|		\multicolumn{6}{c}{\textbf{#{index+1}. Serie}} \\
 		|		\toprule
 		|		Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
@@ -115,6 +118,7 @@ each session, index in data.sessionParts
 	|		\bottomrule
 	|	\end{tabularx}
 	|\end{minipage}
+	|\newline
 
 
 
