@@ -40,7 +40,6 @@
 mixin gesamt(session)
 	|\begin{minipage}[t]{1.0\textwidth}\vspace{10pt}
 	|	\begin{tabularx}{\textwidth}{@{}l *9{>{\centering\arraybackslash}X}@{}}
-	|		\multicolumn{8}{c}{\textbf{Gesamt}} \\
 	|		\toprule
 	|		Anzahl & Ringe & Schnitt & Innenzehner & Bester Teiler & 9.9er & 10.0er & Zeit \\
 	|		\midrule
@@ -52,56 +51,42 @@ mixin gesamt(session)
 
 
 
-mixin serie(session, serie, index)
-	|\begin{minipage}[t]{.48\textwidth}\vspace{10pt}
-	|	\begin{tabular*}{\textwidth}{c|c|c|c|c @{\extracolsep{\fill}} c}
-	|		\multicolumn{6}{c}{\textbf{#{index+1}. Serie}} \\
-	|		\toprule
-	|		Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
-	|		\midrule
-	
-	each shot, index in serie.shots
-		|#{ shot.number}. & #{shot.ring.display} & \rotatebox[origin=c]{#{shot.winkel}}{$\rightarrow$} \SI{ #{shot.winkel} }{\degree} & #{shot.teiler} & #{formatTime(shot.time)} &
-		- if (index == 0)
-			|\multirow{0}[0]{*}{
-			|\begin{minipage}{.3\textwidth}
-			|	\centering
-			|	\includegraphics[height=2.3cm, keepaspectratio]{scheibe_#{session.index}_#{serie.index}.pdf}
-			|\end{minipage} }
-			| \\
-		- else
-			| \\
-	
-	- var i = serie.shots.length
-	- var min = session.disziplin.parts[session.type].serienLength
-	- if (min < 8) {min = 8}
-	- if (min > 10) {min = 10}
-	while i < min
-		|\\
-		- i++
-	
-	|		\hline
-	|		#{serie.anzahl} & #{serie.gesamt} Ringe & &  & #{formatDuration(serie.duration)} & #{serie.schnitt} \O \\
-	|		\bottomrule
-	|	\end{tabular*}
-	|\end{minipage}
-	|\hfill
-
-
-
-mixin session(session, index)
-	- if (index == 0)
-		|\ihead{#{line.title}\\ \today}
-		|\ohead{#{session.user.verein} #{session.user.manschaft}\\ #{session.user.firstName} #{session.user.lastName}}
-		
-		| \section*{#{session.disziplin.title}}
-
-	|\subsection*{ #{session.disziplin.parts[session.type].title} }
-	+gesamt(session)
+mixin serien(session)
 	each serie, index in session.serien
-		+serie(session, serie, index)
-	|\vspace{1cm}
-
+		|\begin{minipage}[t]{.48\textwidth}\vspace{10pt}
+		|	\begin{tabular*}{\textwidth}{c|c|c|c|c @{\extracolsep{\fill}} c}
+		|		\multicolumn{6}{c}{\textbf{#{index+1}. Serie}} \\
+		|		\toprule
+		|		Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
+		|		\midrule
+		
+		each shot, index in serie.shots
+			|#{ shot.number}. & #{shot.ring.display} & \rotatebox[origin=c]{#{shot.winkel}}{$\rightarrow$} \SI{ #{shot.winkel} }{\degree} & #{shot.teiler} & #{formatTime(shot.time)} &
+			- if (index == 0)
+				|\multirow{0}[0]{*}{
+				|\begin{minipage}{.3\textwidth}
+				|	\centering
+				|	\includegraphics[height=3.0cm, keepaspectratio]{scheibe_#{session.index}_#{serie.index}.pdf}
+				|\end{minipage} }
+				|\\
+			- else
+				|\\
+		
+		- var i = serie.shots.length
+		- var min = session.disziplin.parts[session.type].serienLength
+		- if (min < 8) {min = 8}
+		- if (min > 10) {min = 10}
+		while i < min
+			|\\
+			- i++
+		
+		|\hline
+		|#{serie.anzahl} & \textbf{#{serie.gesamt}} & &  & #{formatDuration(serie.duration)} & #{serie.schnitt} \O \\
+		|\bottomrule
+		|\end{tabular*}
+		|\end{minipage}
+		- if (index < session.serien.length)
+			|\hfill
 
 
 
@@ -130,6 +115,9 @@ mixin session(session, index)
 |\usepackage{tabularx}
 |\usepackage{titlesec}
 
+|\usepackage{helvet}
+|\renewcommand{\familydefault}{\sfdefault}
+
 |\titlespacing*{\section} {0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
 |\titlespacing*{\subsection} {0pt}{2.25ex plus 1ex minus .2ex}{-5.0ex plus .2ex}
 
@@ -137,6 +125,15 @@ mixin session(session, index)
 |\begin{document}
 
 each session, index in data.sessionParts
-	+session(session, index)
+	- if (index == 0)
+		|\ihead{#{line.title}\\ \today}
+		|\ohead{#{session.user.verein} #{session.user.manschaft}\\ #{session.user.firstName} #{session.user.lastName}}
+		
+		|\section*{#{session.disziplin.title}}
+	
+	|\subsection*{ #{session.disziplin.parts[session.type].title} }
+	|\vspace{0.2cm}
+	+gesamt(session)
+	+serien(session)
 
 |\end{document}
