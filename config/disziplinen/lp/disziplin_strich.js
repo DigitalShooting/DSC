@@ -2,7 +2,7 @@ var scheibe = require("./scheibe_strich.js")
 
 module.exports = {
 	_id: "lp_strich",
-	title: "LP Strich",
+	title: "Strich",
 	interface: {
 		name: "esa",
 		band: {

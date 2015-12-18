@@ -2,7 +2,7 @@ var scheibe = require("./scheibe_blank.js")
 
 module.exports = {
 	_id: "lp_blank",
-	title: "LP Blank",
+	title: "Blank",
 	interface: {
 		name: "esa",
 		band: {

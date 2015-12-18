@@ -2,7 +2,7 @@ var scheibe = require("./scheibe.js")
 
 module.exports = {
 	_id: "lg_training_5",
-	title: "LG Training 5er",
+	title: "Training 5er",
 	interface: {
 		name: "esa",
 		band: {

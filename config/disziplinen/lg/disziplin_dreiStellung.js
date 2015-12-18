@@ -2,7 +2,7 @@ var scheibe = require("./scheibe.js")
 
 module.exports = {
 	_id: "lg_dreiStellung",
-	title: "LG 3 Stellung",
+	title: "3 Stellung",
 	interface: {
 		name: "esa",
 		band: {

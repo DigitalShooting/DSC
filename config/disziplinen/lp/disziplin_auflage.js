@@ -1,8 +1,8 @@
 var scheibe = require("./scheibe.js")
 
 module.exports = {
-	_id: "lp_training_5",
-	title: "Training 5er",
+	_id: "lp_auflage",
+	title: "Auflage",
 	interface: {
 		name: "esa",
 		band: {
@@ -21,7 +21,7 @@ module.exports = {
 			title: "Probe",
 			probeEcke: true,
 			neueScheibe: true,
-			serienLength: 5,
+			serienLength: 10,
 			anzahlShots: 0,
 			showInfos: true,
 			zehntel: false,
@@ -31,10 +31,29 @@ module.exports = {
 				instantStart: false,
 			},
 			average: {
-				enabled: false,
-				anzahl: 0,
+				enabled: true,
+				anzahl: 30,
 			},
 			exitType: "",
+		},
+		match: {
+			title: "Match",
+			probeEcke: false,
+			neueScheibe: false,
+			serienLength: 10,
+			anzahlShots: 30,
+			showInfos: true,
+			zehntel: false,
+			time: {
+				enabled: false,
+				duration: 0,
+				instantStart: false,
+			},
+			average: {
+				enabled: true,
+				anzahl: 30,
+			},
+			exitType: "beforeFirst",
 		},
 	},
 }
