@@ -10,7 +10,7 @@ module.exports = {
 	printer: {
 		// Printer name in cups
 		name: "Printer1",
-	}
+	},
 
 	// Host Verein (Print log)
 	hostVerein: {
