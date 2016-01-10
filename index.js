@@ -8,6 +8,7 @@ var lessMiddleware = require('less-middleware')
 var config = require("./config/index.js")
 var DSCDataAPI = require("./lib/DSCDataAPI.js")
 var Print = require("./lib/print/print.js")
+var proxy = require("express-http-proxy")
 var app = express()
 
 // jade
@@ -32,6 +33,14 @@ app.use("*", function(req, res, next){
 	next()
 })
 
+// start api and map to /api
+var api = require("./lib/api.js")
+app.use('/api/', proxy("127.0.0.1:" + config.network.api.port, {
+	forwardPath: function(req, res) {
+		return require('url').parse(req.url).path;
+	}
+}));
+
 // default page
 app.get("/", function(req, res, next){
 	res.render("index")
@@ -47,7 +56,7 @@ app.get("/log", function(req, res){
 // Init server on port and socket.io
 var server = http.Server(app)
 var io = require("socket.io")(server);
-server.listen(config.network.port, config.network.address)
+server.listen(config.network.dsc.port, config.network.dsc.address)
 server.on("listening", function() {
 	console.log("[INFO] DSC started (%s:%s)", server.address().address, server.address().port)
 })

@@ -13,7 +13,9 @@
 		"bootstrap": "x",
 		"mysql": "x",
 		"canvas": "x",
-		"swig": "x"
+		"swig": "x",
+		"restify": "x",
+		"express-http-proxy": "x"
 	},
 	"main": "index.js",
 	"scripts": {

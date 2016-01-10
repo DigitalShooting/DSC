@@ -15,8 +15,13 @@ SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 
+-- Update table name
+RENAME TABLE disziplin TO sessionGroup;
+ALTER TABLE session CHANGE `disziplinID` `sessionGroupID` int(11);
 
-CREATE TABLE IF NOT EXISTS `disziplin` (
+
+
+CREATE TABLE IF NOT EXISTS `sessionGroup` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (`id`)
 );
