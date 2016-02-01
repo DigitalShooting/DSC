@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `shot`  (
 	PRIMARY KEY (`number`,`sessionID`)
 );
 ALTER TABLE `shot` ADD COLUMN `ring` double NOT NULL;
+ALTER TABLE `shot` ADD COLUMN `ringValue` double NOT NULL;
 ALTER TABLE `shot` ADD COLUMN `teiler` double NOT NULL;
 ALTER TABLE `shot` ADD COLUMN `winkel` double NOT NULL;
 ALTER TABLE `shot` ADD COLUMN `x` double NOT NULL;
