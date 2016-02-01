@@ -84,7 +84,11 @@ mixin serien(session)
 
 
 
-|\documentclass[a4paper,8pt]{scrartcl}
+|\documentclass[
+|	a4paper,
+|	8pt,
+|	footheight=38pt
+|]{scrartcl}
 |\usepackage[
 |	top    = 2.50cm,
 |	bottom = 2.50cm,
@@ -120,7 +124,7 @@ mixin serien(session)
 each session, index in data.sessionParts
 	- if (index == 0)
 		|\ihead{#{line.title}\\ \today}
-		|\ohead{#{session.user.verein} #{session.user.manschaft}\\ #{session.user.firstName} #{session.user.lastName}}
+		|\ohead{ \large #{session.user.verein} #{session.user.manschaft}\\ #{session.user.firstName} #{session.user.lastName}}
 		
 		|\section*{#{session.disziplin.title}}
 	

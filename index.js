@@ -268,4 +268,13 @@ io.on('connection', function(socket){
 	})
 
 
+
+
+	socket.on("shutdown", function(object){
+		checkAuth(object.auth, function(){
+			child_process.exec(["'sudo shutdown -h now'"], function(err, out, code) { });
+		})
+	})
+
+
 })

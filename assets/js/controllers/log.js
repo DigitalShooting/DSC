@@ -3,7 +3,7 @@ angular.module('dsc.controllers.log', [])
 
 
 .controller('grafik', function ($scope, socket) {
-	$scope.size = "130px"
+	$scope.size = "250px"
 	$scope.scheibe = undefined
 	$scope.zoomlevel = undefined
 	$scope.serie = undefined
