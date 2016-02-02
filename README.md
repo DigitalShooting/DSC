@@ -36,11 +36,22 @@ Access DSC in you browser for localhost on http://127.0.0.1 (read), or with auth
 
 ### 1.3 Konfiguration
 
-### 1.3.1 Authentifizierung
+### 1.3.1 Authentifizierung (`auth.js`)
 Alle APIs mit Schreibzugriff erfordern eine Authentifizierung mittels mitgeschicktem code. Der Code wird mittels GET Parameter an den URL vom DSC angefügt, z.b. `https://<url>:<port>/?key?<code>`.
 
 Zur Authentifizierung werden 2 Passwörter akzeptiert, welche unter `config/auth.js` festgelegt werden. Eine statisches für den Standrechner/ DSM, sowie ein beim Start dynamisch erzeugtes, z.b. zum anzeigen als QR-Code.
 
+### 1.3.2 Database (`database.js`)
+Optionale anbindung an MySQL.
+
+### 1.3.3 Interface (`interface.js`)
+Es 2 Interfaces, welche Schüsse generieren, eines zum testen (demo) und eines um die Häring Anlage zu steuern (esa).
+
+### 1.3.4 Linie (`line.js`)
+Title/ Nummer der Linie, Einstellungen für die Anzeige sowie Drucker und Logo.
+
+### 1.3.5 Network (`network.js`)
+IPs/ Ports für DSC Web interface und API.
 
 
 
@@ -91,10 +102,10 @@ Der aktuelle Verbindungsstatus ist erkennbar an dem schwarzen Block links oben i
 
 
 ## 3 API
-Als API kann aktuell nur die Socket.io Schnittstelle genutzt werden, die die Aktuelle Session bereitstellt.
-TODO: REST API
 
-### 3.1 Socket Client -> Server
+### Socket
+
+#### 3.1 Socket Client -> Server
 Methode             | Parameter     | Auth  | Beschreibung
 --------------------|---------------|-------|------------------------------------------------
 `getSession`        |               | false | Sendet die Aktuelle Session
@@ -110,7 +121,7 @@ Methode             | Parameter     | Auth  | Beschreibung
 `showMessage`       | Mesage Object | true  | Zeigt ein Overlay mit `title` vom `type` (alert | default) an
 `hideMessage`       |               | true  | Schliest die Message
 
-### 3.2 Socket Server -> Client
+#### 3.2 Socket Server -> Client
 Methode         | Parameter         | Beschreibung
 ----------------|-------------------|---------------------------------------------
 `setSession`    | Session Object    | Sendet die aktuelle Session bei Veränderung
@@ -119,6 +130,12 @@ Methode         | Parameter         | Beschreibung
 `showMessage`   | Mesage Object     | Zeigt ein Overlay mit `title` vom `type` (alert | default) an
 `hideMessage`   |                   | Schliest die Message
 
+### REST
+URL                 | Parameter     | Beschreibung
+--------------------|---------------|------------------------------------------------
+`/shot`             |               | 
+`/session`          |               |
+`/sessionGroup`     |               |
 
 
 
