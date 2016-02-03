@@ -7,9 +7,9 @@ USE dsc;
 -- Create User (Change Password)
 GRANT ALL ON `dsc`.* TO 'dsc'@'%' IDENTIFIED BY 'password';
 
-RENAME TABLE shot TO _shot
-RENAME TABLE session TO _session
-RENAME TABLE sessionGroup TO _sessionGroup
+RENAME TABLE shot TO _shot;
+RENAME TABLE session TO _session;
+RENAME TABLE sessionGroup TO _sessionGroup;
 
 -- Adminer 4.2.2 MySQL dump
 
