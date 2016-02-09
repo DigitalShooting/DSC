@@ -3,28 +3,28 @@ angular.module('dsc.controllers.session', [])
 
 .controller('aktuelleSerie', ['$scope', '$sce', "socket", "dscAPI", function ($scope, $sce, socket, dscAPI) {
 	socket.on("setSession", function (session) {
-		var aktuelleSerie
+		var aktuelleSerie;
 
-		var serie = session.serien[session.selection.serie]
+		var serie = session.serien[session.selection.serie];
 		if (serie){
-			aktuelleSerie = []
+			aktuelleSerie = [];
 			for (var i = 0; i < serie.shots.length; i++){
 				var shot = {
 					ring: serie.shots[i].ring.display,
 					teiler: serie.shots[i].teiler,
 					winkel: serie.shots[i].winkel,
 					number: serie.shots[i].number,
-				}
+				};
 
-				var pfeil
-				var winkel
+				var pfeil;
+				var winkel;
 				if (shot.teiler > session.disziplin.scheibe.innenZehner) {
-					pfeil = "&#8594;"
-					winkel = - parseInt(shot.winkel)
+					pfeil = "&#8594;";
+					winkel = - parseInt(shot.winkel);
 				}
 				else {
-					pfeil = "&#9099;"
-					winkel = - parseInt(shot.winkel) - 225
+					pfeil = "&#9099;";
+					winkel = - parseInt(shot.winkel) - 225;
 				}
 
 				aktuelleSerie.push({
@@ -34,7 +34,7 @@ angular.module('dsc.controllers.session', [])
 					arrow: $sce.trustAsHtml(pfeil),
 					winkel: winkel,
 					selectedClass: i == session.selection.shot ? "bold" : "",
-				})
+				});
 
 			}
 		}
@@ -42,14 +42,14 @@ angular.module('dsc.controllers.session', [])
 		$scope.aktuelleSerie = aktuelleSerie;
 
 		if (
-			aktuelleSerie == undefined ||
-			session.disziplin.parts[session.type].showInfos == false
-		) $scope.hidden = true
-		else $scope.hidden = false
+			aktuelleSerie === undefined ||
+			session.disziplin.parts[session.type].showInfos === false
+		) $scope.hidden = true;
+		else $scope.hidden = false;
 
 		$scope.selectShot = function(index){
-			dscAPI.setSelectedShot(index)
-		}
+			dscAPI.setSelectedShot(index);
+		};
 	});
 }])
 
@@ -57,23 +57,23 @@ angular.module('dsc.controllers.session', [])
 
 .controller('aktuellerSchuss', ['$scope', '$sce', "socket", function ($scope, $sce, socket) {
 	socket.on("setSession", function (session) {
-		var currentShot
+		var currentShot;
 
-		var serie = session.serien[session.selection.serie]
+		var serie = session.serien[session.selection.serie];
 		if (serie){
 			currentShot = {
 				teiler: serie.shots[session.selection.shot].teiler,
 				ring: serie.shots[session.selection.shot].ring.display,
 				winkel: serie.shots[session.selection.shot].winkel,
-			}
+			};
 			if (currentShot){
 				if (currentShot.innenZehner) {
-					currentShot.pfeil = $sce.trustAsHtml("&#9099;")
-					currentShot.winkel = - parseInt(currentShot.winkel) - 225
+					currentShot.pfeil = $sce.trustAsHtml("&#9099;");
+					currentShot.winkel = - parseInt(currentShot.winkel) - 225;
 				}
 				else {
-					currentShot.pfeil = $sce.trustAsHtml("&#8594;")
-					currentShot.winkel = - parseInt(currentShot.winkel)
+					currentShot.pfeil = $sce.trustAsHtml("&#8594;");
+					currentShot.winkel = - parseInt(currentShot.winkel);
 				}
 			}
 		}
@@ -81,10 +81,10 @@ angular.module('dsc.controllers.session', [])
 		$scope.currentShot = currentShot;
 
 		if (
-			currentShot == undefined ||
-			session.disziplin.parts[session.type].showInfos == false
-		) $scope.hidden = true
-		else $scope.hidden = false
+			currentShot === undefined ||
+			session.disziplin.parts[session.type].showInfos === false
+		) $scope.hidden = true;
+		else $scope.hidden = false;
 	});
 }])
 
@@ -92,43 +92,43 @@ angular.module('dsc.controllers.session', [])
 
 .controller('serien', function ($scope, socket, dscAPI) {
 	socket.on("setSession", function (session) {
-		var serien = []
-		for(i in session.serien){
+		var serien = [];
+		for(var i in session.serien){
 			serien.push({
 				index: i,
 				value: session.serien[i].gesamt,
 				selectedClass: i == session.selection.serie ? "bold" : "",
-			})
+			});
 		}
 
 		$scope.serien = serien;
 
 		if (
-			serien.length == 0 ||
-			session.disziplin.parts[session.type].showInfos == false
-		) $scope.hidden = true
-		else $scope.hidden = false
+			serien.length === 0 ||
+			session.disziplin.parts[session.type].showInfos === false
+		) $scope.hidden = true;
+		else $scope.hidden = false;
 	});
 
 	$scope.selectSerie = function(index){
-		dscAPI.setSelectedSerie(index)
-	}
+		dscAPI.setSelectedSerie(index);
+	};
 })
 
 
 
 .controller('ringeGesamt', function ($scope, socket) {
 	socket.on("setSession", function (session) {
-		$scope.gesamt = session.gesamt
+		$scope.gesamt = session.gesamt;
 		if (session.selection.serie < session.serien.length){
-			$scope.gesamtSerie = session.serien[session.selection.serie].gesamt
+			$scope.gesamtSerie = session.serien[session.selection.serie].gesamt;
 		}
 
 		if (
-			session.serien.length == 0 ||
-			session.disziplin.parts[session.type].showInfos == false
-		) $scope.hidden = true
-		else $scope.hidden = false
+			session.serien.length === 0 ||
+			session.disziplin.parts[session.type].showInfos === false
+		) $scope.hidden = true;
+		else $scope.hidden = false;
 	});
 })
 
@@ -136,22 +136,22 @@ angular.module('dsc.controllers.session', [])
 
 .controller('schnitt', function ($scope, socket) {
 	socket.on("setSession", function (session) {
-		$scope.schnitt = session.schnitt
-		$scope.schnittCalc = session.schnittCalc
+		$scope.schnitt = session.schnitt;
+		$scope.schnittCalc = session.schnittCalc;
 
-		var part = session.disziplin.parts[session.type]
-		if (part.average.enabled == true){
-			$scope.schnittCalc = session.schnittCalc + " " + ((session.schnittCalc==1) ? "Ring" : "Ringe")
+		var part = session.disziplin.parts[session.type];
+		if (part.average.enabled === true){
+			$scope.schnittCalc = session.schnittCalc + " " + ((session.schnittCalc==1) ? "Ring" : "Ringe");
 		}
 		else {
-			$scope.schnittCalc = ""
+			$scope.schnittCalc = "";
 		}
 
 		if (
-			session.anzahl == 0 ||
-			session.disziplin.parts[session.type].showInfos == false
-		) $scope.hidden = true
-		else $scope.hidden = false
+			session.anzahl === 0 ||
+			session.disziplin.parts[session.type].showInfos === false
+		) $scope.hidden = true;
+		else $scope.hidden = false;
 	});
 })
 
@@ -159,36 +159,36 @@ angular.module('dsc.controllers.session', [])
 
 .controller('anzahlShots', function ($scope, socket) {
 	socket.on("setSession", function (session) {
-		$scope.gesamt = session.anzahl
+		$scope.gesamt = session.anzahl;
 
-		var part = session.disziplin.parts[session.type]
-		if (part.anzahlShots != 0) {
-			$scope.gesamt += "/ " + part.anzahlShots
+		var part = session.disziplin.parts[session.type];
+		if (part.anzahlShots !== 0) {
+			$scope.gesamt += "/ " + part.anzahlShots;
 		}
 
-		if (session.serien[session.selection.serie] != undefined){
-			$scope.serie = session.serien[session.selection.serie].shots.length + "/ " + part.serienLength
+		if (session.serien[session.selection.serie] !== undefined){
+			$scope.serie = session.serien[session.selection.serie].shots.length + "/ " + part.serienLength;
 		}
 
 		if (
-			session.anzahl == 0
-		) $scope.hidden = true
-		else $scope.hidden = false
-	})
+			session.anzahl === 0
+		) $scope.hidden = true;
+		else $scope.hidden = false;
+	});
 })
 
 
 
 .controller('restTime', ['$scope', "socket", 'timeFunctions', function ($scope, socket, timeFunctions) {
-	var refreshIntervalId
+	var refreshIntervalId;
 
-	$scope.textColor = "#000"
+	$scope.textColor = "#000";
 
 	function secondsToString(seconds){
 
-		var numhours = Math.floor(seconds / 3600)
-		var numminutes = Math.floor((seconds % 3600) / 60)
-		var numseconds = (seconds % 3600) % 60
+		var numhours = Math.floor(seconds / 3600);
+		var numminutes = Math.floor((seconds % 3600) / 60);
+		var numseconds = (seconds % 3600) % 60;
 
 		Number.prototype.toFixedDown = function(digits) {
 			var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
@@ -196,50 +196,50 @@ angular.module('dsc.controllers.session', [])
 				return m ? parseFloat(m[1]) : this.valueOf();
 		};
 
-		var string = ""
-		if(numhours > 0){ string += numhours.toFixedDown(0) + "h " }
-		if(numminutes > 0){ string += numminutes.toFixedDown(0) + "m " }
-		if(numseconds > 0){ string += numseconds.toFixedDown(0) + "s " }
+		var string = "";
+		if(numhours > 0){ string += numhours.toFixedDown(0) + "h "; }
+		if(numminutes > 0){ string += numminutes.toFixedDown(0) + "m "; }
+		if(numseconds > 0){ string += numseconds.toFixedDown(0) + "s "; }
 
-		return string
+		return string;
 	}
 
 	socket.on("setSession", function (session) {
 		function refresh($scope){
-			if (session.time.enabled == true){
-				var date = (session.time.end - (new Date().getTime()))/1000
+			if (session.time.enabled === true){
+				var date = (session.time.end - (new Date().getTime()))/1000;
 
-				$scope.label = "Verbleibende Zeit"
+				$scope.label = "Verbleibende Zeit";
 				if (date > 0){
-					$scope.rest = secondsToString(date)
+					$scope.rest = secondsToString(date);
 
-					var percentOver = 1 - (date / (session.time.duration*60))
+					var percentOver = 1 - (date / (session.time.duration*60));
 					if (percentOver < 0.8) {
-						$scope.textColor = "#000000"
+						$scope.textColor = "#000000";
 					}
 					else if (percentOver < 0.9) {
-						$scope.textColor = "#ffa500"
+						$scope.textColor = "#ffa500";
 					}
 					else {
-						$scope.textColor = "#ff0000"
+						$scope.textColor = "#ff0000";
 					}
 				}
 				else {
-					$scope.rest = "Zeit abgelaufen"
-					$scope.textColor = "#ff0000"
+					$scope.rest = "Zeit abgelaufen";
+					$scope.textColor = "#ff0000";
 				}
-				$scope.gesamt = secondsToString(session.time.duration*60)
+				$scope.gesamt = secondsToString(session.time.duration*60);
 			}
 		}
 
 		timeFunctions.$clearInterval( refreshIntervalId );
 		refreshIntervalId = timeFunctions.$setInterval(refresh, 1000, $scope);
-		refresh($scope)
+		refresh($scope);
 
 		if (
-			session.time.enabled == false
-		) $scope.hidden = true
-		else $scope.hidden = false
+			session.time.enabled === false
+		) $scope.hidden = true;
+		else $scope.hidden = false;
 	});
 }])
 
@@ -248,54 +248,54 @@ angular.module('dsc.controllers.session', [])
 .controller('grafik', function ($scope, socket) {
 	// $scope.session = undefined
 
-	$scope.scheibe = undefined
-	$scope.zoomlevel = undefined
-	$scope.serie = undefined
-	$scope.selectedshotindex = undefined
+	$scope.scheibe = undefined;
+	$scope.zoomlevel = undefined;
+	$scope.serie = undefined;
+	$scope.selectedshotindex = undefined;
 
 	socket.on("setSession", function (session) {
-		var serieTmp = session.serien[session.selection.serie]
-		var serie
-		if (serieTmp == undefined) {
-			serie = []
+		var serieTmp = session.serien[session.selection.serie];
+		var serie;
+		if (serieTmp === undefined) {
+			serie = [];
 		}
 		else {
-			serie = serieTmp.shots
+			serie = serieTmp.shots;
 		}
 
-		var scheibe = session.disziplin.scheibe
-		var zoom
+		var scheibe = session.disziplin.scheibe;
+		var zoom;
 
-		if (serie != undefined && serie.length != 0) {
-			var ringInt = serie[session.selection.shot].ring.int
-			var ring = scheibe.ringe[scheibe.ringe.length - ringInt]
+		if (serie !== undefined && serie.length !== 0) {
+			var ringInt = serie[session.selection.shot].ring.int;
+			var ring = scheibe.ringe[scheibe.ringe.length - ringInt];
 
-			currentRing = undefined
+			currentRing = undefined;
 			if (ring){
-				currentRing = ring
-				zoom = ring.zoom
+				currentRing = ring;
+				zoom = ring.zoom;
 			}
-			else if (ringInt == 0){
-				zoom = scheibe.minZoom
+			else if (ringInt === 0){
+				zoom = scheibe.minZoom;
 			}
 			else {
-				zoom = scheibe.defaultZoom
+				zoom = scheibe.defaultZoom;
 			}
 		}
 		else {
-			zoom = scheibe.defaultZoom
+			zoom = scheibe.defaultZoom;
 		}
 
-		$scope.serie = serie
-		$scope.scheibe = scheibe
-		$scope.zoomlevel = zoom
-		$scope.selectedshotindex = session.selection.shot
-		$scope.probeecke = session.disziplin.parts[session.type].probeEcke
+		$scope.serie = serie;
+		$scope.scheibe = scheibe;
+		$scope.zoomlevel = zoom;
+		$scope.selectedshotindex = session.selection.shot;
+		$scope.probeecke = session.disziplin.parts[session.type].probeEcke;
 
 		if (
-			session.disziplin.parts[session.type].showInfos == false
-		) $scope.hidden = true
-		else $scope.hidden = false
+			session.disziplin.parts[session.type].showInfos === false
+		) $scope.hidden = true;
+		else $scope.hidden = false;
 	});
 })
 
@@ -303,13 +303,13 @@ angular.module('dsc.controllers.session', [])
 
 .controller('connection', function ($scope, socket) {
 	socket.on('disconnect', function(){
-		$scope.color = "black"
+		$scope.color = "black";
 	});
 	socket.on('connect', function(){
-		$scope.color = "transparent"
+		$scope.color = "transparent";
 	});
 	socket.on('setStatus', function(connected){
-		$scope.color = connected == true ? "transparent" : "red"
+		$scope.color = connected === true ? "transparent" : "red";
 	});
 })
 
@@ -318,6 +318,6 @@ angular.module('dsc.controllers.session', [])
 
 .controller('session', function ($scope, socket) {
 	socket.on("setSession", function (session) {
-		$scope.session = session
-	})
-})
+		$scope.session = session;
+	});
+});

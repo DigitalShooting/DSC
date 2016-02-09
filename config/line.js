@@ -17,4 +17,4 @@ module.exports = {
 		name: "SV Diana Dettingen",
 		logoPath: __dirname + "/logo.png",
 	},
-}
+};

@@ -18,5 +18,5 @@ angular.module('dsc.services.timeFunctions', [])
 		$clearInterval: function(id) {
 			return $timeout.cancel( _intervals[ id ] );
 		}
-	}
+	};
 }]);

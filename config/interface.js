@@ -16,4 +16,4 @@ module.exports = {
 		// Path to API file
 		path: "./lib/Haering/demo.js",
 	},
-}
+};

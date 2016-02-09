@@ -11,7 +11,7 @@ angular.module('dsc.services.socketio', [
 .factory('auth', function (QueryString) {
 	return {
 		key: QueryString.key,
-	}
+	};
 })
 
 
@@ -34,4 +34,4 @@ angular.module('dsc.services.socketio', [
 		}
 	}
 	return query_string;
-})
+});

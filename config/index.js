@@ -6,4 +6,4 @@ module.exports = {
 	about: require("./about.js"),
 	auth: require("./auth.js"),
 	database: require("./database.js")
-}
+};
