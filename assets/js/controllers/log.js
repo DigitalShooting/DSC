@@ -10,7 +10,7 @@ angular.module('dsc.controllers.log', [])
 	$scope.selectedshotindex = undefined;
 
 	function setSession(){
-		if ($scope.sessions !== undefined && $scope.indexSession !== undefined){
+		if ($scope.sessions != undefined && $scope.indexSession != undefined){
 			$scope.session = $scope.sessions[$scope.indexSession];
 
 			$scope.scheibe = $scope.session.disziplin.scheibe;
@@ -22,7 +22,7 @@ angular.module('dsc.controllers.log', [])
 		}
 	}
 	function setSerie(){
-		if ($scope.session !== undefined && $scope.serieIndex !== undefined){
+		if ($scope.session != undefined && $scope.serieIndex != undefined){
 			$scope.serie = $scope.session.serien[$scope.serieIndex].shots;
 		}
 	}
@@ -46,7 +46,7 @@ angular.module('dsc.controllers.log', [])
 .controller('summary', function ($scope, socket) {
 
 	function setSession(){
-		if ($scope.sessions !== undefined && $scope.indexSession !== undefined){
+		if ($scope.sessions != undefined && $scope.indexSession != undefined){
 			$scope.session = $scope.sessions[$scope.indexSession];
 		}
 	}
@@ -102,7 +102,7 @@ angular.module('dsc.controllers.log', [])
 .filter("formatDate", function(){
 	return function(input){
 		var date = new Date(input);
-		if (date !== undefined){
+		if (date != undefined){
 			var hh = date.getHours().toString();
 			var mm = date.getMinutes().toString();
 			var ss  = date.getSeconds().toString();

@@ -115,7 +115,7 @@ dscDataAPI.on = function(event){
 // helper to perform callback if auth object ist valid
 function checkAuth(auth, callback){
 	if (config.auth.key == auth.key || config.auth.tempKey == auth.key){
-		if (callback !== undefined) callback();
+		if (callback != undefined) callback();
 	}
 	else {
 		console.log("[INFO] Wrong auth key");
@@ -132,7 +132,7 @@ io.on('connection', function(socket){
 	// set about
 	socket.emit('setAbout', config.about);
 
-	if (activeMessage !== undefined){
+	if (activeMessage != undefined){
 		socket.emit('showMessage', {
 			type: activeMessage.type,
 			title: activeMessage.title,

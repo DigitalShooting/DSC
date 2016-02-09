@@ -42,8 +42,8 @@ angular.module('dsc.controllers.session', [])
 		$scope.aktuelleSerie = aktuelleSerie;
 
 		if (
-			aktuelleSerie === undefined ||
-			session.disziplin.parts[session.type].showInfos === false
+			aktuelleSerie == undefined ||
+			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 
@@ -81,8 +81,8 @@ angular.module('dsc.controllers.session', [])
 		$scope.currentShot = currentShot;
 
 		if (
-			currentShot === undefined ||
-			session.disziplin.parts[session.type].showInfos === false
+			currentShot == undefined ||
+			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -104,8 +104,8 @@ angular.module('dsc.controllers.session', [])
 		$scope.serien = serien;
 
 		if (
-			serien.length === 0 ||
-			session.disziplin.parts[session.type].showInfos === false
+			serien.length == 0 ||
+			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -125,8 +125,8 @@ angular.module('dsc.controllers.session', [])
 		}
 
 		if (
-			session.serien.length === 0 ||
-			session.disziplin.parts[session.type].showInfos === false
+			session.serien.length == 0 ||
+			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -140,7 +140,7 @@ angular.module('dsc.controllers.session', [])
 		$scope.schnittCalc = session.schnittCalc;
 
 		var part = session.disziplin.parts[session.type];
-		if (part.average.enabled === true){
+		if (part.average.enabled == true){
 			$scope.schnittCalc = session.schnittCalc + " " + ((session.schnittCalc==1) ? "Ring" : "Ringe");
 		}
 		else {
@@ -148,8 +148,8 @@ angular.module('dsc.controllers.session', [])
 		}
 
 		if (
-			session.anzahl === 0 ||
-			session.disziplin.parts[session.type].showInfos === false
+			session.anzahl == 0 ||
+			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -162,16 +162,16 @@ angular.module('dsc.controllers.session', [])
 		$scope.gesamt = session.anzahl;
 
 		var part = session.disziplin.parts[session.type];
-		if (part.anzahlShots !== 0) {
+		if (part.anzahlShots != 0) {
 			$scope.gesamt += "/ " + part.anzahlShots;
 		}
 
-		if (session.serien[session.selection.serie] !== undefined){
+		if (session.serien[session.selection.serie] != undefined){
 			$scope.serie = session.serien[session.selection.serie].shots.length + "/ " + part.serienLength;
 		}
 
 		if (
-			session.anzahl === 0
+			session.anzahl == 0
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -206,7 +206,7 @@ angular.module('dsc.controllers.session', [])
 
 	socket.on("setSession", function (session) {
 		function refresh($scope){
-			if (session.time.enabled === true){
+			if (session.time.enabled == true){
 				var date = (session.time.end - (new Date().getTime()))/1000;
 
 				$scope.label = "Verbleibende Zeit";
@@ -237,7 +237,7 @@ angular.module('dsc.controllers.session', [])
 		refresh($scope);
 
 		if (
-			session.time.enabled === false
+			session.time.enabled == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -256,7 +256,7 @@ angular.module('dsc.controllers.session', [])
 	socket.on("setSession", function (session) {
 		var serieTmp = session.serien[session.selection.serie];
 		var serie;
-		if (serieTmp === undefined) {
+		if (serieTmp == undefined) {
 			serie = [];
 		}
 		else {
@@ -266,7 +266,7 @@ angular.module('dsc.controllers.session', [])
 		var scheibe = session.disziplin.scheibe;
 		var zoom;
 
-		if (serie !== undefined && serie.length !== 0) {
+		if (serie != undefined && serie.length != 0) {
 			var ringInt = serie[session.selection.shot].ring.int;
 			var ring = scheibe.ringe[scheibe.ringe.length - ringInt];
 
@@ -275,7 +275,7 @@ angular.module('dsc.controllers.session', [])
 				currentRing = ring;
 				zoom = ring.zoom;
 			}
-			else if (ringInt === 0){
+			else if (ringInt == 0){
 				zoom = scheibe.minZoom;
 			}
 			else {
@@ -293,7 +293,7 @@ angular.module('dsc.controllers.session', [])
 		$scope.probeecke = session.disziplin.parts[session.type].probeEcke;
 
 		if (
-			session.disziplin.parts[session.type].showInfos === false
+			session.disziplin.parts[session.type].showInfos == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -309,7 +309,7 @@ angular.module('dsc.controllers.session', [])
 		$scope.color = "transparent";
 	});
 	socket.on('setStatus', function(connected){
-		$scope.color = connected === true ? "transparent" : "red";
+		$scope.color = connected == true ? "transparent" : "red";
 	});
 })
 

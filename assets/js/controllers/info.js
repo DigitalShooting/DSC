@@ -31,8 +31,8 @@ angular.module('dsc.controllers.info', [])
 		$scope.manschaft = session.user.manschaft;
 
 		if (
-			$scope.verein === "" &&
-			$scope.manschaft === ""
+			$scope.verein == "" &&
+			$scope.manschaft == ""
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -70,7 +70,7 @@ angular.module('dsc.controllers.info', [])
 
 		var parts = session.disziplin.parts;
 		if (
-			parts[session.type].neueScheibe === false
+			parts[session.type].neueScheibe == false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -203,7 +203,7 @@ angular.module('dsc.controllers.info', [])
 			}
 		};
 		var newTarget = function(){
-			if (session.disziplin.parts[session.type].neueScheibe === true){
+			if (session.disziplin.parts[session.type].neueScheibe == true){
 				dscAPI.setNewTarget();
 			}
 		};
@@ -292,7 +292,7 @@ angular.module('dsc.controllers.info', [])
 
 .controller('version', function ($scope, socket) {
 	socket.on("setAbout", function(about){
-		if ($scope.version !== undefined && $scope.version != about.version){
+		if ($scope.version != undefined && $scope.version != about.version){
 			location.reload();
 		}
 		else {
