@@ -10,6 +10,7 @@ CREATE TABLE `session` (
   `sessionGroupID` int(11) DEFAULT NULL,
   `part` text COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL,
+  `edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -37,9 +38,10 @@ CREATE TABLE `shot` (
   `y` double NOT NULL,
   `date` datetime NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`number`,`sessionID`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2016-02-03 16:18:42
+-- 2016-02-10 16:40:33

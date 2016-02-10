@@ -7,9 +7,9 @@ USE dsc;
 -- Create User (Change Password)
 GRANT ALL ON `dsc`.* TO 'dsc'@'%' IDENTIFIED BY 'password';
 
-RENAME TABLE shot TO _shot;
-RENAME TABLE session TO _session;
-RENAME TABLE sessionGroup TO _sessionGroup;
+RENAME TABLE shot TO __shot;
+RENAME TABLE session TO __session;
+RENAME TABLE sessionGroup TO __sessionGroup;
 
 -- Adminer 4.2.2 MySQL dump
 
@@ -23,6 +23,7 @@ CREATE TABLE `session` (
   `sessionGroupID` int(11) DEFAULT NULL,
   `part` text COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL,
+  `edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -50,9 +51,10 @@ CREATE TABLE `shot` (
   `y` double NOT NULL,
   `date` datetime NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`number`,`sessionID`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2016-02-03 16:18:42
+-- 2016-02-10 16:40:33

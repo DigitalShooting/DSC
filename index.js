@@ -276,4 +276,13 @@ io.on('connection', function(socket){
 	});
 
 
+
+	socket.on("sendSessions", function(object){
+		checkAuth(object.auth, function(){
+			dscDataAPI.setData(object.sessions, object.group, object.user);
+		});
+	});
+
+
+
 });
