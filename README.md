@@ -131,11 +131,11 @@ Methode         | Parameter         | Beschreibung
 `hideMessage`   |                   | Schliest die Message
 
 ### REST
-URL                 | Parameter     | Beschreibung
---------------------|---------------|------------------------------------------------
-`/shot`             |               | 
-`/session`          |               |
-`/sessionGroup`     |               |
+URL                     | Parameter           | Beschreibung
+------------------------|---------------------|------------------------------------------------
+`/api/shot`             |  after (Unixtime)   | Gibt alle Schüsse zurück, welche nach der gegebenen unixtime gemacht wurden 
+`/api/session`          |  after (Unixtime)   | Gibt alle Sessions zurück, welche nach der gegebenen unixtime gemacht wurden
+`/api/sessionGroup`     |  after (Unixtime)   | Gibt alle Session Groups zurück, welche nach der gegebenen unixtime gemacht wurden
 
 
 
