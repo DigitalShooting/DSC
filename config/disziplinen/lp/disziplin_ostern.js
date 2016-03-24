@@ -4,8 +4,11 @@ module.exports = {
 	_id: "lp_ostern",
 	title: "LP Ostern",
 	interface: {
-		name: "demo",
-		time: 2500,
+		name: "esa",
+		band: {
+			onChangePart: 5,
+			onShot: 3,
+		},
 	},
 	time: {
 		enabled: false,
