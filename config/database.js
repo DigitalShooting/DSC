@@ -1,14 +1,11 @@
 module.exports = {
 
-	// enable/ disable sql backups
+	// enable/ disable database backups
 	enabled: true,
 
-	// MySQL connection params
-	mysql: {
-		connectionLimit : 10,
-		host     : "",
-		user     : "",
-		password : "",
-		database : "",
+	// mongodb connection params
+	mongodb: {
+		url: "mongodb://localhost:27017",
+		collection: "dsc4",
 	},
 };
