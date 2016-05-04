@@ -6,6 +6,6 @@ module.exports = {
 	// mongodb connection params
 	mongodb: {
 		url: "mongodb://localhost:27017",
-		collection: "dsc4",
+		collection: "dsc5",
 	},
 };

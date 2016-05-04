@@ -29,6 +29,7 @@ html(lang="de" ng-app="dsc-log")
 		script(src='/js/controllers/log.js')
 		script(src='/js/services/grafik.js')
 		script(src='js/services/socketio.js')
+		script(src='js/services/timeFunctions.js')
 		
 		meta(name="viewport", content="width=device-width")
 	body
@@ -108,6 +109,6 @@ html(lang="de" ng-app="dsc-log")
 			// init angular app
 			var app = angular.module('dsc-log', [
 				"ds.services.grafik",
-				"dsc.services.socketio", "dsc.controllers.log",
+				"dsc.services.timeFunctions", "dsc.services.socketio", "dsc.controllers.log",
 				"btford.socket-io", "ja.qr", "ngFitText",
 			])

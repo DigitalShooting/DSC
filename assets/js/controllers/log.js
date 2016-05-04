@@ -98,16 +98,4 @@ angular.module('dsc.controllers.log', [])
 
 		return string;
 	};
-})
-.filter("formatDate", function(){
-	return function(input){
-		var date = new Date(input);
-		if (date != undefined){
-			var hh = date.getHours().toString();
-			var mm = date.getMinutes().toString();
-			var ss  = date.getSeconds().toString();
-			return (hh[1]?hh:"0"+hh[0]) + ":" + (mm[1]?mm:"0"+mm[0]) + ":" + (ss[1]?ss:"0"+ss[0]);
-		}
-		return "";
-	};
 });

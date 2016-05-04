@@ -19,4 +19,31 @@ angular.module('dsc.services.timeFunctions', [])
 			return $timeout.cancel( _intervals[ id ] );
 		}
 	};
-}]);
+}])
+
+
+
+.filter("formatDate", function(){
+	return function(input){
+		var date = new Date(input);
+		var curDate = new Date();
+		if (date != undefined){
+			var hh = date.getHours().toString();
+			var mm = date.getMinutes().toString();
+			var ss  = date.getSeconds().toString();
+
+
+
+			var dateString = "";
+			if (curDate.toDateString() != date.toDateString()){
+				var month = (date.getUTCMonth() + 1).toString();
+				var day = date.getUTCDate().toString();
+				var year = date.getUTCFullYear().toString();
+				dateString = " (" + day+"."+month+"."+ year + ")";
+			}
+
+			return (hh[1]?hh:"0"+hh[0]) + ":" + (mm[1]?mm:"0"+mm[0]) + ":" + (ss[1]?ss:"0"+ss[0]) + dateString;
+		}
+		return "";
+	};
+});

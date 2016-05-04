@@ -45,6 +45,12 @@ angular.module('dsc.services.dscAPI', [
 				auth: auth,
 			});
 		},
+		loadData: function(data){
+			socket.emit("loadData", {
+				auth: auth,
+				data: data,
+			});
+		},
 		getTempToken: function(){
 			socket.emit("getTempToken", {
 				auth: auth,

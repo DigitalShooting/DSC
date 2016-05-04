@@ -135,10 +135,60 @@ angular.module('dsc.controllers.info', [])
 
 
 
+.controller('menuOld', function ($scope, dscAPI, socket, auth, $http) {
+	$scope.activeID = "";
+	$scope.totalItems = 0;
+	$scope.itemsPerPage = 15;
+	$scope.currentPage = 1;
+	$scope.paginationMaxSize = 5;
+
+	$scope.loadData = function(data){
+		dscAPI.loadData(data);
+		$('#modeOld').modal('hide');
+	};
+
+	$scope.update = function(){
+		$http({
+			method: 'GET',
+			url: '/api/data',
+			params: {
+				limit: $scope.itemsPerPage,
+				page: $scope.currentPage-1,
+			},
+		}).then(function successCallback(response) {
+			$scope.historieData = response.data;
+		}, function errorCallback(response) { });
+
+		$http({
+			method: 'GET',
+			url: '/api/data/count',
+		}).then(function successCallback(response) {
+			$scope.totalItems = response.data;
+		}, function errorCallback(response) { });
+	};
+
+	$scope.$watch('currentPage', function() {
+		$scope.update();
+	});
+
+	socket.on("setData", function (data) {
+		$scope.activeID = data._id;
+	});
+})
+
+
+
 .controller('menuDisziplinen', function ($scope, socket, dscAPI) {
 	$scope.setDisziplien = function(disziplin){
 		dscAPI.setDisziplin(disziplin);
 		$('#disziplinMenu').modal('hide');
+	};
+
+	$scope.openHistorie = function(){
+		$('#disziplinMenu').modal('hide');
+
+		$('#modeOld').modal('show');
+		angular.element('#modeOld').scope().update();
 	};
 
 	socket.on("setConfig", function (config) {

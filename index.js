@@ -10,6 +10,7 @@ var proxy = require("express-http-proxy");
 var config = require("./config/index.js");
 var DSCDataAPI = require("./lib/DSCDataAPI.js");
 var Print = require("./lib/print/");
+var mongodb = require("./lib/mongodb.js");
 
 var app = express();
 
@@ -79,8 +80,38 @@ dscDataAPI.init(function(){
 		manschaft: "",
 	});
 
+
+
 	// set default disziplin
-	dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
+	var initDefalutSession = function(){
+		dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
+	};
+
+	if (config.database.enabled) {
+		mongodb(function(collection){
+			var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
+				if (data.length === 0) {
+					initDefalutSession();
+				}
+				else {
+					var timeDelta = ((new Date ()).getTime()) - data[0].date;
+					if (timeDelta < 10*60 *1000) { // when last session ist only 10 minutes old, load it
+						dscDataAPI.setData(data[0]);
+					}
+					else {
+						initDefalutSession();
+					}
+				}
+			});
+		});
+	}
+	else {
+		initDefalutSession();
+	}
+
+
+
+
 
 	// listen to dsc api events
 	dscDataAPI.on = function(event){
@@ -240,6 +271,14 @@ dscDataAPI.init(function(){
 						});
 					}
 				});
+			});
+		});
+
+
+
+		socket.on('loadData', function(object){
+			checkAuth(object.auth, function(){
+				dscDataAPI.setData(object.data);
 			});
 		});
 
