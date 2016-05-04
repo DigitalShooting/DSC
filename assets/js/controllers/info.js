@@ -147,7 +147,7 @@ angular.module('dsc.controllers.info', [])
 		$('#modeOld').modal('hide');
 	};
 
-	$scope.update = function(){
+	function update(){
 		$http({
 			method: 'GET',
 			url: '/api/data',
@@ -165,14 +165,17 @@ angular.module('dsc.controllers.info', [])
 		}).then(function successCallback(response) {
 			$scope.totalItems = response.data;
 		}, function errorCallback(response) { });
-	};
+	}
+
+	update();
 
 	$scope.$watch('currentPage', function() {
-		$scope.update();
+		update();
 	});
 
-	socket.on("setData", function (data) {
+	socket.on("switchData", function (data) {
 		$scope.activeID = data._id;
+		update();
 	});
 })
 
@@ -188,7 +191,6 @@ angular.module('dsc.controllers.info', [])
 		$('#disziplinMenu').modal('hide');
 
 		$('#modeOld').modal('show');
-		angular.element('#modeOld').scope().update();
 	};
 
 	socket.on("setConfig", function (config) {

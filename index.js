@@ -90,12 +90,12 @@ dscDataAPI.init(function(){
 	if (config.database.enabled) {
 		mongodb(function(collection){
 			var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
-				if (data.length === 0) {
+				if (data.length === 0 || err) {
 					initDefalutSession();
 				}
 				else {
 					var timeDelta = ((new Date ()).getTime()) - data[0].date;
-					if (timeDelta < 10*60 *1000) { // when last session ist only 10 minutes old, load it
+					if (timeDelta < config.database.reloadLimit *1000) {
 						dscDataAPI.setData(data[0]);
 					}
 					else {
@@ -118,6 +118,9 @@ dscDataAPI.init(function(){
 		if (event.type == "dataChanged"){
 			io.emit('setSession', dscDataAPI.getActiveSession());
 			io.emit('setData', dscDataAPI.getActiveData());
+		}
+		if (event.type == "switchData"){
+			io.emit('switchData', dscDataAPI.getActiveData());
 		}
 		else if (event.type == "statusChanged"){
 			io.emit('setStatus', event.connected);
@@ -167,6 +170,8 @@ dscDataAPI.init(function(){
 
 		// set about
 		socket.emit('setAbout', config.about);
+
+		socket.emit('switchData', dscDataAPI.getActiveData());
 
 		if (activeMessage != undefined){
 			socket.emit('showMessage', {
