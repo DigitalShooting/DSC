@@ -139,7 +139,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 									th(colspan="2") Disziplin
 									th(colspan="2") Datum
 								tr(ng-repeat="data in historieData track by $index" ng-click="loadData(data)" class="{{activeID == data._id ? 'info' : ''}}")
-									td {{data.user.firstName}} {{data.sessionParts[0].user.lastName}}
+									td {{data.user.firstName}} {{data.user.lastName}}
 									td {{data.user.verein}}
 									td {{data.disziplin.title}}
 									td {{data.disziplin.scheibe.title}}

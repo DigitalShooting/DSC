@@ -70,7 +70,7 @@ angular.module('dsc.controllers.main', [])
 
 		var parts = data.disziplin.parts;
 		if (
-			parts[data.sessionParts[data.sessionParts.length-1].type].neueScheibe === false
+			parts[data.sessionParts[data.sessionIndex].type].neueScheibe === false
 		) $scope.hidden = true;
 		else $scope.hidden = false;
 	});
@@ -82,7 +82,7 @@ angular.module('dsc.controllers.main', [])
 	socket.on("setData", function (data) {
 		var parts = data.disziplin.parts;
 
-		$scope.activePart = parts[data.sessionParts[data.sessionParts.length-1].type].title;
+		$scope.activePart = parts[data.sessionParts[data.sessionIndex].type].title;
 		$scope.openPartsMenu = function(){
 			$('#modeMenu').modal('show');
 		};
@@ -95,7 +95,7 @@ angular.module('dsc.controllers.main', [])
 
 .controller('menuParts', function ($scope, socket, dscAPI) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 
 		$scope.disziplin = data.disziplin.title;
 		$scope.parts = [];
@@ -227,7 +227,7 @@ angular.module('dsc.controllers.main', [])
 
 .controller('shortcut', function ($scope, socket, dscAPI) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 
 		var previousSerie = function(){
 			if (session.selection.serie > 0){
@@ -385,10 +385,10 @@ angular.module('dsc.controllers.main', [])
 
 .controller('aktuelleSerie', ['$scope', '$sce', "socket", "dscAPI", function ($scope, $sce, socket, dscAPI) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 		var aktuelleSerie;
 
-		var serie = data.sessionParts[data.sessionParts.length-1].serien[session.selection.serie];
+		var serie = data.sessionParts[data.sessionIndex].serien[session.selection.serie];
 		if (serie){
 			aktuelleSerie = [];
 			for (var i = 0; i < serie.shots.length; i++){
@@ -417,9 +417,8 @@ angular.module('dsc.controllers.main', [])
 					value: shot.ring,
 					arrow: $sce.trustAsHtml(pfeil),
 					winkel: winkel,
-					selectedClass: i == data.sessionParts[data.sessionParts.length-1].selection.shot ? "bold" : "",
+					selectedClass: i == data.sessionParts[data.sessionIndex].selection.shot ? "bold" : "",
 				});
-
 			}
 		}
 
@@ -441,7 +440,7 @@ angular.module('dsc.controllers.main', [])
 
 .controller('aktuellerSchuss', ['$scope', '$sce', "socket", function ($scope, $sce, socket) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 		var currentShot;
 
 		var serie = session.serien[session.selection.serie];
@@ -478,7 +477,7 @@ angular.module('dsc.controllers.main', [])
 
 .controller('serien', function ($scope, socket, dscAPI) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 		var serien = [];
 		for(var i in session.serien){
 			serien.push({
@@ -506,7 +505,7 @@ angular.module('dsc.controllers.main', [])
 
 .controller('ringeGesamt', function ($scope, socket) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 
 		$scope.gesamt = session.gesamt;
 		if (session.selection.serie < session.serien.length){
@@ -525,7 +524,7 @@ angular.module('dsc.controllers.main', [])
 
 .controller('schnitt', function ($scope, socket) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 
 		$scope.schnitt = session.schnitt;
 		$scope.schnittCalc = session.schnittCalc;
@@ -550,7 +549,7 @@ angular.module('dsc.controllers.main', [])
 
 .controller('anzahlShots', function ($scope, socket) {
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 
 		$scope.gesamt = session.anzahl;
 
@@ -598,7 +597,7 @@ angular.module('dsc.controllers.main', [])
 	}
 
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 
 		function refresh($scope){
 			if (session.time.enabled === true){
@@ -649,7 +648,7 @@ angular.module('dsc.controllers.main', [])
 	$scope.selectedshotindex = undefined;
 
 	socket.on("setData", function (data) {
-		var session = data.sessionParts[data.sessionParts.length-1];
+		var session = data.sessionParts[data.sessionIndex];
 
 		var serieTmp = session.serien[session.selection.serie];
 		var serie;
@@ -715,6 +714,6 @@ angular.module('dsc.controllers.main', [])
 
 .controller('session', function ($scope, socket) {
 	socket.on("setData", function (data) {
-		$scope.session = data.sessionParts[data.sessionParts.length-1];
+		$scope.session = data.sessionParts[data.sessionIndex];
 	});
 });
