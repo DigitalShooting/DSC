@@ -42,7 +42,7 @@ mixin gesamt(session)
 
 
 
-mixin serien(session)
+mixin serien(session, disziplin)
 	each serie, index in session.serien
 		|\begin{minipage}[t]{.48\textwidth}\vspace{10pt}
 		|	\begin{tabular*}{\textwidth}{c|c|c|c|c @{\extracolsep{\fill}} c}
@@ -64,7 +64,7 @@ mixin serien(session)
 				|\\
 		
 		- var i = serie.shots.length
-		- var min = session.disziplin.parts[session.type].serienLength
+		- var min = disziplin.parts[session.type].serienLength
 		- if (min < 8) {min = 8}
 		- if (min > 10) {min = 10}
 		while i < min
@@ -121,16 +121,16 @@ mixin serien(session)
 
 |\begin{document}
 
+
+|\ihead{#{line.title}\\ \today}
+|\ohead{ \large #{data.user.verein} #{data.user.manschaft}\\ #{data.user.firstName} #{data.user.lastName}}
+
+|\section*{#{data.disziplin.title}}
+
 each session, index in data.sessionParts
-	- if (index == 0)
-		|\ihead{#{line.title}\\ \today}
-		|\ohead{ \large #{session.user.verein} #{session.user.manschaft}\\ #{session.user.firstName} #{session.user.lastName}}
-		
-		|\section*{#{session.disziplin.title}}
-	
-	|\subsection*{ #{session.disziplin.parts[session.type].title} }
+	|\subsection*{ #{data.disziplin.parts[session.type].title} }
 	|\vspace{0.2cm}
 	+gesamt(session)
-	+serien(session)
+	+serien(session, data.disziplin)
 
 |\end{document}

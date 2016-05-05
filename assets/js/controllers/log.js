@@ -9,16 +9,16 @@ angular.module('dsc.controllers.log', [])
 	$scope.serie = undefined;
 	$scope.selectedshotindex = undefined;
 
-	function setSession(){
-		if ($scope.sessions !== undefined && $scope.indexSession !== undefined){
-			$scope.session = $scope.sessions[$scope.indexSession];
+	function setData(){
+		if ($scope.data.sessionParts !== undefined && $scope.indexSession !== undefined){
+			$scope.session = $scope.data.sessionParts[$scope.indexSession];
 
-			$scope.scheibe = $scope.session.disziplin.scheibe;
-			$scope.zoomlevel = $scope.session.disziplin.scheibe.defaultZoom;
+			$scope.scheibe = $scope.data.disziplin.scheibe;
+			$scope.zoomlevel = $scope.data.disziplin.scheibe.defaultZoom;
 			setSerie();
 			$scope.selectedshotindex = -1;
 
-			$scope.probeecke = $scope.session.disziplin.parts[$scope.session.type].probeEcke;
+			$scope.probeecke = $scope.data.disziplin.parts[$scope.session.type].probeEcke;
 		}
 	}
 	function setSerie(){
@@ -29,15 +29,15 @@ angular.module('dsc.controllers.log', [])
 
 	$scope.init = function(indexSession, serieIndex){
 		$scope.indexSession = indexSession;
-		setSession();
+		setData();
 
 		$scope.serieIndex = serieIndex;
 		setSerie();
 	};
 
 	socket.on("setData", function (data) {
-		$scope.sessions = data.sessionParts;
-		setSession();
+		$scope.data = data;
+		setData();
 	});
 })
 
@@ -45,20 +45,20 @@ angular.module('dsc.controllers.log', [])
 
 .controller('summary', function ($scope, socket) {
 
-	function setSession(){
-		if ($scope.sessions !== undefined && $scope.indexSession !== undefined){
-			$scope.session = $scope.sessions[$scope.indexSession];
+	function setData(){
+		if ($scope.data.sessionParts !== undefined && $scope.indexSession !== undefined){
+			$scope.session = $scope.data.sessionParts[$scope.indexSession];
 		}
 	}
 
 	$scope.init = function(indexSession){
 		$scope.indexSession = indexSession;
-		setSession();
+		setData();
 	};
 
 	socket.on("setData", function (data) {
-		$scope.sessions = data.sessionParts;
-		setSession();
+		$scope.data.sessionParts = data.sessionParts;
+		setData();
 	});
 
 })
@@ -67,7 +67,7 @@ angular.module('dsc.controllers.log', [])
 
 .controller('sessions', function ($scope, socket) {
 	socket.on("setData", function (data) {
-		$scope.sessions = data.sessionParts;
+		$scope.data = data;
 	});
 
 	function n(n){

@@ -37,21 +37,21 @@ html(lang="de" ng-app="dsc-log")
 			small  #{config.line.title}
 	
 		div(ng-controller="sessions")
-			div(ng-repeat="session in sessions track by $index" class="session")
+			div(ng-repeat="session in data.sessionParts track by $index" class="session")
 				table(class="headerTable col-xs-4 shotTable")
 					tr
 						th Name
-						td {{session.user.firstName}} {{session.user.lastName}}
+						td {{data.user.firstName}} {{data.user.lastName}}
 					tr
 						th Datum
 						td {{currentDate}}	
 				table(class="headerTable col-xs-4 shotTable")
 					tr
 						th Verein
-						td {{session.user.verein}}
+						td {{data.user.verein}}
 					tr
 						th Manschaft
-						td {{session.user.manschaft}}
+						td {{data.user.manschaft}}
 				table(class="headerTable col-xs-4 shotTable")
 					tr
 						th Disziplin

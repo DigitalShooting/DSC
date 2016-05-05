@@ -72,19 +72,17 @@ server.on("listening", function() {
 var dscDataAPI = DSCDataAPI();
 dscDataAPI.init(function(){
 
-	// set default user
-	dscDataAPI.setUser({
-		firstName: "Gast",
-		lastName: "",
-		verein: "",//config.line.hostVerein.name,
-		manschaft: "",
-	});
-
-
-
 	// set default disziplin
 	var initDefalutSession = function(){
 		dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
+
+		// set default user
+		dscDataAPI.setUser({
+			firstName: "Gast",
+			lastName: "",
+			verein: "",//config.line.hostVerein.name,
+			manschaft: "",
+		});
 	};
 
 	if (config.database.enabled) {
