@@ -393,17 +393,18 @@ angular.module('dsc.controllers.main', [])
 					teiler: serie.shots[i].teiler,
 					winkel: serie.shots[i].winkel,
 					number: serie.shots[i].number,
+					innenZehner: serie.shots[i].innenZehner,
 				};
 
 				var pfeil;
 				var winkel;
-				if (shot.teiler > session.disziplin.scheibe.innenZehner) {
-					pfeil = "&#8594;";
-					winkel = - parseInt(shot.winkel);
-				}
-				else {
+				if (shot.innenZehner) {
 					pfeil = "&#9099;";
 					winkel = - parseInt(shot.winkel) - 225;
+				}
+				else {
+					pfeil = "&#8594;";
+					winkel = - parseInt(shot.winkel);
 				}
 
 				aktuelleSerie.push({
@@ -444,6 +445,7 @@ angular.module('dsc.controllers.main', [])
 				teiler: serie.shots[session.selection.shot].teiler,
 				ring: serie.shots[session.selection.shot].ring.display,
 				winkel: serie.shots[session.selection.shot].winkel,
+				innenZehner: serie.shots[session.selection.shot].innenZehner,
 			};
 			if (currentShot){
 				if (currentShot.innenZehner) {
