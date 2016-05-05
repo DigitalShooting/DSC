@@ -142,6 +142,16 @@ angular.module('dsc.controllers.info', [])
 	$scope.currentPage = 1;
 	$scope.paginationMaxSize = 5;
 
+	$scope.format = {
+		name: function(data){
+			var verein = "";
+			if (data.sessionParts[0].user.verein !== undefined && data.sessionParts[0].user.verein !== ""){
+				verein = "(" + data.sessionParts[0].user.verein + ")";
+			}
+			return data.sessionParts[0].user.firstName + " " + data.sessionParts[0].user.lastName + " " + verein;
+		}
+	};
+
 	$scope.loadData = function(data){
 		dscAPI.loadData(data);
 		$('#modeOld').modal('hide');

@@ -27,7 +27,7 @@ angular.module('dsc.services.timeFunctions', [])
 	return function(input){
 		var date = new Date(input);
 		var curDate = new Date();
-		if (date != undefined){
+		if (date !== undefined){
 			var hh = date.getHours().toString();
 			var mm = date.getMinutes().toString();
 			var ss  = date.getSeconds().toString();
@@ -43,6 +43,33 @@ angular.module('dsc.services.timeFunctions', [])
 			}
 
 			return (hh[1]?hh:"0"+hh[0]) + ":" + (mm[1]?mm:"0"+mm[0]) + ":" + (ss[1]?ss:"0"+ss[0]) + dateString;
+		}
+		return "";
+	};
+})
+.filter("formatDay", function(){
+	return function(input){
+		var date = new Date(input);
+		var curDate = new Date();
+		if (date !== undefined){
+			var day = date.getUTCDate().toString();
+			var month = (date.getUTCMonth() + 1).toString();
+			var year = date.getUTCFullYear().toString();
+			return (day[1]?day:"0"+day[0]) + "." + (month[1]?month:"0"+month[0]) + "." + year;
+		}
+		return "";
+	};
+})
+.filter("formatTime", function(){
+	return function(input){
+		var date = new Date(input);
+		var curDate = new Date();
+		if (date !== undefined){
+			var hh = date.getHours().toString();
+			var mm = date.getMinutes().toString();
+			var ss  = date.getSeconds().toString();
+
+			return (hh[1]?hh:"0"+hh[0]) + ":" + (mm[1]?mm:"0"+mm[0]) + " Uhr";
 		}
 		return "";
 	};

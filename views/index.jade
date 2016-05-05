@@ -137,15 +137,17 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 						h4(class="modal-title" id="myModalLabel") Historie
 					.modal-body
 						.row
-							table(class="table table-striped table-hover table-condensed")
+							table(class="table table-striped table-hover table-condensed table-bordered")
 								tr
-									th Disziplin
 									th Name
-									th Datum
+									th(colspan="2") Disziplin
+									th(colspan="2") Datum
 								tr(ng-repeat="data in historieData track by $index" ng-click="loadData(data)" class="{{activeID == data._id ? 'info' : ''}}")
-									td {{data.sessionParts[0].disziplin.title}} ({{data.sessionParts[0].disziplin.scheibe.title}})
-									td {{data.sessionParts[0].user.firstName}} {{data.sessionParts[0].user.lastName}} ({{data.sessionParts[0].user.verein}})
-									td {{data.date | formatDate}}
+									td {{format.name(data)}}
+									td {{data.sessionParts[0].disziplin.title}}
+									td {{data.sessionParts[0].disziplin.scheibe.title}}
+									td {{data.date | formatTime}}
+									td {{data.date | formatDay}}
 							
 						
 					.modal-footer
