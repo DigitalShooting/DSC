@@ -2,10 +2,6 @@ doctype html
 html(lang="de" ng-app="dsc" ng-controller="session")
 	head
 		title DSC - #{config.line.title}
-		
-		// favicon
-		link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
-		link(rel="icon" href="/favicon.ico" type="image/x-icon")
 			
 		link(href="/css/style.css", rel="stylesheet")
 		
@@ -38,8 +34,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 		script(src='js/services/socketio.js')
 		script(src='js/services/dscAPI.js')
 		script(src='js/services/timeFunctions.js')
-		script(src='js/controllers/info.js')
-		script(src='js/controllers/session.js')
+		script(src='js/controllers/index.js')
 		
 		// Shortcut module
 		script(src="/js/services/shortcut.js")
@@ -217,7 +212,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 						h3 Serien
 						ul(class="list-inline")
 							li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
-						
+					
 					
 		div(class="version" ng-controller="version") 
 			p {{version}}	
@@ -252,6 +247,6 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 			angular.module("dsc", [
 				"ds.services.grafik",
 				"dsc.services.socketio", "dsc.services.timeFunctions", "dsc.services.dscAPI",
-				"dsc.controllers.info", "dsc.controllers.session",
+				"dsc.controllers.main",
 				"ui.bootstrap", "ja.qr", "ngFitText",
 			])

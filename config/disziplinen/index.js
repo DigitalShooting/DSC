@@ -8,7 +8,6 @@ var lg = {
 	demo_blank: 	require("./lg/disziplin_demo_blank.js"),
 	demo: 			require("./lg/disziplin_demo.js"),
 	finale: 		require("./lg/disziplin_finale.js"),
-	ostern: 		require("./lg/disziplin_ostern.js"),
 	training: 		require("./lg/disziplin_training.js"),
 	training_5: 	require("./lg/disziplin_training_5.js"),
 	wettkampf: 		require("./lg/disziplin_wettkampf.js"),
@@ -19,7 +18,6 @@ var lp = {
 	demo: 			require("./lp/disziplin_demo.js"),
 	demo_strich: 	require("./lp/disziplin_demo_strich.js"),
 	finale: 		require("./lp/disziplin_finale.js"),
-	ostern: 		require("./lp/disziplin_ostern.js"),
 	strich: 		require("./lp/disziplin_strich.js"),
 	training: 		require("./lp/disziplin_training.js"),
 	training_5: 	require("./lp/disziplin_training_5.js"),
@@ -36,7 +34,6 @@ all[lg.blank._id] =					lg.blank;
 all[lg.demo._id] =					lg.demo;
 all[lg.demo_blank._id] =			lg.demo_blank;
 all[lg.finale._id] =				lg.finale;
-all[lg.ostern._id] =				lg.ostern;
 all[lg.training._id] =				lg.training;
 all[lg.training_5._id] =			lg.training_5;
 all[lg.wettkampf._id] =				lg.wettkampf;
@@ -47,7 +44,6 @@ all[lp.demo._id] =					lp.demo;
 all[lp.demo_strich._id] =			lp.demo_strich;
 all[lp.finale._id] =				lp.finale;
 all[lp.strich._id] =				lp.strich;
-all[lp.ostern._id] =				lp.ostern;
 all[lp.training._id] =				lp.training;
 all[lp.training_5._id] =			lp.training_5;
 all[lp.wettkampf._id] =				lp.wettkampf;
@@ -91,13 +87,6 @@ module.exports = {
 				lp.demo._id,
 				lg.demo_blank._id,
 				lp.demo_strich._id,
-			]
-		},
-		{
-			title: "Ostern",
-			disziplinen: [
-				lg.ostern._id,
-				lp.ostern._id,
 			]
 		},
 	],

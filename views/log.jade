@@ -62,16 +62,11 @@ html(lang="de" ng-app="dsc-log")
 				div(class="col-xs-12" ng-repeat="serie in session.serien track by $index")
 					table(class="col-xs-9 shotTable")
 						tr
-							th
-								u Nr
-							th
-								u Ring
-							th
-								u Winkel
-							th
-								u Teiler
-							th
-								u Zeit
+							th(class="underline") Nr
+							th(class="underline") Ring
+							th(class="underline") Winkel
+							th(class="underline") Teiler
+							th(class="underline") Zeit
 						tr(ng-repeat="shot in serie.shots track by $index")
 							td {{shot.number}}.
 							td {{shot.ring.display}}
