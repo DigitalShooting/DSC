@@ -108,7 +108,6 @@ Der aktuelle Verbindungsstatus ist erkennbar an dem schwarzen Block links oben i
 #### 3.1 Socket Client -> Server
 Methode             | Parameter     | Auth  | Beschreibung
 --------------------|---------------|-------|------------------------------------------------
-`getSession`        |               | false | Sendet die Aktuelle Session
 `getData`           |               | false | Sendet das Aktuelle Data Obejct (Alle Sessions)
 `getConfig`         |               | false | Sendet die Aktuelle Config
 `setNewTarget`      |               | true  | Neue Scheibe (TODO: Validation if enabled)
@@ -116,6 +115,7 @@ Methode             | Parameter     | Auth  | Beschreibung
 `setSelectedSerie`  | index         | true  | Ausgewählte Serie ändern
 `setSelectedShot`   | index         | true  | Ausgewählte Serie ändern
 `setUser`           | user object   | true  | Aktuelle Session neuem User zuweisen
+`setData`           | data object   | true  | Läd das gegebene Data Object und weist ihm eine neue ID zu
 `setPart`           | id            | true  | Aktiven Part ändern
 `print`             |               | true  | Alle Sessions Drucken
 `showMessage`       | Mesage Object | true  | Zeigt ein Overlay mit `title` vom `type` (alert | default) an
@@ -124,7 +124,6 @@ Methode             | Parameter     | Auth  | Beschreibung
 #### 3.2 Socket Server -> Client
 Methode         | Parameter         | Beschreibung
 ----------------|-------------------|---------------------------------------------
-`setSession`    | Session Object    | Sendet die aktuelle Session bei Veränderung
 `setData`       | Data Object       | Sendet alle Session (Data) (bei Veränderung)
 `setConfig`     | Config Object     | Sendet die aktuelle Config
 `showMessage`   | Mesage Object     | Zeigt ein Overlay mit `title` vom `type` (alert | default) an
@@ -133,9 +132,8 @@ Methode         | Parameter         | Beschreibung
 ### REST
 URL                     | Parameter           | Beschreibung
 ------------------------|---------------------|------------------------------------------------
-`/api/shot`             |  after (Unixtime)   | Gibt alle Schüsse zurück, welche nach der gegebenen unixtime gemacht wurden 
-`/api/session`          |  after (Unixtime)   | Gibt alle Sessions zurück, welche nach der gegebenen unixtime gemacht wurden
-`/api/sessionGroup`     |  after (Unixtime)   | Gibt alle Session Groups zurück, welche nach der gegebenen unixtime gemacht wurden
+`/api/data`             |  limit/ page        | Gibt alle Data Objects zurück, für gegebene Parameter
+
 
 
 

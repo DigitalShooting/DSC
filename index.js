@@ -114,7 +114,6 @@ dscDataAPI.init(function(){
 	// listen to dsc api events
 	dscDataAPI.on = function(event){
 		if (event.type == "dataChanged"){
-			io.emit('setSession', dscDataAPI.getActiveSession());
 			io.emit('setData', dscDataAPI.getActiveData());
 		}
 		if (event.type == "switchData"){
@@ -177,13 +176,6 @@ dscDataAPI.init(function(){
 				title: activeMessage.title,
 			});
 		}
-
-
-		// get/ set session
-		socket.on('getSession', function(key){
-			socket.emit('setSession', dscDataAPI.getActiveSession());
-		});
-		socket.emit('setSession', dscDataAPI.getActiveSession());
 
 
 		// get/ set data
