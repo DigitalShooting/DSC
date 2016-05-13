@@ -7,7 +7,7 @@ module.exports = {
 		name: "esa",
 		band: {
 			onChangePart: 5,
-			onShot: 3,
+			onShot: 2,
 		},
 	},
 	time: {
