@@ -1,10 +1,36 @@
 # Changelog
 
-## Future
-- `FEATURE` Backup Soultion
-- `FEATURE` BigData
+## v2.0
+- `ADD` Breaking Changes in API (`setSession` to `setData`)
+- `ADD` MongoDB Database backend
+- `DEL` SQL
+- `ADD` improvements to Disziplinen
 
-----
+## v1.7.2
+- `ADD` Disziplinen
+
+## v1.7.1
+- `FIX` Load Data
+
+## v1.7
+- `ADD` EC6
+- `ADD` Load Data (beta)
+
+## v1.6
+- `ADD` Doku
+- `ADD` Better Latex printing
+- `ADD` SQL improvements
+
+## v1.5
+- `FIX` Printing Error with Unicode char
+- `ADD` Data API
+
+## v1.4
+- `ADD` Disziplinen
+- `FIX` Latex Printing
+- `ADD` More infos on print (Innenzehner, etc.)
+- `ADD` Grafix Scale Factor to reduce proccessing
+- `ADD` SQL Database
 
 ## v1.3
 - `ADD` Exit type warning
