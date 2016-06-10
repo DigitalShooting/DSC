@@ -440,6 +440,9 @@ angular.module('dsc.controllers.main', [])
 
 .controller('aktuellerSchuss', ['$scope', '$sce', "socket", function ($scope, $sce, socket) {
 	socket.on("setData", function (data) {
+		// trigger window.resize to fix possible wring zize of labels
+		$(window).trigger('resize');
+
 		var session = data.sessionParts[data.sessionIndex];
 		var currentShot;
 
