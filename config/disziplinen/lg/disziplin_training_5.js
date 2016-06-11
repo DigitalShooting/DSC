@@ -20,6 +20,7 @@ module.exports = {
 		probe: {
 			title: "Probe",
 			probeEcke: true,
+			mainPart: true,
 			neueScheibe: true,
 			serienLength: 5,
 			anzahlShots: 0,
