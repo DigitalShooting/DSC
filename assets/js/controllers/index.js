@@ -9,7 +9,7 @@ angular.module('dsc.controllers.main', [])
 		setTimeout(function(){
 			// trigger window.resize to fix possible wring zize of labels
 			$(window).trigger('resize');
-		}, 500);
+		}, 50);
 
 		$scope.name = data.user.firstName + " " + data.user.lastName;
 
