@@ -6,6 +6,11 @@ angular.module('dsc.controllers.main', [])
 		$scope.line = config.line.title;
 	});
 	socket.on("setData", function (data) {
+		setTimeout(function(){
+			// trigger window.resize to fix possible wring zize of labels
+			$(window).trigger('resize');
+		}, 500);
+
 		$scope.name = data.user.firstName + " " + data.user.lastName;
 
 		$scope.openUserMenu = function(){
@@ -440,9 +445,6 @@ angular.module('dsc.controllers.main', [])
 
 .controller('aktuellerSchuss', ['$scope', '$sce', "socket", function ($scope, $sce, socket) {
 	socket.on("setData", function (data) {
-		// trigger window.resize to fix possible wring zize of labels
-		$(window).trigger('resize');
-
 		var session = data.sessionParts[data.sessionIndex];
 		var currentShot;
 
