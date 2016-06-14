@@ -1,7 +1,16 @@
 # Changelog
 
+## Future
+- `ADD` API to get new disziplinen
+- `ADD` Add Help/ Doku
+
+## v2.1 (In dev)
+- `ADD` Support for minDate parameter in /api/data
+- `ADD` mainPart config to part config, to mark parts for counting in RWK
+- `FIX` Autoresizing labels
+
 ## v2.0
-- `ADD` Breaking Changes in API (`setSession` to `setData`)
+- `ADD` Breaking changes in API (`setSession` to `setData`)
 - `ADD` MongoDB Database backend
 - `DEL` SQL
 - `ADD` improvements to Disziplinen
