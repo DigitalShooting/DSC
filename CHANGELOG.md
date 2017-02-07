@@ -9,6 +9,10 @@
 - `ADD` mainPart config to part config, to mark parts for counting in RWK
 - `FIX` Autoresizing labels
 
+# v2.0.1
+- `ÀDD` Disziplinen as Submodule
+- `UPDATE` Disziplinen (LG Auflage/ Finale)
+
 ## v2.0
 - `ADD` Breaking changes in API (`setSession` to `setData`)
 - `ADD` MongoDB Database backend
