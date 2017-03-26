@@ -1,22 +1,21 @@
 {
   "name": "DSC",
-  "version": "1.3.0",
+  "version": "2.1.0",
   "description": "",
   "private": true,
   "dependencies": {
-    "bootstrap": "x",
-    "canvas": "x",
-    "convert-base": "x",
+    "bootstrap": "^3.3.7",
+    "canvas": "^1.6.5",
+    "convert-base": "0.1.0",
     "exec": "x",
-    "express": "x",
-    "express-http-proxy": "x",
+    "express": "^4.15.2",
+    "express-http-proxy": "^0.11.0",
     "jade": "x",
-    "less-middleware": "x",
-    "mongodb": "^2.1.16",
-    "mysql": "x",
-    "restify": "x",
-    "socket.io": "^1.3.6",
-    "swig": "x"
+    "less-middleware": "^2.2.0",
+    "mongodb": "^2.2.25",
+    "mysql": "^2.13.0",
+    "restify": "^4.3.0",
+    "socket.io": "^1.7.3"
   },
   "main": "index.js",
   "scripts": {
