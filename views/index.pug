@@ -2,50 +2,50 @@ doctype html
 html(lang="de" ng-app="dsc" ng-controller="session")
 	head
 		title DSC - #{config.line.title}
-			
+
 		link(href="/css/style.css", rel="stylesheet")
-		
+
 		// jquery
 		script(src="/libs/jquery/dist/jquery.js")
-		
+
 		// bootstrap
 		script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
-		
+
 		// Angular
 		script(src="/libs/angularjs/angular.min.js")
 		script(src='/libs/angular-route/angular-route.js')
-		
+
 		//- Angular UI
 		script(src="/libs/angular-bootstrap/ui-bootstrap.min.js")
 		script(src="/libs/angular-bootstrap/ui-bootstrap-tpls.min.js")
-		
+
 		// Angular QR
 		script(src="/libs/qrcode/lib/qrcode.min.js")
 		script(src="/libs/angular-qr/angular-qr.min.js")
-		
+
 		// Socket io
 		script(src="/socket.io/socket.io.js")
 		script(src="/libs/angular-socket-io/socket.js")
-		
+
 		// FitText
-		script(src="/libs/ngFitText/src/ng-FitText.js")
-		
+		script(src="/libs/ngFitText/dist/ng-FitText.min.js")
+
 		script(src='js/services/grafik.js')
 		script(src='js/services/socketio.js')
 		script(src='js/services/dscAPI.js')
 		script(src='js/services/timeFunctions.js')
 		script(src='js/controllers/index.js')
-		
+
 		// Shortcut module
 		script(src="/js/services/shortcut.js")
-	
+
 		meta(name="viewport", content="width=device-width")
 	body
-	
+
 		div(class="overlay" ng-controller="messageController" ng-hide="hidden")
 			div(class="alert alert-{{message.type}}")
 				h1 {{message.title}}
-	
+
 		div(class="modal" id="overlayMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="overlayController")
 			div(class="modal-dialog" role="document")
 				.modal-content
@@ -55,7 +55,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 						br
 						p {{infoObject.text}}
 						br
-		
+
 		div(class="modal" id="disziplinMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuDisziplinen")
 			div(class="modal-dialog modal-lg" role="document")
 				.modal-content
@@ -69,14 +69,14 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 								p(class='menuItem') {{group.title}}
 								ul(class="list-group")
 									a(class="list-group-item {{isActive(id)}}" ng-repeat="id in group.disziplinen track by $index" ng-click="setDisziplien(id)") {{disziplinen.all[id].title}}
-									
+
 					.modal-footer
 						div(class="btn-group" role="group" style="float:left;" aria-label="...")
 							button(type="button" class="btn btn-default" ng-click="openHistorie()") Historie
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
-		
-		
-		
+
+
+
 		div(class="modal" id="userMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuUser")
 			div(class="modal-dialog" role="document")
 				.modal-content
@@ -99,9 +99,9 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 							.modal-footer
 								button(type="button" class="btn btn-link" style="float:left;") {{adminUrl}}
 								button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
-		
-		
-		
+
+
+
 		div(class="modal" id="modeMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="menuParts")
 			div(class="modal-dialog" role="document")
 				.modal-content
@@ -118,7 +118,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					.modal-footer
 						div(class="btn-group" role="group" style="float:left;" aria-label="...")
 							button(type="button" class="btn btn-default" ng-click="print()") Alles Drucken
-						
+
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
 
 
@@ -158,7 +158,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 		div(ng-controller="shortcut")
 		div(class="status" style="position:absolute;" ng-controller="connection")
 			div(style="background-color:{{color}}")
-		div(class="logo") 
+		div(class="logo")
 			img(src="./logo.png")
 		table(class="navbar-cutsom navbar-default navbar-top")
 			tr
@@ -182,11 +182,11 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					h4 Gesamt
 					h3(data-fittext data-fittext-max="30ex") {{gesamt}}
 					h4 {{gesamtSerie}}
-		
+
 		div(class="modules")
 			div(ng-controller="grafik" class="grafikController {{hidden == true ? 'col-xs-12' : 'col-xs-7'}} noPadding grafik")
 				target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" class="grafik")
-			
+
 			div(class="col-xs-5 noPadding fullHeight info")
 				.col-xs-12
 					div(class="grayBox" ng-controller="aktuellerSchuss" ng-hide="hidden")
@@ -198,7 +198,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 							tr
 								td
 									h2(animate-on-change='currentShot') {{currentShot.teiler}} Teiler
-			
+
 				div(class="col-xs-6 fullHeight")
 					div(class="aktuelleSerie grayBox" ng-controller="aktuelleSerie" ng-hide="hidden")
 						h3 Aktuelle Serie
@@ -208,16 +208,16 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 								td(class="{{shot.selectedClass}}") {{shot.value}}
 								td
 									span(style="margin-top:-2.2vh; display:block; margin-top: 4%; transform-origin: 50% 50%; -webkit-transform:rotate({{shot.winkel}}deg)" ng-bind-html="shot.arrow")
-				
+
 				div(class="col-xs-6 fullHeight")
 					div(class="serien grayBox" ng-controller="serien" ng-hide="hidden")
 						h3 Serien
 						ul(class="list-inline")
 							li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
-					
-					
-		div(class="version" ng-controller="version") 
-			p {{version}}	
+
+
+		div(class="version" ng-controller="version")
+			p {{version}}
 		table(class="navbar-cutsom navbar-default")
 			tr
 				td(ng-controller="name" ng-hide="hidden" ng-click="openUserMenu()")
@@ -240,11 +240,11 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 					h4 Modus
 					h3(data-fittext data-fittext-max="30ex") {{activePart}}
 					h4
-					
+
 		script.
 			// env vars
 			var scaleFactor = "#{config.line.scaleFactor}"
-			
+
 			// init angular app
 			angular.module("dsc", [
 				"ds.services.grafik",
