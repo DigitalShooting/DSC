@@ -15,8 +15,8 @@ var app = express();
 
 
 
-// pug
-app.set('view engine', 'pug');
+// jade
+app.set('view engine', 'jade');
 
 // asset routes
 app.use("/js/", express.static("./assets/js"));
