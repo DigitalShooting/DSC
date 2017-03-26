@@ -2,7 +2,6 @@ var express = require("express");
 var http = require("http");
 var https = require("https");
 var fs = require('fs');
-var jade = require('jade');
 var child_process = require('child_process');
 var lessMiddleware = require('less-middleware');
 var proxy = require("express-http-proxy");
@@ -16,8 +15,8 @@ var app = express();
 
 
 
-// jade
-app.set('view engine', 'jade');
+// pug
+app.set('view engine', 'pug');
 
 // asset routes
 app.use("/js/", express.static("./assets/js"));

@@ -2,40 +2,40 @@ doctype html
 html(lang="de" ng-app="dsc-log")
 	head
 		title Log - #{config.line.title}
-		
+
 		link(href="/css/log.css", rel="stylesheet")
-	
+
 		// jquery
 		script(src="/libs/jquery/dist/jquery.js")
-		
+
 		// bootstrap
 		script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
-		
+
 		// Angular
 		script(src="/libs/angularjs/angular.min.js")
 		script(src='/libs/angular-route/angular-route.js')
-		
+
 		// Socket io
 		script(src="/socket.io/socket.io.js")
 		script(src="/libs/angular-socket-io/socket.js")
-		
+
 		// Angular QR
 		script(src="/libs/qrcode/lib/qrcode.min.js")
 		script(src="/libs/angular-qr/angular-qr.min.js")
-		
+
 		// FitText
 		script(src="/libs/ngFitText/src/ng-FitText.js")
-		
+
 		script(src='/js/controllers/log.js')
 		script(src='/js/services/grafik.js')
 		script(src='js/services/socketio.js')
 		script(src='js/services/timeFunctions.js')
-		
+
 		meta(name="viewport", content="width=device-width")
 	body
 		h1 #{config.line.hostVerein.name}
 			small  #{config.line.title}
-	
+
 		div(ng-controller="sessions")
 			div(ng-repeat="session in data.sessionParts track by $index" class="session")
 				table(class="headerTable col-xs-4 shotTable")
@@ -44,7 +44,7 @@ html(lang="de" ng-app="dsc-log")
 						td {{data.user.firstName}} {{data.user.lastName}}
 					tr
 						th Datum
-						td {{currentDate}}	
+						td {{currentDate}}
 				table(class="headerTable col-xs-4 shotTable")
 					tr
 						th Verein
@@ -79,7 +79,7 @@ html(lang="de" ng-app="dsc-log")
 							td
 							td
 							td {{serie.duration | formatDuration}}
-							
+
 					div(ng-controller="grafik" ng-init='init($parent.$parent.$index, $parent.$index)' class="grafikController col-xs-3")
 						target(zoomlevel="zoomlevel" serie="serie" selectedshotindex="selectedshotindex" scheibe="scheibe" probeecke="probeecke" size="size" class="grafik")
 				div(ng-controller="summary" ng-init='init($parent.$index)' ng-hide="hidden" class="col-xs-12")
@@ -96,11 +96,11 @@ html(lang="de" ng-app="dsc-log")
 							td
 							td
 							td {{session.duration | formatDuration}}
-		
+
 		script.
 			// env vars
 			var scaleFactor = "#{config.line.scaleFactor}"
-		
+
 			// init angular app
 			var app = angular.module('dsc-log', [
 				"ds.services.grafik",

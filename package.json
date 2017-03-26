@@ -10,7 +10,7 @@
     "exec": "x",
     "express": "^4.15.2",
     "express-http-proxy": "^0.11.0",
-    "jade": "x",
+    "pug": "^2.0.0-beta11",
     "less-middleware": "^2.2.0",
     "mongodb": "^2.2.25",
     "mysql": "^2.13.0",
