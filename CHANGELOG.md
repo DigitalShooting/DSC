@@ -4,10 +4,8 @@
 - `ADD` API to get new disziplinen
 - `ADD` Add Help/ Doku
 
-## v2.1
+## v2.0.2
 - `ADD` Support for minDate parameter in /api/data
-- `ADD` mainPart config to part config, to mark parts for counting in RWK
-- `FIX` Autoresizing labels
 - `FIX` Fix wrong sum for session and serie when zehntel is used
 
 ## v2.0.1
