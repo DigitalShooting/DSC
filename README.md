@@ -1,5 +1,5 @@
 # DigitalShootingClient (DSC)
-Client zum erfassen von Schüssen mit Anbindung an Häring ESA.
+Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ESA` Anlagen.
 
 ![Demo](https://raw.githubusercontent.com/DigitalShooting/assets/master/DSC_1.gif)
 
@@ -9,7 +9,7 @@ Client zum erfassen von Schüssen mit Anbindung an Häring ESA.
 ## 1 Installation
 
 ### 1.1 Abhängigkeiten
-- nodejs (>0.12)
+- nodejs (>4)
 - npm
 - g++ (Haering API)
 - [node-canvas](https://github.com/Automattic/node-canvas) (Latex Print)
@@ -20,6 +20,8 @@ Client zum erfassen von Schüssen mit Anbindung an Häring ESA.
 # clone
 git clone https://github.com/DigitalShooting/DSC.git
 cd DSC
+
+# update submodules
 
 # NPM install
 npm install
