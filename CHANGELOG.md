@@ -3,6 +3,11 @@
 ## Future
 - `ADD` API to get new disziplinen
 - `ADD` Add Help/ Doku
+- move printing to own module to reuse in DSM
+- Allow selection of old targets (in parts view)
+- Rebuild the connection to the Haering API
+- Add power off api
+- Prevent multiple prints
 
 ## v2.0.2
 - `ADD` Support for minDate parameter in /api/data
