@@ -1,6 +1,7 @@
 # Changelog
 
 ## Future
+- Add 1 Second lock after button press in ui to prevent double click
 - `ADD` API to get new disziplinen
 - `ADD` Add Help/ Doku
 - move printing to own module to reuse in DSM
