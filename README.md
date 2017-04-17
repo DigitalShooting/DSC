@@ -5,7 +5,6 @@ Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ES
 
 
 
-
 ## 1 Installation
 
 ### 1.1 Abhängigkeiten
@@ -17,14 +16,12 @@ Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ES
 
 ### 1.2 Git
 ````
-# clone
-git clone https://github.com/DigitalShooting/DSC.git
+# clone and update submodules
+git clone --recursiv https://github.com/DigitalShooting/DSC.git
 cd DSC
 
-# update submodules
-
-# NPM install
-npm install
+# NPM rebuild
+npm rebuild
 
 # configure (more under /docs/config.md)
 ls config/
@@ -34,7 +31,6 @@ node index.js
 ````
 
 Access DSC in you browser for localhost on http://127.0.0.1 (read), or with auth key http://127.0.0.1/?key=123 (write). `123` is the default auth key, defined in config/auth.js.
-
 
 ### 1.3 Konfiguration
 
