@@ -10,8 +10,9 @@
 - Add power off api
 - Prevent multiple prints
 
-## v2.0.3 TODO
+## v2.1.0 TODO
 - `ADD` node_modules to repo
+- `ADD` Proper version lib
 
 ## v2.0.2
 - `ADD` Support for minDate parameter in /api/data

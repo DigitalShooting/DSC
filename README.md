@@ -23,6 +23,9 @@ cd DSC
 # NPM rebuild
 npm rebuild
 
+# Build Hearing API
+./lib/Haering/buildAPI.sh
+
 # configure (more under /docs/config.md)
 ls config/
 
