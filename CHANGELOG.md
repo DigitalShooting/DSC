@@ -10,6 +10,9 @@
 - Add power off api
 - Prevent multiple prints
 
+## v2.0.3 TODO
+- `ADD` node_modules to repo
+
 ## v2.0.2
 - `ADD` Support for minDate parameter in /api/data
 - `FIX` Fix wrong sum for session and serie when zehntel is used
