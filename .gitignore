@@ -11,7 +11,6 @@ node_modules/**/**/build/Makefile
 
 .DS_Store
 /stylesheets/*.css
-/config/version.tmp
 /lib/Haering/bin/
 /config/ssl/server*
 /config/database.js.my

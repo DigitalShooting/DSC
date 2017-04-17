@@ -10,6 +10,7 @@ var config = require("./config/index.js");
 var DSCDataAPI = require("./lib/DSCDataAPI.js");
 var Print = require("./lib/print/");
 var mongodb = require("./lib/mongodb.js");
+var version = require("./lib/version.js");
 
 var app = express();
 
@@ -165,7 +166,9 @@ dscDataAPI.init(function(){
 	io.on('connection', function(socket){
 
 		// set about
-		socket.emit('setAbout', config.about);
+		socket.emit('setAbout', {
+			version: version,
+		});
 
 		socket.emit('switchData', dscDataAPI.getActiveData());
 
