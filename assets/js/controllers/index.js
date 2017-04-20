@@ -231,6 +231,8 @@ angular.module('dsc.controllers.main', [])
 
 
 .controller('shortcut', function ($scope, socket, dscAPI) {
+	var isTempDisabled = false;
+
 	socket.on("setData", function (data) {
 		var session = data.sessionParts[data.sessionIndex];
 
@@ -294,6 +296,20 @@ angular.module('dsc.controllers.main', [])
 			dscAPI.print();
 		};
 
+
+		var tempDisableShortcut = function(){
+			if (isTempDisabled) {
+				return false;
+			}
+			else {
+				isTempDisabled = true;
+				setTimeout(function(){
+					isTempDisabled = false;
+				}, 1000);
+				return true;
+			}
+		};
+
 		// LEFT - Previous serie
 		shortcut.remove("left");
 		shortcut.add("left", previousSerie);
@@ -331,7 +347,11 @@ angular.module('dsc.controllers.main', [])
 
 		// F5 - Neue Scheibe
 		shortcut.remove("F5");
-		shortcut.add("F5", newTarget);
+		shortcut.add("F5", function(){
+			if (tempDisableShortcut()) {
+				newTarget();
+			}
+		});
 
 		// F6 - OK
 		// shortcut.remove("F6")
@@ -344,8 +364,16 @@ angular.module('dsc.controllers.main', [])
 		// F8 / m - Abbrechen/ Probe/ Match
 		shortcut.remove("F8");
 		shortcut.remove("m");
-		shortcut.add("F8", togglePart);
-		shortcut.add("m", togglePart);
+		shortcut.add("F8", function(){
+			if (tempDisableShortcut()) {
+				togglePart();
+			}
+		});
+		shortcut.add("m", function(){
+			if (tempDisableShortcut()) {
+				togglePart();
+			}
+		});
 	});
 })
 
