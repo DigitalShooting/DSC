@@ -24,6 +24,12 @@ Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ES
 Falls aktiv:
 - mongodb
 
+#### Shutdown
+`dsc` user `sudo` Rechte für den `shutdown` Befehl geben
+````
+dsc ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+````
+
 ### Git
 ````
 # clone and update submodules
@@ -63,10 +69,6 @@ Title/ Nummer der Linie, Einstellungen für die Anzeige sowie Drucker und Logo.
 
 ### Network (`network.js`)
 IPs/ Ports für DSC Web interface und API.
-
-### Sonstiges
-- Durcker in CUPS konfigurieren
-- `dsc` user `sudo` Rechte für den `shutdown` Befehl geben
 
 
 ## Bedienung
