@@ -247,6 +247,14 @@ dscDataAPI.init(function(){
 
 
 
+		socket.on('setSessionIndex', function(object){
+			checkAuth(object.auth, function(){
+				dscDataAPI.setSessionIndex(object.sessionIndex);
+			});
+		});
+
+
+
 		socket.on('print', function(object){
 			checkAuth(object.auth, function(){
 				io.emit('info', {

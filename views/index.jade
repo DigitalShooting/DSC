@@ -117,8 +117,26 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 									a(class="list-group-item {{part.active}}" ng-repeat="part in parts track by $index" ng-click="switchToPart(part.id)") {{part.title}}
 					.modal-footer
 						div(class="btn-group" role="group" style="float:left;" aria-label="...")
-							button(type="button" class="btn btn-default" ng-click="print()") Alles Drucken
-
+							button(type="button" class="btn btn-default" ng-click="print()") Drucken
+							button(type="button" class="btn btn-default" ng-click="menuOldPartSelect()") Scheiben
+						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
+						
+						
+		
+		div(class="modal" id="modeOldPartSelect" tabindex="-1" role="dialog" ng-controller="menuOldPartSelect")
+			div(class="modal-dialog" role="document")
+				.modal-content
+					.modal-header
+						button(type="button" class="close" data-dismiss="modal")
+							span(aria-hidden="true") &times;
+						h4(class="modal-title" id="myModalLabel") Modus
+					.modal-body
+						.row
+							div(class="col-xs-10 col-xs-offset-1")
+								p(class="menuItem") Verlauf
+								ul(class="list-group")
+									a(class="list-group-item {{session.active}}" ng-repeat="session in usedParts" ng-click="switchToSession(session.index)") {{session.title}}
+					.modal-footer
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
 
 
@@ -214,7 +232,7 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 						h3 Serien
 						ul(class="list-inline")
 							li(ng-repeat="shot in serien track by $index" class="col-xs-3" ng-click="selectSerie(shot.index)" class="{{shot.selectedClass}}") {{shot.value}}
-
+							
 
 		div(class="version" ng-controller="version")
 			p {{version}}

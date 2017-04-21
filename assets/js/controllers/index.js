@@ -112,17 +112,41 @@ angular.module('dsc.controllers.main', [])
 				active: id == session.type ? "active" : ""
 			});
 		}
-
-		$scope.switchToPart = function(id){
-			dscAPI.setPart(id);
-			$('#modeMenu').modal('hide');
-		};
-
-		$scope.print = function(){
-			dscAPI.print();
-			$('#modeMenu').modal('hide');
-		};
 	});
+
+	$scope.switchToPart = function(id){
+		dscAPI.setPart(id);
+		$('#modeMenu').modal('hide');
+	};
+
+	$scope.print = function(){
+		dscAPI.print();
+		$('#modeMenu').modal('hide');
+	};
+	$scope.menuOldPartSelect = function() {
+		$('#modeMenu').modal('hide');
+		$('#modeOldPartSelect').modal('show');
+	};
+})
+
+
+
+.controller('menuOldPartSelect', function ($scope, socket, dscAPI) {
+	socket.on("setData", function (data) {
+		$scope.usedParts = [];
+		for (var sessionIndex = 0; sessionIndex < data.sessionParts.length; sessionIndex++) {
+			$scope.usedParts.push({
+				title: data.disziplin.parts[data.sessionParts[sessionIndex].type].title,
+				index: sessionIndex,
+				active: sessionIndex == data.sessionIndex ? "active" : "",
+			});
+		}
+	});
+
+	$scope.switchToSession = function(index){
+		dscAPI.setSessionIndex(index);
+		console.log(index);
+	};
 })
 
 

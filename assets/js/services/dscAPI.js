@@ -16,6 +16,12 @@ angular.module('dsc.services.dscAPI', [
 				partId: partId,
 			});
 		},
+		setSessionIndex: function(sessionIndex){
+			socket.emit("setSessionIndex", {
+				auth: auth,
+				sessionIndex: sessionIndex,
+			});
+		},
 		setSelectedSerie: function(index){
 			socket.emit("setSelectedSerie", {
 				auth: auth,
