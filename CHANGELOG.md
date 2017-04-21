@@ -5,7 +5,6 @@
 - `ADD` Add Help/ Doku
 - move printing to own module to reuse in DSM
 - Rebuild the connection to the Haering API
-- Add power off api
 
 ## v2.1.0 TODO
 - `ADD` node_modules to repo
