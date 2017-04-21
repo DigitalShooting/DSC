@@ -64,6 +64,9 @@ Title/ Nummer der Linie, Einstellungen für die Anzeige sowie Drucker und Logo.
 ### Network (`network.js`)
 IPs/ Ports für DSC Web interface und API.
 
+### Sonstiges
+- Durcker in CUPS konfigurieren
+- `dsc` user `sudo` Rechte für den `shutdown` Befehl geben
 
 
 ## Bedienung
