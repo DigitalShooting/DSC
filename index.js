@@ -262,7 +262,7 @@ dscDataAPI.init(function(){
 					text: "Der Ausdruck wird erstellt.",
 				});
 
-				Print(dscDataAPI.getActiveData(), function(err){
+				Print(dscDataAPI.getActiveData(), object.printTemplate, function(err){
 					if (err){
 						io.emit('info', {
 							title: "Drucken fehlgeschlagen.",

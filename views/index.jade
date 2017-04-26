@@ -117,8 +117,18 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 									a(class="list-group-item {{part.active}}" ng-repeat="part in parts track by $index" ng-click="switchToPart(part.id)") {{part.title}}
 					.modal-footer
 						div(class="btn-group" role="group" style="float:left;" aria-label="...")
-							button(type="button" class="btn btn-default" ng-click="print()") Drucken
-							button(type="button" class="btn btn-default" ng-click="menuOldPartSelect()") Scheiben
+							button(type="button" class="btn btn-default" ng-click="print('default')") Drucken
+							button(type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+								span(class="caret")
+								span(class="sr-only") Toggle Dropdown
+							ul(class="dropdown-menu")
+								li
+									a(ng-click="print('default')") Normal
+								li
+									a(ng-click="print('dateless')") Ohne Datum
+							
+						button(type="button" class="btn btn-default" style="margin-left:5px;float:left;" ng-click="menuOldPartSelect()") Scheiben
+						
 						button(type="button" class="btn btn-default" data-dismiss="modal") Schließen
 						
 						

@@ -1,0 +1,130 @@
+
+
+- function formatDuration(totalSeconds){
+	- totalSeconds = Math.round(totalSeconds)
+	
+	- var h = Math.floor(totalSeconds / 3600);
+	- if (h > 0) h = h + " h "
+	- else {h = ""}
+	
+	- totalSeconds = totalSeconds % 3600;
+	
+	- var m = Math.floor(totalSeconds / 60);
+	- if (m > 0) m = m + " min "
+	- else {m = ""}
+	
+	- var s = totalSeconds % 60;
+	- if (s > 0) s = s + " sec"
+	- else {s = ""}
+	
+	- return h+m+s;
+- }
+
+
+
+mixin gesamt(session)
+	|\begin{minipage}[t]{1.0\textwidth}\vspace{10pt}
+	|	\begin{tabularx}{\textwidth}{@{}l *9{>{\centering\arraybackslash}X}@{}}
+	|		\toprule
+	|		Anzahl & Ringe & Schnitt & Innenzehner & Bester Teiler & 9.9er & 10.0er & Zeit \\
+	|		\midrule
+	|		#{session.anzahl} & \textbf{#{session.gesamt}} & #{session.schnitt} \O & #{session.counts.innenZehner} & #{session.bestTeiler} & #{session.counts.neunNeun} & #{session.counts.zehnNull} & #{formatDuration(session.duration)} \\
+	|		\bottomrule
+	|	\end{tabularx}
+	|\end{minipage}
+	|\newline
+
+
+
+mixin serien(session, disziplin)
+	each serie, index in session.serien
+		|\begin{minipage}[t]{.48\textwidth}\vspace{10pt}
+		|	\begin{tabular*}{\textwidth}{c|c|c|c|c @{\extracolsep{\fill}} c}
+		|		\multicolumn{6}{c}{\textbf{#{index+1}. Serie}} \\
+		|		\toprule
+		|		Nr & Ring & Winkel & Teiler & Dauer & Grafik \\
+		|		\midrule
+		
+		each shot, index in serie.shots
+			|#{ shot.number}. & #{shot.ring.display} & \rotatebox[origin=c]{#{shot.winkel}}{$\rightarrow$} \SI{ #{shot.winkel} }{\degree} & #{shot.teiler} & &
+			- if (index == 0)
+				|\multirow{0}[0]{*}{
+				|\begin{minipage}{.3\textwidth}
+				|	\centering
+				|	\includegraphics[height=3.0cm, keepaspectratio]{scheibe_#{session.index}_#{serie.index}.pdf}
+				|\end{minipage} }
+				|\\
+			- else
+				|\\
+		
+		- var i = serie.shots.length
+		- var min = disziplin.parts[session.type].serienLength
+		- if (min < 8) {min = 8}
+		- if (min > 10) {min = 10}
+		while i < min
+			|\\
+			- i++
+		
+		|\hline
+		|#{serie.anzahl} & \textbf{#{serie.gesamt}} & &  & #{formatDuration(serie.duration)} & #{serie.schnitt} \O \\
+		|\bottomrule
+		|\end{tabular*}
+		|\end{minipage}
+		- if (index < session.serien.length)
+			|\hfill
+
+
+
+
+
+
+|\documentclass[
+|	a4paper,
+|	8pt,
+|	footheight=38pt
+|]{scrartcl}
+|\usepackage[
+|	top    = 2.50cm,
+|	bottom = 2.50cm,
+|	left   = 1.00cm,
+|	right  = 1.00cm
+|]{geometry}
+
+|\usepackage{scrpage2}
+|\pagestyle{scrheadings}
+|\usepackage[utf8]{inputenc}
+|\usepackage[ngerman]{babel}
+|\usepackage{pdfpages}
+|\usepackage{siunitx}
+|\usepackage{booktabs,lipsum,calc}
+|\usepackage{multirow}
+|\usepackage{graphicx}
+|\usepackage{float}
+|\usepackage{lmodern}
+|\usepackage{tabularx}
+|\usepackage{titlesec}
+
+|\DeclareUnicodeCharacter{FFFD}{?}
+
+|\usepackage{helvet}
+|\renewcommand{\familydefault}{\sfdefault}
+
+|\titlespacing*{\section} {0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+|\titlespacing*{\subsection} {0pt}{2.25ex plus 1ex minus .2ex}{-5.0ex plus .2ex}
+
+
+|\begin{document}
+
+
+|\ihead{#{line.title}\\ }
+|\ohead{ \large #{data.user.verein} #{data.user.manschaft}\\ #{data.user.firstName} #{data.user.lastName}}
+
+|\section*{#{data.disziplin.title}}
+
+each session, index in data.sessionParts
+	|\subsection*{ #{data.disziplin.parts[session.type].title} }
+	|\vspace{0.2cm}
+	+gesamt(session)
+	+serien(session, data.disziplin)
+
+|\end{document}

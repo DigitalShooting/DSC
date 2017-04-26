@@ -46,9 +46,10 @@ angular.module('dsc.services.dscAPI', [
 				disziplin: disziplin,
 			});
 		},
-		print: function(){
+		print: function(printTemplate){
 			socket.emit("print", {
 				auth: auth,
+				printTemplate: printTemplate,
 			});
 		},
 		loadData: function(data){

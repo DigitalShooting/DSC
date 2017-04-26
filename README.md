@@ -134,7 +134,7 @@ Methode             | Parameter     | Auth  | Beschreibung
 `setData`           | data object   | true  | Läd das gegebene Data Object und weist ihm eine neue ID zu
 `setPart`           | id            | true  | Aktiven Part ändern
 `setSessionIndex`   | index         | true  | Aktive Session wechseln
-`print`             |               | true  | Alle Sessions Drucken
+`print`             | printTemplate | true  | Alle Sessions Drucken
 `showMessage`       | Mesage Object | true  | Zeigt ein Overlay mit `title` vom `type` (alert | default) an
 `hideMessage`       |               | true  | Schliest die Message
 

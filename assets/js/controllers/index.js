@@ -119,8 +119,8 @@ angular.module('dsc.controllers.main', [])
 		$('#modeMenu').modal('hide');
 	};
 
-	$scope.print = function(){
-		dscAPI.print();
+	$scope.print = function(printTemplate){
+		dscAPI.print(printTemplate);
 		$('#modeMenu').modal('hide');
 	};
 	$scope.menuOldPartSelect = function() {
