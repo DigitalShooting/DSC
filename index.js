@@ -241,7 +241,7 @@ dscDataAPI.init(function(){
 
 		socket.on('setPart', function(object){
 			checkAuth(object.auth, function(){
-				dscDataAPI.setPart(object.partId);
+				dscDataAPI.setPart(object.partId, object.force);
 			});
 		});
 
