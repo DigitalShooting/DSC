@@ -11,6 +11,7 @@
 - `ADD` Proper version lib
 - `ADD` Limit number of keyboard actions per second to one, for some actions
 - `ADD` Allow selection of old parts
+- `FIX` Part selection force, was always true
 
 ## v2.0.2
 - `ADD` Support for minDate parameter in /api/data
