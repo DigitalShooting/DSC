@@ -9,7 +9,9 @@ var proxy = require("express-http-proxy");
 var config = require("./config/index.js");
 var DSCDataAPI = require("./lib/DSCDataAPI.js");
 var Print = require("./lib/print/");
-var mongodb = require("./lib/mongodb.js");
+
+var DSCDatabaseAPI = require("./lib/DSCDatabaseAPI.js");
+
 var version = require("./lib/version.js");
 
 var app = express();
@@ -86,7 +88,7 @@ dscDataAPI.init(function(){
 	};
 
 	if (config.database.enabled) {
-		mongodb(function(collection){
+		new DSCDatabaseAPI(function(collection){
 			var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
 				if (data.length === 0 || err) {
 					initDefalutSession();
@@ -114,6 +116,7 @@ dscDataAPI.init(function(){
 	// listen to dsc api events
 	dscDataAPI.on = function(event){
 		if (event.type == "dataChanged"){
+			console.log(dscDataAPI.getActiveData())
 			io.emit('setData', dscDataAPI.getActiveData());
 		}
 		if (event.type == "switchData"){
@@ -320,7 +323,7 @@ dscDataAPI.init(function(){
 
 		socket.on("shutdown", function(object){
 			checkAuth(object.auth, function(){
-				child_process.exec(["'sudo shutdown -h now'"], function(err, out, code) { });
+				child_process.execFile("sudo" , ["shutdown", "-h", "now"], function(err, out, code) { });
 			});
 		});
 
