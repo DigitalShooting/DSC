@@ -320,7 +320,7 @@ dscDataAPI.init(function(){
 
 		socket.on("shutdown", function(object){
 			checkAuth(object.auth, function(){
-				child_process.exec(["'sudo shutdown -h now'"], function(err, out, code) { });
+				child_process.execFile("sudo", ["shutdown", "-h", "now"], function(err, out, code) { });
 			});
 		});
 
