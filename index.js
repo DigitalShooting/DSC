@@ -1,46 +1,37 @@
-var express = require("express");
-var http = require("http");
-var https = require("https");
-var fs = require('fs');
 var child_process = require('child_process');
-var lessMiddleware = require('less-middleware');
-var proxy = require("express-http-proxy");
 
 var config = require("./config/index.js");
 var DSCDataAPI = require("./lib/DSCDataAPI.js");
 var Print = require("./lib/print/");
-var mongodb = require("./lib/mongodb.js");
-var version = require("./lib/version.js");
-
-// Start API Processes
-var restAPIProcess = child_process.fork("./lib/api.js");
+var MongoDBHelper = require("./lib/MongoDBHelper.js");
 
 // Start Main Server Processes
-var controllerProcess = child_process.fork("./controller.js");
+var controllerProcess = child_process.fork("./lib/Webserver");
 
 controllerProcess.on("message", function(event){
-  if (event.type === "newTarget") {
+  switch (event.type) {
+  case "newTarget":
     dscDataAPI.newTarget();
-  }
-  if (event.type === "setDisziplin") {
+    break;
+  case "setDisziplin":
     dscDataAPI.setDisziplin(event.data);
-  }
-  if (event.type === "setSelectedSerie") {
+    break;
+  case "setSelectedSerie":
     dscDataAPI.setSelectedSerie(event.data);
-  }
-  if (event.type === "setSelectedShot") {
+    break;
+  case "setSelectedShot":
     dscDataAPI.setSelectedShot(event.data);
-  }
-  if (event.type === "setUser") {
+    break;
+  case "setUser":
     dscDataAPI.setUser(event.data);
-  }
-  if (event.type === "setPart") {
+    break;
+  case "setPart":
     dscDataAPI.setPart(event.data.partId, event.data.force);
-  }
-  if (event.type === "setSessionIndex") {
+    break;
+  case "setSessionIndex":
     dscDataAPI.setSessionIndex(event.data);
-  }
-  if (event.type === "print") {
+    break;
+  case "print":
     controllerProcess.send({type: "print_didStart"});
     Print(dscDataAPI.getActiveData(), event.data, function(err){
       if (err){
@@ -50,22 +41,31 @@ controllerProcess.on("message", function(event){
         controllerProcess.send({type: "print_didFinish"});
       }
     });
-  }
-  if (event.type === "loadData") {
+    break;
+  case "loadData":
     dscDataAPI.setData(event.data);
-  }
-  if (event.type === "showMessage") {
+    break;
+  case "showMessage":
     controllerProcess.send({type: "showMessage", data: event.data});
-  }
-  if (event.type === "hideMessage") {
+    break;
+  case "hideMessage":
     controllerProcess.send({type: "hideMessage"});
-  }
-  if (event.type === "shutdown") {
+    break;
+  case "shutdown":
     child_process.execFile("sudo", ["shutdown", "-h", "now"], function(err, out, code) { });
-  }
-  if (event.type === "sendSessions") {
+    break;
+  case "sendSessions":
     dscDataAPI.setData(event.data.sessions, event.data.group, event.data.user);
+    break;
+
+  default:
+    console.error("Unnown event was called from controllerProcess", event);
   }
+});
+
+controllerProcess.on("exit", function(){
+  console.error("[Main Process] Webserver Worker did exit, stopping DSC...");
+  process.exit();
 });
 
 
@@ -73,88 +73,90 @@ controllerProcess.on("message", function(event){
 // dsc api init
 var dscDataAPI = DSCDataAPI();
 dscDataAPI.init(function(){
-	aaa.bb();
 
-	// set default disziplin
-	var initDefalutSession = function(){
-		dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
+  // set default disziplin
+  var initDefalutSession = function(){
+    dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
 
-		// set default user
-		dscDataAPI.setUser({
-			firstName: "Gast",
-			lastName: "",
-			verein: "",//config.line.hostVerein.name,
-			manschaft: "",
-		});
-	};
+    // set default user
+    dscDataAPI.setUser({
+      firstName: "Gast",
+      lastName: "",
+      verein: "",//config.line.hostVerein.name,
+      manschaft: "",
+    });
+  };
 
-	if (config.database.enabled) {
-		mongodb(function(collection){
-			var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
-				if (data.length == 0 || err) {
-					initDefalutSession();
-				}
-				else {
-					// TODO search for last shot date
-					var timeDelta = ((new Date ()).getTime()) - data[0].date;
-					if (timeDelta < config.database.reloadLimit *1000) {
-						dscDataAPI.setData(data[0]);
-					}
-					else {
-						initDefalutSession();
-					}
-				}
-			});
-		});
-	}
-	else {
-		initDefalutSession();
-	}
-
-
-	// listen to dsc api events
-	dscDataAPI.on = function(event){
-		if (event.type === "dataChanged"){
-			controllerProcess.send({
-				type: "dataChanged",
-				data: dscDataAPI.getActiveData(),
-			});
-		}
-		else if (event.type === "switchData"){
-			controllerProcess.send({
-				type: "switchData",
-				data: dscDataAPI.getActiveData(),
-			});
-		}
-		else if (event.type === "statusChanged"){
-			controllerProcess.send({
-				type: "statusChanged",
-				data: event.connected,
-			});
-		}
-		else if (event.type === "alertTimeOverShot"){
-			controllerProcess.send({
-				type: "alertTimeOverShot",
-			});
-		}
-		else if (event.type === "alertShotLimit"){
-			controllerProcess.send({
-				type: "alertShotLimit",
-			});
-		}
-		else if (event.type === "exitTypeWarning_beforeFirst"){
-			controllerProcess.send({
-				type: "exitTypeWarning_beforeFirst",
-			});
-		}
-		else if (event.type === "exitTypeWarning_none"){
-			controllerProcess.send({
-				type: "exitTypeWarning_none",
-			});
-		}
-
-	};
+  if (config.database.enabled) {
+    MongoDBHelper(function(collection){
+      var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
+        if (data.length == 0 || err) {
+          initDefalutSession();
+        }
+        else {
+          // TODO search for last shot date
+          var timeDelta = ((new Date ()).getTime()) - data[0].date;
+          if (timeDelta < config.database.reloadLimit *1000) {
+            dscDataAPI.setData(data[0]);
+          }
+          else {
+            initDefalutSession();
+          }
+        }
+      });
+    });
+  }
+  else {
+    initDefalutSession();
+  }
 
 
-	var activeMessage;
+  // listen to dsc api events
+  dscDataAPI.on = function(event){
+    switch (event.type) {
+    case "dataChanged":
+      controllerProcess.send({
+        type: "dataChanged",
+        data: dscDataAPI.getActiveData(),
+      });
+      break;
+    case "switchData":
+      controllerProcess.send({
+        type: "switchData",
+        data: dscDataAPI.getActiveData(),
+      });
+      break;
+    case "statusChanged":
+      controllerProcess.send({
+        type: "statusChanged",
+        data: event.connected,
+      });
+      break;
+    case "alertTimeOverShot":
+      controllerProcess.send({
+        type: "alertTimeOverShot",
+      });
+      break;
+    case "alertShotLimit":
+      controllerProcess.send({
+        type: "alertShotLimit",
+      });
+      break;
+    case "exitTypeWarning_beforeFirst":
+      controllerProcess.send({
+        type: "exitTypeWarning_beforeFirst",
+      });
+      break;
+    case "exitTypeWarning_none":
+      controllerProcess.send({
+        type: "exitTypeWarning_none",
+      });
+      break;
+
+    default:
+      console.error("Unnown event was called from dataAPI", event);
+    }
+  };
+
+  var activeMessage;
 });
