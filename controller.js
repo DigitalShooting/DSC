@@ -142,12 +142,12 @@ process.on("message", function(event){
 
 // helper to perform callback if auth object ist valid
 function checkAuth(auth, callback){
-	if (config.auth.key == auth.key || config.auth.tempKey == auth.key){
-		if (callback != null) callback();
-	}
-	else {
-		console.log("[INFO] Wrong auth key");
-	}
+  if (config.auth.key == auth.key || config.auth.tempKey == auth.key){
+    if (callback != null) callback();
+  }
+  else {
+    console.log("[INFO] Wrong auth key");
+  }
 }
 
 
@@ -157,161 +157,161 @@ function checkAuth(auth, callback){
 // socket stuff
 io.on('connection', function(socket){
 
-	// set about
-	socket.emit('setAbout', {
-		version: version,
-	});
+  // set about
+  socket.emit('setAbout', {
+    version: version,
+  });
 
-	socket.emit('switchData', activeData);
+  socket.emit('switchData', activeData);
 
   // Send shotMessage if we have any
-	if (activeMessage !== undefined){
+  if (activeMessage !== undefined){
     socket.emit("showMessage", {
       type: activeMessage.type,
       title: activeMessage.title,
     });
-	}
+  }
 
 
-	// get/ set data
-	socket.on('getData', function(key){
-		socket.emit('setData', activeData);
-	});
-	socket.emit('setData', activeData);
+  // get/ set data
+  socket.on('getData', function(key){
+    socket.emit('setData', activeData);
+  });
+  socket.emit('setData', activeData);
 
 
-	// get/ set config
-	socket.on('getConfig', function(key){
-		socket.emit('setConfig', {
-			disziplinen: config.disziplinen,
-			line: config.line,
-		});
-	});
-	socket.emit('setConfig', {
-		disziplinen: config.disziplinen,
-		line: config.line,
-	});
+  // get/ set config
+  socket.on('getConfig', function(key){
+    socket.emit('setConfig', {
+      disziplinen: config.disziplinen,
+      line: config.line,
+    });
+  });
+  socket.emit('setConfig', {
+    disziplinen: config.disziplinen,
+    line: config.line,
+  });
 
 
-	// set new target
-	socket.on('newTarget', function(object){
-		checkAuth(object.auth, function(){
+  // set new target
+  socket.on('newTarget', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "newTarget"});
-		});
-	});
+    });
+  });
 
 
-	// set disziplin
-	socket.on('setDisziplin', function(object){
-		checkAuth(object.auth, function(){
-			var key = object.disziplin;
+  // set disziplin
+  socket.on('setDisziplin', function(object){
+    checkAuth(object.auth, function(){
+      var key = object.disziplin;
       process.send({type: "setDisziplin", data: config.disziplinen.all[key]});
-		});
-	});
+    });
+  });
 
 
-	// selection
-	socket.on('setSelectedSerie', function(object){
-		checkAuth(object.auth, function(){
+  // selection
+  socket.on('setSelectedSerie', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "setSelectedSerie", data: object.index});
-		});
-	});
-	socket.on('setSelectedShot', function(object){
-		checkAuth(object.auth, function(){
+    });
+  });
+  socket.on('setSelectedShot', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "setSelectedShot", data: object.index});
-		});
-	});
+    });
+  });
 
 
-	// set user
-	socket.on('setUser', function(object){
-		checkAuth(object.auth, function(){
+  // set user
+  socket.on('setUser', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "setUser", data: object.user});
-		});
-	});
+    });
+  });
 
 
 
-	socket.on('setPart', function(object){
-		checkAuth(object.auth, function(){
+  socket.on('setPart', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "setPart", data: {
         partId: object.partId,
         force: object.force,
       }});
-		});
-	});
+    });
+  });
 
 
 
-	socket.on('setSessionIndex', function(object){
-		checkAuth(object.auth, function(){
+  socket.on('setSessionIndex', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "setSessionIndex", data: object.sessionIndex});
-		});
-	});
+    });
+  });
 
 
 
-	socket.on('print', function(object){
-		checkAuth(object.auth, function(){
+  socket.on('print', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "print", data: object.printTemplate});
-		});
-	});
+    });
+  });
 
 
 
-	socket.on('loadData', function(object){
-		checkAuth(object.auth, function(){
+  socket.on('loadData', function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "loadData", data: object.data});
-		});
-	});
+    });
+  });
 
 
 
-	// Returns the current temp token to manipulate the session
-	socket.on('getTempToken', function(object){
-		checkAuth(object.auth, function(){
-			socket.emit("setTempToken", config.auth.tempKey);
-		});
-	});
+  // Returns the current temp token to manipulate the session
+  socket.on('getTempToken', function(object){
+    checkAuth(object.auth, function(){
+      socket.emit("setTempToken", config.auth.tempKey);
+    });
+  });
 
 
 
 
-	socket.on("showMessage", function(object){
-		checkAuth(object.auth, function(){
+  socket.on("showMessage", function(object){
+    checkAuth(object.auth, function(){
 
       process.send({type: "loadData", data: {
-				type: object.type,
-				title: object.title,
-			}});
-		});
-	});
-	socket.on("hideMessage", function(object){
-		checkAuth(object.auth, function(){
+        type: object.type,
+        title: object.title,
+      }});
+    });
+  });
+  socket.on("hideMessage", function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "hideMessage"});
-		});
-	});
+    });
+  });
 
 
 
 
-	socket.on("shutdown", function(object){
-		checkAuth(object.auth, function(){
-			process.send({type: "shutdown"});
-		});
-	});
+  socket.on("shutdown", function(object){
+    checkAuth(object.auth, function(){
+      process.send({type: "shutdown"});
+    });
+  });
 
 
 
-	socket.on("sendSessions", function(object){
-		checkAuth(object.auth, function(){
+  socket.on("sendSessions", function(object){
+    checkAuth(object.auth, function(){
       process.send({type: "sendSessions", data: {
         sessions: object.sessions,
         group: object.group,
         user: object.user,
       }});
-		});
-	});
+    });
+  });
 
 
 
