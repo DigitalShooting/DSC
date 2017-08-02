@@ -70,105 +70,91 @@ controllerProcess.on("message", function(event){
 
 
 
-// Kill all child processes
-var killWorkers = function() {
-  restAPIProcess.kill();
-  controllerProcess.kill();
-};
-process.on("uncaughtException", function(err){
-  console.error(err);
-  killWorkers();
-  process.exit();
-});
-process.on('SIGINT', killWorkers); // catch ctrl-c
-process.on('SIGTERM', killWorkers); // catch kill
-
-
-
 // dsc api init
 var dscDataAPI = DSCDataAPI();
 dscDataAPI.init(function(){
+	aaa.bb();
 
-  // set default disziplin
-  var initDefalutSession = function(){
-    dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
+	// set default disziplin
+	var initDefalutSession = function(){
+		dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
 
-    // set default user
-    dscDataAPI.setUser({
-      firstName: "Gast",
-      lastName: "",
-      verein: "",//config.line.hostVerein.name,
-      manschaft: "",
-    });
-  };
+		// set default user
+		dscDataAPI.setUser({
+			firstName: "Gast",
+			lastName: "",
+			verein: "",//config.line.hostVerein.name,
+			manschaft: "",
+		});
+	};
 
-  if (config.database.enabled) {
-    mongodb(function(collection){
-      var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
-        if (data.length == 0 || err) {
-          initDefalutSession();
-        }
-        else {
-          // TODO search for last shot date
-          var timeDelta = ((new Date ()).getTime()) - data[0].date;
-          if (timeDelta < config.database.reloadLimit *1000) {
-            dscDataAPI.setData(data[0]);
-          }
-          else {
-            initDefalutSession();
-          }
-        }
-      });
-    });
-  }
-  else {
-    initDefalutSession();
-  }
-
-
-  // listen to dsc api events
-  dscDataAPI.on = function(event){
-    if (event.type === "dataChanged"){
-      controllerProcess.send({
-        type: "dataChanged",
-        data: dscDataAPI.getActiveData(),
-      });
-    }
-    else if (event.type === "switchData"){
-      controllerProcess.send({
-        type: "switchData",
-        data: dscDataAPI.getActiveData(),
-      });
-    }
-    else if (event.type === "statusChanged"){
-      controllerProcess.send({
-        type: "statusChanged",
-        data: event.connected,
-      });
-    }
-    else if (event.type === "alertTimeOverShot"){
-      controllerProcess.send({
-        type: "alertTimeOverShot",
-      });
-    }
-    else if (event.type === "alertShotLimit"){
-      controllerProcess.send({
-        type: "alertShotLimit",
-      });
-    }
-    else if (event.type === "exitTypeWarning_beforeFirst"){
-      controllerProcess.send({
-        type: "exitTypeWarning_beforeFirst",
-      });
-    }
-    else if (event.type === "exitTypeWarning_none"){
-      controllerProcess.send({
-        type: "exitTypeWarning_none",
-      });
-    }
-
-  };
+	if (config.database.enabled) {
+		mongodb(function(collection){
+			var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
+				if (data.length == 0 || err) {
+					initDefalutSession();
+				}
+				else {
+					// TODO search for last shot date
+					var timeDelta = ((new Date ()).getTime()) - data[0].date;
+					if (timeDelta < config.database.reloadLimit *1000) {
+						dscDataAPI.setData(data[0]);
+					}
+					else {
+						initDefalutSession();
+					}
+				}
+			});
+		});
+	}
+	else {
+		initDefalutSession();
+	}
 
 
-  var activeMessage;
+	// listen to dsc api events
+	dscDataAPI.on = function(event){
+		if (event.type === "dataChanged"){
+			controllerProcess.send({
+				type: "dataChanged",
+				data: dscDataAPI.getActiveData(),
+			});
+		}
+		else if (event.type === "switchData"){
+			controllerProcess.send({
+				type: "switchData",
+				data: dscDataAPI.getActiveData(),
+			});
+		}
+		else if (event.type === "statusChanged"){
+			controllerProcess.send({
+				type: "statusChanged",
+				data: event.connected,
+			});
+		}
+		else if (event.type === "alertTimeOverShot"){
+			controllerProcess.send({
+				type: "alertTimeOverShot",
+			});
+		}
+		else if (event.type === "alertShotLimit"){
+			controllerProcess.send({
+				type: "alertShotLimit",
+			});
+		}
+		else if (event.type === "exitTypeWarning_beforeFirst"){
+			controllerProcess.send({
+				type: "exitTypeWarning_beforeFirst",
+			});
+		}
+		else if (event.type === "exitTypeWarning_none"){
+			controllerProcess.send({
+				type: "exitTypeWarning_none",
+			});
+		}
+
+	};
+
+
+	var activeMessage;
 });

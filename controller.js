@@ -67,6 +67,20 @@ server.on("listening", function() {
 var activeData;
 var activeMessage;
 
+
+
+// Exit when the main process dies
+process.once("disconnect", function(){
+  console.error("[Webserver Worker] Master got disconnect event, trying to exit with 0");
+  process.exit(0);
+});
+
+process.once("exit", function(code){
+  console.error("[Webserver Worker] exit with %s", code);
+});
+
+
+
 process.on("message", function(event){
   if (event.type === "dataChanged"){
     activeData = event.data;
