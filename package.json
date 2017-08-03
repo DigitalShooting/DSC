@@ -5,15 +5,15 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "canvas": "^1.6.5",
+    "canvas": "^1.6.6",
     "convert-base": "0.1.0",
     "exec": "x",
-    "express": "^4.15.2",
+    "express": "^4.15.3",
     "jade": "^1.11.0",
-    "less-middleware": "^2.2.0",
-    "mongodb": "^2.2.25",
-    "mysql": "^2.13.0",
-    "socket.io": "^1.7.3"
+    "less-middleware": "^2.2.1",
+    "mongodb": "^2.2.30",
+    "mysql": "^2.14.1",
+    "socket.io": "^1.7.4"
   },
   "main": "index.js",
   "scripts": {
