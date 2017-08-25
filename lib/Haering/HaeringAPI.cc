@@ -166,8 +166,73 @@ class HaeringAPI {
 		}
 
 
-		
+
 };
+
+
+
+// // main
+// //
+// // Ussage: 		[device] 	[mode] 			[mode settings]
+// //				/dev/ttyS1	band			8 (Band Move)
+// //				/dev/ttyS1	nop
+// //				/dev/ttyS1	set				3 (Shot Band Move)
+// //				/dev/ttyS1	readSettings
+// //
+// // Description: Opens new HaeringAPI object with given device and calls given mode.
+// //
+// int main( int argc, char* argv[]){
+// 	if (argc >= 3){
+// 		HaeringAPI api(argv[1]);
+//
+// 		// ------------------ BAND ----------------------
+// 		if (strcmp(argv[2], "band") == 0){
+// 			if (argc >= 4){
+// 				char band_time = atoi(argv[3]);
+// 				api.sendBand(band_time);
+// 			}
+// 			else {
+// 				printf("[ERROR] onChangePart Move Time not defined\n");
+// 			}
+// 		}
+// 		// ----------------------------------------------
+//
+//
+// 		// ------------------ NOP -----------------------
+// 		else if (strcmp(argv[2], "nop") == 0){
+// 			api.sendNOP();
+// 		}
+// 		// ----------------------------------------------
+//
+//
+// 		// ----------------- SET ------------------------
+// 		else if (strcmp(argv[2], "set") == 0){
+// 			if (argc >= 4){
+// 				char band_time = atoi(argv[3]);
+// 				api.sendSet(band_time);
+// 			}
+// 			else {
+// 				printf("[ERROR] onShot Move Time not defined\n");
+// 			}
+// 		}
+// 		// ----------------------------------------------
+//
+//
+// 		// ---------------- READSETTINGS ----------------
+// 		else if (strcmp(argv[2], "readSettings") == 0){
+// 			api.sendReadSettings();
+// 		}
+// 		// ----------------------------------------------
+//
+// 		else {
+// 			printf("[ERROR] Mode not defined!\n");
+// 		}
+// 	}
+// 	else {
+// 		printf("Ussage: [device] [mode] [mode settings]\n");
+// 	}
+// }
+
 
 
 
@@ -182,53 +247,66 @@ class HaeringAPI {
 // Description: Opens new HaeringAPI object with given device and calls given mode.
 //
 int main( int argc, char* argv[]){
-	if (argc >= 3){
-		HaeringAPI api(argv[1]);
+  if (argc >= 2){
+    HaeringAPI api(argv[1]);
 
-		// ------------------ BAND ----------------------
-		if (strcmp(argv[2], "band") == 0){
-			if (argc >= 4){
-				char band_time = atoi(argv[3]);
-				api.sendBand(band_time);
-			}
-			else {
-				printf("[ERROR] onChangePart Move Time not defined\n");
-			}
-		}
-		// ----------------------------------------------
+    char buf[BUFSIZ];
+    while (fgets(buf,BUFSIZ,stdin) != NULL) {
+      char delimiter[] = " ";
+      char *mode = strtok(buf, delimiter);
 
-
-		// ------------------ NOP -----------------------
-		else if (strcmp(argv[2], "nop") == 0){
-			api.sendNOP();
-		}
-		// ----------------------------------------------
-
-
-		// ----------------- SET ------------------------
-		else if (strcmp(argv[2], "set") == 0){
-			if (argc >= 4){
-				char band_time = atoi(argv[3]);
-				api.sendSet(band_time);
-			}
-			else {
-				printf("[ERROR] onShot Move Time not defined\n");
-			}
-		}
-		// ----------------------------------------------
+      // ------------------ BAND ----------------------
+      if (strncmp(mode, "band", 4) == 0){
+        char *bandTimeChar = strtok(NULL, delimiter);
+        if (bandTimeChar != NULL){
+          char band_time = atoi(bandTimeChar);
+          api.sendBand(band_time);
+        }
+        else {
+          fprintf(stdout, "[ERROR] onChangePart Move Time not defined\n");
+        }
+      }
+      // ----------------------------------------------
 
 
-		// ---------------- READSETTINGS ----------------
-		else if (strcmp(argv[2], "readSettings") == 0){
-			api.sendReadSettings();
-		}
-		// ----------------------------------------------
+      // ------------------ NOP -----------------------
+      else if (strncmp(mode, "nop", 3) == 0){
+        api.sendNOP();
+      }
+      // ----------------------------------------------
 
-		else {
-			printf("[ERROR] Mode not defined!\n");
-		}
-	}
-	else {
-		printf("Ussage: [device] [mode] [mode settings]\n");
-	}
+
+      // ----------------- SET ------------------------
+      else if (strncmp(mode, "set", 3) == 0){
+        char *bandTimeChar = strtok(NULL, delimiter);
+        if (bandTimeChar != NULL){
+          char band_time = atoi(bandTimeChar);
+          api.sendSet(band_time);
+        }
+        else {
+          fprintf(stdout, "[ERROR] onShot Move Time not defined\n");
+        }
+      }
+      // ----------------------------------------------
+
+
+      // ---------------- READSETTINGS ----------------
+      else if (strncmp(mode, "readSettings", 8) == 0){
+        api.sendReadSettings();
+      }
+      // ----------------------------------------------
+
+      else {
+        fprintf(stdout, "[ERROR] Mode not defined!\n");
+      }
+
+
+    }
+
+    return 0;
+  }
+  else {
+    fprintf(stdout, "Ussage: [device]\n");
+    return 1;
+  }
 }
