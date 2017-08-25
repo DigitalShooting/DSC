@@ -83,7 +83,7 @@ class HaeringAPI {
 			if (err != -1) {
 				printf("%02x", arr[i]);					// Print it out as HEX
 			}
-			usleep(50000);								// Wait for the next one
+			// usleep(50000);								// Wait for the next one
 			i++;
 		}
 	}
@@ -252,6 +252,7 @@ int main( int argc, char* argv[]){
 
     char buf[BUFSIZ];
     while (fgets(buf,BUFSIZ,stdin) != NULL) {
+			fflush(stdout);
       char delimiter[] = " ";
       char *mode = strtok(buf, delimiter);
 
