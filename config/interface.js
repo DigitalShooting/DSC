@@ -4,7 +4,7 @@ module.exports = {
 	esa: {
 
 		// Path to API file
-		path: "./lib/Haering/ESADeviceInterface.js",
+		path: "./lib/Interfaces/DeviceInterfaceESA.js",
 
 		// COM Port
 		com : "/dev/ttyS0",
@@ -14,6 +14,6 @@ module.exports = {
 	demo: {
 
 		// Path to API file
-		path: "./lib/Haering/DemoDeviceInterface.js",
+		path: "./lib/Interfaces/DeviceInterfaceDemo.js",
 	},
 };
