@@ -19,5 +19,8 @@
   "scripts": {
     "preinstall": "./lib/Haering/buildAPI.sh",
     "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0"
   }
 }
