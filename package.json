@@ -18,9 +18,11 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "./lib/Haering/buildAPI.sh",
-    "test": "mocha"
+    "test": "mocha",
+    "cover": "istanbul cover _mocha"
   },
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "mocha": "^3.5.0"
   }
 }
