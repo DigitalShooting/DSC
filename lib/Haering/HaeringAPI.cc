@@ -171,78 +171,15 @@ class HaeringAPI {
 
 
 
-// // main
-// //
-// // Ussage: 		[device] 	[mode] 			[mode settings]
-// //				/dev/ttyS1	band			8 (Band Move)
-// //				/dev/ttyS1	nop
-// //				/dev/ttyS1	set				3 (Shot Band Move)
-// //				/dev/ttyS1	readSettings
-// //
-// // Description: Opens new HaeringAPI object with given device and calls given mode.
-// //
-// int main( int argc, char* argv[]){
-// 	if (argc >= 3){
-// 		HaeringAPI api(argv[1]);
-//
-// 		// ------------------ BAND ----------------------
-// 		if (strcmp(argv[2], "band") == 0){
-// 			if (argc >= 4){
-// 				char band_time = atoi(argv[3]);
-// 				api.sendBand(band_time);
-// 			}
-// 			else {
-// 				printf("[ERROR] onChangePart Move Time not defined\n");
-// 			}
-// 		}
-// 		// ----------------------------------------------
-//
-//
-// 		// ------------------ NOP -----------------------
-// 		else if (strcmp(argv[2], "nop") == 0){
-// 			api.sendNOP();
-// 		}
-// 		// ----------------------------------------------
-//
-//
-// 		// ----------------- SET ------------------------
-// 		else if (strcmp(argv[2], "set") == 0){
-// 			if (argc >= 4){
-// 				char band_time = atoi(argv[3]);
-// 				api.sendSet(band_time);
-// 			}
-// 			else {
-// 				printf("[ERROR] onShot Move Time not defined\n");
-// 			}
-// 		}
-// 		// ----------------------------------------------
-//
-//
-// 		// ---------------- READSETTINGS ----------------
-// 		else if (strcmp(argv[2], "readSettings") == 0){
-// 			api.sendReadSettings();
-// 		}
-// 		// ----------------------------------------------
-//
-// 		else {
-// 			printf("[ERROR] Mode not defined!\n");
-// 		}
-// 	}
-// 	else {
-// 		printf("Ussage: [device] [mode] [mode settings]\n");
-// 	}
-// }
-
-
-
-
 // main
 //
-// Ussage: 		[device] 	[mode] 			[mode settings]
-//				/dev/ttyS1	band			8 (Band Move)
-//				/dev/ttyS1	nop
-//				/dev/ttyS1	set				3 (Shot Band Move)
-//				/dev/ttyS1	readSettings
+// Ussage: [device]
+//
+// CLI Commands:   [mode][mode settings]
+//                 band 8 (Band Move)
+//                 nop
+//                 set 3 (Shot Band Move)
+//                 readSettings
 //
 // Description: Opens new HaeringAPI object with given device and calls given mode.
 //
