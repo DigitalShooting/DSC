@@ -1,7 +1,7 @@
 module.exports = {
 
 	// enable/ disable database backups
-	enabled: false,
+	enabled: true,
 
 	// if the newest session is less than this time (in sec) old, we load it while starting
 	reloadLimit: 10*60,
