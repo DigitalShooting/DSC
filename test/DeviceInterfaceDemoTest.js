@@ -6,10 +6,14 @@ const Shot = require("../lib/Interfaces/Shot.js");
 const config = require("../config/index.js");
 const disziplin_demo = require("../disziplinen/lg/disziplin_demo.js");
 
-// Set timeout time smaller to speed up test
-disziplin_demo.interface.time = 10;
-
 describe("DeviceInterfaceDemo", function() {
+
+  before(function() {
+    // Set timeout time smaller to speed up test
+    disziplin_demo.interface.time = 10;
+    disziplin_demo.interface.limit = 10;
+  });
+
   describe('#onNewStatus()', function() {
     it("Check if status is true", function(done) {
       var interfaceConfig = config.interface[disziplin_demo.interface.name];
