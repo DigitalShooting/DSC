@@ -1,7 +1,7 @@
 module.exports = {
 
 	// enable/ disable database backups
-	enabled: true,
+	enabled: false,
 
 	// if the newest session is less than this time (in sec) old, we load it while starting
 	reloadLimit: 10*60,
@@ -9,6 +9,6 @@ module.exports = {
 	// mongodb connection params
 	mongodb: {
 		url: "mongodb://localhost:27017",
-		collection: "dsc4aa",
+		collection: "dsc4aaaaooo",
 	},
 };
