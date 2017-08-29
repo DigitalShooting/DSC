@@ -29,14 +29,14 @@ describe("DSCDataAPI", function() {
     });
   });
 
-  describe('#setDisziplin()', function() {
-    it("Check if each disziplin works", function() {
-      for (var id in config.disziplinen.all) {
-        dscDataAPI.setDisziplin(config.disziplinen.all[id]);
-        assert.equal(dscDataAPI.getActiveData().disziplin, config.disziplinen.all[id]);
-      }
-    });
-  });
+  // describe('#setDisziplin()', function() {
+  //   it("Check if each disziplin works", function() {
+  //     for (var id in config.disziplinen.all) {
+  //       dscDataAPI.setDisziplin(config.disziplinen.all[id]);
+  //       assert.equal(dscDataAPI.getActiveData().disziplin, config.disziplinen.all[id]);
+  //     }
+  //   });
+  // });
 
   describe('#setPart()', function() {
     it("check if set part is working", function() {
