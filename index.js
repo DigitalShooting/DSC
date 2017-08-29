@@ -152,6 +152,9 @@ dscDataAPI.init(function(){
         type: "exitTypeWarning_none",
       });
       break;
+    case "message":
+      console.log(event.text)
+      break;
 
     default:
       console.error("Unnown event was called from dataAPI", event);
