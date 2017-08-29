@@ -1,4 +1,4 @@
-# DigitalShootingClient (DSC)
+# DigitalShootingClient (DSC) [![Build Status](https://travis-ci.org/DigitalShooting/DSC.svg?branch=master)](https://travis-ci.org/DigitalShooting/DSC)
 Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ESA` Anlagen.
 
 ![Demo](https://raw.githubusercontent.com/DigitalShooting/assets/master/DSC_1.gif)
@@ -8,7 +8,7 @@ Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ES
 ## Installation
 
 ### Abhängigkeiten
-- `nodejs` (>4)
+- `nodejs` (stable/ lts)
 - `npm`
 
 #### Haering API

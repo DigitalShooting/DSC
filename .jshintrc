@@ -9,7 +9,8 @@
 		"document",
 		"moment",
 		"io",
-		"dscGatewayUrl"
+		"dscGatewayUrl",
+		"describe", "before", "beforeEach", "it"
 	],
 	"-W041": false,
 	"-W104": false,
