@@ -87,29 +87,6 @@ dscDataAPI.init(function(){
     });
   };
 
-  if (config.database.enabled) {
-    MongoDBHelper(function(collection){
-      var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
-        if (data.length == 0 || err) {
-          initDefalutSession();
-        }
-        else {
-          // TODO search for last shot date
-          var timeDelta = ((new Date ()).getTime()) - data[0].date;
-          if (timeDelta < config.database.reloadLimit *1000) {
-            dscDataAPI.setData(data[0]);
-          }
-          else {
-            initDefalutSession();
-          }
-        }
-      });
-    });
-  }
-  else {
-    initDefalutSession();
-  }
-
 
   // listen to dsc api events
   dscDataAPI.on = function(event){
@@ -160,6 +137,31 @@ dscDataAPI.init(function(){
       console.error("Unnown event was called from dataAPI", event);
     }
   };
+
+
+  if (config.database.enabled) {
+    MongoDBHelper(function(collection){
+      var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
+        if (data.length == 0 || err) {
+          initDefalutSession();
+        }
+        else {
+          // TODO search for last shot date
+          var timeDelta = ((new Date ()).getTime()) - data[0].date;
+          if (timeDelta < config.database.reloadLimit *1000) {
+            dscDataAPI.setData(data[0]);
+          }
+          else {
+            initDefalutSession();
+          }
+        }
+      });
+    });
+  }
+  else {
+    initDefalutSession();
+  }
+
 
   var activeMessage;
 });
