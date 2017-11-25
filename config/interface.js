@@ -8,6 +8,12 @@ module.exports = {
 
 		// COM Port
 		com : "/dev/ttyS0",
+		
+		// Band ACK
+		bandACK: {
+			enabled: true,
+			port: 61424,
+		},
 	},
 
 	// Demo Interface
