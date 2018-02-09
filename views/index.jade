@@ -227,7 +227,8 @@ html(lang="de" ng-app="dsc" ng-controller="session")
 									h1(animate-on-change='currentShot') {{currentShot.ring}}
 							tr
 								td
-									h2(animate-on-change='currentShot') {{currentShot.teiler}} Teiler
+									h2(animate-on-change='currentShot')
+										span(ng-show="showTeiler") {{currentShot.teiler}} Teiler
 
 				div(class="col-xs-6 fullHeight")
 					div(class="aktuelleSerie grayBox" ng-controller="aktuelleSerie" ng-hide="hidden")

@@ -457,6 +457,12 @@ angular.module('dsc.controllers.main', [])
 					innenZehner: serie.shots[i].innenZehner,
 				};
 
+				// Parse if showDetails is set
+				var part = data.disziplin.parts[session.type];
+				if (part != null && part.showDetails == false) {
+					shot.ring = serie.shots[i].ring.int;
+				}
+
 				var pfeil;
 				var winkel;
 				if (shot.innenZehner) {
@@ -500,6 +506,8 @@ angular.module('dsc.controllers.main', [])
 		var session = data.sessionParts[data.sessionIndex];
 		var currentShot;
 
+		$scope.showTeiler = true;
+
 		var serie = session.serien[session.selection.serie];
 		if (serie){
 			currentShot = {
@@ -508,6 +516,14 @@ angular.module('dsc.controllers.main', [])
 				winkel: serie.shots[session.selection.shot].winkel,
 				innenZehner: serie.shots[session.selection.shot].innenZehner,
 			};
+
+			// Parse if showDetails is set
+			var part = data.disziplin.parts[session.type];
+			if (part != null && part.showDetails == false) {
+				currentShot.ring = serie.shots[session.selection.shot].ring.int;
+				$scope.showTeiler = false;
+			}
+
 			if (currentShot){
 				if (currentShot.innenZehner) {
 					currentShot.pfeil = $sce.trustAsHtml("&#9099;");
