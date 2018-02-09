@@ -4,7 +4,44 @@ angular.module('dsc.services.socketio', [
 
 
 .factory('socket', function (socketFactory) {
-	return socketFactory();
+// 	const ws = new WebSocket("ws://127.0.0.1:8080")
+// 	ws.onopen = function (evt) {
+//    ws.send("Hello!");
+// };
+
+
+	return {
+		emit: function(type, data) {
+			if (ws.readyState === ws.OPEN) {
+				console.log(JSON.stringify({
+					type: type,
+					data: data,
+				}))
+				ws.send(JSON.stringify({
+					type: type,
+					data: data,
+				}));
+			}
+			else {
+				console.log("WS not open")
+			}
+		},
+		on: function(type, callback) {
+			ws.addEventListener("message", function (event) {
+				var message = JSON.parse(event.data);
+				if (message == null) {
+					console.log("Got null message");
+				}
+				else if (message.type == type) {
+					console.log(message);
+					callback(message.data);
+				}
+			}.bind(this));
+
+		}
+	};
+
+	// return socketFactory();
 })
 
 

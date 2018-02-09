@@ -96,6 +96,7 @@ dscDataAPI.init(function(){
         type: "dataChanged",
         data: dscDataAPI.getActiveData(),
       });
+      console.log(dscDataAPI.getActiveData());
       break;
     case "switchData":
       controllerProcess.send({
