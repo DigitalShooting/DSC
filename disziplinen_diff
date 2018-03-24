@@ -1,0 +1,17 @@
+diff --git a/lg/disziplin_demo.js b/lg/disziplin_demo.js
+index 19c9336..d6c435a 100644
+--- a/lg/disziplin_demo.js
++++ b/lg/disziplin_demo.js
+@@ -33,6 +33,12 @@ module.exports = {
+ 				anzahl: 40,
+ 			},
+ 			exitType: "",
++
++			mode: "game_stairs",
++			steps: [
++				{ repeats: 5, minimum: 8.3 },
++				{ repeats: 3, minimum: 8.8 },
++			],
+ 		},
+ 		match: {
+ 			title: "Match",
