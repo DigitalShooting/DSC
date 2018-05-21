@@ -8,6 +8,12 @@ var MongoDBHelper = require("./lib/MongoDBHelper.js");
 // Start Main Server Processes
 var controllerProcess = child_process.fork("./lib/Webserver");
 
+
+if (config.database.enabled) {
+  child_process.execSync("sleep 10");
+}
+
+
 controllerProcess.on("message", function(event){
   switch (event.type) {
   case "newTarget":
