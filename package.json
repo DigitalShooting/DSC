@@ -4,16 +4,16 @@
   "description": "",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "canvas": "^1.6.6",
+    "bootstrap": "^3.4.1",
+    "canvas": "^2.5.5",
     "convert-base": "0.1.0",
     "dgram": "^1.0.1",
-    "express": "^4.15.4",
-    "jade": "^1.11.0",
-    "less-middleware": "^2.2.1",
-    "mongodb": "^2.2.31",
-    "mysql": "^2.14.1",
-    "socket.io": "^2.0.3"
+    "express": "^4.17.1",
+    "less-middleware": "^3.1.0",
+    "mongodb": "^3.5.7",
+    "mysql": "^2.18.1",
+    "pug": "^2.0.4",
+    "socket.io": "^2.3.0"
   },
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,6 @@
     "cover": "istanbul cover _mocha"
   },
   "devDependencies": {
-    "istanbul": "^0.4.5",
-    "mocha": "^3.5.0"
+    "mocha": "^7.1.2"
   }
 }
