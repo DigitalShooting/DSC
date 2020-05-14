@@ -45,13 +45,15 @@ mixin gesamt(session)
 mixin serien(session, disziplin)
 	each serie, index in session.serien
 		|\begin{minipage}[t]{.48\textwidth}\vspace{10pt}
-		|	\begin{tabular*}{\textwidth}{c|c|c|c|c @{\extracolsep{\fill}} c}
+		|	\begin{tabular*}{\textwidth}{=c|+c|+c|+c|+c @{\extracolsep{\fill}} c}
 		|		\multicolumn{6}{c}{\textbf{#{index+1}. Serie}} \\
 		|		\toprule
 		|		Nr & Ring & Winkel & Teiler & Zeit & Grafik \\
 		|		\midrule
 		
 		each shot, index in serie.shots
+			- if (shot.overtime == true)
+				|\rowstyle{\color{red}}
 			|#{ shot.number}. & #{shot.ring.display} & \rotatebox[origin=c]{#{shot.winkel}}{$\rightarrow$} \SI{ #{shot.winkel} }{\degree} & #{shot.teiler} & #{formatTime(shot.time)} &
 			- if (index == 0)
 				|\multirow{0}[0]{*}{
@@ -101,6 +103,7 @@ mixin serien(session, disziplin)
 |\usepackage[utf8]{inputenc}
 |\usepackage[ngerman]{babel}
 |\usepackage{pdfpages}
+|\usepackage{tabu}
 |\usepackage{siunitx}
 |\usepackage{booktabs,lipsum,calc}
 |\usepackage{multirow}
@@ -109,6 +112,26 @@ mixin serien(session, disziplin)
 |\usepackage{lmodern}
 |\usepackage{tabularx}
 |\usepackage{titlesec}
+|\usepackage{array}
+|\usepackage{xcolor}
+
+
+|\newcommand*{\@rowstyle}{}
+|
+|\newcommand*{\rowstyle}[1]{% sets the style of the next row
+|  \gdef\@rowstyle{#1}%
+|  \@rowstyle\ignorespaces%
+|}
+|
+|\newcolumntype{=}{% resets the row style
+|  >{\gdef\@rowstyle{}}%
+|}
+|
+|\newcolumntype{+}{% adds the current row style to the next column
+|  >{\@rowstyle}%
+|}
+
+
 
 |\DeclareUnicodeCharacter{FFFD}{?}
 
