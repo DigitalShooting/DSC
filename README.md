@@ -2,7 +2,6 @@
 Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ESA` Anlagen.
 
 ![Demo](https://raw.githubusercontent.com/DigitalShooting/assets/master/DSC-demo-2.png)
-![Demo GIF](https://raw.githubusercontent.com/DigitalShooting/assets/master/DSC-demo-1.gif)
 
 
 ## Installation
