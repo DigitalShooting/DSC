@@ -1,4 +1,4 @@
-# DigitalShootingClient (DSC) [![Build Status](https://travis-ci.org/DigitalShooting/DSC.svg?branch=master)](https://travis-ci.org/DigitalShooting/DSC)
+# DigitalShootingClient (DSC)
 Modularer Client zum erfassen von Schüssen, mit Unterstützung für `Häring ESA` Anlagen.
 
 ![Demo](https://raw.githubusercontent.com/DigitalShooting/assets/master/DSC-demo-2.png)
