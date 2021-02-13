@@ -1,5 +1,5 @@
 stages:
-  - build
+  - install
   - test
 
 cache:
@@ -7,13 +7,13 @@ cache:
   - node_modules/
   - disziplinen/
 
-build:
-  stage: build
+install:
+  stage: install
   image: node:13
   script:
-    - npm install
     - git submodule init
     - git submodule update
+    - npm install
 
 test:
   stage: test
