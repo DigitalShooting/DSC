@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 build:
   stage: build
@@ -8,4 +9,8 @@ build:
     - npm install
     - git submodule init
     - git submodule update
+
+test:
+  stage: test
+  script:
     - npm run test
