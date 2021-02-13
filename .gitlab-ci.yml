@@ -1,6 +1,10 @@
 stages:
-  - install
+  - build
   - package
+
+before_script:
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
 
 cache:
   paths:
@@ -8,30 +12,20 @@ cache:
   - disziplinen/
   - gui/
 
-install:
-  stage: install
+build-backend:
+  stage: build
+  image: node:13
   script:
-    - git submodule update --init --recursive
+    - npm install
+    - npm run test
 
-#build-backend:
-#  stage: build
-#  image: node:13
-#  script:
-#    - npm install
-
-#build-frontend:
-#  stage: build
-#  image: node:13
-#  script:
-#    - cd gui
-#    - npm install
-#    - ./node_modules/.bin/ng build
-
-#test-backend:
-#  stage: test
-#  image: node:13
-#  script:
-#    - npm run test
+build-frontend:
+  stage: build
+  image: node:13
+  script:
+    - cd gui
+    - npm install
+    - ./node_modules/.bin/ng build
 
 package-docker:
   stage: package
