@@ -1,11 +1,22 @@
 stages:
   - build
+  - test
+
+cache:
+  paths:
+  - node_modules/
+  - disziplinen/
 
 build:
   stage: build
   image: node:13
   script:
+    - ls -lah
+    - git submodule update --checkout --init
     - npm install
-    - git submodule init
-    - git submodule update
+
+test:
+  stage: test
+  image: node:13
+  script:
     - npm run test
