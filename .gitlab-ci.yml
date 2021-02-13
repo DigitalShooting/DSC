@@ -1,39 +1,36 @@
 stages:
-  - install
-  - build
-  - build
-  - test
   - package
-cache:
-  paths:
-  - node_modules/
-  - disziplinen/
-  - gui/
 
-install:
-  stage: install
-  script:
-    - git submodule update --init --recursive
+#cache:
+#  paths:
+#  - node_modules/
+#  - disziplinen/
+#  - gui/
 
-build-backend:
-  stage: build
-  image: node:13
-  script:
-    - npm install
+#install:
+#  stage: install
+#  script:
+#    - git submodule update --init --recursive
 
-build-frontend:
-  stage: build
-  image: node:13
-  script:
-    - cd gui
-    - npm install
-    - ./node_modules/.bin/ng build
+#build-backend:
+#  stage: build
+#  image: node:13
+#  script:
+#    - npm install
 
-test-backend:
-  stage: test
-  image: node:13
-  script:
-    - npm run test
+#build-frontend:
+#  stage: build
+#  image: node:13
+#  script:
+#    - cd gui
+#    - npm install
+#    - ./node_modules/.bin/ng build
+
+#test-backend:
+#  stage: test
+#  image: node:13
+#  script:
+#    - npm run test
 
 package-docker:
   stage: package
