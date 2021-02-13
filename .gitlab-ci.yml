@@ -11,8 +11,9 @@ build:
   stage: build
   image: node:13
   script:
-    - npm install
+    - ls -lah
     - git submodule update --checkout --init
+    - npm install
 
 test:
   stage: test
