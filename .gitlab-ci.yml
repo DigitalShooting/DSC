@@ -1,5 +1,5 @@
 stages:
-  - install
+  - setup
   - test
 
 cache:
@@ -7,8 +7,8 @@ cache:
   - node_modules/
   - disziplinen/
 
-install:
-  stage: install
+setup:
+  stage: setup
   image: node:13
   script:
     - npm install
