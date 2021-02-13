@@ -1,4 +1,6 @@
 stages:
+  - install
+  - build
   - build
   - test
 
@@ -6,16 +8,27 @@ cache:
   paths:
   - node_modules/
   - disziplinen/
+  - gui/
 
-build:
+install:
+  stage: install
+  script:
+    - git submodule update --init --recursive
+
+build-backend:
   stage: build
   image: node:13
   script:
     - npm install
-    - git submodule init
-    - git submodule update
 
-test:
+build-frontend:
+  stage: build
+  image: node:13
+  script:
+    - cd gui
+    - npm install
+
+test-backend:
   stage: test
   image: node:13
   script:
