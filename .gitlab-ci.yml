@@ -27,6 +27,7 @@ build-frontend:
   script:
     - cd gui
     - npm install
+    - ./node_modules/.bin/ng build
 
 test-backend:
   stage: test
