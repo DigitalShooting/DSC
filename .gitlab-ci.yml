@@ -5,12 +5,6 @@ stages:
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
-cache:
-  paths:
-#  - node_modules/
-  - disziplinen/
-  - gui/
-
 build-backend:
   stage: build
   image: node:13
