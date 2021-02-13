@@ -2,6 +2,11 @@ stages:
   - build
   - test
 
+cache:
+  paths:
+  - node_modules/
+  - disziplinen/
+
 build:
   stage: build
   image: node:13
