@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-
+  - package
 cache:
   paths:
   - node_modules/
@@ -20,3 +20,13 @@ test:
   image: node:13
   script:
     - npm run test
+
+package-docker:
+  stage: package
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --build-arg SA_PASSWORD=$SA_PASSWORD --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/sql/Dockerfile --destination $CI_REGISTRY_IMAGE
