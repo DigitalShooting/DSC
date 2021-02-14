@@ -16,7 +16,7 @@ build:
   script:
     - npm install
     - npm run test
-    - tar cJf dsc.tar.xz .
+    - tar cJf dsc.tar.xz --exclude=dsc.tar.xz --exclude=./.git/ .
   artifacts:
     paths:
       - ./dsc.tar.xz
