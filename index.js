@@ -144,7 +144,6 @@ dscDataAPI.init(function(){
     }
   };
 
-
   if (config.database.enabled) {
     MongoDBHelper(function(collection){
       var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
@@ -167,7 +166,6 @@ dscDataAPI.init(function(){
   else {
     initDefalutSession();
   }
-
 
   var activeMessage;
 });
