@@ -1,6 +1,3 @@
 [submodule "disziplinen"]
 	path = disziplinen
 	url = https://gitlab.com/digitalshooting/disziplinen
-[submodule "gui"]
-	path = gui
-	url = https://gitlab.com/digitalshooting/DSC-Frontend.git
