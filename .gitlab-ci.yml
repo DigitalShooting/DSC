@@ -16,6 +16,10 @@ build:
   script:
     - npm install
     - npm run test
+    - tar cJf dsc.tar.xz .
+  artifacts:
+    paths:
+      - ./dsc.tar.xz
 
 package-docker:
   stage: package
