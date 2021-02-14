@@ -1,25 +1,21 @@
 stages:
-  - install
   - build
-  - build
-  - test
   - package
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
 cache:
   paths:
-  - node_modules/
-  - disziplinen/
-  - gui/
-
-install:
-  stage: install
-  script:
-    - git submodule update --init --recursive
+    - node_modules/
+    - gui/node_modules/
 
 build-backend:
   stage: build
   image: node:13
   script:
     - npm install
+    - npm run test
 
 build-frontend:
   stage: build
@@ -29,12 +25,6 @@ build-frontend:
     - npm install
     - ./node_modules/.bin/ng build
 
-test-backend:
-  stage: test
-  image: node:13
-  script:
-    - npm run test
-
 package-docker:
   stage: package
   image:
@@ -43,4 +33,4 @@ package-docker:
   script:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --build-arg SA_PASSWORD=$SA_PASSWORD --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/sql/Dockerfile --destination $CI_REGISTRY_IMAGE
+    - /kaniko/executor --build-arg SA_PASSWORD=$SA_PASSWORD --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE
