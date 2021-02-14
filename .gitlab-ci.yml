@@ -8,22 +8,14 @@ variables:
 cache:
   paths:
     - node_modules/
-    - gui/node_modules/
+    - frontend/
 
-build-backend:
+build:
   stage: build
   image: node:13
   script:
     - npm install
     - npm run test
-
-build-frontend:
-  stage: build
-  image: node:13
-  script:
-    - cd gui
-    - npm install
-    - ./node_modules/.bin/ng build
 
 package-docker:
   stage: package
