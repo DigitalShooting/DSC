@@ -15,7 +15,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "preinstall": "./updateFrontend.sh && ./lib/Haering/buildAPI.sh",
+    "preinstall": "./lib/Haering/buildAPI.sh",
     "test": "mocha",
     "cover": "istanbul cover _mocha"
   },
