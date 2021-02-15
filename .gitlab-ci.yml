@@ -16,7 +16,7 @@ build:
   script:
     - npm install
     - npm run test
-    - tar cJf dsc.tar.xz --exclude=dsc.tar.xz --exclude=./.git/ .
+    - tar cJf dsc.tar.xz config disziplinen frontend index.js lib/ LICENSE.md node_modules package* README.md
   artifacts:
     paths:
       - ./dsc.tar.xz
