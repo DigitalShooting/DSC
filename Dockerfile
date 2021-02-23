@@ -5,12 +5,9 @@ WORKDIR /usr/src/dsc
 RUN apt update
 RUN apt install -y g++ build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev texlive texlive-lang-german texlive-science
 
-COPY lib/Haering/ ./lib/Haering
-COPY package*.json ./
+COPY . .
 
 RUN npm install
-
-COPY . .
 
 WORKDIR /usr/src/dsc
 EXPOSE 3000
