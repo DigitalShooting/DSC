@@ -15,6 +15,7 @@ build:
   image: node:13
   script:
     - npm install
+    - npm run test
     - ./updateFrontend.sh
     - tar cJf dsc.tar.xz config disziplinen frontend index.js lib/ LICENSE.md node_modules package* README.md
   artifacts:
