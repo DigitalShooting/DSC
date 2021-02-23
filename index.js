@@ -14,7 +14,7 @@ if (config.database.enabled) {
 }
 
 
-controllerProcess.on("message", function(event){
+controllerProcess.on("message", event => {
   switch (event.type) {
   case "newTarget":
     dscDataAPI.newTarget();
@@ -39,7 +39,7 @@ controllerProcess.on("message", function(event){
     break;
   case "print":
     controllerProcess.send({type: "print_didStart"});
-    Print(dscDataAPI.getActiveData(), event.data, function(err){
+    Print(dscDataAPI.getActiveData(), event.data, err => {
       if (err){
         controllerProcess.send({type: "print_error"});
       }
@@ -58,7 +58,7 @@ controllerProcess.on("message", function(event){
     controllerProcess.send({type: "hideMessage"});
     break;
   case "shutdown":
-    child_process.execFile("sudo", ["shutdown", "-h", "now"], function(err, out, code) { });
+    child_process.execFile("sudo", ["shutdown", "-h", "now"], (err, out, code) => { });
     break;
   case "sendSessions":
     dscDataAPI.setData(event.data.sessions, event.data.group, event.data.user);
@@ -69,7 +69,7 @@ controllerProcess.on("message", function(event){
   }
 });
 
-controllerProcess.on("exit", function(){
+controllerProcess.on("exit", () => {
   console.error("[Main Process] Webserver Worker did exit, stopping DSC...");
   process.exit();
 });
@@ -78,10 +78,10 @@ controllerProcess.on("exit", function(){
 
 // dsc api init
 var dscDataAPI = DSCDataAPI();
-dscDataAPI.init(function(){
+dscDataAPI.init(() => {
 
   // set default disziplin
-  var initDefalutSession = function(){
+  var initDefalutSession = () => {
     dscDataAPI.setDisziplin(config.disziplinen.defaultDisziplin);
 
     // set default user
@@ -95,7 +95,7 @@ dscDataAPI.init(function(){
 
 
   // listen to dsc api events
-  dscDataAPI.on = function(event){
+  dscDataAPI.on = event => {
     switch (event.type) {
     case "dataChanged":
       controllerProcess.send({
@@ -145,8 +145,8 @@ dscDataAPI.init(function(){
   };
 
   if (config.database.enabled) {
-    MongoDBHelper(function(collection){
-      var data = collection.find().sort({date:-1}).limit(1).toArray(function (err, data) {
+    MongoDBHelper(collection => {
+      var data = collection.find().sort({date:-1}).limit(1).toArray((err, data) => {
         if (data.length == 0 || err) {
           initDefalutSession();
         }
