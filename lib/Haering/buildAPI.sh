@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 MY_PATH="`dirname \"$0\"`"
 
