@@ -8,11 +8,11 @@ if (DSCConfig != null) {
 	config = JSON.parse(rawdata);
 	config.auth.tempKey = Math.random().toString(36).substr(2, 5);
 	config.interface.esa.path = "./lib/Interfaces/DeviceInterfaceESA.js";
-	config.interface.esa.bandACK: {
+	config.interface.esa.bandACK = {
 		enabled: false,
 		port: 61424,
 	};
-	config.interface.demo: {
+	config.interface.demo = {
 		path: "./lib/Interfaces/DeviceInterfaceDemo.js",
 	};
 	config.line.hostVerein.logoPath = __dirname + "/logo.png";
