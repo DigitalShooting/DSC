@@ -16,6 +16,7 @@ if (DSCConfig != null) {
 		path: "./lib/Interfaces/DeviceInterfaceDemo.js",
 	};
 	config.line.hostVerein.logoPath = __dirname + "/logo.png";
+	config.disziplinen = require("../disziplinen/");
 }
 else {
 	config = {
