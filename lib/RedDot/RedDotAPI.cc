@@ -126,16 +126,6 @@ class RedDotAPI {
 
 
 
-    // Send paper move to serial device
-    // unsigned char time:    Time to move (0-255)
-    // void sendBand(unsigned char time) {
-    //   unsigned char seq[] = { 0x17, time };
-    //   writeToHaering(fd, seq, sizeof(seq));
-    //   readFromHaering(fd, 17);
-    // }
-
-
-
     // Send NOP to serial device
     // output:     Recived bytes
     void sendNOP() {
@@ -143,6 +133,7 @@ class RedDotAPI {
       writeToHaering(fd, seq, sizeof(seq));
       readFromHaering(fd, 80);
     }
+
 
 
     // Send ACK to serial device
@@ -154,36 +145,17 @@ class RedDotAPI {
     }
 
 
-    // Set Mode to LP
-    void modeLP() {
+
+    // Set target mode to serial device
+    // unsigned char mode:    ModeID to Set (LP: 0, LG: 1)
+    void setMode(unsigned char mode) {
       unsigned char seq1[] = { 0x11, 0x00, 0x01 };
       writeToHaering(fd, seq1, sizeof(seq1));
       readFromHaering(fd, 1);
-      unsigned char seq2[] = { 0x00 };
+      unsigned char seq2[] = { mode };
       writeToHaering(fd, seq2, sizeof(seq2));
       readFromHaering(fd, 1);
     }
-
-    // Send Config to serial device
-    // unsigned char time:   Time to move after each shot (0-255)
-    // void sendSet(unsigned char time) {
-    //   unsigned char seq[] = { 0x14, 0x05, 0xFA, 0x14, time, 0x09, 0x0D, 0x08, 0x4F, 0x00, 0x00, 0x00, 0x00, 0x1E, 0xDC, 0x01, 0x90 };
-    //   writeToHaering(fd, seq, sizeof(seq));
-    //   readFromHaering(fd, 0);
-    // }
-
-
-
-    // Read settings from serial device
-    // output:     Settings
-    // void sendReadSettings() {
-    //   unsigned char seq[] = { 0x13, 0x00 };
-    //   writeToHaering(fd, seq, sizeof(seq));
-    //   readFromHaering(fd, 26);
-    // }
-
-
-
 };
 
 
@@ -212,18 +184,6 @@ int main( int argc, char* argv[]){
       char delimiter[] = " ";
       char *mode = strtok(buf, delimiter);
 
-      // ------------------ BAND ----------------------
-      // if (strncmp(mode, "band", 4) == 0){
-      //   char *bandTimeChar = strtok(NULL, delimiter);
-      //   if (bandTimeChar != NULL){
-      //     char band_time = atoi(bandTimeChar);
-      //     api.sendBand(band_time);
-      //   }
-      //   else {
-      //     fprintf(stdout, "[ERROR] onChangePart Move Time not defined\n");
-      //   }
-      // }
-      // ----------------------------------------------
 
 
       // ------------------ NOP -----------------------
@@ -233,39 +193,27 @@ int main( int argc, char* argv[]){
       // ----------------------------------------------
 
 
-      // ------------------ NOP -----------------------
+      // ------------------ ACK -----------------------
       else if (strncmp(mode, "ack", 3) == 0){
         api.sendACK();
       }
       // ----------------------------------------------
 
 
-      // ------------------ NOP -----------------------
-      else if (strncmp(mode, "lp", 2) == 0){
-        api.modeLP();
+      // ----------------- SET ------------------------
+      else if (strncmp(mode, "set", 3) == 0){
+        char *modeChar = strtok(NULL, delimiter);
+        if (modeChar != NULL){
+          char mode = atoi(modeChar);
+          api.setMode(mode);
+        }
+        else {
+          fprintf(stdout, "[ERROR] set Mode ID not defined\n");
+        }
       }
       // ----------------------------------------------
 
 
-      // ----------------- SET ------------------------
-      // else if (strncmp(mode, "set", 3) == 0){
-      //   char *bandTimeChar = strtok(NULL, delimiter);
-      //   if (bandTimeChar != NULL){
-      //     char band_time = atoi(bandTimeChar);
-      //     api.sendSet(band_time);
-      //   }
-      //   else {
-      //     fprintf(stdout, "[ERROR] onShot Move Time not defined\n");
-      //   }
-      // }
-      // ----------------------------------------------
-
-
-      // ---------------- READSETTINGS ----------------
-      // else if (strncmp(mode, "readSettings", 8) == 0){
-      //   api.sendReadSettings();
-      // }
-      // ----------------------------------------------
 
       else {
         fprintf(stdout, "[ERROR] Mode not defined!\n");
