@@ -202,13 +202,13 @@ int main( int argc, char* argv[]){
 
       // ----------------- SET ------------------------
       else if (strncmp(mode, "set", 3) == 0){
-        char *modeChar = strtok(NULL, delimiter);
-        if (modeChar != NULL){
-          char mode = atoi(modeChar);
-          api.setMode(mode);
+        char *targetChar = strtok(NULL, delimiter);
+        if (targetChar != NULL){
+          char target = atoi(targetChar);
+          api.setMode(target);
         }
         else {
-          fprintf(stdout, "[ERROR] set Mode ID not defined\n");
+          fprintf(stdout, "[ERROR] set target not defined\n");
         }
       }
       // ----------------------------------------------
