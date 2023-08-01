@@ -149,11 +149,8 @@ class RedDotAPI {
     // Set target mode to serial device
     // unsigned char mode:    ModeID to Set (LP: 0, LG: 1)
     void setMode(unsigned char mode) {
-      unsigned char seq1[] = { 0x11, 0x00, 0x01 };
-      writeToHaering(fd, seq1, sizeof(seq1));
-      readFromHaering(fd, 1);
-      unsigned char seq2[] = { mode };
-      writeToHaering(fd, seq2, sizeof(seq2));
+      unsigned char seq[] = { 0x11, 0x00, 0x01, mode };
+      writeToHaering(fd, seq, sizeof(seq));
       readFromHaering(fd, 1);
     }
 };
